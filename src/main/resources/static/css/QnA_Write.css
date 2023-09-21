@@ -1,0 +1,160 @@
+/* section 2 �쟾泥� */
+.sec_2 {
+    height: 670px;
+}
+
+.sec_2>.QnA_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* section 2 �젣紐� */
+.sec_2>.QnA_title>#QnA {
+    font-size: 40px;
+    padding-top: 50px;
+    padding-right: 50px;
+    color: rgb(192, 57, 43);
+}
+
+/* section 2 �뱶�엻諛뺤뒪 */
+.sec_2>.QnA_title>.dropdown {
+    margin: 50px 50px 0 0;
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.dropbtn {
+    width: 180px;
+    height: 32px;
+    border-radius: 3px;
+    background-color: rgb(240, 240, 240);
+    font-size: 17px;
+    text-align: left;
+    position: relative;
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.dropbtn>img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transition: 0.5s;
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.drop_content {
+    margin-top: -3px;
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.drop_content>a {
+    border: 1px solid gray;
+    background-color: rgb(240, 240, 240);
+    border-radius: 3px;
+    width: 178px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    padding-left: 12px;
+    text-align: left;
+    display: none;
+}
+
+/* �뱶�엻諛뺤뒪 �슚怨� */
+.wrapper>.sec_2>.QnA_title>.dropdown>.dropbtn:focus img {
+    transform: rotate(180deg);
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.dropbtn:focus+.drop_content {
+    position: absolute;
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.dropbtn:focus+.drop_content>a {
+    display: block;
+    margin: 0 2px;
+}
+
+.wrapper>.sec_2>.QnA_title>.dropdown>.drop_content>a:hover {
+    background-color: rgb(218, 218, 218);
+}
+
+/* section 2 �궡 湲��벐湲� 踰꾪듉 */
+.btn_write {
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
+ }
+
+.btn_write input[type="button"] {
+    background-color:rgb(192, 57, 43);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+
+
+
+/* 異붽�遺�(�뱶濡�踰꾪듉,�궡�슜�뀓�뒪�듃) */
+#writeForm input[type="text"],
+#writeForm textarea {
+   width: 200%;
+   padding: 10px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   resize: vertical;
+}
+
+
+#writeForm label {
+   display: block;
+   margin-bottom: 15px;
+   font-weight: bold;
+   font-size: 18px;
+}
+
+
+
+#writeForm h2 {
+   margin-top: 0;
+   font-size: 18px;
+   font-weight: bold;
+}
+
+#writeForm form {
+   margin-top: 20px;
+}
+
+#writeForm input[type="text"],
+#writeForm textarea {
+   width: 100%;
+   padding: 10px;
+   font-size: 16px;
+   border: 2px solid #ccc;
+   border-radius: 4px;
+   resize: vertical;
+}
+
+
+
+
+#writeForm label {
+   display: block;
+   margin-bottom: 15px;
+   font-weight: bold;
+   font-size: 18px;
+}
+
+
+.dropbtn {
+
+   margin-left: 880px;
+   margin-right: 10px;
+
+}
+
+.drop_content {
+   margin-left: 880px;
+
+}

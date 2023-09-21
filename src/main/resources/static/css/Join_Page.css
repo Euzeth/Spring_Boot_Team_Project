@@ -1,0 +1,105 @@
+li{
+    list-style: none;
+    }
+
+    .join {
+        width: 450px;
+        display: block;
+        height: 900px;
+        padding-top: 50px;
+        margin: 0 auto;
+    }
+
+    .join h1 {
+        padding-top: 20px;
+        font-size: 35px;
+        color: #111;
+        text-align: center;
+    }
+
+    .join>form ul {
+        padding: 40px 0 10px;
+    }
+    
+    .join>form ul li {
+        padding: 0 0 12px;
+        text-align: left;
+    }
+
+    .join>form>ul>li>span{
+        font-size: 20px;
+        display: block;
+    }
+
+    .join>form ul li input {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        text-indent: 15px;
+        font-size: 18px;
+        color: black;
+        font-family: 'SDSamliphopangche_Basic';
+    }
+
+    .join>form>ul>li #id_input, #addr_input{
+        width: 75%;
+        height: 40px;
+        box-sizing: border-box;
+        text-indent: 15px;
+        font-size: 18px;
+        color: black;
+        font-family: 'SDSamliphopangche_Basic';
+    }
+
+    .join form ul li input::-webkit-input-placeholder {
+        font-size: 18px;
+        color: gray;
+    }
+
+    .join form #idcheck_btn, #addr_btn{
+        width: 82px;
+        height: 40px;
+        margin-left: 15px;
+        margin-right: 0px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .join>form #join_btn {
+        width: 100%;
+        height: 50px;
+        background: #ed1c24;
+        border-radius: 5px;
+        font-size: 22px;
+        color: #fff;
+        margin-top: 25px;
+        cursor: pointer;
+    }
+
+    .join div {
+        padding: 0 0 45px;
+    }
+
+    .join div ul {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .join div ul li {
+        position: relative;
+    }
+   
+    .join div ul li:nth-child(2) {
+        padding-right: 150px;
+    }
+
+    .join div ul li:nth-child(2)::after {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 1px;
+        height: 16px;
+        width: 1.2px;
+        background: #111;
+        transform: rotate(25deg);
+    }

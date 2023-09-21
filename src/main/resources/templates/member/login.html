@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <!-- common.css    -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/Login_Page.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <!-- favicon.ico   -->
+    <link rel="icon" href="/images/favicon/favicon_2xl.png" />
+</head>
+<body>
+<div class="wrapper">
+    <!-- header -->
+    <!-- top-header -->
+    <header>
+        <div class="log-header">
+            <a href="/index" ><img class="logo" src="/img/로고.png" alt=""></a>
+            <ul>
+                <li><a href=""><img  src="/img/english.png" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
+        <div class="logheader_line"></div>
+    </header>
+
+    <section class="login">
+        <h1>워터멜론에서 즐거운 음악감상하세요!</h1>
+        <form action="/member/login" method="post">
+            <ul>
+                <li><input id="id" name="username" type="text" placeholder="아이디" title="아이디입력"></li>
+                <li><input name="password" type="password" placeholder="비밀번호" title="비밀번호입력"></li>
+                <div class="log_chk">
+                    <li><input type="checkbox" id="save_id"><label for="save_id">아이디저장</label></li>
+                    <li><input type="checkbox" id="auto_lg"><label for="auto_lg">자동로그인</label></li>
+                </div>
+                <li><button type="submit" id="login">로그인</button></li>
+            </ul>
+        </form>
+        <div>
+            <ul>
+                <li><a href="">아이디 찾기</a></li>
+                <li><a href="">비밀번호 찾기</a></li>
+                <li><a href="/member/join" />회원가입</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li><a href=""> 개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/img/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span>
+            <span>대구광역시 중구 중앙대로 366 반월센트럴타워 10층</span>
+            <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span>
+            <span>사업자등록번호 : 024-04-02023</span>
+            <br>
+            <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
+            <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+    </footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+        var key = getCookie("key");
+        var idInput = document.getElementById("id");
+        if (idInput) {
+            idInput.value = key;
+        }
+
+        // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+        var saveIdCheckbox = document.getElementById("save_id");
+        if (idInput.value !== "") {
+            saveIdCheckbox.checked = true; // ID 저장하기를 체크 상태로 두기.
+        }
+
+        saveIdCheckbox.addEventListener("change", function () {
+            // 체크박스에 변화가 있다면,
+            if (saveIdCheckbox.checked) {
+                // ID 저장하기 체크했을 때,
+                setCookie("key", idInput.value, 7); // 7일 동안 쿠키 보관
+            } else {
+                // ID 저장하기 체크 해제 시,
+                deleteCookie("key");
+            }
+        });
+
+        // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+        idInput.addEventListener("keyup", function () {
+            if (saveIdCheckbox.checked) {
+                // ID 저장하기를 체크한 상태라면,
+                setCookie("key", idInput.value, 7); // 7일 동안 쿠키 보관
+            }
+        });
+
+        // 쿠키 저장하기
+        function setCookie(cookieName, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var cookieValue = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());
+            document.cookie = cookieName + "=" + cookieValue;
+        }
+
+        // 쿠키 삭제
+        function deleteCookie(cookieName) {
+            var expireDate = new Date();
+            expireDate.setDate(expireDate.getDate() - 1);
+            document.cookie = cookieName + "=; expires=" + expireDate.toGMTString();
+        }
+
+        // 쿠키 가져오기
+        function getCookie(cookieName) {
+            cookieName = cookieName + '=';
+            var cookieData = document.cookie;
+            var start = cookieData.indexOf(cookieName);
+            var cookieValue = '';
+            if (start !== -1) { // 쿠키가 존재하면
+                start += cookieName.length;
+                var end = cookieData.indexOf(';', start);
+                if (end === -1) // 쿠키 값의 마지막 위치 인덱스 번호 설정
+                    end = cookieData.length;
+                console.log("end 위치: " + end);
+                cookieValue = cookieData.substring(start, end);
+            }
+            return unescape(cookieValue);
+        }
+    });
+
+</script>
+
+</body>
+</html>

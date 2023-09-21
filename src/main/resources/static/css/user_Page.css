@@ -1,0 +1,64 @@
+li{
+    list-style: none;
+    }
+
+    .user {
+        width: 410px;
+        display: block;
+        height: 750px;
+        padding-top: 50px;
+        margin: 0 auto;
+    }
+
+    .user h1 {
+        padding-top: 20px;
+        font-size: 35px;
+        color: #111;
+        text-align: center;
+    }
+
+    .user>ul {
+        padding: 40px 0 10px;
+    }
+    
+    .user>ul li {
+        padding: 0 0 12px;
+        text-align: left;
+    }
+    
+    .user>ul li .title {
+		font-size: 25px;
+		display: block;
+		margin-left: 10px;
+		color: gray;
+	}
+	
+	.user>ul li .info{
+		font-size: 30px;
+		display: block;
+		margin-top: 10px;
+		text-align: center;
+	}
+
+    .user #back_btn {
+        width: 60px;
+        height: 35px;
+        background: #ed1c24;
+        border-radius: 5px;
+        font-size: 22px;
+        color: #fff;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    
+    .user #update_btn{
+		width: 100px;
+        height: 35px;
+        background: #ed1c24;
+        border-radius: 5px;
+        font-size: 22px;
+        color: #fff;
+        margin-top: 20px;
+  		margin-left: 240px;
+        cursor: pointer;
+	}

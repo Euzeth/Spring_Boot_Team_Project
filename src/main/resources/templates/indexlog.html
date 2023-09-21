@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:sec="">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <!-- common.css    -->
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/Main_Page_log.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+
+    <!-- favicon.ico   -->
+    <link rel="icon" href="/images/favicon/favicon_2xl.png" />
+
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- 메인 -->
+    <header>
+        <div class="top-header">
+            <a href="/indexlog" ><img class="logo" src="/img/로고.png" alt=""></a>
+            <form action="" method="get">
+                <div class="search_box">
+                    <div class="search_btn" id="searchButton">SEARCH</div>
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <img id="searchbtn" src="/img/search.png" alt="" >
+                </div>
+            </form>
+            <ul>
+                <li><a href="/membership" style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
+                        src="/img/add.png" alt=""> 멤버십가입</a></li>
+                <li><a href=""><img src="/img/english.png" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
+    </header>
+    <nav>
+        <div class="mobilemenu">
+                <span href="" class="material-symbols-outlined">menu
+                    <ul class="wa">
+                        <li><a href="">수박차트</a></li>
+                        <li><a href="">수박DJ</a></li>
+                        <li><a href="">수박TV</a></li>
+                        <li><a href="">수박매거진</a></li>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">마이페이지</a></li>
+                    </ul>
+                </span>
+        </div>
+        <div class="navi">
+            <div class="Menu_left">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">수박차트</a>
+                        <ul class="two--depth">
+                            <li><a href="">국내TOP100</a></li>
+                            <li><a href="">해외TOP100</a></li>
+                            <li><a href="">최신음악</a></li>
+                            <li><a href="">장르음악</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박DJ</a>
+                        <ul class="two--depth">
+                            <li><a href="">#투데이</a></li>
+                            <li><a href="">테마장르</a></li>
+                            <li><a href="">인기선곡</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박TV</a>
+                        <ul class="two--depth">
+                            <li><a href="">뮤직비디오</a></li>
+                            <li><a href="">수박방송</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박매거진</a>
+                        <ul class="two--depth">
+                            <li><a href="">오늘의매거진</a></li>
+                            <li><a href="">완결매거진</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="Menu_right">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">공지사항</a>
+                        <ul class="two--depth">
+                            <li><a href="">공지사항</a></li>
+                            <li><a href="">QnA</a></li>
+                            <li><a href="">자주하는질문</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">마이페이지</a>
+                        <ul class="two--depth">
+                            <li><a href="/member/mypage"/>정보수정</a></li>
+                            <li><a href="">마이리스트</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="header_line"></div>
+    <main>
+        <section class="section1">
+            <aside>오늘의 추천 앨범
+                <div class="d1" style="overflow: hidden;">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"><a><img src="/img/Feeling.png">Feeling</a></div>
+                        <div class="swiper-slide"><a><img src="/img/NewJeans.png">NewJeans 1st EP 'NewJeans'</a>
+                        </div>
+                        <div class="swiper-slide"><a><img src="/img/That's Not how This Works.png">That's Not how
+                            This Works</a></div>
+                        <div class="swiper-slide"><a><img src="/img/song1.webp">NewJeans 'Super Shy'</a></div>
+                        <div class="swiper-slide"><a><img src="/img/song3.jpg">I feel</a></div>
+                        <div class="swiper-slide"><a><img src="/img/song6.jpg">UNFORGIVEN</a></div>
+                        <div class="swiper-slide"><a><img src="/img/song10.webp">I've IVE</a></div>
+                        <div class="swiper-slide"><a><img src="/img/song8.webp">MY WORLD - The 3rd Mini Album</a></div>
+                        <div class="swiper-slide"><a><img src="/img/song4.jpg">1집 Alone</a></div>
+                    </div>
+                </div>
+            </aside>
+            <article>워터멜론에서 즐거운 음악감상하세요!
+                <div>
+                    <br>
+                    <a href=""><img src="/img/user.png" alt=""></a>
+                    <span><sec:authentication property="principal.name" />&nbsp;님, 환영합니다!</span>
+                </div>
+                <h4></h4>
+                <form method=post action="/app/logout">
+                    <button id="logout_btn">LOGOUT</button>
+                </form>
+            </article>
+        </section>
+        <section class="section2">
+            <aside>HOT 수박매거진<br>
+                <a href="">
+                    <img src="/img/블랙핑크.png" width="300px" height="220px" alt=""> BLACKPINK IN COACHELLA <br></a>
+                <span> 역대 전체 K-POP 아티스트들은 물론, 범위를 넓힌 '아시아계 아티스트'중에서도 코첼라 페스티벌에서 헤드라이너로 선 것은 BLACKPINK 외에는 전례가
+                        없습니다.</span>
+            </aside>
+            <article>멤버십 이벤트<br><br />
+                <span>워터멜론을 구독해보세요!</span>
+                <span>첫 구독 1개월 무료</span>
+                <div><a href="">구독하기</a></div>
+            </article>
+            <aside>
+                <div class="top10">
+                    <span> WATERMELON </span>
+                    <span> TOP10 </span>
+                    <img src="/img/로고-removebg-preview.png" alt="">
+                </div> <br>
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>No.</th>
+                            <th>TITLE</th>
+                            <th>ARTIST</th>
+                        </tr>
+                        <tr>
+                            <td class="no">1 -</td>
+                            <td class="title">I AM</td>
+                            <td class="artist">IVE(아이브)</td>
+                        </tr>
+                        <tr>
+                            <td class="id">2 -</td>
+                            <td class="title">Kitsch</td>
+                            <td class="artist">IVE(아이브)</td>
+                        </tr>
+                        <tr>
+                            <td class="id">3 -</td>
+                            <td class="title">꽃</td>
+                            <td class="artist">지수(JISOO)</td>
+                        </tr>
+                        <tr>
+                            <td class="no">4 -</td>
+                            <td class="title">Ditto</td>
+                            <td class="artist">NewJeans</td>
+                        </tr>
+                        <tr>
+                            <td class="no">5 -</td>
+                            <td class="title">Hype boy</td>
+                            <td class="artist">NewJeans</td>
+                        </tr>
+                        <tr>
+                            <td class="no">6 -</td>
+                            <td class="title">OMG</td>
+                            <td class="artist">NewJeans</td>
+                        </tr>
+                        <tr>
+                            <td class="no">7 ▲1</td>
+                            <td class="title">Teddy Bear</td>
+                            <td class="artist">STAYC</td>
+                        </tr>
+                        <tr>
+                            <td class="no">8 ▼1</td>
+                            <td class="title">사람 pt.2(feat. ...)</td>
+                            <td class="artist">Agust D</td>
+                        </tr>
+                        <tr>
+                            <td class="no">9 ▲1</td>
+                            <td class="title">Like Crazy</td>
+                            <td class="artist">지민</td>
+                        </tr>
+                        <tr>
+                            <td class="no">10 -</td>
+                            <td class="title">사랑은 늘 도망가</td>
+                            <td class="artist">임영웅</td>
+                        </tr>
+                    </table>
+                    <div><a href="">더보기</a></div>
+                </div>
+            </aside>
+        </section>
+    </main>
+    <footer>
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li><a href=""> 개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/img/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span>
+            <span>대구광역시 중구 중앙대로 366 반월센트럴타워 10층</span>
+            <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span>
+            <span>사업자등록번호 : 024-04-02023</span>
+            <br>
+            <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
+            <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+    const swiper_multi_slider = new Swiper('.section1 .d1', {
+        // Optional parameters
+        direction: 'horizontal',
+        autoplay: { delay: 2000 },
+        loop: true,
+        slidesPerView: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+
+    });
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<!-- <script>
+    const logout_btn = document.getElementById("logout_btn");
+
+    logout_btn.addEventListener('click', function(){
+        axios.post("/app/logout")
+        .then(response =>{
+            console.log("success")
+        })
+        .catch(error=>{console.log("error!");})
+    })
+
+</script> -->
+
+
+
+</body>
+</html>
