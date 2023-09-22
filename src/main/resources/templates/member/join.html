@@ -38,11 +38,13 @@
         <form class="joinform" name="joinform" action="/member/join" method="post" onsubmit="return false">
             <ul>
                 <li><span>ID</span> <span th:text="${username}" style="font-size:0.7rem;color:orange;" class="username_msg"></span>
-                    <input id="id_input" class="username" name="username" type="text" placeholder="example@example.com"
-                           title="아이디입력" >
-                    <button type="button" class="btn btn-secondary email_auth_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width:80px; margin-left:5px;">
-                        인증
-                    </button>
+                    <div>
+                        <input id="id_input" class="username" name="username" type="text" placeholder="example@example.com"
+                               title="아이디입력" >
+                        <button type="button" class="btn btn-secondary email_auth_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            인증
+                        </button>
+                    </div>
                     </li>
                 <li><span>PW</span>  <span th:text="${password}" style="font-size:0.7rem;color:orange;"></span>
                     <input id="pw_input" name="pw"
@@ -52,8 +54,12 @@
                            placeholder="비밀번호확인" title="비밀번호확인" ></li>
                 <li><span>NAME</span> <input type="text" name="name"
                                              placeholder="이름" title="이름입력" ></li>
-                <li><span>우편번호</span> <input type="text" id="addr_input" name="zipcode" class="zipcode" placeholder="우편번호" title="우편번호입력" >
-                    <button id="addr_btn">검색</button></li>
+                <li><span>우편번호</span> <span th:text="${zipcode}" style="font-size:0.7rem;color:orange;"></span>
+                    <div>
+                        <input type="text" id="addr_input" name="zipcode" class="zipcode" placeholder="우편번호" title="우편번호입력" >
+                        <button class="btn btn-secondary zipcode_btn" id="addr_btn">검색</button>
+                    </div>
+                </li>
                 <li><span>ADDRESS</span> <input name="addr1" class="addr1" type="text" placeholder="주소" title="주소입력" ></li>
                 <li><input type="text" name="addr2" placeholder="동/호수 입력" title="주소입력"></li>
                 <li><span>PHONE</span> <input type="text" name="phone"

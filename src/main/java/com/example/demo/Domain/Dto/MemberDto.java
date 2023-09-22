@@ -25,6 +25,7 @@ public class MemberDto {
 
 	private String role;
 	private String phone;
+	@NotBlank(message = "주소를 입력하세요")
 	private String zipcode;
 	private String addr1;
 	private String addr2;

@@ -160,7 +160,7 @@ public class MemberController {
 
 	@PostMapping("/join")
 	public String join(@Valid MemberDto dto, BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response) {
-		log.info("POST /join");
+		log.info("POST /join" + dto);
 
 		if(bindingResult.hasFieldErrors()) {
 			for( FieldError error  : bindingResult.getFieldErrors()) {
@@ -175,7 +175,7 @@ public class MemberController {
 		{
 			return "/member/join";
 		}
-		return "redirect:login?msg=Join_Success!";
+		return "/member/login";
 	}
 
 	@GetMapping("/mypage")
