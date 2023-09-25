@@ -47,13 +47,10 @@
                     </div>
                     </li>
                 <li><span>PW</span>  <span th:text="${password}" style="font-size:0.7rem;color:orange;"></span>
-                    <input id="pw_input" name="pw"
-                                           type="password" placeholder="비밀번호" title="비밀번호입력" ></li>
+                    <input id="pw_input" name="password" type="password" placeholder="비밀번호" title="비밀번호입력" ></li>
                 <li><span>PW Check</span> <span th:text="${repassword}" style="font-size:0.7rem;color:orange;"></span>
-                    <input id="pwc_input" name="pwc_input" type="password"
-                           placeholder="비밀번호확인" title="비밀번호확인" ></li>
-                <li><span>NAME</span> <input type="text" name="name"
-                                             placeholder="이름" title="이름입력" ></li>
+                    <input id="pwc_input" name="repassword" type="password" placeholder="비밀번호확인" title="비밀번호확인" ></li>
+                <li><span>NAME</span> <input type="text" name="name" placeholder="이름" title="이름입력" ></li>
                 <li><span>우편번호</span> <span th:text="${zipcode}" style="font-size:0.7rem;color:orange;"></span>
                     <div>
                         <input type="text" id="addr_input" name="zipcode" class="zipcode" placeholder="우편번호" title="우편번호입력" >
@@ -62,8 +59,7 @@
                 </li>
                 <li><span>ADDRESS</span> <input name="addr1" class="addr1" type="text" placeholder="주소" title="주소입력" ></li>
                 <li><input type="text" name="addr2" placeholder="동/호수 입력" title="주소입력"></li>
-                <li><span>PHONE</span> <input type="text" name="phone"
-                                              placeholder="핸드폰번호" title="핸드폰번호입력" ></li>
+                <li><span>PHONE</span> <input type="text" name="phone" placeholder="핸드폰번호" title="핸드폰번호입력" ></li>
                 <li><button id="join_btn" onclick="isValid()">JOIN!</button></li>
             </ul>
         </form>

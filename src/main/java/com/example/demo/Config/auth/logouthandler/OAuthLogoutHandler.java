@@ -99,7 +99,6 @@ public class OAuthLogoutHandler implements LogoutHandler {
             if(session!=null)
                 session.invalidate();
 
-
         }
 
 

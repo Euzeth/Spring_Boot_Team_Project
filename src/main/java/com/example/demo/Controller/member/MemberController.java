@@ -175,7 +175,7 @@ public class MemberController {
 		{
 			return "/member/join";
 		}
-		return "/member/login";
+		return "redirect:login?msg=Join_Success!";
 	}
 
 	@GetMapping("/mypage")

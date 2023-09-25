@@ -131,6 +131,7 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         dto.setZipcode(member.get().getZipcode());
         dto.setAddr1(member.get().getAddr1());
         dto.setAddr2(member.get().getAddr2());
+        dto.setName(member.get().getName());
 
         PrincipalDetails principalDetails = new PrincipalDetails();
         principalDetails.setMember(dto);
