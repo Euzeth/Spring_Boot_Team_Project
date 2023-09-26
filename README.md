@@ -45,7 +45,7 @@
 
 ## ▶️ Software 목록
 
-##### IDE : IntelliJ IDEA 2023.2
+##### IDE : IntelliJ IDEA 2023.2.2
 ##### SpringBoot 2.7.15
 ##### maven version 3.1.2
 ##### Git 2.40.1.windows.1
