@@ -56,7 +56,7 @@ public class MemberService{
 				dto.setPassword( passwordEncoder.encode(dto.getPassword()) );
 
 				Member member = MemberDto.dtoToEntity(dto);
-
+				System.out.println(member);
 				memberRepository.save(member);
 
 				return true;

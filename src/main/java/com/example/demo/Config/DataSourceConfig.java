@@ -30,21 +30,23 @@ public class DataSourceConfig {
 
 	
 //	HikariCP DataSource
-	@Bean
-	public HikariDataSource dataSource()
-	{
-		HikariDataSource dataSource = new HikariDataSource();
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/musicdb");
-		dataSource.setUsername("root");
-		dataSource.setPassword("1234");	 
-		return dataSource;
-	}
+@Bean
+public HikariDataSource dataSource()
+{
+	HikariDataSource dataSource = new HikariDataSource();
+	dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+	dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/musicdb");
+	dataSource.setUsername("root");
+	dataSource.setPassword("1234");
+
+	return dataSource;
+}
+
 	
-    @Bean
-    public DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }
+//    @Bean
+//    public DataSourceTransactionManager transactionManager() {
+//        return new DataSourceTransactionManager(dataSource());
+//    }
 	
 	
 }
