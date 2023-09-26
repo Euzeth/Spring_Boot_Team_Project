@@ -96,48 +96,48 @@ https://shields.io/
 |END POINT|METHOD|DESCRIPTION|
 |------|---|---|
 
-메인관련 end point
-|/index|get|메인 페이지|
-|/indexlog|get|로그인 후 메인 페이지|
+메인관련 end point <br/>
+|/index|get|메인 페이지| <br/>
+|/indexlog|get|로그인 후 메인 페이지| <br/>
 
-노래관련 end point
-|/song|get|노래 재생 기능|
-|/search|get|노래 검색 페이지|
-|/top100|get|인기순위 100곡 소개 페이지|
+노래관련 end point <br/>
+|/song|get|노래 재생 기능| <br/>
+|/search|get|노래 검색 페이지| <br/>
+|/top100|get|인기순위 100곡 소개 페이지| <br/>
 
-멤버관련 end point
-|/member/join|post|회원가입 페이지|
-|/member/login|get|로그인 페이지|
-|/member/user|get|유저 정보 페이지|
-|/member/member|get|유저 관리 페이지|
-|/member/update|post|유저 정보 수정페이지|
+멤버관련 end point <br/>
+|/member/join|post|회원가입 페이지| <br/>
+|/member/login|get|로그인 페이지| <br/>
+|/member/user|get|유저 정보 페이지| <br/>
+|/member/member|get|유저 관리 페이지| <br/>
+|/member/update|post|유저 정보 수정페이지| <br/>
 
-멤버십관련 end point
-|/membershipU|get|유저|멤버십가입 페이지||
-|/membershipM|get|멤버|멤버십관리 페이지||
-|/membership_selectId|get|개별 유저 ID로 조회|
-|/membership_selectCode|get|개별 유저 CODE로 조회|
-|/membership_selectDate|get|개별 유저 종료일자로 조회|
-|/membership_delete|post|개별 유저 삭제|
-|/membership/request1|get|멤버십 정기결제 1|
-|/membership/request2|get|멤버십 정기결제 2|
-|/membership/success1|get|멤버십 정기결제 1 성공|
-|/membership/success2|get|멤버십 정기결제 2 성공|
-|/membership/cancel|get|멤버십 결제 취소|
-|/membership/fail|get|멤버십 결제 실패|
+멤버십관련 end point <br/>
+|/membershipU|get|유저|멤버십가입 페이지|| <br/>
+|/membershipM|get|멤버|멤버십관리 페이지|| <br/>
+|/membership_selectId|get|개별 유저 ID로 조회| <br/>
+|/membership_selectCode|get|개별 유저 CODE로 조회| <br/>
+|/membership_selectDate|get|개별 유저 종료일자로 조회| <br/>
+|/membership_delete|post|개별 유저 삭제| <br/>
+|/membership/request1|get|멤버십 정기결제 1| <br/>
+|/membership/request2|get|멤버십 정기결제 2| <br/>
+|/membership/success1|get|멤버십 정기결제 1 성공| <br/>
+|/membership/success2|get|멤버십 정기결제 2 성공| <br/>
+|/membership/cancel|get|멤버십 결제 취소| <br/>
+|/membership/fail|get|멤버십 결제 실패| <br/>
 
-공지사항관련 end point
-|/notice/list|get|공지사항 모든 게시물 목록 표시|
-|/notice/post|get|공지사항 게시물 작성|
-|/notice/read|get|공지사항 게시물 1건 읽기|
-|/notice/update|post|공시사항 게시물 수정|
-
-qna관련 end point
-|/qna/list|get|QnA 모든 게시물 목록 표시|
-|/qna/post|get|QnA 게시물 작성|
-|/qna/read|get|QnA 게시물 1건 읽기|
-|/qna/update|post|QnA 게시물 수정|
-<br/>
+공지사항관련 end point <br/>
+|/notice/list|get|공지사항 모든 게시물 목록 표시| <br/>
+|/notice/post|get|공지사항 게시물 작성| <br/>
+|/notice/read|get|공지사항 게시물 1건 읽기| <br/>
+|/notice/update|post|공시사항 게시물 수정| <br/>
+ 
+qna관련 end point <br/>
+|/qna/list|get|QnA 모든 게시물 목록 표시| <br/>
+|/qna/post|get|QnA 게시물 작성| <br/>
+|/qna/read|get|QnA 게시물 1건 읽기| <br/>
+|/qna/update|post|QnA 게시물 수정| <br/>
+<br/> 
 
 
 
