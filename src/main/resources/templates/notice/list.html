@@ -24,7 +24,7 @@
 <div class="wrapper">
     <header>
         <div class="top-header">
-            <a href="./index.html"><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/indexlog"><img class="logo" src="/images/로고.png" alt=""></a>
             <div class="search_box">
                 <div>SEARCH</div>
                 <input type="text" placeholder="듣고 싶은 노래를 검색하세요!">
@@ -81,8 +81,8 @@
                     <li>
                         <a href="">공지사항</a>
                         <ul class="two--depth">
-                            <li><a href="">공지사항</a></li>
-                            <li><a href="">QnA</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="/qna/list">QnA</a></li>
                             <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
@@ -178,9 +178,17 @@
 
 
                                 <!-- PAGENATION -->
-                                <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                    <a class="page-link" th:href="@{/notice/list(pageNo=${i},type=${pageDto.criteria.type},keyword=${pageDto.criteria.keyword} )}" > <span th:text="${i}"></span> </a>
-                                </li>
+                                <th:block th:if="${pageDto.criteria.type == null}">
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i})}" ><span th:text="${i}"></span></a>
+                                    </li>
+                                </th:block>
+
+                                <th:block th:if="${pageDto.criteria.type != null}">
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i}, type=${pageDto.criteria.type}, keyword=${pageDto.criteria.keyword})}" ><span th:text="${i}"></span></a>
+                                    </li>
+                                </th:block>
 
 
                                 <!-- NEXT -->

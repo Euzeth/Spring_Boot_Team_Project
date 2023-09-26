@@ -1,0 +1,17 @@
+.sec_1{
+       height: 100%;
+       margin-bottom: 20px;
+}
+
+#notice{
+             font-size: 40px;
+             padding-top: 20px;
+             padding-left: 50px;
+             color: rgb(192, 57, 43);
+        }
+
+        .form-label{
+                     font-size: 25px;
+                     padding-top: 10px;
+                     padding-left: 10px;
+                }

@@ -1,0 +1,109 @@
+
+/* Section 1 전체 */
+        .sec_1 {
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+
+        /* Section 1 내 검색창 */
+        .QnA_search {
+            height: 38px;
+            width: 550px;
+            border: 3px solid rgb(92, 115, 6);
+            position: relative;
+            border-radius: 7px;
+            line-height: 20px;
+            padding-left: 10px;
+        }
+
+        .selectbox{
+            height: 35px;
+            width: 110px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 35px;
+            margin-top: -1px;
+            margin-left: -10px;
+            border-right: 3px solid rgb(92, 115, 6);
+            background-color: rgba(92, 115, 6, 0.43);
+            position: absolute;
+        }
+
+        .QnA_search>input {
+            padding-top: 2px;
+            height: 30px;
+            width: 400px;
+            border: 1px;
+            outline: 1px;
+            position: absolute;
+            top: 2px;
+            left: 125px;
+            font-size: 18px;
+            color: black;
+            font-family: 'SDSamliphopangche_Basic';
+        }
+
+        .QnA_search>button {
+             position: absolute;
+             height: 30px;
+             top: 3px;
+             left: 90%;
+             font-size: 25px;
+             background-color: white;
+             border: none;
+        }
+
+        #qna{
+             font-size: 40px;
+             padding-top: 20px;
+             padding-left: 50px;
+             color: rgb(192, 57, 43);
+        }
+
+        .qna-header{
+            text-align: right;
+            font-size:20px;
+            margin-bottom: 10px;
+        }
+
+        .qna-body th{
+            font-size:23px;
+            text-align: center;
+        }
+
+        .qna-body td{
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .one--depth>li>a:hover{
+            text-decoration: none;
+            color: black;
+        }
+
+
+.pagenation{
+    margin-top:20px;
+    margin-bottom:50px;
+}
+
+.page-link {
+  color: #000;
+  background-color: #fff;
+  font-size : 17px;
+}
+
+.page-item.active .page-link {
+ z-index: 1;
+ color: white;
+ background-color: rgb(192, 57, 43);
+
+}
+
+.page-link:focus, .page-link:hover {
+ color: white;
+  background-color: rgb(192, 57, 43);
+  border-color: #ccc;
+}
