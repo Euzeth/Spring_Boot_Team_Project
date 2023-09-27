@@ -186,6 +186,19 @@ public class MembershipController {
         return "Subscribe Fail..";
     }
 
+    @GetMapping("/membership/selectAll")
+    public String membership_selectAll(Model model) {
+        log.info("GET /memberhsipM");
+        List<MembershipDto> list = membershipService.getMembershipList();
+
+        List<MembershipDto> membershipDtoList = list.stream().collect(Collectors.toList());
+
+        model.addAttribute("selectedAllList", membershipDtoList);
+
+        System.out.println(membershipDtoList);
+
+        return "membershipM";
+    }
 
     // membership 개별 유저 조회 관련 매핑(ID)
     @GetMapping("/membership/selectId")

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 
 @Service
@@ -39,15 +40,16 @@ public class MembershipService {
 
     @Transactional(rollbackFor = Exception.class)
     public List<MembershipDto> getMembershipCode(String membershipcode) {
-        List<MembershipDto> list = membershipRepository.findMembershipCode(membershipcode);
+        List<MembershipDto> Codelist = membershipRepository.findMembershipCode(membershipcode);
 
 
-        return membershipRepository.findMembershipCode(membershipcode);
+        return Codelist;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public List<MembershipDto> getMembershipDate(LocalDate enddate) {
-        return membershipRepository.findMembershipEnddate(enddate);
+        List<MembershipDto> Datelist = membershipRepository.findMembershipEnddate(enddate);
+        return Datelist;
     }
 
 

@@ -4,6 +4,7 @@ import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Entity.Member;
 import com.example.demo.Domain.Entity.Membership;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,9 +12,10 @@ import org.springframework.security.core.Authentication;
 
 import java.time.LocalDate;
 
-/*@Data
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class MembershipDto {
     private String username;
     private String name;
@@ -21,16 +23,7 @@ public class MembershipDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enddate;
-    private String membershipcode;*/
-
-    public interface MembershipDto{
-        String getUsername();
-        String getName();
-        LocalDate getStartdate();
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
-        LocalDate getEnddate();
-        String getMembershipcode();
-        String setMembershipcode(String membershipcode);
+    private String membershipcode;
 
     public static Membership dtoToEntity(MembershipDto dto, Authentication authentication) {
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();

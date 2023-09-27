@@ -31,26 +31,28 @@
     <section class="membership_M">
         <h1>멤버십 관리 페이지입니다.</h1>
         <ul>
+            <form action="/membership/selectAll" method="get">
             <li><span class="title">멤버십회원 전체조회
-						<button class="alluser" id="showButton">조회하기</button>
+						<button class="alluser" id="showButton" type="submit">조회하기</button>
 				</span>
                 <hr /></li>
+            </form>
             <div class="selectall">
                 <table>
                     <tr>
                         <td class="search_title1" style="color: rgb(92, 115, 6);">CODE</td>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">ID</td>
+                        <td class="search_title2" style="color: rgb(92, 115, 6);">USERNAME</td>
                         <td class="search_title1" style="color: rgb(92, 115, 6);">NAME</td>
                         <td class="search_title2" style="color: rgb(92, 115, 6);">START_DATE</td>
                         <td class="search_title2" style="color: rgb(92, 115, 6);">END_DATE</td>
                     </tr>
-                    <c:forEach items="${list}" var="dto">
+                    <c:forEach items="${selectedAllList}" var="dto">
                         <tr>
-                            <td class="search_title1">${dto.membershipCode}</td>
-                            <td class="search_title1">${dto.id}</td>
+                            <td class="search_title1">${dto.membershipcode}</td>
+                            <td class="search_title2">${dto.username}</td>
                             <td class="search_title1">${dto.name}</td>
-                            <td class="search_title2">${dto.startDate}</td>
-                            <td class="search_title2">${dto.endDate}</td>
+                            <td class="search_title2">${dto.startdate}</td>
+                            <td class="search_title2">${dto.enddate}</td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -75,36 +77,36 @@
                 <table>
                     <tr>
                         <td class="search_title1" style="color: rgb(92, 115, 6);">CODE</td>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">ID</td>
+                        <td class="search_title1" style="color: rgb(92, 115, 6);">USERNAME</td>
                         <td class="search_title1" style="color: rgb(92, 115, 6);">NAME</td>
                         <td class="search_title2" style="color: rgb(92, 115, 6);">START_DATE</td>
                         <td class="search_title2" style="color: rgb(92, 115, 6);">END_DATE</td>
                     </tr>
                     <c:if test="${not empty selectedId}">
                         <tr>
-                            <td class="search_title1">${selectedId.membershipCode}</td>
-                            <td class="search_title1">${selectedId.id}</td>
+                            <td class="search_title1">${selectedId.membershipcode}</td>
+                            <td class="search_title1">${selectedId.username}</td>
                             <td class="search_title1">${selectedId.name}</td>
-                            <td class="search_title2">${selectedId.startDate}</td>
-                            <td class="search_title2">${selectedId.endDate}</td>
+                            <td class="search_title2">${selectedId.startdate}</td>
+                            <td class="search_title2">${selectedId.enddate}</td>
                         </tr>
                     </c:if>
                     <c:forEach items="${selectedCodeList}" var="dto">
                         <tr>
-                            <td class="search_title1">${dto.membershipCode}</td>
-                            <td class="search_title1">${dto.id}</td>
+                            <td class="search_title1">${dto.membershipcode}</td>
+                            <td class="search_title1">${dto.username}</td>
                             <td class="search_title1">${dto.name}</td>
-                            <td class="search_title2">${dto.startDate}</td>
-                            <td class="search_title2">${dto.endDate}</td>
+                            <td class="search_title2">${dto.startdate}</td>
+                            <td class="search_title2">${dto.enddate}</td>
                         </tr>
                     </c:forEach>
                     <c:forEach items="${selectedDateList}" var="dto">
                         <tr>
-                            <td class="search_title1">${dto.membershipCode}</td>
-                            <td class="search_title1">${dto.id}</td>
+                            <td class="search_title1">${dto.membershipcode}</td>
+                            <td class="search_title1">${dto.username}</td>
                             <td class="search_title1">${dto.name}</td>
-                            <td class="search_title2">${dto.startDate}</td>
-                            <td class="search_title2">${dto.endDate}</td>
+                            <td class="search_title2">${dto.startdate}</td>
+                            <td class="search_title2">${dto.enddate}</td>
                         </tr>
                     </c:forEach>
                 </table>

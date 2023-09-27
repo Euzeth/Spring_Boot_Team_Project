@@ -7,7 +7,7 @@ import com.example.demo.Domain.Dto.QnADto;
 import com.example.demo.Domain.Dto.ReplyDto;
 import com.example.demo.Domain.Entity.QnA;
 import com.example.demo.Domain.Entity.Reply;
-import com.example.demo.Domain.Entity.ReplyRepository;
+import com.example.demo.Domain.Repository.ReplyRepository;
 import com.example.demo.Domain.Repository.QnARepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
