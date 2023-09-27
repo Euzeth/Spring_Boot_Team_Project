@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.w3.org/1999/xhtml" >
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -132,7 +132,7 @@
                 <div>
                     <br>
                     <a href=""><img src="/images/user.png" alt=""></a>
-                    <span><sec:authentication property="principal.name" />&nbsp;님, 환영합니다!</span>
+                    <span th:text="${principalDetails.name + ' 님, 환영합니다!'}"></span>
                 </div>
                 <h4></h4>
                 <form method=post action="/logout">

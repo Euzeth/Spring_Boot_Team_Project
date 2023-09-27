@@ -225,14 +225,5 @@ public class MemberController {
 	    model.addAttribute("list", userDtoList);
 	}
 
-	@GetMapping("/checkDuplicate")
-	public ResponseEntity<String> checkDuplicate(@RequestParam("id") String id) {
-	    try {
-	        boolean duplicate_id = memberService.idcheck(id);
-	        return ResponseEntity.ok(String.valueOf(duplicate_id));
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("중복 확인 중에 오류가 발생했습니다.");
-	    }
-	}
 	
 }

@@ -1,6 +1,10 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Config.auth.PrincipalDetails;
+import com.example.demo.Domain.Dto.MemberDto;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +27,17 @@ public class IndexController{
 	}
 	
 	@GetMapping("/indexlog")
-	public void f3() {
+	public void indexlog_get(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)
+	{
 		log.info("GET /indexlog");
+		log.info("principalDetails " + principalDetails);
+
+		model.addAttribute("principalDetails", principalDetails);
 	}
 	
 	@PostMapping("/indexlog")
-	public void f4() {
+	public void indexlog_post()
+	{
 		log.info("POST /indexlog");
 	}
 
