@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:c="">
+<html lang="en" xmlns:c="" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -29,32 +29,33 @@
     </header>
 
     <section class="membership_M">
-        <h1>멤버십 관리 페이지입니다.</h1>
+        <h1>멤버십 관리 페이지입니다. </h1>
+        //포크 확인해보기
         <ul>
+            <div>
             <form action="/membership/selectAll" method="get">
             <li><span class="title">멤버십회원 전체조회
 						<button class="alluser" id="showButton" type="submit">조회하기</button>
 				</span>
                 <hr /></li>
             </form>
+            </div>
             <div class="selectall">
                 <table>
                     <tr>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">CODE</td>
-                        <td class="search_title2" style="color: rgb(92, 115, 6);">USERNAME</td>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">NAME</td>
-                        <td class="search_title2" style="color: rgb(92, 115, 6);">START_DATE</td>
-                        <td class="search_title2" style="color: rgb(92, 115, 6);">END_DATE</td>
+                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
                     </tr>
-                    <c:forEach items="${selectedAllList}" var="dto">
-                        <tr>
-                            <td class="search_title1">${dto.membershipcode}</td>
-                            <td class="search_title2">${dto.username}</td>
-                            <td class="search_title1">${dto.name}</td>
-                            <td class="search_title2">${dto.startdate}</td>
-                            <td class="search_title2">${dto.enddate}</td>
-                        </tr>
-                    </c:forEach>
+                    <tr th:each="dto:${selectedAllList}">
+                        <td class="search_title1" th:text="${dto.membershipcode}"></td>
+                        <td class="search_title2" th:text="${dto.username}"></td>
+                        <td class="search_title1" th:text="${dto.name}"></td>
+                        <td class="search_title2" th:text="${dto.startdate}"></td>
+                        <td class="search_title2" th:text="${dto.enddate}"></td>
+                    </tr>
                 </table>
             </div>
             <br />
@@ -66,8 +67,7 @@
                     <option value="membershipcode">멤버십 코드</option>
                     <option value="enddate">종료 날짜</option>
                 </select>
-                <form
-                        action="/membership/selectId" method="get">
+                <form action="/membership/selectId" method="get">
                     <input type="text" class="search_input"
                            placeholder="검색할 USERNAME를 입력하세요" name="username">
                     <button class="ms_search" type="submit" id="key_search">검색</button>
@@ -76,39 +76,34 @@
             <div class="keywordShow">
                 <table>
                     <tr>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">CODE</td>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">USERNAME</td>
-                        <td class="search_title1" style="color: rgb(92, 115, 6);">NAME</td>
-                        <td class="search_title2" style="color: rgb(92, 115, 6);">START_DATE</td>
-                        <td class="search_title2" style="color: rgb(92, 115, 6);">END_DATE</td>
+                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
                     </tr>
-                    <c:if test="${not empty selectedId}">
-                        <tr>
-                            <td class="search_title1">${selectedId.membershipcode}</td>
-                            <td class="search_title1">${selectedId.username}</td>
-                            <td class="search_title1">${selectedId.name}</td>
-                            <td class="search_title2">${selectedId.startdate}</td>
-                            <td class="search_title2">${selectedId.enddate}</td>
-                        </tr>
-                    </c:if>
-                    <c:forEach items="${selectedCodeList}" var="dto">
-                        <tr>
-                            <td class="search_title1">${dto.membershipcode}</td>
-                            <td class="search_title1">${dto.username}</td>
-                            <td class="search_title1">${dto.name}</td>
-                            <td class="search_title2">${dto.startdate}</td>
-                            <td class="search_title2">${dto.enddate}</td>
-                        </tr>
-                    </c:forEach>
-                    <c:forEach items="${selectedDateList}" var="dto">
-                        <tr>
-                            <td class="search_title1">${dto.membershipcode}</td>
-                            <td class="search_title1">${dto.username}</td>
-                            <td class="search_title1">${dto.name}</td>
-                            <td class="search_title2">${dto.startdate}</td>
-                            <td class="search_title2">${dto.enddate}</td>
-                        </tr>
-                    </c:forEach>
+                    <!-- 선택된 옵션에 따라서 다른 블록을 표시하거나 숨김 -->
+                    <tr th:if="${selectedId != null and #strings.equals(selectedOption, 'username')}">
+                        <td class="search_title1" th:text="${selectedId.membershipcode}"></td>
+                        <td class="search_title2" th:text="${selectedId.username}"></td>
+                        <td class="search_title1" th:text="${selectedId.name}"></td>
+                        <td class="search_title2" th:text="${selectedId.startdate}"></td>
+                        <td class="search_title2" th:text="${selectedId.enddate}"></td>
+                    </tr>
+                    <tr th:if="${selectedCodeList != null and #strings.equals(selectedOption, 'membershipcode')}">
+                        <td class="search_title1" th:text="${selectedCodeList.membershipcode}"></td>
+                        <td class="search_title2" th:text="${selectedCodeList.username}"></td>
+                        <td class="search_title1" th:text="${selectedCodeList.name}"></td>
+                        <td class="search_title2" th:text="${selectedCodeList.startdate}"></td>
+                        <td class="search_title2" th:text="${selectedCodeList.enddate}"></td>
+                    </tr>
+                    <tr th:if="${selectedDateList != null and #strings.equals(selectedOption, 'enddate')}">
+                        <td class="search_title1" th:text="${selectedDateList.membershipcode}"></td>
+                        <td class="search_title2" th:text="${selectedDateList.username}"></td>
+                        <td class="search_title1" th:text="${selectedDateList.name}"></td>
+                        <td class="search_title2" th:text="${selectedDateList.startdate}"></td>
+                        <td class="search_title2" th:text="${selectedDateList.enddate}"></td>
+                    </tr>
                 </table>
             </div>
             <br />
@@ -158,7 +153,7 @@
 
 <script>
     //회원 전체조회 script
-        document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
            // 버튼 클릭 이벤트 핸들러
            var showButton = document.getElementById('showButton');
            var selectAllDiv = document.querySelector('.selectall');
@@ -219,7 +214,7 @@
               } else {
                   keywordShowDiv.style.display = 'none'; // 숨김
               }
-          });
+          })
 
     //회원 삭제 script
        const form = document.querySelector('.ms_delete');
