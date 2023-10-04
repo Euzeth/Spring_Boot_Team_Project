@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -205,8 +206,10 @@ public class MemberController {
 	}
 
 	@GetMapping("/user")
-	public void user() {
+	public void user(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)
+	{
 		log.info("GET /user");
+		model.addAttribute("principalDetails", principalDetails);
 	}
 
 	@GetMapping("/member")

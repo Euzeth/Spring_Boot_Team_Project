@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -29,20 +30,23 @@
     <section class="user">
         <h1>내 정보를 확인 해보세요!</h1>
         <ul>
-            <c:if test="${empty updatedDto}">
-                <li><span class="title">ID</span><hr/><span class="info"><sec:authentication property="principal.username" /></span> </li>
+                <li><span class="title">ID</span><hr/><span class="info" th:text="${principalDetails.username}" aria-readonly="true"></span> </li>
                 <br />
-                <li><span class="title">NAME</span><hr/> <span class="info"><sec:authentication property="principal.name" /></span></li>
+                <li><span class="title">NAME</span><hr/> <span class="info" th:text="${principalDetails.name}"></span></li>
                 <br />
                 <li><span class="title">PW</span><hr/><span class="info" >****</span></li>
                 <br />
-                <li><span class="title">ADDR</span><hr/><span class="info"><sec:authentication property="principal.addr" /></span></li>
+                <li><span class="title">ZIPCODE</span><hr/><span class="info" th:text="${principalDetails.zipcode}"></span></li>
                 <br />
-                <li><span class="title">PHONE</span><hr/><span class="info"><sec:authentication property="principal.phone" /></span></li>
-                <button id="back_btn" onclick= "location.href='/indexlog'">이전</button>
-                <button id="update_btn" onclick = "location.href='/member/update'">정보수정</button>
-            </c:if>
-
+                <li><span class="title">ADDR1</span><hr/><span class="info" th:text="${principalDetails.addr1}"></span></li>
+                <br />
+                <li><span class="title">ADDR2</span><hr/><span class="info" th:text="${principalDetails.addr2}"></span></li>
+                <br />
+                <li><span class="title">PHONE</span><hr/><span class="info" th:text="${principalDetails.phone}"></span></li>
+                <div>
+                    <button id="back_btn" onclick= "location.href='/indexlog'">이전</button>
+                    <button id="update_btn" onclick = "location.href='/member/update'">정보수정</button>
+                </div>
         </ul>
     </section>
 

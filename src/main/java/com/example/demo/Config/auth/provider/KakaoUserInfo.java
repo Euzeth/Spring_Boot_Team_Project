@@ -32,4 +32,9 @@ public class KakaoUserInfo implements OAuth2UserInfo{
     public String getName() {
         return (String)attributes.get("nickname");
     }
+
+    public String getAddr1() {return (String)attributes.get("addr1");}
+    public String getAddr2(){return (String)attributes.get("addr2");}
+    public String getPhone(){return (String)attributes.get("phone");}
+    public String getZipcode(){return (String)attributes.get("zipcode");}
 }

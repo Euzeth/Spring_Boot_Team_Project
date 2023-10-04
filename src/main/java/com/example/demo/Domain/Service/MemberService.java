@@ -1,6 +1,7 @@
 package com.example.demo.Domain.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.Domain.Dto.MemberDto;
 import com.example.demo.Domain.Entity.Member;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -74,8 +76,15 @@ public class MemberService{
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public void modifyMember(MemberDto dto) {
+	public boolean modifyMember(MemberDto dto) {
+		Member member = new Member();
+		member.setName(dto.getName());
+		member.setAddr1(dto.getAddr1());
+		member.setAddr2(dto.getAddr2());
+		member.setPhone(dto.getPhone());
+		member.setZipcode(dto.getZipcode());
 
+		return false;
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -87,10 +96,6 @@ public class MemberService{
 
         return null; //
     }
-	
-	public boolean idcheck(String id) throws Exception {
 
-		return false;
-	}
 
 }

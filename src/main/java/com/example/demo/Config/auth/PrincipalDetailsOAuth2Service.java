@@ -82,10 +82,10 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
         String name = oAuth2UserInfo.getName();
-
-
-
-
+        String addr1 = oAuth2UserInfo.getAddr1();
+        String addr2 = oAuth2UserInfo.getAddr2();
+        String phone = oAuth2UserInfo.getPhone();
+        String zipcode = oAuth2UserInfo.getZipcode();
 
         //DB 저장
         Optional<Member> optional =   memberRepository.findById(username);
@@ -95,6 +95,10 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
                     .password(password)
                     .role(role)
                     .name(name)
+                    .addr1(addr1)
+                    .addr2(addr2)
+                    .phone(phone)
+                    .zipcode(zipcode)
                     .provider(provider)
                     .providerId(providerId)
                     .build();
@@ -113,6 +117,10 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         dto.setPassword(password);
         dto.setRole(role);
         dto.setName(name);
+        dto.setAddr1(addr1);
+        dto.setAddr2(addr2);
+        dto.setPhone(phone);
+        dto.setZipcode(zipcode);
         //OAUTH2 LOGOUT
         dto.setProvider(provider);
         dto.setProviderId(providerId);

@@ -5,7 +5,7 @@ li{
     .user {
         width: 410px;
         display: block;
-        height: 750px;
+        height: 950px;
         padding-top: 50px;
         margin: 0 auto;
     }
@@ -50,7 +50,9 @@ li{
         margin-top: 20px;
         cursor: pointer;
     }
-    
+    .user>ul>div{
+        display:flex;
+    }
     .user #update_btn{
 		width: 100px;
         height: 35px;
