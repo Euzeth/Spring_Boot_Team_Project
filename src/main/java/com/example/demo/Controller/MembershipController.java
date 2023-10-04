@@ -81,6 +81,14 @@ public class MembershipController {
 
         model.addAttribute("list", membershipDtoList);*/
 
+        log.info("GET /memberhsipM");
+        List<MembershipDto> list = membershipService.getMembershipList();
+
+        List<MembershipDto> membershipDtoList = list.stream().collect(Collectors.toList());
+
+        model.addAttribute("selectedAllList", membershipDtoList);
+
+        System.out.println(membershipDtoList);
     }
 
     // 유저 멤버십페이지에서 WM_1 결제
@@ -186,8 +194,8 @@ public class MembershipController {
         return "Subscribe Fail..";
     }
 
-    @GetMapping("/membership/selectAll")
-    public String membership_selectAll(Model model) {
+ /*   @GetMapping("/membership/selectAll")
+    public void membership_selectAll(Model model) {
         log.info("GET /memberhsipM");
         List<MembershipDto> list = membershipService.getMembershipList();
 
@@ -196,9 +204,7 @@ public class MembershipController {
         model.addAttribute("selectedAllList", membershipDtoList);
 
         System.out.println(membershipDtoList);
-
-        return "membershipM";
-    }
+    }*/
 
     // membership 개별 유저 조회 관련 매핑(ID)
     @GetMapping("/membership/selectId")

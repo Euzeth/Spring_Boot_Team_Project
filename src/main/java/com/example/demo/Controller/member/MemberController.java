@@ -210,7 +210,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/member")
-	public void member(Model model) {
+	public void	 member(Model model) {
 		log.info("GET /member");
 		List<MemberDto> list = memberService.getAllMember();
 		

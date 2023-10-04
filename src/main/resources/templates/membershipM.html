@@ -30,15 +30,14 @@
 
     <section class="membership_M">
         <h1>멤버십 관리 페이지입니다. </h1>
-        //포크 확인해보기
         <ul>
             <div>
-            <form action="/membership/selectAll" method="get">
+          <!--  <form action="/membership/selectAll" method="get">-->
             <li><span class="title">멤버십회원 전체조회
-						<button class="alluser" id="showButton" type="submit">조회하기</button>
+						<button class="alluser" id="showButton">조회하기</button>
 				</span>
                 <hr /></li>
-            </form>
+           <!-- </form>-->
             </div>
             <div class="selectall">
                 <table>
@@ -75,7 +74,8 @@
             </div>
             <div class="keywordShow">
                 <table>
-                    <tr>
+
+                    <tr th:if="${selectedId != null and selectedCodeList != null and selectedDateList != null}">
                         <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
                         <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
                         <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
@@ -104,6 +104,7 @@
                         <td class="search_title2" th:text="${selectedDateList.startdate}"></td>
                         <td class="search_title2" th:text="${selectedDateList.enddate}"></td>
                     </tr>
+
                 </table>
             </div>
             <br />
@@ -159,16 +160,16 @@
            var selectAllDiv = document.querySelector('.selectall');
 
            showButton.addEventListener('click', function() {
-               // 현재 상태를 확인하여 토글
                if (selectAllDiv.style.display === 'none' || selectAllDiv.style.display === '') {
-                   selectAllDiv.style.display = 'block'; // 보이도록 함
-               } else {
-                   selectAllDiv.style.display = 'none'; // 숨김
-               }
+	               selectAllDiv.style.display = 'block'; // 보이도록 함
+	           } else {
+	               selectAllDiv.style.display = 'none'; // 숨김
+	           }
+
            });
 
     //회원 단건조회 script
-             //단건조회 관련 변수
+	<!--   //단건조회 관련 변수
            var select = document.getElementById('select');
            var searchBlock = document.querySelector('.search_block');
            // 옵션 선택이 변경될 때 이벤트 리스너 추가
@@ -209,12 +210,73 @@
           // key_search 버튼 클릭 이벤트 핸들러
           key_search.addEventListener('click', function () {
               // 현재 상태를 확인하여 토글
-              if (keywordShowDiv.style.display === 'none' || keywordShowDiv.style.display === '') {
                   keywordShowDiv.style.display = 'block'; // 보이도록 함
-              } else {
-                  keywordShowDiv.style.display = 'none'; // 숨김
-              }
-          })
+
+          });-->
+          // 검색 버튼 요소 가져오기
+var searchButton = document.getElementById('key_search');
+
+// 검색 버튼 클릭 이벤트 핸들러 추가
+searchButton.addEventListener('click', function (e) {
+    e.preventDefault(); // 기본 폼 제출 동작 방지
+
+    // 선택된 옵션과 입력 필드의 값을 가져오기
+    var selectedOption = document.getElementById('select').value;
+    var inputValue = document.querySelector('.search_input').value;
+
+    // AJAX 또는 Fetch API를 사용하여 서버로 데이터를 요청합니다.
+    // 이 부분에서 서버로 데이터를 요청하고 응답을 처리해야 합니다.
+
+    // 예를 들어, Fetch API를 사용하여 데이터를 요청하는 코드는 다음과 같을 수 있습니다.
+    fetch('/membership/select', {
+        method: 'POST', // 또는 'GET'에 따라 변경
+        body: JSON.stringify({ option: selectedOption, value: inputValue }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 서버로부터 받은 데이터를 처리하고 HTML 표에 표시합니다.
+        updateTable(data);
+    })
+    .catch(error => {
+        console.error('에러 발생:', error);
+    });
+});
+
+// HTML 표 업데이트 함수
+function updateTable(data) {
+    var table = document.querySelector('.keywordShow table');
+    var tbody = table.querySelector('tbody');
+
+    // 기존 데이터 제거
+    tbody.innerHTML = '';
+
+    // 데이터를 표에 추가
+    data.forEach(function (item) {
+        var row = document.createElement('tr');
+        var codeCell = document.createElement('td');
+        var usernameCell = document.createElement('td');
+        var nameCell = document.createElement('td');
+        var startDateCell = document.createElement('td');
+        var endDateCell = document.createElement('td');
+
+        codeCell.textContent = item.membershipcode;
+        usernameCell.textContent = item.username;
+        nameCell.textContent = item.name;
+        startDateCell.textContent = item.startdate;
+        endDateCell.textContent = item.enddate;
+
+        row.appendChild(codeCell);
+        row.appendChild(usernameCell);
+        row.appendChild(nameCell);
+        row.appendChild(startDateCell);
+        row.appendChild(endDateCell);
+
+        tbody.appendChild(row);
+    });
+}
 
     //회원 삭제 script
        const form = document.querySelector('.ms_delete');
