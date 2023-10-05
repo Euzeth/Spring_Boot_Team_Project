@@ -32,12 +32,12 @@
         <h1>멤버십 관리 페이지입니다. </h1>
         <ul>
             <div>
-          <!--  <form action="/membership/selectAll" method="get">-->
+            <form action="/membership/selectAll" method="get">
             <li><span class="title">멤버십회원 전체조회
 						<button class="alluser" id="showButton">조회하기</button>
 				</span>
                 <hr /></li>
-           <!-- </form>-->
+            </form>
             </div>
             <div class="selectall">
                 <table>
@@ -73,9 +73,9 @@
                 </form>
             </div>
             <div class="keywordShow">
+                <th:block th:if="${selectedId != null and #strings.equals(selectedOption, 'username')}">
                 <table>
-
-                    <tr th:if="${selectedId != null and selectedCodeList != null and selectedDateList != null}">
+                    <tr>
                         <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
                         <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
                         <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
@@ -83,29 +83,53 @@
                         <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
                     </tr>
                     <!-- 선택된 옵션에 따라서 다른 블록을 표시하거나 숨김 -->
-                    <tr th:if="${selectedId != null and #strings.equals(selectedOption, 'username')}">
+                    <tr>
                         <td class="search_title1" th:text="${selectedId.membershipcode}"></td>
                         <td class="search_title2" th:text="${selectedId.username}"></td>
                         <td class="search_title1" th:text="${selectedId.name}"></td>
                         <td class="search_title2" th:text="${selectedId.startdate}"></td>
                         <td class="search_title2" th:text="${selectedId.enddate}"></td>
                     </tr>
-                    <tr th:if="${selectedCodeList != null and #strings.equals(selectedOption, 'membershipcode')}">
+                    </table>
+                    </th:block>
+
+                    <th:block th:if="${selectedCodeList != null and #strings.equals(selectedOption, 'membershipcode')}">
+                <table>
+                    <tr>
+                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
+                    </tr>
+                <tr>
                         <td class="search_title1" th:text="${selectedCodeList.membershipcode}"></td>
                         <td class="search_title2" th:text="${selectedCodeList.username}"></td>
                         <td class="search_title1" th:text="${selectedCodeList.name}"></td>
                         <td class="search_title2" th:text="${selectedCodeList.startdate}"></td>
                         <td class="search_title2" th:text="${selectedCodeList.enddate}"></td>
                     </tr>
-                    <tr th:if="${selectedDateList != null and #strings.equals(selectedOption, 'enddate')}">
+                </table>
+                    </th:block>
+                <th:block th:if="${selectedDateList != null and #strings.equals(selectedOption, 'enddate')}">
+                    <table>
+                        <tr>
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
+                        </tr>
+                    <tr>
                         <td class="search_title1" th:text="${selectedDateList.membershipcode}"></td>
                         <td class="search_title2" th:text="${selectedDateList.username}"></td>
                         <td class="search_title1" th:text="${selectedDateList.name}"></td>
                         <td class="search_title2" th:text="${selectedDateList.startdate}"></td>
                         <td class="search_title2" th:text="${selectedDateList.enddate}"></td>
                     </tr>
-
                 </table>
+                </th:block>
+
             </div>
             <br />
             <li><span class="title">회원 삭제</span>
@@ -151,132 +175,148 @@
         integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
 <script>
+
     //회원 전체조회 script
-       document.addEventListener('DOMContentLoaded', function() {
+     <!-- document.addEventListener('DOMContentLoaded', function() {
            // 버튼 클릭 이벤트 핸들러
            var showButton = document.getElementById('showButton');
            var selectAllDiv = document.querySelector('.selectall');
 
            showButton.addEventListener('click', function() {
                if (selectAllDiv.style.display === 'none' || selectAllDiv.style.display === '') {
-	               selectAllDiv.style.display = 'block'; // 보이도록 함
-	           } else {
-	               selectAllDiv.style.display = 'none'; // 숨김
-	           }
+                 axios.get("/membership/selectAll")
+                .then(function (response) {
+                    var data = response.data;
+                      selectAllDiv.style.display = 'block'; // 보이도록 함
 
+                    // data를 DTO에 매핑하고 테이블에 표시하는 코드를 작성해야 합니다.
+                    displaySearchResults(data);
+                    // 예를 들어, data를 반복하여 테이블 행을 추가할 수 있습니다.
+                })
+                .catch(function (error) {
+                    console.error("검색에 실패했습니다.", error);
+                    selectAllDiv.style.display = 'none'; // 숨김
+                })
+
+
+           }
            });
+-->
+
+
+   document.addEventListener('DOMContentLoaded', function() {
+        // 버튼 클릭 이벤트 핸들러
+        var showButton = document.getElementById('showButton');
+        var selectAllDiv = document.querySelector('.selectall');
+
+        showButton.addEventListener('click', function() {
+            if (selectAllDiv.style.display === 'none' || selectAllDiv.style.display === '') {
+                // axios를 사용하여 서버로 GET 요청을 보냅니다.
+                axios.get("/membership/selectAll")
+                    .then(function (response) {
+                        var data = response.data;
+
+                        // selectAllDiv의 내용을 초기화합니다.
+                        selectAllDiv.innerHTML = "";
+
+                        // 테이블을 생성하고 헤더를 추가합니다.
+                        var table = document.createElement("table");
+                        table.innerHTML = `
+                            <tr>
+                                <th class="search_title1" style="color: rgb(92, 115, 6);">CODE</th>
+                                <th class="search_title2" style="color: rgb(92, 115, 6);">USERNAME</th>
+                                <th class="search_title1" style="color: rgb(92, 115, 6);">NAME</th>
+                                <th class="search_title2" style="color: rgb(92, 115, 6);">START_DATE</th>
+                                <th class="search_title2" style="color: rgb(92, 115, 6);">END_DATE</th>
+                            </tr>
+                        `;
+
+                        // 데이터를 테이블에 추가합니다.
+                        data.forEach(function (dto) {
+                            var row = table.insertRow();
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3);
+                            var cell5 = row.insertCell(4);
+
+                            cell1.textContent = dto.membershipcode;
+                            cell2.textContent = dto.username;
+                            cell3.textContent = dto.name;
+                            cell4.textContent = dto.startdate;
+                            cell5.textContent = dto.enddate;
+                        });
+
+                        // 테이블을 selectAllDiv에 추가합니다.
+                        selectAllDiv.appendChild(table);
+
+                        // selectAllDiv을 보이도록 설정합니다.
+                        selectAllDiv.style.display = 'block';
+                    })
+                    .catch(function (error) {
+                        console.error("검색에 실패했습니다.", error);
+                        selectAllDiv.style.display = 'none'; // 실패 시 숨김
+                    });
+            }
+        });
+    });
+
+<!--
+
+
 
     //회원 단건조회 script
-	<!--   //단건조회 관련 변수
-           var select = document.getElementById('select');
-           var searchBlock = document.querySelector('.search_block');
-           // 옵션 선택이 변경될 때 이벤트 리스너 추가
-          select.addEventListener('change', function() {
-          var selectedOption = select.value;
-          var formAction = '';
-          var inputName = '';
-          var inputPlaceholder = '';
+	 document.addEventListener("DOMContentLoaded", function () {
+            var select = document.getElementById("select");
+            var searchForm = document.getElementById("searchForm");
+            var searchInput = searchForm.querySelector(".search_input");
+            var resultTable = document.getElementById("resultTable");
 
-          // 선택된 옵션에 따라서 form action, input name, placeholder 설정
-          if (selectedOption === 'username') {
-              formAction = '/membership/selectId';
-            inputName = 'username';
-            inputPlaceholder = '검색할 USERNAME을 입력하세요';
-          } else if (selectedOption === 'membershipcode') {
-                formAction = '/membership/selectCode';
-                inputName = 'membershipcode';
-                inputPlaceholder = '멤버십 코드를 입력하세요';
-          } else if (selectedOption === 'enddate') {
-                  formAction = '/membership/selectDate';
-                inputName = 'enddate';
-                inputPlaceholder = '검색할 종료 날짜를 입력하세요';
-          }
+            select.addEventListener("change", function () {
+                var selectedOption = select.value;
+                var placeholderText = "";
 
-                // 폼과 입력 필드 업데이트
-                var form = searchBlock.querySelector('form');
-                form.action = formAction;
-                var input = form.querySelector('.search_input');
-                input.name = inputName;
-                input.placeholder = inputPlaceholder;
+                if (selectedOption === "username") {
+                    placeholderText = "검색할 USERNAME를 입력하세요";
+                } else if (selectedOption === "membershipcode") {
+                    placeholderText = "검색할 멤버십 코드를 입력하세요";
+                } else if (selectedOption === "enddate") {
+                    placeholderText = "검색할 종료 날짜를 입력하세요";
+                }
+
+                searchInput.placeholder = placeholderText;
+            });
+
+            searchForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // 폼 제출 방지
+
+                var selectedOption = select.value;
+                var searchKeyword = searchInput.value;
+
+               // 서버로 검색 요청을 보냅니다.
+                axios.get("/membership/selectId")
+                .then(function (response) {
+                    // 검색 결과를 받아와서 테이블에 표시합니다.
+                    var data = response.data;
+
+
+                    // data를 DTO에 매핑하고 테이블에 표시하는 코드를 작성해야 합니다.
+
+                    displaySearchResults(data);
+                    // 예를 들어, data를 반복하여 테이블 행을 추가할 수 있습니다.
+                })
+                .catch(function (error) {
+                    console.error("검색에 실패했습니다.", error);
                 });
 
 
-        // 버튼 클릭 이벤트 핸들러
-          var key_search = document.getElementById('key_search');
-          var keywordShowDiv = document.querySelector('.keywordShow');
+            });
+        });
 
-          // key_search 버튼 클릭 이벤트 핸들러
-          key_search.addEventListener('click', function () {
-              // 현재 상태를 확인하여 토글
-                  keywordShowDiv.style.display = 'block'; // 보이도록 함
 
-          });-->
-          // 검색 버튼 요소 가져오기
-var searchButton = document.getElementById('key_search');
 
-// 검색 버튼 클릭 이벤트 핸들러 추가
-searchButton.addEventListener('click', function (e) {
-    e.preventDefault(); // 기본 폼 제출 동작 방지
 
-    // 선택된 옵션과 입력 필드의 값을 가져오기
-    var selectedOption = document.getElementById('select').value;
-    var inputValue = document.querySelector('.search_input').value;
-
-    // AJAX 또는 Fetch API를 사용하여 서버로 데이터를 요청합니다.
-    // 이 부분에서 서버로 데이터를 요청하고 응답을 처리해야 합니다.
-
-    // 예를 들어, Fetch API를 사용하여 데이터를 요청하는 코드는 다음과 같을 수 있습니다.
-    fetch('/membership/select', {
-        method: 'POST', // 또는 'GET'에 따라 변경
-        body: JSON.stringify({ option: selectedOption, value: inputValue }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        // 서버로부터 받은 데이터를 처리하고 HTML 표에 표시합니다.
-        updateTable(data);
-    })
-    .catch(error => {
-        console.error('에러 발생:', error);
-    });
-});
-
-// HTML 표 업데이트 함수
-function updateTable(data) {
-    var table = document.querySelector('.keywordShow table');
-    var tbody = table.querySelector('tbody');
-
-    // 기존 데이터 제거
-    tbody.innerHTML = '';
-
-    // 데이터를 표에 추가
-    data.forEach(function (item) {
-        var row = document.createElement('tr');
-        var codeCell = document.createElement('td');
-        var usernameCell = document.createElement('td');
-        var nameCell = document.createElement('td');
-        var startDateCell = document.createElement('td');
-        var endDateCell = document.createElement('td');
-
-        codeCell.textContent = item.membershipcode;
-        usernameCell.textContent = item.username;
-        nameCell.textContent = item.name;
-        startDateCell.textContent = item.startdate;
-        endDateCell.textContent = item.enddate;
-
-        row.appendChild(codeCell);
-        row.appendChild(usernameCell);
-        row.appendChild(nameCell);
-        row.appendChild(startDateCell);
-        row.appendChild(endDateCell);
-
-        tbody.appendChild(row);
-    });
-}
 
     //회원 삭제 script
        const form = document.querySelector('.ms_delete');
@@ -305,6 +345,7 @@ function updateTable(data) {
            }
        });
     });
+-->
 
 
 </script>
