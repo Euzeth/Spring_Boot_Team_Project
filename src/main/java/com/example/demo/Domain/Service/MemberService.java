@@ -31,8 +31,8 @@ public class MemberService{
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	public List<MemberDto> getAllMember(){
-		return null;
+	public List<Member> getAllMember(){
+		return memberRepository.findAll();
 	}
 	
 	public MemberDto searchMember(String id){
@@ -76,25 +76,17 @@ public class MemberService{
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public boolean modifyMember(MemberDto dto) {
-		Member member = new Member();
-		member.setName(dto.getName());
-		member.setAddr1(dto.getAddr1());
-		member.setAddr2(dto.getAddr2());
-		member.setPhone(dto.getPhone());
-		member.setZipcode(dto.getZipcode());
-
-		return false;
+	public void modifyMember(Member member) {
+		memberRepository.save(member);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
 	public void removeMember(String id) {
-
+		memberRepository.deleteById(id);
 	}
 	
-	public String getMemberName(String id) {
-
-        return null; //
+	public Member getMemberName(String username) {
+        return memberRepository.findById(username).orElse(null);
     }
 
 

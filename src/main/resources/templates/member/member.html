@@ -29,20 +29,24 @@
         <ul>
             <li><span class="title">전체회원조회<button class="alluser" id="showButton">조회하기</button></span><hr/></li>
             <div class="selectall">
-                <%-- <c:forEach items="${list}" var="dto">
-                <span>${dto.id}</span>&nbsp;&nbsp;<span>${dto.name}</span>
-                &nbsp;&nbsp;<span>${dto.addr}</span>&nbsp;&nbsp;<span>${dto.phone}</span><br/>
-            </c:forEach> --%>
-                <c:forEach items="${list}" var="dto">
-                    <table>
-                        <tr>
-                            <td style="width:100px; height:25px;">${dto.id}</td>
-                            <td style="width:100px; height:25px;">${dto.name}</td>
-                            <td style="width:100px; height:25px;">${dto.addr}</td>
-                            <td style="width:100px; height:25px;">${dto.phone}</td>
-                        </tr>
-                    </table>
-                </c:forEach>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="member : ${list}">
+                        <td th:text="${member.username}">Username</td>
+                        <td th:text="${member.name}">Name</td>
+                        <td th:text="${member.addr1 + ' ' + member.addr2}">Address</td>
+                        <td th:text="${member.phone}">Phone</td>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
             <br />
@@ -122,7 +126,7 @@
             const searchValue = searchInput.value;
 
             try {
-                const response = await axios.post('/app/member/remove', null, {
+                const response = await axios.post('/member/remove', null, {
                     params: { id: searchValue }
                 });
                 console.log('서버 응답:', response);
@@ -150,7 +154,7 @@
             const searchValue = searchInput.value;
 
             try {
-                const response = axios.post('/app/member/search', null, {
+                const response = axios.post('/member/search', null, {
                     params: { id: searchValue }
                 });
                 console.log('서버 응답:', response);

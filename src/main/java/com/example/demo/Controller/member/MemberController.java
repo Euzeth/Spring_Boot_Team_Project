@@ -11,6 +11,8 @@ import javax.validation.Valid;
 
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MemberDto;
+import com.example.demo.Domain.Entity.Member;
+import com.example.demo.Domain.Repository.MemberRepository;
 import com.example.demo.Domain.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -120,30 +122,32 @@ public class MemberController {
 	}
 
 	@GetMapping("/update")
-	public void update(MemberDto dto) {
+	public void update(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, Member member) {
 		log.info("GET /member/update");
-		memberService.modifyMember(dto);
+		model.addAttribute("principalDetails", principalDetails);
+		memberService.modifyMember(member);
 	}
 	
 	@PostMapping("/update")
-	public String update(MemberDto dto, Authentication authentication) {
+	public String update(Member member, Authentication authentication, MemberDto dto) {
 		log.info("POST /member/update");
-		memberService.modifyMember(dto);
+
+		memberService.modifyMember(member);
 		
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		principalDetails.setMember(dto);
 
-		
 		return "redirect:user";
 	}
 	
 	@GetMapping("/remove")
-	public void remove(@RequestParam String id) {
+	public void remove(String id) {
 		log.info("GET /member/delete");
 		memberService.removeMember(id);
 	}
 	
 	@PostMapping("/remove")
-	public String remove1(@RequestParam String id) {
+	public String remove1(String id) {
 		log.info("POST /member/delete");
 		memberService.removeMember(id);
 		return "redirect:member";
@@ -215,17 +219,16 @@ public class MemberController {
 	@GetMapping("/member")
 	public void member(Model model) {
 		log.info("GET /member");
-		List<MemberDto> list = memberService.getAllMember();
-		
-		List<MemberDto> userDtoList = list.stream()
-	            .filter(dto -> "ROLE_USER".equals(dto.getRole()))
-	            .collect(Collectors.toList());
+		List<Member> list = memberService.getAllMember();
+		List<Member> userDtoList = list.stream()
+				.filter(dto -> "ROLE_USER".equals(dto.getRole()))
+				.collect(Collectors.toList());
 
 		userDtoList.forEach((dto) -> {
-	        System.out.println(dto);
-	    });
+			System.out.println(dto);
+		});
+		model.addAttribute("list", userDtoList);
 
-	    model.addAttribute("list", userDtoList);
 	}
 
 	

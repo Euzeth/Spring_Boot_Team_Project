@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>UPDATE PAGE</title>
@@ -29,13 +29,13 @@
     <section class="update">
         <h1>내 정보를 수정 해보세요!</h1>
         <form action="/member/update" method="post">
-            <span class="title" >ID</span><hr/><input type="text" name="id" value="" /><br />
-            <span class="title">NAME</span><hr/><input type="text" name="name" value="" /><br />
-            <span class="title">PW</span><hr/><input type="password" name="pw" value="" /><br />
-            <span class="title">ZIPCODE</span><hr/><input type="text" name="zipcode" value="" /><br />
-            <span class="title">ADDR1</span><hr/><input type="text" name="addr1" value="" /><br />
-            <span class="title">ADDR2</span><hr/><input type="text" name="addr2" value="" /><br />
-            <span class="title">PHONE</span><hr/><input type="text" name="phone" value="" />
+            <span class="title" >ID</span><hr/><input type="text" name="id" th:value="${principalDetails.username}" readonly /><br />
+            <span class="title">NAME</span><hr/><input type="text" name="name" th:value="${principalDetails.name}" readonly /><br />
+            <span class="title">PW</span><hr/><input type="password" name="pw" th:value="${principalDetails.password}" /><br />
+            <span class="title">ZIPCODE</span><hr/><input type="text" name="zipcode" th:value="${principalDetails.zipcode}" /><br />
+            <span class="title">ADDR1</span><hr/><input type="text" name="addr1" th:value="${principalDetails.addr1}" /><br />
+            <span class="title">ADDR2</span><hr/><input type="text" name="addr2" th:value="${principalDetails.addr2}" /><br />
+            <span class="title">PHONE</span><hr/><input type="text" name="phone" th:value="${principalDetails.phone}" />
             <input id="update_btn" type="submit" value="수정하기" />
         </form>
 
