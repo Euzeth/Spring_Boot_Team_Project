@@ -77,7 +77,24 @@ public class MemberService{
 	
 	@Transactional(rollbackFor = Exception.class)
 	public void modifyMember(Member member) {
-		memberRepository.save(member);
+		// 멤버 정보 가져오기
+		Member existingMember = getMemberName(member.getUsername());
+
+		if (existingMember != null) {
+			// 수정할 필드 업데이트
+			existingMember.setPassword(passwordEncoder.encode(member.getPassword()));
+			existingMember.setName(member.getName());
+			existingMember.setZipcode(member.getZipcode());
+			existingMember.setAddr1(member.getAddr1());
+			existingMember.setAddr2(member.getAddr2());
+			existingMember.setPhone(member.getPhone());
+
+			// 멤버 정보 저장
+			memberRepository.save(existingMember);
+		} else {
+			// 해당 멤버가 존재하지 않을 경우 예외 처리
+			//throw new MemberNotFoundException("Member not found with username: " + member.getUsername());
+		}
 	}
 	
 	@Transactional(rollbackFor = Exception.class)

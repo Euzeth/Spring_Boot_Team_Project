@@ -123,16 +123,17 @@ public class MemberController {
 
 	@GetMapping("/update")
 	public void update(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, Member member) {
-		log.info("GET /member/update");
+		log.info("GET /member/update" + principalDetails);
 		model.addAttribute("principalDetails", principalDetails);
 		memberService.modifyMember(member);
 	}
 	
 	@PostMapping("/update")
-	public String update(Member member, Authentication authentication, MemberDto dto) {
+	public String update(MemberDto dto, Authentication authentication) {
 		log.info("POST /member/update");
 
-		memberService.modifyMember(member);
+		Member member = memberService.getMemberName(dto.getUsername());
+
 		
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 		principalDetails.setMember(dto);

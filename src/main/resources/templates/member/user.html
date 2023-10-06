@@ -29,25 +29,25 @@
     </header>
     <section class="user">
         <h1>내 정보를 확인 해보세요!</h1>
-        <ul>
-                <li><span class="title">ID</span><hr/><span class="info" th:text="${principalDetails.username}" aria-readonly="true"></span> </li>
+        <form action="/member/update">
+                <li><span class="title">ID</span><hr/><input type="text" name="username" th:value="${principalDetails.username}" readonly/> </li>
                 <br />
-                <li><span class="title">NAME</span><hr/> <span class="info" th:text="${principalDetails.name}"></span></li>
+                <li><span class="title">NAME</span><hr/><input type="text" name="name" th:value="${principalDetails.name}" readonly/></li>
                 <br />
-                <li><span class="title">PW</span><hr/><span class="info" >****</span></li>
+                <li><span class="title">PW</span><hr/><input type="password" name="password" th:value="${principalDetails.password}" readonly/></li>
                 <br />
-                <li><span class="title">ZIPCODE</span><hr/><span class="info" th:text="${principalDetails.zipcode}"></span></li>
+                <li><span class="title">ZIPCODE</span><hr/><input type="text" name="zipcode" th:value="${principalDetails.zipcode}" readonly/></li>
                 <br />
-                <li><span class="title">ADDR1</span><hr/><span class="info" th:text="${principalDetails.addr1}"></span></li>
+                <li><span class="title">ADDR1</span><hr/><input type="text" name="addr1" th:value="${principalDetails.addr1}" readonly/></li>
                 <br />
-                <li><span class="title">ADDR2</span><hr/><span class="info" th:text="${principalDetails.addr2}"></span></li>
+                <li><span class="title">ADDR2</span><hr/><input type="text" name="addr2" th:value="${principalDetails.addr2}" readonly/></li>
                 <br />
-                <li><span class="title">PHONE</span><hr/><span class="info" th:text="${principalDetails.phone}"></span></li>
+                <li><span class="title">PHONE</span><hr/><input type="text" name="phone" th:value="${principalDetails.phone}" readonly/></li>
                 <div>
                     <button id="back_btn" onclick= "location.href='/indexlog'">이전</button>
                     <button id="update_btn" onclick = "location.href='/member/update'">정보수정</button>
                 </div>
-        </ul>
+        </form>
     </section>
 
     <footer>

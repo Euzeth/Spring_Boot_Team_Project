@@ -29,11 +29,15 @@
     <section class="update">
         <h1>내 정보를 수정 해보세요!</h1>
         <form action="/member/update" method="post">
-            <span class="title" >ID</span><hr/><input type="text" name="id" th:value="${principalDetails.username}" readonly /><br />
+            <span class="title" >ID</span><hr/><input type="text" name="username" th:value="${principalDetails.username}" readonly /><br />
             <span class="title">NAME</span><hr/><input type="text" name="name" th:value="${principalDetails.name}" readonly /><br />
-            <span class="title">PW</span><hr/><input type="password" name="pw" th:value="${principalDetails.password}" /><br />
-            <span class="title">ZIPCODE</span><hr/><input type="text" name="zipcode" th:value="${principalDetails.zipcode}" /><br />
-            <span class="title">ADDR1</span><hr/><input type="text" name="addr1" th:value="${principalDetails.addr1}" /><br />
+            <span class="title">PW</span><hr/><input type="password" name="password" th:value="${principalDetails.password}" /><br />
+            <span class="title">PW</span><hr/><input type="password" name="repassword" th:value="${principalDetails.password}" /><br />
+            <div>
+                <span class="title">ZIPCODE</span>
+                <button class="btn btn-secondary zipcode_btn" id="addr_btn">검색</button>
+            </div><hr/><input type="text" name="zipcode" class="zipcode" th:value="${principalDetails.zipcode}" /><br />
+            <span class="title">ADDR1</span><hr/><input type="text" name="addr1" class="addr1" th:value="${principalDetails.addr1}" /><br />
             <span class="title">ADDR2</span><hr/><input type="text" name="addr2" th:value="${principalDetails.addr2}" /><br />
             <span class="title">PHONE</span><hr/><input type="text" name="phone" th:value="${principalDetails.phone}" />
             <input id="update_btn" type="submit" value="수정하기" />
@@ -65,6 +69,32 @@
         </div>
     </footer>
 </div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+    const addr_btn = document.querySelector('#addr_btn');
+    addr_btn.addEventListener('click', function(){
+        new daum.Postcode({
+        oncomplete: function(data) {
+            console.log(data);
+            const zipcode = document.querySelector('.zipcode');
+            const addr1 = document.querySelector('.addr1');
+
+            if(data.userSelectedType === 'R')
+            {
+                addr1.value = data.roadAddress;
+            }
+            else
+            {
+                addr1.value = data.jibunAddress;
+            }
+            zipcode.value = data.zonecode;
+        }
+    }).open();
+    });
+
+</script>
 
 </body>
 </html>

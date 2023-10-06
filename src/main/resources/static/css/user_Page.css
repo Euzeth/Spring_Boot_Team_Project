@@ -17,27 +17,32 @@ li{
         text-align: center;
     }
 
-    .user>ul {
+    .user>form {
         padding: 40px 0 10px;
     }
     
-    .user>ul li {
+    .user>form li {
         padding: 0 0 12px;
         text-align: left;
     }
     
-    .user>ul li .title {
+    .user>form li .title {
 		font-size: 25px;
 		display: block;
 		margin-left: 10px;
 		color: gray;
 	}
 	
-	.user>ul li .info{
+	.user>form>li>input{
 		font-size: 30px;
-		display: block;
-		margin-top: 10px;
-		text-align: center;
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        color: black;
+        font-family: 'SDSamliphopangche_Basic';
 	}
 
     .user #back_btn {
@@ -50,7 +55,7 @@ li{
         margin-top: 20px;
         cursor: pointer;
     }
-    .user>ul>div{
+    .user>form>div{
         display:flex;
     }
     .user #update_btn{
