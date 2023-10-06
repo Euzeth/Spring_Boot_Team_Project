@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -18,19 +20,77 @@ public class MusicService {
     @Autowired
     MusicRepository musicRepository;
 
+//    @Transactional(rollbackFor = SQLException.class)
+//    public List<Music> getTitleSearchList(MusicDto dto) {
+//        int totalcount=0;
+//        if(dto!=null&& dto.getType()!=null) {
+//            if (dto.getType().equals("title"))
+//                totalcount = musicRepository.countWhereTitleKeyword(dto.getSearchText());
+//        }
+//        else
+//            totalcount = (int)musicRepository.count();
+//
+//
+//        List<Music> titleSearchList = musicRepository.findSearchMusicTitle(dto.getTitle());
+//
+//
+//        return titleSearchList;
+//    }
+//
+//    @Transactional(rollbackFor = SQLException.class)
+//    public List<Music> getArtistSearchList(MusicDto dto) {
+//        int totalcount=0;
+//        if(dto!=null&& dto.getType()!=null) {
+//            if (dto.getType().equals("artist"))
+//                totalcount = musicRepository.countWhereArtistKeyword(dto.getSearchText());
+//        }
+//        else
+//            totalcount = (int)musicRepository.count();
+//        List<Music> artistSearchList = musicRepository.findSearchMusicArtist(dto.getArtist());
+//
+//
+//        return artistSearchList;
+//    }
+
     @Transactional(rollbackFor = SQLException.class)
-    public List<Music> getTitleSearchList(String title) {
-        List<Music> titleSearchList = musicRepository.findSearchMusicTitle(title);
+    public Map<String,Object> GetSearchList(MusicDto dto) {
+
+        Map<String,Object> returns = new HashMap<String,Object>();
+
+        //--------------------------------------------------------
+        //SEARCH
+        //--------------------------------------------------------
+        int totalcount=0;
+        if(dto!=null&& dto.getType()!=null) {
+            if (dto.getType().equals("title"))
+                totalcount = musicRepository.countWhereTitleKeyword(dto.getSearchText());
+            else if (dto.getType().equals("artist"))
+                totalcount = musicRepository.countWhereArtistKeyword(dto.getSearchText());
+        }
+        else
+            totalcount = (int)musicRepository.count();
+
+        //--------------------------------------------------------
+        //SEARCH
+        //--------------------------------------------------------
+        List<Music> list = null;
+        if(dto!=null&& dto.getType()!=null) {
+            if (dto.getType().equals("title")) {
+                list = musicRepository.findSearchMusicTitle(dto.getSearchText());
+                System.out.println(dto.getSearchText());
+                System.out.println("TITLE SEARCH!");
+                System.out.println(list);
+            }
+            else if (dto.getType().equals("artist"))
+                list = musicRepository.findSearchMusicArtist(dto.getSearchText());
+        }
 
 
-        return titleSearchList;
+        returns.put("list",list);
+
+        return returns;
+
     }
 
-    @Transactional(rollbackFor = SQLException.class)
-    public List<Music> getArtistSearchList(String artist) {
-        List<Music> artistSearchList = musicRepository.findSearchMusicArtist(artist);
 
-
-        return artistSearchList;
-    }
 }

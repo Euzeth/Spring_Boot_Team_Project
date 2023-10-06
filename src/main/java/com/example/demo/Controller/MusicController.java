@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -26,32 +28,55 @@ public class MusicController {
 		System.out.println("GET /song");
 	}
 
-	@GetMapping("/searchTitle")
-	public void searchTitle(MusicDto dto, Model model) {
-		log.info("GET /searchTitle");
-		List<Music> list = musicService.getTitleSearchList(dto.getSearchText());
+	@GetMapping("/search")
+	public void search(String searchText, String type, MusicDto dto, Model model){
+		log.info("GET /search");
+		//search(searchText, type, dto)
+		if(type!=null){
+			dto.setType(type);
+		}
+		if(searchText!=null){
+			dto.setSearchText(searchText);
+		}
 
-		List<Music> searchTitleList = list.stream().collect(Collectors.toList());
 
-		model.addAttribute("searchTitleList", searchTitleList);
 
-		System.out.println(searchTitleList);
+		//서비스 실행
+//		if(dto.getType().equals("title")){
+//			List<Music> list = musicService.getTitleSearchList(dto);
+//
+//
+//			List<Music> searchTitleList = list.stream().collect(Collectors.toList());
+//
+//			model.addAttribute("searchTitleList", searchTitleList);
+//
+//			System.out.println(searchTitleList);
+//		}
+//
+//		if(dto.getType().equals("artist")){
+//			List<Music> list = musicService.getArtistSearchList(dto);
+//
+//			List<Music> searchArtistList = list.stream().collect(Collectors.toList());
+//
+//			model.addAttribute("searchArtistList", searchArtistList);
+//
+//			System.out.println(searchArtistList);
+//		}
+
+		//서비스 실행
+		Map<String,Object> map = musicService.GetSearchList(dto);
+
+		List<Music> list = (List<Music>)map.get("list");
+
+		List<MusicDto> searchList = list.stream().map(music -> MusicDto.Of(music)).collect(Collectors.toList());
+		System.out.println(searchList);
+
+		model.addAttribute("searchList", searchList);
+
+
 
 
 	}
 
-	@GetMapping("/searchArtist")
-	public String searchArtist(MusicDto dto, Model model) {
-		log.info("GET /searchArtist");
-		List<Music> list = musicService.getArtistSearchList(dto.getSearchText());
 
-		List<Music> searchArtistList = list.stream().collect(Collectors.toList());
-
-		model.addAttribute("searchArtistList", searchArtistList);
-
-		System.out.println(searchArtistList);
-
-		return "search";
-
-	}
 }

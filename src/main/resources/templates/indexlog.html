@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/headertest.css">
     <link rel="stylesheet" type="text/css" href="/css/Main_Page_log.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
@@ -21,11 +21,21 @@
     <header>
         <div class="top-header">
             <a href="/indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
-            <form action="/searchTitle" method="get">
+<!--            <form action="/searchTitle" method="get">-->
+<!--                <div class="search_box">-->
+<!--                    <div class="search_btn" id="searchButton">SEARCH</div>-->
+<!--                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >-->
+<!--                    <img id="searchbtn" src="/images/search.png" alt="" >-->
+<!--                </div>-->
+<!--            </form>-->
+            <form action="/search" method="get">
                 <div class="search_box">
-                    <div class="search_btn" id="searchButton">SEARCH</div>
+                    <select name="type"  class="selectbox" >
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
                     <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
-                    <img id="searchbtn" src="/images/search.png" alt="" >
+                    <button type="submit">🔍</button>
                 </div>
             </form>
             <ul>

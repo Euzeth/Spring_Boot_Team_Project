@@ -1,0 +1,30 @@
+
+/* Section 1 전체 */
+section {
+    margin: 20px auto;
+}
+
+
+
+        #search{
+             font-size: 40px;
+             padding-top: 20px;
+             padding-left: 50px;
+             color: rgb(192, 57, 43);
+             margin-bottom: 30px;
+        }
+
+        .search-body th{
+            font-size:23px;
+            text-align: center;
+        }
+
+        .search-body td{
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .one--depth>li>a:hover{
+            text-decoration: none;
+            color: black;
+        }
