@@ -3,6 +3,7 @@ package com.example.demo.Domain.Dto;
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Entity.Member;
 import com.example.demo.Domain.Entity.Membership;
+import com.example.demo.Domain.Entity.Music;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class MembershipDto {
     private String membershipcode;
 
     public static Membership dtoToEntity(MembershipDto dto, Authentication authentication) {
-        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusMonths(1).minusDays(1);
         Membership membership = Membership.builder()

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
     <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="icon" href="/images/favicon/favicon.ico"/>
 
 </head>
 
@@ -20,7 +20,7 @@
 <div class="wrapper">
     <header>
         <div class="log-header">
-            <a href="/index" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/index"><img class="logo" src="/images/로고.png" alt=""></a>
             <ul>
                 <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
             </ul>
@@ -32,34 +32,37 @@
         <h1>멤버십 관리 페이지입니다. </h1>
         <ul>
             <div>
-            <form action="/membership/selectAll" method="get">
-            <li><span class="title">멤버십회원 전체조회
-						<button class="alluser" id="showButton">조회하기</button>
-				</span>
-                <hr /></li>
-            </form>
+                <form action="/membership/selectAll" method="get">
+                    <li><span class="title">멤버십회원 전체조회<button class="alluser" id="showButton"
+                                                              type="submit">조회하기</button></span>
+                        <hr/>
+                    </li>
+                </form>
             </div>
             <div class="selectall">
-                <table>
-                    <tr>
-                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
-                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
-                    </tr>
-                    <tr th:each="dto:${selectedAllList}">
-                        <td class="search_title1" th:text="${dto.membershipcode}"></td>
-                        <td class="search_title2" th:text="${dto.username}"></td>
-                        <td class="search_title1" th:text="${dto.name}"></td>
-                        <td class="search_title2" th:text="${dto.startdate}"></td>
-                        <td class="search_title2" th:text="${dto.enddate}"></td>
-                    </tr>
-                </table>
+                <th:block>
+                    <table>
+                        <tr th:if="${selectedAllList} !=null">
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
+                        </tr>
+                        <tr th:each="dto : ${selectedAllList}">
+                            <td class="search_title1" th:text="${dto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${dto.username}"></td>
+                            <td class="search_title1" th:text="${dto.name}"></td>
+                            <td class="search_title2" th:text="${dto.startdate}"></td>
+                            <td class="search_title2" th:text="${dto.enddate}"></td>
+                        </tr>
+                    </table>
+                </th:block>
             </div>
-            <br />
+            <br/>
             <li><span class="title">멤버십 키워드검색</span>
-                <hr /></li>
+                <hr/>
+            </li>
             <div class="search_block">
                 <select id="select">
                     <option value="username" selected>USERNAME</option>
@@ -73,73 +76,53 @@
                 </form>
             </div>
             <div class="keywordShow">
-                <th:block th:if="${selectedId != null and #strings.equals(selectedOption, 'username')}">
-                <table>
-                    <tr>
-                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
-                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
-                    </tr>
-                    <!-- 선택된 옵션에 따라서 다른 블록을 표시하거나 숨김 -->
-                    <tr>
-                        <td class="search_title1" th:text="${selectedId.membershipcode}"></td>
-                        <td class="search_title2" th:text="${selectedId.username}"></td>
-                        <td class="search_title1" th:text="${selectedId.name}"></td>
-                        <td class="search_title2" th:text="${selectedId.startdate}"></td>
-                        <td class="search_title2" th:text="${selectedId.enddate}"></td>
-                    </tr>
-                    </table>
-                    </th:block>
-
-                    <th:block th:if="${selectedCodeList != null and #strings.equals(selectedOption, 'membershipcode')}">
-                <table>
-                    <tr>
-                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
-                        <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
-                        <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
-                    </tr>
-                <tr>
-                        <td class="search_title1" th:text="${selectedCodeList.membershipcode}"></td>
-                        <td class="search_title2" th:text="${selectedCodeList.username}"></td>
-                        <td class="search_title1" th:text="${selectedCodeList.name}"></td>
-                        <td class="search_title2" th:text="${selectedCodeList.startdate}"></td>
-                        <td class="search_title2" th:text="${selectedCodeList.enddate}"></td>
-                    </tr>
-                </table>
-                    </th:block>
-                <th:block th:if="${selectedDateList != null and #strings.equals(selectedOption, 'enddate')}">
+                <th:block>
                     <table>
-                        <tr>
+                        <tr th:if="${selectedId} != null or ${selectedCodeList} != null or ${selectedDateList} != null">
                             <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
                             <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
                             <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
                             <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
                             <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
                         </tr>
-                    <tr>
-                        <td class="search_title1" th:text="${selectedDateList.membershipcode}"></td>
-                        <td class="search_title2" th:text="${selectedDateList.username}"></td>
-                        <td class="search_title1" th:text="${selectedDateList.name}"></td>
-                        <td class="search_title2" th:text="${selectedDateList.startdate}"></td>
-                        <td class="search_title2" th:text="${selectedDateList.enddate}"></td>
-                    </tr>
-                </table>
+
+                        <tr th:each="searchDto : ${selectedId}">
+                            <td class="search_title1" th:text="${searchDto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${searchDto.username}"></td>
+                            <td class="search_title1" th:text="${searchDto.name}"></td>
+                            <td class="search_title2" th:text="${searchDto.startdate}"></td>
+                            <td class="search_title2" th:text="${searchDto.enddate}"></td>
+                        </tr>
+
+                        <tr th:each="searchDto : ${selectedCodeList}">
+                            <td class="search_title1" th:text="${searchDto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${searchDto.username}"></td>
+                            <td class="search_title1" th:text="${searchDto.name}"></td>
+                            <td class="search_title2" th:text="${searchDto.startdate}"></td>
+                            <td class="search_title2" th:text="${searchDto.enddate}"></td>
+                        </tr>
+
+                        <tr th:each="searchDto : ${selectedDateList}">
+                            <td class="search_title1" th:text="${searchDto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${searchDto.username}"></td>
+                            <td class="search_title1" th:text="${searchDto.name}"></td>
+                            <td class="search_title2" th:text="${searchDto.startdate}"></td>
+                            <td class="search_title2" th:text="${searchDto.enddate}"></td>
+                        </tr>
+                    </table>
                 </th:block>
 
             </div>
-            <br />
+            <br/>
             <li><span class="title">회원 삭제</span>
-                <hr /></li>
+                <hr/>
+            </li>
             <form action="/membership/delete" method="post">
                 <input type="text" id="remove_input" name="username"
                        placeholder="멤버십에서 삭제할 USERNAME을 입력하세요">
                 <button class="ms_delete">삭제</button>
             </form>
-            <br />
+            <br/>
         </ul>
 
     </section>
@@ -178,143 +161,9 @@
 <script>
 
     //회원 전체조회 script
-     <!-- document.addEventListener('DOMContentLoaded', function() {
-           // 버튼 클릭 이벤트 핸들러
-           var showButton = document.getElementById('showButton');
-           var selectAllDiv = document.querySelector('.selectall');
-
-           showButton.addEventListener('click', function() {
-               if (selectAllDiv.style.display === 'none' || selectAllDiv.style.display === '') {
-                 axios.get("/membership/selectAll")
-                .then(function (response) {
-                    var data = response.data;
-                      selectAllDiv.style.display = 'block'; // 보이도록 함
-
-                    // data를 DTO에 매핑하고 테이블에 표시하는 코드를 작성해야 합니다.
-                    displaySearchResults(data);
-                    // 예를 들어, data를 반복하여 테이블 행을 추가할 수 있습니다.
-                })
-                .catch(function (error) {
-                    console.error("검색에 실패했습니다.", error);
-                    selectAllDiv.style.display = 'none'; // 숨김
-                })
-
-
-           }
-           });
--->
-
-
-   document.addEventListener('DOMContentLoaded', function() {
-        // 버튼 클릭 이벤트 핸들러
-        var showButton = document.getElementById('showButton');
-        var selectAllDiv = document.querySelector('.selectall');
-
-        showButton.addEventListener('click', function() {
-            if (selectAllDiv.style.display === 'none' || selectAllDiv.style.display === '') {
-                // axios를 사용하여 서버로 GET 요청을 보냅니다.
-                axios.get("/membership/selectAll")
-                    .then(function (response) {
-                        var data = response.data;
-
-                        // selectAllDiv의 내용을 초기화합니다.
-                        selectAllDiv.innerHTML = "";
-
-                        // 테이블을 생성하고 헤더를 추가합니다.
-                        var table = document.createElement("table");
-                        table.innerHTML = `
-                            <tr>
-                                <th class="search_title1" style="color: rgb(92, 115, 6);">CODE</th>
-                                <th class="search_title2" style="color: rgb(92, 115, 6);">USERNAME</th>
-                                <th class="search_title1" style="color: rgb(92, 115, 6);">NAME</th>
-                                <th class="search_title2" style="color: rgb(92, 115, 6);">START_DATE</th>
-                                <th class="search_title2" style="color: rgb(92, 115, 6);">END_DATE</th>
-                            </tr>
-                        `;
-
-                        // 데이터를 테이블에 추가합니다.
-                        data.forEach(function (dto) {
-                            var row = table.insertRow();
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            var cell5 = row.insertCell(4);
-
-                            cell1.textContent = dto.membershipcode;
-                            cell2.textContent = dto.username;
-                            cell3.textContent = dto.name;
-                            cell4.textContent = dto.startdate;
-                            cell5.textContent = dto.enddate;
-                        });
-
-                        // 테이블을 selectAllDiv에 추가합니다.
-                        selectAllDiv.appendChild(table);
-
-                        // selectAllDiv을 보이도록 설정합니다.
-                        selectAllDiv.style.display = 'block';
-                    })
-                    .catch(function (error) {
-                        console.error("검색에 실패했습니다.", error);
-                        selectAllDiv.style.display = 'none'; // 실패 시 숨김
-                    });
-            }
-        });
-    });
-
-<!--
-
 
 
     //회원 단건조회 script
-	 document.addEventListener("DOMContentLoaded", function () {
-            var select = document.getElementById("select");
-            var searchForm = document.getElementById("searchForm");
-            var searchInput = searchForm.querySelector(".search_input");
-            var resultTable = document.getElementById("resultTable");
-
-            select.addEventListener("change", function () {
-                var selectedOption = select.value;
-                var placeholderText = "";
-
-                if (selectedOption === "username") {
-                    placeholderText = "검색할 USERNAME를 입력하세요";
-                } else if (selectedOption === "membershipcode") {
-                    placeholderText = "검색할 멤버십 코드를 입력하세요";
-                } else if (selectedOption === "enddate") {
-                    placeholderText = "검색할 종료 날짜를 입력하세요";
-                }
-
-                searchInput.placeholder = placeholderText;
-            });
-
-            searchForm.addEventListener("submit", function (event) {
-                event.preventDefault(); // 폼 제출 방지
-
-                var selectedOption = select.value;
-                var searchKeyword = searchInput.value;
-
-               // 서버로 검색 요청을 보냅니다.
-                axios.get("/membership/selectId")
-                .then(function (response) {
-                    // 검색 결과를 받아와서 테이블에 표시합니다.
-                    var data = response.data;
-
-
-                    // data를 DTO에 매핑하고 테이블에 표시하는 코드를 작성해야 합니다.
-
-                    displaySearchResults(data);
-                    // 예를 들어, data를 반복하여 테이블 행을 추가할 수 있습니다.
-                })
-                .catch(function (error) {
-                    console.error("검색에 실패했습니다.", error);
-                });
-
-
-            });
-        });
-
-
 
 
 
@@ -345,7 +194,6 @@
            }
        });
     });
--->
 
 
 </script>

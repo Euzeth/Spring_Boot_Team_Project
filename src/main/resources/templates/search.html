@@ -134,20 +134,12 @@
                             <th:block >
                                 <tr th:each="searchDto, iterationStat  : ${searchList}">
                                     <td th:text="${iterationStat.count}"></td>
-                                    <td><a th:text="${searchDto.title}">  </a></td>
+                                    <td><a th:href="@{/search(type=${searchDto.type}, searchText=${searchDto.searchText})}" th:text="${searchDto.title}">  </a></td>
                                     <td th:text="${searchDto.artist}"></td>
                                     <td th:text="${searchDto.count}"></td>
                                 </tr>
                             </th:block>
 
-                          <!--  <th:block >
-                                <tr th:each="searchDto2, iterationStat : ${searchArtistList}">
-                                    <td th:text="${iterationStat.count}"></td>
-                                    <td><a th:href="#"  th:text="${searchDto2.title}">  </a></td>
-                                    <td th:text="${searchDto2.artist}"></td>
-                                    <td th:text="${searchDto2.count}"></td>
-                                </tr>
-                            </th:block>-->
                             </tbody>
                         </table>
 

@@ -56,16 +56,17 @@ public class MembershipController {
         }
         return "indexlog";
     }
-  @GetMapping("/membership")
-    public String membership(HttpSession session, Authentication authentication){
-        System.out.println("Authentication : " + authentication);
-      return MembershipRequest(session);
-  }
 
-  @PostMapping("/membership")
-    public String membership_post(HttpSession session){
+    @GetMapping("/membership")
+    public String membership(HttpSession session, Authentication authentication) {
+        System.out.println("Authentication : " + authentication);
         return MembershipRequest(session);
-  }
+    }
+
+    @PostMapping("/membership")
+    public String membership_post(HttpSession session) {
+        return MembershipRequest(session);
+    }
 
     @GetMapping("/membershipU")
     public void membership_U() {
@@ -192,9 +193,9 @@ public class MembershipController {
     @GetMapping("/membership/selectAll")
     public String membership_selectAll(Model model) {
         log.info("GET /memberhsipM");
-        List<MembershipDto> list = membershipService.getMembershipList();
 
-        List<MembershipDto> membershipDtoList = list.stream().collect(Collectors.toList());
+        List<Membership> list = membershipService.getMembershipList();
+        List<Membership> membershipDtoList = list.stream().collect(Collectors.toList());
 
         model.addAttribute("selectedAllList", membershipDtoList);
 
@@ -218,9 +219,9 @@ public class MembershipController {
     @GetMapping("/membership/selectCode")
     public String membership_selectCode(@RequestParam String membershipcode, Model model) {
         log.info("GET /membership_M select CODE");
-        List<MembershipDto> list = membershipService.getMembershipCode(membershipcode);
 
-        List<MembershipDto> selectedCodeList = list.stream().collect(Collectors.toList());
+        List<Membership> list = membershipService.getMembershipCode(membershipcode);
+        List<Membership> selectedCodeList = list.stream().collect(Collectors.toList());
 
         model.addAttribute("selectedCodeList", selectedCodeList);
 
@@ -236,7 +237,6 @@ public class MembershipController {
         System.out.println("MembershipController's dataBinder.. " + dataBinder);
         // String("2022-01-01") -> LocalDate로 변환 Editor
         dataBinder.registerCustomEditor(LocalDate.class, "endDate", new MembershipDtoEditor());
-
     }
 
     @GetMapping("/membership/selectDate")
@@ -273,7 +273,6 @@ public class MembershipController {
         membershipService.removeMembership(username);
         return "redirect:/membershipM";
     }
-
 
 
 }

@@ -32,35 +32,11 @@ public class MusicController {
 	public void search(String searchText, String type, MusicDto dto, Model model){
 		log.info("GET /search");
 		//search(searchText, type, dto)
-		if(type!=null){
-			dto.setType(type);
-		}
-		if(searchText!=null){
-			dto.setSearchText(searchText);
-		}
-
-
-
-		//서비스 실행
-//		if(dto.getType().equals("title")){
-//			List<Music> list = musicService.getTitleSearchList(dto);
-//
-//
-//			List<Music> searchTitleList = list.stream().collect(Collectors.toList());
-//
-//			model.addAttribute("searchTitleList", searchTitleList);
-//
-//			System.out.println(searchTitleList);
+//		if(type!=null){
+//			dto.setType(type);
 //		}
-//
-//		if(dto.getType().equals("artist")){
-//			List<Music> list = musicService.getArtistSearchList(dto);
-//
-//			List<Music> searchArtistList = list.stream().collect(Collectors.toList());
-//
-//			model.addAttribute("searchArtistList", searchArtistList);
-//
-//			System.out.println(searchArtistList);
+//		if(searchText!=null){
+//			dto.setSearchText(searchText);
 //		}
 
 		//서비스 실행
@@ -69,12 +45,10 @@ public class MusicController {
 		List<Music> list = (List<Music>)map.get("list");
 
 		List<MusicDto> searchList = list.stream().map(music -> MusicDto.Of(music)).collect(Collectors.toList());
+
 		System.out.println(searchList);
 
 		model.addAttribute("searchList", searchList);
-
-
-
 
 	}
 

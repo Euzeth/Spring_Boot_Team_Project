@@ -20,12 +20,7 @@ public interface MusicRepository extends JpaRepository<Music,Integer> {
     @Query(value = "SELECT * FROM musicdb.music m WHERE m.artist LIKE %:keyWord%  ORDER BY m.music_code ASC" ,nativeQuery = true)
     List<Music> findSearchMusicArtist(@Param("keyWord")String keyWord);
 
-    // Type , Keyword 로 필터링된 count 계산
-    @Query("SELECT COUNT(m) FROM Music m WHERE m.title LIKE %:keyWord%")
-    Integer countWhereTitleKeyword(@Param("keyWord")String keyWord);
 
-    @Query("SELECT COUNT(m) FROM Music m WHERE m.artist LIKE %:keyWord%")
-    Integer countWhereArtistKeyword(@Param("keyWord")String keyWord);
 
 
 }

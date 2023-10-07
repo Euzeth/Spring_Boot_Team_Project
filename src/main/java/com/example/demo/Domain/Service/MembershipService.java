@@ -26,30 +26,27 @@ public class MembershipService {
     @Autowired
     MembershipRepository membershipRepository;
 
+
     @Transactional(rollbackFor = SQLException.class)
-    public List<MembershipDto> getMembershipList() {
+    public List<Membership> getMembershipList() {
         return membershipRepository.findMembershipListAll();
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Membership getMembershipOne(String username) {
-
-
         return membershipRepository.findMembershipUsername(username);
     }
 
+
     @Transactional(rollbackFor = Exception.class)
-    public List<MembershipDto> getMembershipCode(String membershipcode) {
-        List<MembershipDto> Codelist = membershipRepository.findMembershipCode(membershipcode);
-
-
-        return Codelist;
+    public List<Membership> getMembershipCode(String membershipcode) {
+        return membershipRepository.findMembershipCode(membershipcode);
     }
+
 
     @Transactional(rollbackFor = Exception.class)
     public List<MembershipDto> getMembershipDate(LocalDate enddate) {
-        List<MembershipDto> Datelist = membershipRepository.findMembershipEnddate(enddate);
-        return Datelist;
+        return membershipRepository.findMembershipEnddate(enddate);
     }
 
 
@@ -76,7 +73,7 @@ public class MembershipService {
         if (membershipOptional.isPresent()) {
             Membership membership = membershipOptional.get();
             membershipRepository.delete(membership);
-        } else if(!membershipOptional.isPresent()) {
+        } else {
             System.out.println("찾으시는 USERNAME이 없습니다.");
         }
 

@@ -4,6 +4,7 @@ import com.example.demo.Domain.Entity.Music;
 import com.example.demo.Domain.Entity.Notice;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -17,10 +18,12 @@ public class MusicDto {
 	private String type; //title, artist
 
 
-	public MusicDto(){
-		searchText = searchText;
-		type = type;
-	}
+//	public MusicDto(){
+//		searchText = searchText;
+//		type = type;
+//	}
+
+
 
 	public static MusicDto Of(Music music) {
 		MusicDto dto = new MusicDto();
@@ -29,6 +32,8 @@ public class MusicDto {
 		dto.artist = music.getArtist();
 		dto.music_path = music.getMusic_path();
 		dto.count = music.getCount();
+//		dto.type = dto.getType();
+//		dto.searchText = dto.getSearchText();
 		return dto;
 	}
 
