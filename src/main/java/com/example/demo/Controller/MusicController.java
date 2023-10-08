@@ -32,12 +32,12 @@ public class MusicController {
 	public void search(String searchText, String type, MusicDto dto, Model model){
 		log.info("GET /search");
 		//search(searchText, type, dto)
-//		if(type!=null){
-//			dto.setType(type);
-//		}
-//		if(searchText!=null){
-//			dto.setSearchText(searchText);
-//		}
+		if(type!=null){
+			dto.setType(dto.getType());
+		}
+		if(searchText!=null){
+			dto.setSearchText(dto.getSearchText());
+		}
 
 		//서비스 실행
 		Map<String,Object> map = musicService.GetSearchList(dto);
@@ -49,6 +49,8 @@ public class MusicController {
 		System.out.println(searchList);
 
 		model.addAttribute("searchList", searchList);
+		model.addAttribute("searchText", dto.getSearchText());
+		model.addAttribute("type",dto.getType());
 
 	}
 

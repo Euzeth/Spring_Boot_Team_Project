@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <!--  BS5  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <!-- common.css    -->
     <link rel="stylesheet" href="/css/common.css" type="text/css">
     <!-- header -->
@@ -25,24 +21,41 @@
 
 
 <div class="wrapper">
+    <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/indexlog"><img class="logo" src="/images/로고.png" alt=""></a>
-            <div class="search_box">
-                <div>SEARCH</div>
-                <input type="text" placeholder="듣고 싶은 노래를 검색하세요!">
-                <a href=""><img src="/images/search.svg" alt=""></a>
-            </div>
+            <a href="/indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <form action="/search" method="get">
+                <div class="search_box">
+                    <select name="type"  class="selectbox" >
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <button type="submit">🔍</button>
+                </div>
+            </form>
             <ul>
-                <li><a href="" style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
-                        src="/images/add.svg" alt=""> 멤버십가입</a></li>
-                <li><a href=""><img src="/images/english.svg" alt="">ENGLISH</a></li>
+                <li><a href="/member/login"
+                       style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
+                        src="/images/add.png" alt=""> 멤버십가입</a></li>
+                <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
             </ul>
         </div>
     </header>
-
-    <!-- header nav -->
     <nav>
+        <div class="mobilemenu">
+                <span href="" class="material-symbols-outlined">menu
+                    <ul class="wa">
+                        <li><a href="">수박차트</a></li>
+                        <li><a href="">수박DJ</a></li>
+                        <li><a href="">수박TV</a></li>
+                        <li><a href="">수박매거진</a></li>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">마이페이지</a></li>
+                    </ul>
+                </span>
+        </div>
         <div class="navi">
             <div class="Menu_left">
                 <ul class="one--depth">
@@ -73,7 +86,7 @@
                     <li>
                         <a href="">수박매거진</a>
                         <ul class="two--depth">
-                            <li><a href="">오늘의매거진</a></li>
+                            <li><a href="./magazine.html">오늘의매거진</a></li>
                             <li><a href="">완결매거진</a></li>
                         </ul>
                     </li>
@@ -85,7 +98,7 @@
                         <a href="">공지사항</a>
                         <ul class="two--depth">
                             <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/qna/list">QnA</a></li>
+                            <li><a href="/member/login">QnA</a></li>
                             <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
@@ -99,6 +112,7 @@
                 </ul>
             </div>
         </div>
+
     </nav>
     <div class="header_line"></div>
 
@@ -123,20 +137,20 @@
 
             <!-- title -->
             <div id="notice">공지사항</div>
-            <div>
+            <div style="width:100%">
                 <div class="notice-header">
                     Page No (<span style="color:red;" th:text="${pageNo}"></span> / <span th:text="${pageDto.totalpage}"></span> Page)
                 </div>
                 <div class="notice-body">
                     <!-- body -->
-                    <table class="table w-70">
+                    <table>
                         <thead>
                         <tr>
-                            <th scope="col-1" style="width:120px;">NO</th>
-                            <th scope="col-2" style="width:150px;">CATEGORY</th>
-                            <th scope="col-2">TITLE</th>
-                            <th scope="col-2" style="width:150px;">DATE</th>
-                            <th scope="col-1" style="width:120px;">COUNT</th>
+                            <th class="title_1">NO</th>
+                            <th class="title_1">CATEGORY</th>
+                            <th class="title_2">TITLE</th>
+                            <th class="title_1">DATE</th>
+                            <th class="title_1">COUNT</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -156,26 +170,24 @@
 
                 </div>
 
-                <div class="notice-footer row position-relative">
+                <div class="notice-footer">
 
                     <!-- post btn -->
                     <div class="button">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="Basic outlined example">
-                            <a th:href="@{/notice/post}"   type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;">글쓰기</a>
-                        </div>
+                            <a th:href="@{/notice/post}"   type="button">글쓰기</a>
                     </div>
 
 
                     <!-- pagenation -->
 
                     <div class="pagenation">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
+                        <nav style="display:block;">
+                            <ul style="display:flex;">
 
                                 <!-- PREV      -->
                                 <li class="page-item" th:if="${pageDto.prev}">
-                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
+                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}">
+                                        <span>&laquo;</span>
                                     </a>
                                 </li>
 
@@ -196,17 +208,14 @@
 
                                 <!-- NEXT -->
                                 <li class="page-item"  th:if="${pageDto.next}">
-                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
+                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}">
+                                        <span>&raquo;</span>
                                     </a>
                                 </li>
 
                             </ul>
                         </nav>
                     </div>
-
-
-
                 </div>
             </div>
 

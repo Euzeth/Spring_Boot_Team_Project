@@ -32,7 +32,7 @@
     padding-left: 10px;
 }
 
-.wrapper>header>.top-header>form>.search_box>div{
+.wrapper>header>.top-header>form>.search_box>select{
     /* border: 1px solid rosybrown; */
     height: 35px;
     width: 110px;
@@ -58,13 +58,15 @@
     font-family: 'SDSamliphopangche_Basic';
 }
 
-.wrapper>header>.top-header>form>.search_box>img {
+.wrapper>header>.top-header>form>.search_box>button {
     position: absolute;
-    width: 30px;
     height: 30px;
-    top: 0px;
-    left: 92%;
-    display: block;
+    top: -5px;
+    left: 90%;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+
 }
 
 /* 헤더 내 퀵메뉴 */

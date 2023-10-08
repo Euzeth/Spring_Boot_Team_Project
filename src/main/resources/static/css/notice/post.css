@@ -28,3 +28,11 @@
     text-align : center;
     font-size : 18px;
 }
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li>a:hover{
+    color: black;
+}
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li>a:hover{
+    color: black;
+}
