@@ -4,8 +4,11 @@ import com.example.demo.Controller.QnAController;
 import com.example.demo.Domain.Dto.Criteria;
 import com.example.demo.Domain.Dto.PageDto;
 import com.example.demo.Domain.Dto.QnADto;
+import com.example.demo.Domain.Dto.ReplyDto;
 import com.example.demo.Domain.Entity.QnA;
+import com.example.demo.Domain.Entity.Reply;
 import com.example.demo.Domain.Repository.QnARepository;
+import com.example.demo.Domain.Repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -27,6 +29,8 @@ public class QnAService {
     @Autowired
     private QnARepository qnaRepository;
 
+    @Autowired
+    private ReplyRepository replyRepository;
 
 
     //모든 게시물 가져오기
@@ -383,6 +387,54 @@ public class QnAService {
         qnaRepository.save(qna);
     }
 
+    //ADD REPLY
+    public void addReply(Long qno, String contents) {
+        Reply reply = new Reply();
+        QnA qna = new QnA();
+        qna.setNo(qno);
+
+        reply.setRno(null);
+        reply.setQna(qna);
+        reply.setContent(contents);
+        reply.setRegdate(LocalDate.now());
+
+        replyRepository.save(reply);
+
+
+    }
+
+    public List<ReplyDto> getReplyList(Long qno) {
+        List<Reply> replyList =  replyRepository.GetReplyByBnoDesc(qno);
+
+        List<ReplyDto> returnReply  = new ArrayList();
+        ReplyDto dto = null;
+
+        if(!replyList.isEmpty()) {
+            for(int i=0;i<replyList.size();i++) {
+
+                dto = new ReplyDto();
+                dto.setBno(replyList.get(i).getQna().getNo());
+                dto.setRno(replyList.get(i).getRno());
+                dto.setContent(replyList.get(i).getContent());
+                dto.setRegdate(replyList.get(i).getRegdate());
+
+                returnReply.add(dto);
+
+            }
+            return returnReply;
+        }
+
+        return null;
+    }
+
+    public Long getReplyCount(Long qno) {
+        return replyRepository.GetReplyCountByBnoDesc(qno);
+
+    }
+
+    public void deleteReply(Long rno) {
+        replyRepository.deleteById(rno);
+    }
 
 
 }

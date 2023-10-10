@@ -32,8 +32,6 @@ public class MusicDto {
 		dto.artist = music.getArtist();
 		dto.music_path = music.getMusic_path();
 		dto.count = music.getCount();
-		dto.type = dto.getType();
-		dto.searchText = dto.getSearchText();
 		return dto;
 	}
 

@@ -1,6 +1,7 @@
 package com.example.demo.RestController;
 
 import com.example.demo.Controller.QnAController;
+import com.example.demo.Domain.Dto.ReplyDto;
 import com.example.demo.Domain.Service.QnAService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,35 @@ public class QnARestController {
 
     }
 
+    //-------------------
+    // 댓글 추가
+    //-------------------
+    @GetMapping("/reply/add")
+    public void addReply(Long qno, String contents){
+        log.info("GET /qna/reply/add qno " + qno + " contents " + contents);
+        qnaService.addReply(qno, contents);
+    }
+
+    //-------------------
+    // 댓글 조회
+    //-------------------
+    @GetMapping("/reply/list")
+    public List<ReplyDto> getListReply(Long qno){
+        log.info("GET /qna/reply/list " + qno);
+        List<ReplyDto> list =  qnaService.getReplyList(qno);
+        return list;
+    }
+
+    //-------------------
+    //댓글 카운트
+    //-------------------
+    @GetMapping("/reply/count")
+    public Long getCount(Long qno){
+        log.info("GET /qna/reply/count " + qno);
+        Long cnt = qnaService.getReplyCount(qno);
+
+        return cnt;
+    }
 
 
 

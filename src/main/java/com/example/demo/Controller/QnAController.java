@@ -280,33 +280,13 @@ public class QnAController {
     //--------------------------------
     // /qna/reply/delete
     //--------------------------------
-    @GetMapping("/reply/delete/{bno}/{rno}")
-    public String delete(@PathVariable Long bno, @PathVariable Long rno){
-        log.info("GET /qna/reply/delete bno,rno " + rno + " " + rno);
+    @GetMapping("/reply/delete/{qno}/{rno}")
+    public String delete(@PathVariable Long qno, @PathVariable Long rno){
+        log.info("GET /qna/reply/delete qno,rno " + rno + " " + rno);
 
-        qnaService.deleteReply(rno);
+        qnaService.deleteReply(qno);
 
-        return "redirect:/qna/read?no="+bno;
-    }
-
-    //--------------------------------
-    // /qna/reply/thumbsup
-    //--------------------------------
-    @GetMapping("/reply/thumbsup")
-    public String thumbsup(Long bno, Long rno)
-    {
-
-        qnaService.thumbsUp(rno);
-        return "redirect:/qna/read?no="+bno;
-    }
-    //--------------------------------
-    // /qna/reply/thumbsdown
-    //--------------------------------
-    @GetMapping("/reply/thumbsdown")
-    public String thumbsudown(Long bno, Long rno)
-    {
-        qnaService.thumbsDown(rno);
-        return "redirect:/qna/read?no="+bno;
+        return "redirect:/qna/read?no="+qno;
     }
 
 
