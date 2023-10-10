@@ -76,24 +76,27 @@ public class MemberService{
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public void modifyMember(Member member) {
-		// 멤버 정보 가져오기
-		Member existingMember = getMemberName(member.getUsername());
+	public boolean modifyMember(MemberDto dto) {
+		// 이전 회원 정보 가져오기
+		Member oldMember = memberRepository.findById(dto.getUsername()).orElse(null);
+        System.out.println("DTO : " +dto);
+		if (oldMember != null) {
+			// 새로운 정보로 업데이트
+			oldMember.setPassword(dto.getPassword());
+			oldMember.setName(dto.getName());
+			oldMember.setZipcode(dto.getZipcode());
+			oldMember.setAddr1(dto.getAddr1());
+			oldMember.setAddr2(dto.getAddr2());
+			oldMember.setPhone(dto.getPhone());
+			oldMember.setRole(dto.getRole());
 
-		if (existingMember != null) {
-			// 수정할 필드 업데이트
-			existingMember.setPassword(passwordEncoder.encode(member.getPassword()));
-			existingMember.setName(member.getName());
-			existingMember.setZipcode(member.getZipcode());
-			existingMember.setAddr1(member.getAddr1());
-			existingMember.setAddr2(member.getAddr2());
-			existingMember.setPhone(member.getPhone());
+			// 회원 정보 저장
+			Member updatedMember = memberRepository.save(oldMember);
 
-			// 멤버 정보 저장
-			memberRepository.save(existingMember);
+			return updatedMember != null;
 		} else {
-			// 해당 멤버가 존재하지 않을 경우 예외 처리
-			//throw new MemberNotFoundException("Member not found with username: " + member.getUsername());
+			// 기존 회원 정보가 없을 경우 예외 처리 또는 오류 처리
+			return false;
 		}
 	}
 	

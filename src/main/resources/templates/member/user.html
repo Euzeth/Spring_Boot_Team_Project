@@ -29,7 +29,7 @@
     </header>
     <section class="user">
         <h1>내 정보를 확인 해보세요!</h1>
-        <form action="/member/update">
+        <form action="/member/update" class="update" name="update" onsubmit="return false">
                 <li><span class="title">ID</span><hr/><input type="text" name="username" th:value="${principalDetails.username}" readonly/> </li>
                 <br />
                 <li><span class="title">NAME</span><hr/><input type="text" name="name" th:value="${principalDetails.name}" readonly/></li>
@@ -45,7 +45,7 @@
                 <li><span class="title">PHONE</span><hr/><input type="text" name="phone" th:value="${principalDetails.phone}" readonly/></li>
                 <div>
                     <button id="back_btn" onclick= "location.href='/indexlog'">이전</button>
-                    <button id="update_btn" onclick = "location.href='/member/update'">정보수정</button>
+                    <button id="update_btn" onclick="isValid()">정보수정</button>
                 </div>
         </form>
     </section>
@@ -73,6 +73,13 @@
         </div>
     </footer>
 </div>
+
+<script>
+    const isValid = ()=>{
+        const form = document.update;
+        form.submit();
+    }
+</script>
 
 </body>
 </html>

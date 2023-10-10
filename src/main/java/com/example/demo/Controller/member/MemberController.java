@@ -122,21 +122,17 @@ public class MemberController {
 	}
 
 	@GetMapping("/update")
-	public void update(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, Member member) {
+	public void update(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, MemberDto dto) {
 		log.info("GET /member/update" + principalDetails);
 		model.addAttribute("principalDetails", principalDetails);
-		memberService.modifyMember(member);
+		memberService.modifyMember(dto);
 	}
 	
 	@PostMapping("/update")
 	public String update(MemberDto dto, Authentication authentication) {
 		log.info("POST /member/update");
 
-		Member member = memberService.getMemberName(dto.getUsername());
-
-		
-		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
-		principalDetails.setMember(dto);
+		memberService.modifyMember(dto);
 
 		return "redirect:user";
 	}

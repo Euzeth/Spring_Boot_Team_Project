@@ -28,7 +28,7 @@
 
     <section class="update">
         <h1>내 정보를 수정 해보세요!</h1>
-        <form action="/member/update" method="post">
+        <form action="/member/update" method="post" class="update" name="update" onsubmit="return false" >
             <span class="title" >ID</span><hr/><input type="text" name="username" th:value="${principalDetails.username}" readonly /><br />
             <span class="title">NAME</span><hr/><input type="text" name="name" th:value="${principalDetails.name}" readonly /><br />
             <span class="title">PW</span><hr/><input type="password" name="password" th:value="${principalDetails.password}" /><br />
@@ -40,7 +40,7 @@
             <span class="title">ADDR1</span><hr/><input type="text" name="addr1" class="addr1" th:value="${principalDetails.addr1}" /><br />
             <span class="title">ADDR2</span><hr/><input type="text" name="addr2" th:value="${principalDetails.addr2}" /><br />
             <span class="title">PHONE</span><hr/><input type="text" name="phone" th:value="${principalDetails.phone}" />
-            <input id="update_btn" type="submit" value="수정하기" />
+            <input id="update_btn" type="submit" value="수정하기" onclick="isValid()"/>
         </form>
 
     </section>
@@ -94,6 +94,13 @@
     }).open();
     });
 
+</script>
+
+<script>
+    const isValid = ()=>{
+        const form = document.update;
+        form.submit();
+    }
 </script>
 
 </body>
