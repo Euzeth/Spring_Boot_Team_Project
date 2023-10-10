@@ -13,15 +13,15 @@ public class MusicDto {
 	private String title;
 	private String artist;
 	private String music_path;
-	private Long count;
+	private int count;
 	private String searchText; //찾을 키워드
 	private String type; //title, artist
 
 
-//	public MusicDto(){
-//		searchText = searchText;
-//		type = type;
-//	}
+	public MusicDto(){
+		searchText = searchText;
+		type = type;
+	}
 
 
 
@@ -32,8 +32,8 @@ public class MusicDto {
 		dto.artist = music.getArtist();
 		dto.music_path = music.getMusic_path();
 		dto.count = music.getCount();
-//		dto.type = dto.getType();
-//		dto.searchText = dto.getSearchText();
+		dto.type = dto.getType();
+		dto.searchText = dto.getSearchText();
 		return dto;
 	}
 

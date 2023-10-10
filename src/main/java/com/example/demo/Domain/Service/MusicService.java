@@ -47,4 +47,10 @@ public class MusicService {
     }
 
 
+    public void likeMusic(int musicId) {
+        Music music =  musicRepository.findById(musicId).get();
+        music.setCount(music.getCount()+1);
+        musicRepository.save(music);
+    }
+
 }

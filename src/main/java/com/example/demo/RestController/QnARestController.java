@@ -1,7 +1,6 @@
 package com.example.demo.RestController;
 
 import com.example.demo.Controller.QnAController;
-import com.example.demo.Domain.Dto.ReplyDto;
 import com.example.demo.Domain.Service.QnAService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,51 +77,6 @@ public class QnARestController {
             return "failed";
 
     }
-
-
-
-
-    //-------------------
-    //댓글추가
-    //-------------------
-    @GetMapping("/reply/add")
-    public void addReply(Long bno,String contents , String username){
-        log.info("GET /qna/reply/add " + bno + " " + contents + " " + username);
-        qnaService.addReply(bno,contents, username);
-    }
-    //-------------------
-    //댓글 조회
-    //-------------------
-    @GetMapping("/reply/list")
-    public List<ReplyDto> getListReply(Long bno){
-        log.info("GET /qna/reply/list " + bno);
-        List<ReplyDto> list =  qnaService.getReplyList(bno);
-        return list;
-    }
-    //-------------------
-    //댓글 카운트
-    //-------------------
-    @GetMapping("/reply/count")
-    public Long getCount(Long bno){
-        log.info("GET /qna/reply/count " + bno);
-        Long cnt = qnaService.getReplyCount(bno);
-
-        return cnt;
-    }
-
-
-
-
-
-    //-------------------
-    //댓글삭제
-    //-------------------
-
-    //-------------------
-    //댓글수정
-    //-------------------
-
-
 
 
 

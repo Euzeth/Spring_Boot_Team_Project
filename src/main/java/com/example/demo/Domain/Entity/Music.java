@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -19,7 +21,7 @@ public class Music {
     private String artist;
     private String title;
     private String music_path;
-    private Long count;
+    private int count;
 
 
 }

@@ -4,7 +4,9 @@ section {
     margin: 20px auto;
 }
 
-
+.sec_1{
+    margin-bottom: 20px;
+}
 
         #search{
              font-size: 40px;
@@ -52,4 +54,16 @@ section {
 
         .title_2{
             width: 400px;
+        }
+
+        .top_btn{
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            padding: 5px;
+            bottom: 30px;
+            right: 50px;
+            cursor: pointer;
+            border: 3px solid rgb(192, 57, 43);
+            border-radius: 50%;
         }

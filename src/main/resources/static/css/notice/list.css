@@ -105,7 +105,7 @@
                .button > a{
                    color: rgb(192, 57, 43);
                    display: block;
-                   border: 1px solid rgb(192, 57, 43);
+                   border: 2px solid rgb(192, 57, 43);
                    border-radius: 7px;
                    background-color: white;
                    font-size: 23px;
@@ -127,7 +127,7 @@
 
         .page-link {
             color: #000;
-            border: 1px solid;
+            border: 2px solid;
             background-color: transparent;
             font-size: 20px;
             display: block;
