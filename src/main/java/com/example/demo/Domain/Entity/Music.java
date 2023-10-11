@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Optional;
 
 @Entity
 @Builder
@@ -17,11 +18,13 @@ import javax.persistence.Id;
 @Data
 public class Music {
     @Id
-    private int music_code;
+    private Long music_code;
     private String artist;
     private String title;
     private String music_path;
-    private int count;
+    private Long mlike;
+    private Long count;
+
 
 
 }

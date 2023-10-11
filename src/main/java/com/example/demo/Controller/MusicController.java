@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +35,7 @@ public class MusicController {
 	}
 
 	@GetMapping("/search")
-	public void search(String searchText, String type, MusicDto dto, Model model){
+	public void search(String searchText, String type, MusicDto dto, Model model) {
 		log.info("GET /search");
 		//search(searchText, type, dto)
 		if(type!=null){
@@ -58,20 +61,15 @@ public class MusicController {
 
 	}
 
-//	@GetMapping("/like")
-//	public void like(MusicDto dto) {
-//		log.info("GET /like");
-//
-//
-//
-//	}
 
-	@GetMapping("/like")
-	public String like(MusicDto dto) {
-		log.info("GET /like");
-		musicService.likeMusic(dto.getMusic_code());
+	@GetMapping("/search/like")
+	public String like(Long music_code,String searchText, String type) {
+		log.info("GET /search/like " +music_code + " " +type + " " + searchText);
 
-		return "redirect:/search?type="+dto.getType()+"&searchText="+dto.getSearchText();
+		musicService.likeMusic(music_code);
+
+
+		return "redirect:/search?type="+type+"&searchText="+searchText;
 	}
 
 }

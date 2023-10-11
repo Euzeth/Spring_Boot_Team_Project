@@ -56,6 +56,24 @@ section {
             width: 400px;
         }
 
+        .like_btn{
+            display: inline-block;
+            width: 30px;
+            height :30px;
+            position:relative;
+        }
+
+        .likeno{
+            position: absolute;
+            display: inline-block;
+            width: 25px;
+            height: 30px;
+            line-height: 26px;
+            text-align: center;
+            font-size:15px;
+            color: rgb(192, 57, 43);
+        }
+
         .top_btn{
             position: fixed;
             width: 40px;
@@ -67,3 +85,14 @@ section {
             border: 3px solid rgb(192, 57, 43);
             border-radius: 50%;
         }
+
+        .material-symbols-outlined {
+                  font-variation-settings:
+                  'FILL' 0,
+                  'wght' 400,
+                  'GRAD' 0,
+                  'opsz' 24
+                }
+
+                 th:nth-of-type(2) { display: none; }
+                 td:nth-of-type(2) { display: none; }

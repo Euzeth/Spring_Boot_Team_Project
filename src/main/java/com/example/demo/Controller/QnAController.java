@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Domain.Dto.MemberDto;
 import com.example.demo.Domain.Dto.QnADto;
 import com.example.demo.Domain.Dto.Criteria;
 import com.example.demo.Domain.Dto.PageDto;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -125,7 +127,7 @@ public class QnAController {
     //-------------------
 
     @GetMapping("/read")
-    public String read(Long no, Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String read(Long no, Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         log.info("GET /qna/read : " + no);
 
         //서비스 실행
@@ -195,6 +197,15 @@ public class QnAController {
             }
         }
         model.addAttribute("qnaDto",dto);
+
+        String role = (String)session.getAttribute("role");
+        if(role.equals("ROLE_USER")){
+            model.addAttribute("role", "USER");
+        } else if(role.equals("ROLE_MEMBER")){
+            model.addAttribute("role", "MEMBER");
+        }
+        System.out.println(role);
+
 
         return "qna/read";
     }
@@ -282,9 +293,9 @@ public class QnAController {
     //--------------------------------
     @GetMapping("/reply/delete/{qno}/{rno}")
     public String delete(@PathVariable Long qno, @PathVariable Long rno){
-        log.info("GET /qna/reply/delete qno,rno " + rno + " " + rno);
+        log.info("GET /qna/reply/delete qno,rno " + qno + " " + rno);
 
-        qnaService.deleteReply(qno);
+        qnaService.deleteReply(rno);
 
         return "redirect:/qna/read?no="+qno;
     }

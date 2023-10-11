@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MusicRepository extends JpaRepository<Music,Integer> {
+public interface MusicRepository extends JpaRepository<Music,Long> {
     @Query(value = "SELECT * FROM musicdb.music m WHERE m.title LIKE %:keyWord%  ORDER BY m.music_code ASC" ,nativeQuery = true)
     List<Music> findSearchMusicTitle(@Param("keyWord")String keyWord);
 

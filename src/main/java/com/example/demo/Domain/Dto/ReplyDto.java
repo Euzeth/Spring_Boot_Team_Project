@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ReplyDto {
 
     private Long rno;
-    private Long bno;
+    private Long qno;
     private String content;
-    private LocalDate regdate;  // 등록날자
+    private LocalDateTime regdate;  // 등록날짜
 }

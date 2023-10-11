@@ -98,17 +98,5 @@ public class QnARestController {
         return list;
     }
 
-    //-------------------
-    //댓글 카운트
-    //-------------------
-    @GetMapping("/reply/count")
-    public Long getCount(Long qno){
-        log.info("GET /qna/reply/count " + qno);
-        Long cnt = qnaService.getReplyCount(qno);
-
-        return cnt;
-    }
-
-
 
 }

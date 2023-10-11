@@ -2,12 +2,14 @@ package com.example.demo.Domain.Service;
 
 import com.example.demo.Domain.Dto.MusicDto;
 import com.example.demo.Domain.Entity.Music;
+import com.example.demo.Domain.Entity.Notice;
 import com.example.demo.Domain.Entity.QnA;
 import com.example.demo.Domain.Repository.MusicRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -48,10 +50,22 @@ public class MusicService {
 
     }
 
+//    @Transactional(rollbackFor = SQLException.class)
+//    public Music getMusicOne(int musicId) {
+//
+//        Optional<Music> music = musicRepository.findById(musicId);
+//        if(music.isEmpty())
+//            return null;
+//        else
+//            return music.get();
+//    }
 
-    public void likeMusic(int musicId) {
+
+
+
+    public void likeMusic(Long musicId) {
         Music music =  musicRepository.findById(musicId).get();
-        music.setCount(music.getCount()+1);
+        music.setMlike(music.getMlike()+1L);
         musicRepository.save(music);
     }
 

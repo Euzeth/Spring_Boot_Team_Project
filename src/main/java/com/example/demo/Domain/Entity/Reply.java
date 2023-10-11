@@ -24,7 +24,7 @@ public class Reply {
             foreignKeyDefinition = "FOREIGN KEY (qno) REFERENCES qna(no) ON DELETE CASCADE ON UPDATE CASCADE") ) //FK설정\
     private QnA qna;
     private String content;
-    private LocalDate regdate;  // 등록날짜
+    private LocalDateTime regdate;  // 등록날짜
 
 
 

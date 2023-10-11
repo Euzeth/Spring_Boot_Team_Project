@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class MusicDto {
-	private int music_code;
+	private Long music_code;
 	private String title;
 	private String artist;
 	private String music_path;
-	private int count;
+	private Long mlike;
+	private Long count;
 	private String searchText; //찾을 키워드
 	private String type; //title, artist
 
@@ -31,6 +32,7 @@ public class MusicDto {
 		dto.title = music.getTitle();
 		dto.artist = music.getArtist();
 		dto.music_path = music.getMusic_path();
+		dto.mlike = music.getMlike();
 		dto.count = music.getCount();
 		return dto;
 	}

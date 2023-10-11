@@ -1,5 +1,7 @@
 package com.example.demo.Domain.Service;
 
+import com.example.demo.Config.auth.PrincipalDetails;
+import com.example.demo.Config.auth.PrincipalDetailsService;
 import com.example.demo.Controller.QnAController;
 import com.example.demo.Domain.Dto.Criteria;
 import com.example.demo.Domain.Dto.PageDto;
@@ -10,15 +12,19 @@ import com.example.demo.Domain.Entity.Reply;
 import com.example.demo.Domain.Repository.QnARepository;
 import com.example.demo.Domain.Repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -396,7 +402,7 @@ public class QnAService {
         reply.setRno(null);
         reply.setQna(qna);
         reply.setContent(contents);
-        reply.setRegdate(LocalDate.now());
+        reply.setRegdate(LocalDateTime.now());
 
         replyRepository.save(reply);
 
@@ -413,7 +419,7 @@ public class QnAService {
             for(int i=0;i<replyList.size();i++) {
 
                 dto = new ReplyDto();
-                dto.setBno(replyList.get(i).getQna().getNo());
+                dto.setQno(replyList.get(i).getQna().getNo());
                 dto.setRno(replyList.get(i).getRno());
                 dto.setContent(replyList.get(i).getContent());
                 dto.setRegdate(replyList.get(i).getRegdate());
