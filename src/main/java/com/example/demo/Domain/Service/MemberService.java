@@ -7,7 +7,6 @@ import com.example.demo.Domain.Dto.MemberDto;
 import com.example.demo.Domain.Entity.Member;
 import com.example.demo.Domain.Repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -34,10 +32,8 @@ public class MemberService{
 	public List<Member> getAllMember(){
 		return memberRepository.findAll();
 	}
-	
-	public MemberDto searchMember(String id){
-		return null;
-	}
+
+	public Optional<Member> searchMember(String username){ return memberRepository.findById(username);}
 	
 	@Transactional(rollbackFor = Exception.class)
 	public boolean addMember(MemberDto dto, Model model, HttpServletRequest request) {
@@ -82,13 +78,13 @@ public class MemberService{
         System.out.println("DTO : " +dto);
 		if (oldMember != null) {
 			// 새로운 정보로 업데이트
-			oldMember.setPassword(dto.getPassword());
+			oldMember.setPassword(passwordEncoder.encode(dto.getPassword()));
 			oldMember.setName(dto.getName());
 			oldMember.setZipcode(dto.getZipcode());
 			oldMember.setAddr1(dto.getAddr1());
 			oldMember.setAddr2(dto.getAddr2());
 			oldMember.setPhone(dto.getPhone());
-			oldMember.setRole(dto.getRole());
+			oldMember.setRole("ROLE_USER");
 
 			// 회원 정보 저장
 			Member updatedMember = memberRepository.save(oldMember);
@@ -109,5 +105,28 @@ public class MemberService{
         return memberRepository.findById(username).orElse(null);
     }
 
+	public MemberDto getUpdatedUserInfo(String username) {
+		Member member = memberRepository.findById(username).orElse(null);
+		if (member != null) {
+			// Member를 MemberDto로 변환하여 반환
+			return convertMemberToDto(member);
+		}
+		return null;
+	}
+
+	public MemberDto convertMemberToDto(Member member) {
+		MemberDto memberDto = new MemberDto();
+		memberDto.setUsername(member.getUsername());
+		memberDto.setName(member.getName());
+		memberDto.setZipcode(member.getZipcode());
+		memberDto.setAddr1(member.getAddr1());
+		memberDto.setAddr2(member.getAddr2());
+		memberDto.setPhone(member.getPhone());
+		memberDto.setRole("ROLE_USER");
+
+		System.out.println("memberDto : " + memberDto);
+
+		return memberDto;
+	}
 
 }

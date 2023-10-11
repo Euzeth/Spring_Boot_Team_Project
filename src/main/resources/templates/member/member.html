@@ -53,26 +53,26 @@
             <li><span class="title">회원 검색</span><hr/></li>
             <div class="search_block" >
                 <input type="text" id="search_input" name="id" placeholder="검색할 id를 입력하세요">
-                <button class="oneuser">검색</button>
+                <button class="oneuser" id="searchButton">검색</button>
             </div>
             <div class="oneshowBlock" id="oneshowblock">
                 <table>
                     <thead>
                     <tr>
+                        <th>유저아이디</th>
                         <th>이름</th>
-                        <th>이메일</th>
-                        <!-- 추가 필드들에 대한 헤더를 여기에 추가 -->
+                        <th>주소</th>
+                        <th>전화번호</th>
                     </tr>
                     </thead>
                     <tbody>
                     <!-- 검색 결과 반복 -->
-                    <th:each="member : ${searchResults}">
-                    <tr>
-                        <td>${member.name}</td>
-                        <td>${member.email}</td>
-                        <!-- 추가 필드들을 여기에 추가 -->
+                    <tr th:each="member : ${searchResults}">
+                        <td th:text="${member.username}">Username</td>
+                        <td th:text="${member.name}">Name</td>
+                        <td th:text="${member.addr1 + ' ' + member.addr2}">Address</td>
+                        <td th:text="${member.phone}">Phone</td>
                     </tr>
-                    </th:each>
                     </tbody>
                 </table>
             </div>
@@ -145,48 +145,47 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        const search = document.querySelector('.oneuser');
+        const searchButton = document.querySelector('#searchButton');
         const searchInput = document.querySelector('#search_input');
+        const oneshowblock = document.querySelector('#oneshowblock');
 
-        search.addEventListener('click', function(event){
+        searchButton.addEventListener('click', async function(event) {
             event.preventDefault();
 
             const searchValue = searchInput.value;
 
             try {
-                const response = axios.post('/member/search', null, {
-                    params: { id: searchValue }
+                const response = await axios.post('/member/search', null, {
+                    params: { username: searchValue }
                 });
                 console.log('서버 응답:', response);
-                response.then(function(response) {
-                    const searchResults = response.data; // 검색 결과 데이터
-                    const oneshowblock = document.querySelector('#oneshowblock');
-                    oneshowblock.innerHTML = ''; // 이전 결과를 지우고 새로운 결과를 추가하기 위해 초기화
 
-                    // 검색 결과를 표로 나타내는 HTML 문자열 생성
-                    let html = '<table>';
-                    html += '<thead><tr><th>이름</th><th>이메일</th></tr></thead>';
-                    html += '<tbody>';
-                    searchResults.forEach(function(member) {
-                        html += '<tr><td>' + member.name + '</td><td>' + member.email + '</td></tr>';
-                    });
-                    html += '</tbody></table>';
+                const searchResults = response.data; // 응답에서 검색 결과 가져오기
 
-                    // oneshowblock에 HTML 추가
-                    oneshowblock.innerHTML = html;
+                // 검색 결과를 표시하기 위한 HTML 생성
+                let html = '<table>';
+                html += '<thead><tr><th>유저아이디</th><th>이름</th><th>주소</th><th>전화번호</th></tr></thead>';
+                html += '<tbody>';
+                searchResults.forEach(function(member) {
+                    html += '<tr><td>' + member.username + '</td><td>' + member.name + '</td><td>' + (member.addr1 + ' ' + member.addr2) + '</td><td>' + member.phone + '</td></tr>';
+                });
+                html += '</tbody></table>';
 
-                       alert('회원검색 완료.');
-                    })
-                } catch (error) {
+                // 검색 결과를 표시할 요소를 업데이트
+                oneshowblock.innerHTML = html;
+
+                alert('회원 검색 완료.');
+            } catch (error) {
                 if (error.response) {
                     console.error('서버 응답 오류:', error.response.data);
                 } else {
                     console.error('요청 오류:', error.message);
                 }
-                // 오류가 발생했을 때 처리
-                alert('회원검색 실패.');
+                // 오류 처리 및 사용자에게 오류 메시지를 표시
+                alert('회원 검색 실패.');
             }
-        })
+        });
+
 
     });
 

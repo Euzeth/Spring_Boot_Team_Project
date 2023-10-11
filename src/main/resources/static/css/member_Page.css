@@ -3,7 +3,7 @@ li{
     }
 
     .member {
-        width: 450px;
+        width: 550px;
         display: block;
         height: 100%;
         padding-top: 50px;
@@ -110,9 +110,10 @@ li{
         cursor: pointer;
 	}
 	
-	.selectall {
+	.selectall{
         display: none;
         font-size: 20px;
 		margin-top: 10px;
 		text-align: center;
     }
+

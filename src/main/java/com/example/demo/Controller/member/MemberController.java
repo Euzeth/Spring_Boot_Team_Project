@@ -1,6 +1,8 @@
 package com.example.demo.Controller.member;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -109,28 +111,27 @@ public class MemberController {
 	}
 	
 	@GetMapping("/search")
-	public void search(@RequestParam String id) {
+	public @ResponseBody void search(@RequestParam String username) {
         log.info("GET /member/search");
-        memberService.searchMember(id);
-        
     }
-	
+
 	@PostMapping("/search")
-	public String search_post(@RequestParam String id, Model model) {
-		log.info("POST /member/search");
-		return "";
+	public @ResponseBody List<Member> searchPost(@RequestParam(value = "username", required = true) String username, Model model) {
+		log.info("POST /member/search + " + username);
+		List<Member> members = new ArrayList<>();
+		members.add(memberService.searchMember(username).orElse(null));
+		return members;
 	}
 
 	@GetMapping("/update")
 	public void update(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, MemberDto dto) {
 		log.info("GET /member/update" + principalDetails);
 		model.addAttribute("principalDetails", principalDetails);
-		memberService.modifyMember(dto);
 	}
 	
 	@PostMapping("/update")
 	public String update(MemberDto dto, Authentication authentication) {
-		log.info("POST /member/update");
+		log.info("POST /member/update + " + dto);
 
 		memberService.modifyMember(dto);
 
@@ -207,10 +208,19 @@ public class MemberController {
 	}
 
 	@GetMapping("/user")
-	public void user(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)
+	public String user(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)
 	{
 		log.info("GET /user");
 		model.addAttribute("principalDetails", principalDetails);
+
+		String username = principalDetails.getUsername();
+		MemberDto updatedUserInfo = memberService.getUpdatedUserInfo(username);
+		System.out.println("Updated User Info: " + updatedUserInfo);
+
+		if (updatedUserInfo != null) {
+			model.addAttribute("updatedUserInfo", updatedUserInfo);
+		}
+		return "/member/user";
 	}
 
 	@GetMapping("/member")
