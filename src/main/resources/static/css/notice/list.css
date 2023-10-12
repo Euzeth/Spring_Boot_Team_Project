@@ -98,9 +98,10 @@
         }
 
        .button{
-                   margin: 30px 0 20px auto;
-                   width: 100px;
-               }
+           margin: 10px 0 5px auto;
+           width: 220px;
+           display: flex;
+       }
 
                .button > a{
                    color: rgb(192, 57, 43);
@@ -108,9 +109,11 @@
                    border: 2px solid rgb(192, 57, 43);
                    border-radius: 7px;
                    background-color: white;
-                   font-size: 23px;
+                   font-size: 18px;
                    text-align: center;
-                   line-height: 40px;
+                   line-height: 30px;
+                   margin-right: 20px;
+                   padding: 5px 10px;
                }
 
         .pagenation{

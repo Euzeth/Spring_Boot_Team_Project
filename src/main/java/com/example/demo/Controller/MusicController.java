@@ -72,4 +72,21 @@ public class MusicController {
 		return "redirect:/search?type="+type+"&searchText="+searchText;
 	}
 
+	@GetMapping("/search/addlist")
+	public void addList(MusicDto dto,String searchText,String type){
+		log.info("GET /search/addlist " + dto.getTitle());
+
+
+
+	}
+
+
+	@GetMapping("/top100")
+	public void top100(MusicDto dto, Model model){
+		log.info("GET /top100 ");
+
+
+
+	}
+
 }

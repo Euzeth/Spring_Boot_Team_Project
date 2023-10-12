@@ -234,5 +234,17 @@ public class MemberController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("중복 확인 중에 오류가 발생했습니다.");
 	    }
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	@GetMapping("/mylist")
+	public void myList(){
+		log.info("/GET mylist");
+
+	}
+
+
+
+
+
 	
 }
