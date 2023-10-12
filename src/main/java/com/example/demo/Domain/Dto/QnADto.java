@@ -34,6 +34,8 @@ public class QnADto {
 
 
 
+
+
     public static QnADto Of(QnA qna) {
         QnADto dto = new QnADto();
         dto.no = qna.getNo();

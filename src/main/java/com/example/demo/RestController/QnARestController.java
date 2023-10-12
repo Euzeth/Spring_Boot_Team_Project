@@ -79,52 +79,24 @@ public class QnARestController {
 
     }
 
-
-
-
     //-------------------
-    //댓글추가
+    // 댓글 추가
     //-------------------
     @GetMapping("/reply/add")
-    public void addReply(Long bno,String contents , String username){
-        log.info("GET /qna/reply/add " + bno + " " + contents + " " + username);
-        qnaService.addReply(bno,contents, username);
+    public void addReply(Long qno, String contents){
+        log.info("GET /qna/reply/add qno " + qno + " contents " + contents);
+        qnaService.addReply(qno, contents);
     }
+
     //-------------------
-    //댓글 조회
+    // 댓글 조회
     //-------------------
     @GetMapping("/reply/list")
-    public List<ReplyDto> getListReply(Long bno){
-        log.info("GET /qna/reply/list " + bno);
-        List<ReplyDto> list =  qnaService.getReplyList(bno);
+    public List<ReplyDto> getListReply(Long qno){
+        log.info("GET /qna/reply/list " + qno);
+        List<ReplyDto> list =  qnaService.getReplyList(qno);
         return list;
     }
-    //-------------------
-    //댓글 카운트
-    //-------------------
-    @GetMapping("/reply/count")
-    public Long getCount(Long bno){
-        log.info("GET /qna/reply/count " + bno);
-        Long cnt = qnaService.getReplyCount(bno);
-
-        return cnt;
-    }
-
-
-
-
-
-    //-------------------
-    //댓글삭제
-    //-------------------
-
-    //-------------------
-    //댓글수정
-    //-------------------
-
-
-
-
 
 
 }

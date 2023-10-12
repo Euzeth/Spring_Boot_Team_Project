@@ -7,8 +7,8 @@ import com.example.demo.Domain.Dto.QnADto;
 import com.example.demo.Domain.Dto.ReplyDto;
 import com.example.demo.Domain.Entity.QnA;
 import com.example.demo.Domain.Entity.Reply;
-import com.example.demo.Domain.Entity.ReplyRepository;
 import com.example.demo.Domain.Repository.QnARepository;
+import com.example.demo.Domain.Repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -388,31 +388,24 @@ public class QnAService {
         qnaRepository.save(qna);
     }
 
-
-
-    //----------------------------------------------------------------
-    // REPLY ADD
-    //----------------------------------------------------------------
-    public void addReply(Long bno,String contents, String username) {
+    //ADD REPLY
+    public void addReply(Long qno, String contents) {
         Reply reply = new Reply();
         QnA qna = new QnA();
-        qna.setNo(bno);
+        qna.setNo(qno);
 
+        reply.setRno(null);
         reply.setQna(qna);
         reply.setContent(contents);
-        reply.setUsername(username);
         reply.setRegdate(LocalDateTime.now());
-        reply.setLikecount(0L);
-        reply.setUnlikecount(0L);
 
         replyRepository.save(reply);
+
+
     }
 
-    //----------------------------------------------------------------
-    // REPLY LIST
-    //----------------------------------------------------------------
-    public List<ReplyDto> getReplyList(Long bno) {
-        List<Reply> replyList =  replyRepository.GetReplyByQnoDesc(bno);
+    public List<ReplyDto> getReplyList(Long qno) {
+        List<Reply> replyList =  replyRepository.GetReplyByBnoDesc(qno);
 
         List<ReplyDto> returnReply  = new ArrayList();
         ReplyDto dto = null;
@@ -423,10 +416,7 @@ public class QnAService {
                 dto = new ReplyDto();
                 dto.setQno(replyList.get(i).getQna().getNo());
                 dto.setRno(replyList.get(i).getRno());
-                dto.setUsername(replyList.get(i).getUsername());
                 dto.setContent(replyList.get(i).getContent());
-                dto.setLikecount(replyList.get(i).getLikecount());
-                dto.setUnlikecount(replyList.get(i).getUnlikecount());
                 dto.setRegdate(replyList.get(i).getRegdate());
 
                 returnReply.add(dto);
@@ -436,33 +426,16 @@ public class QnAService {
         }
 
         return null;
-
     }
 
-
-    //----------------------------------------------------------------
-    // REPLY COUNT By BNO
-    //----------------------------------------------------------------
-
-    public Long getReplyCount(Long bno) {
-        return replyRepository.GetReplyCountByQnoDesc(bno);
+    public Long getReplyCount(Long qno) {
+        return replyRepository.GetReplyCountByBnoDesc(qno);
 
     }
-
 
     public void deleteReply(Long rno) {
         replyRepository.deleteById(rno);
     }
 
-    public void thumbsUp(Long rno) {
-        Reply reply =  replyRepository.findById(rno).get();
-        reply.setLikecount(reply.getLikecount()+1L);
-        replyRepository.save(reply);
-    }
 
-    public void thumbsDown(Long rno) {
-        Reply reply =  replyRepository.findById(rno).get();
-        reply.setUnlikecount(reply.getUnlikecount()+1L);
-        replyRepository.save(reply);
-    }
 }

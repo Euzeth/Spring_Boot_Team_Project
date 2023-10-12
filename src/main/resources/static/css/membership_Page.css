@@ -56,7 +56,7 @@
     font-size: 37px;
     color: gray;
     margin-top: 5px;
-    
+
 }
 
 .ms_pay .subscribe_2>span {
@@ -66,11 +66,11 @@
     font-size: 37px;
     color: gray;
     margin-top: 5px;
-    
+
 }
 
 
-.ms_pay #price {
+.ms_pay .price {
     display: block;
     font-size: 45px;
     color: brown;
@@ -120,12 +120,12 @@
     /* position: absolute; */
     width: 130px;
     height: 130px;
-    
+
 }
 
 
 .ms_benefit #title1 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
@@ -134,7 +134,7 @@
 }
 
 .ms_benefit #title2 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
@@ -142,7 +142,7 @@
 }
 
 .ms_benefit #title3 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
@@ -150,10 +150,9 @@
 }
 
 .ms_benefit #title4 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
     margin-left: 150px;
 }
-

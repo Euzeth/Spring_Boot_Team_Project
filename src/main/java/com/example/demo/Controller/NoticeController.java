@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -86,11 +87,32 @@ public class NoticeController {
 
     }
 
-    //-------------------
+    private String NoticeRequest(HttpSession session) {
+        String role = (String) session.getAttribute("role");
+        if ("ROLE_USER".equals(role)) {
+            System.out.println("user's mypage");
+            return "redirect:/notice/list";
+        } else if ("ROLE_MEMBER".equals(role)) {
+            System.out.println("member's mypage");
+            return "redirect:/notice/post";
+        }
+        return "redirect:/notice/list";
+    }
+
+    @GetMapping("/page")
+    public String getPage(HttpSession session){return NoticeRequest(session);}
+
+    @PostMapping("/page")
+    public String postPage(HttpSession session){return NoticeRequest(session);}
+
     // POST
     //-------------------
     @GetMapping("/post")
-    public void post_get(){log.info("GET /notice/post");}
+    public void post_get(){
+        log.info("GET /notice/post");
+    }
+
+
 
     @PostMapping("/post")
     public String post_post(@Valid NoticeDto dto, BindingResult bindingResult, Model model) throws IOException {

@@ -21,11 +21,9 @@ public class Reply {
     @JoinColumn(name = "qno",foreignKey = @ForeignKey(name = "FK_reply_qna",
             foreignKeyDefinition = "FOREIGN KEY (qno) REFERENCES qna(no) ON DELETE CASCADE ON UPDATE CASCADE") ) //FK설정\
     private QnA qna;
-    private String username;
     private String content;
-    private Long likecount;       //좋아요 Count
-    private Long unlikecount;     //싫어요 Count
-    private LocalDateTime regdate;  // 등록날자
+    private LocalDateTime regdate;  // 등록날짜
+
 
 
 }

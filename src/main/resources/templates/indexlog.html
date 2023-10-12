@@ -21,11 +21,14 @@
     <header>
         <div class="top-header">
             <a href="/indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
-            <form action="" method="get">
+            <form action="/search" method="get">
                 <div class="search_box">
-                    <div class="search_btn" id="searchButton">SEARCH</div>
+                    <select name="type"  class="selectbox" >
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
                     <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
-                    <img id="searchbtn" src="/images/search.png" alt="" >
+                    <button type="submit">🔍</button>
                 </div>
             </form>
             <ul>
@@ -89,8 +92,8 @@
                     <li>
                         <a href="">공지사항</a>
                         <ul class="two--depth">
-                            <li><a href="">공지사항</a></li>
-                            <li><a href="">QnA</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="/qna/list">QnA</a></li>
                             <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
@@ -150,7 +153,7 @@
             <article>멤버십 이벤트<br><br />
                 <span>워터멜론을 구독해보세요!</span>
                 <span>첫 구독 1개월 무료</span>
-                <div><a href="">구독하기</a></div>
+                <div><a href="/membership">구독하기</a></div>
             </article>
             <aside>
                 <div class="top10">
@@ -262,22 +265,6 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-<!-- <script>
-    const logout_btn = document.getElementById("logout_btn");
-
-    logout_btn.addEventListener('click', function(){
-        axios.post("/app/logout")
-        .then(response =>{
-            console.log("success")
-        })
-        .catch(error=>{console.log("error!");})
-    })
-
-</script> -->
-
-
 
 </body>
 </html>

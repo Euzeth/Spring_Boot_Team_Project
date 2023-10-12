@@ -32,20 +32,20 @@
     padding-left: 10px;
 }
 
-.wrapper>header>.top-header>form .search_box>div{
+.wrapper>header>.top-header>form>.search_box>select{
     /* border: 1px solid rosybrown; */
     height: 35px;
     width: 110px;
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
-    line-height: 35px;
+    line-height: 38px;
     margin-top: -1px;
     margin-left: -10px;
     border-right: 3px solid rgb(92, 115, 6);
     background-color: rgba(92, 115, 6, 0.43);
 }
 
-.wrapper>header>.top-header>form .search_box>input {
+.wrapper>header>.top-header>form>.search_box>input {
     height: 30px;
     width: 340px;
     border: 1px;
@@ -53,18 +53,20 @@
     position: absolute;
     top: -1px;
     left: 115px;
-    font-size: 15px;
+    font-size: 18px;
     color: black;
-    font-family: 'NanumSquareBold';
+    font-family: 'SDSamliphopangche_Basic';
 }
 
-.wrapper>header>.top-header>form .search_box>img {
+.wrapper>header>.top-header>form>.search_box>button {
     position: absolute;
-    width: 30px;
     height: 30px;
-    top: 0px;
-    left: 92%;
-    display: block;
+    top: -5px;
+    left: 90%;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+
 }
 
 /* �뿤�뜑 �궡 �듬찓�돱 */

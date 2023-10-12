@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -125,7 +126,7 @@ public class QnAController {
     //-------------------
 
     @GetMapping("/read")
-    public String read(Long no, Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String read(Long no, Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         log.info("GET /qna/read : " + no);
 
         //서비스 실행
@@ -195,6 +196,15 @@ public class QnAController {
             }
         }
         model.addAttribute("qnaDto",dto);
+
+        String role = (String)session.getAttribute("role");
+        if(role.equals("ROLE_USER")){
+            model.addAttribute("role", "USER");
+        } else if(role.equals("ROLE_MEMBER")){
+            model.addAttribute("role", "MEMBER");
+        }
+        System.out.println(role);
+
 
         return "qna/read";
     }
@@ -280,33 +290,13 @@ public class QnAController {
     //--------------------------------
     // /qna/reply/delete
     //--------------------------------
-    @GetMapping("/reply/delete/{bno}/{rno}")
-    public String delete(@PathVariable Long bno, @PathVariable Long rno){
-        log.info("GET /qna/reply/delete bno,rno " + rno + " " + rno);
+    @GetMapping("/reply/delete/{qno}/{rno}")
+    public String delete(@PathVariable Long qno, @PathVariable Long rno){
+        log.info("GET /qna/reply/delete qno,rno " + qno + " " + rno);
 
         qnaService.deleteReply(rno);
 
-        return "redirect:/qna/read?no="+bno;
-    }
-
-    //--------------------------------
-    // /qna/reply/thumbsup
-    //--------------------------------
-    @GetMapping("/reply/thumbsup")
-    public String thumbsup(Long bno, Long rno)
-    {
-
-        qnaService.thumbsUp(rno);
-        return "redirect:/qna/read?no="+bno;
-    }
-    //--------------------------------
-    // /qna/reply/thumbsdown
-    //--------------------------------
-    @GetMapping("/reply/thumbsdown")
-    public String thumbsudown(Long bno, Long rno)
-    {
-        qnaService.thumbsDown(rno);
-        return "redirect:/qna/read?no="+bno;
+        return "redirect:/qna/read?no="+qno;
     }
 
 

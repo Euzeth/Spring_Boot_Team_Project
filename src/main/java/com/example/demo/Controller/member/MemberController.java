@@ -184,8 +184,6 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Authentication authentication, Model model) {
 		System.out.println("authentication : " + authentication);
-		
-		
 		return MypageRequest(session);
 	}	
 		
