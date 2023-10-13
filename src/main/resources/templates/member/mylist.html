@@ -117,7 +117,7 @@
                     <div class="mylist-header">
                         <div class="button">
                             <a    type="button">선택재생</a>
-                            <a    type="button">선택삭제</a>
+                            <a    type="button" onclick="deleteValue();">선택삭제</a>
                         </div>
                     </div>
 
@@ -126,7 +126,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th><input type="checkbox" id="check"><label for="check"></label></th>
+                                <th><input type="checkbox" id="allCheck" name="allCheck"></th>
                                 <th class="title_1">NO</th>
                                 <th class="title_1">CODE</th>
                                 <th class="title_2">TITLE</th>
@@ -138,7 +138,7 @@
                             <!-- SEARCH LIST ITEMS -->
                             <th:block>
                                 <tr th:each="mylistDto, iterationStat  : ${myList}">
-                                    <th><input type="checkbox"></th>
+                                    <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
                                     <td th:text="${myList.music_code}"></td>
                                     <td th:text="${myList.title}"></td>

@@ -98,7 +98,7 @@
                         <a href="">공지사항</a>
                         <ul class="two--depth">
                             <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/member/login">QnA</a></li>
+                            <li><a href="/qna/list">QnA</a></li>
                             <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
@@ -173,7 +173,7 @@
                 <div class="notice-footer">
 
                     <!-- post btn -->
-                    <div class="button">
+                    <div class="button" th:if="${#strings.equals(role, 'MEMBER')}">
                             <a th:href="@{/notice/post}"   type="button">글쓰기</a>
                     </div>
 

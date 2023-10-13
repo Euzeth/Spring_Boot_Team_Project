@@ -130,11 +130,13 @@
                         <table>
                             <thead>
                             <tr>
+                                <th><input type="checkbox" id="allCheck" name="allCheck"></th>
                                 <th class="title_1">NO</th>
                                 <th class="title_1">CODE</th>
                                 <th class="title_2">TITLE</th>
                                 <th class="title_1">ARTIST</th>
                                 <th class="title_1">LIKE</th>
+                                <th class="title_1">ADD</th>
                                 <th class="title_1">COUNT</th>
                             </tr>
                             </thead>
@@ -142,6 +144,7 @@
                             <!-- SEARCH LIST ITEMS -->
                             <th:block>
                                 <tr th:each="searchDto, iterationStat  : ${searchList}">
+                                    <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
                                     <td th:text="${searchDto.music_code}"></td>
                                     <td><a th:text="${searchDto.title}"> </a></td>
@@ -149,6 +152,10 @@
                                     <td>
                                         <a th:href="@{/search/like(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}" class="like_btn">
                                             <span class="material-symbols-outlined">favorite</span><span th:text="${searchDto.mlike}" class="likeno"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="add_btn">
+                                            <span class="material-symbols-outlined">add</span></a>
                                     </td>
                                     <td th:text="${searchDto.count}"></td>
 
@@ -196,7 +203,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-
+//Top버튼 스크립트
     const mTopBtn = document.querySelector(".top_btn");
 
     window.addEventListener("scroll", () => {
@@ -218,7 +225,19 @@
       });
     });
 
+//체크박스 모두 체크
 
+    // allCheck 체크박스 엘리먼트와 모든 rowCheck 체크박스 엘리먼트를 가져옵니다.
+    const allCheck = document.getElementById('allCheck');
+    const rowCheckboxes = document.querySelectorAll('input[name="rowCheck"]');
+
+    // allCheck 체크박스의 상태가 변경될 때 호출될 함수를 정의합니다.
+    allCheck.addEventListener('change', function() {
+        // allCheck 체크박스의 상태에 따라 모든 rowCheck 체크박스를 선택 또는 선택 해제합니다.
+        rowCheckboxes.forEach(function(checkbox) {
+            checkbox.checked = allCheck.checked;
+        });
+    });
 
 </script>
 

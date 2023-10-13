@@ -16,17 +16,11 @@ import java.util.Optional;
 @Repository
 public interface MembershipRepository extends JpaRepository<Membership,String> {
 
-//    @Query(value="SELECT NEW com.example.demo.Domain.Dto.MembershipDto(m.username, m.name, m.startdate, m.enddate, m.membershipcode) FROM Membership m order by m.membershipcode asc")
-//    List<MembershipDto> findMembershipListAll();
-
     @Query(value="SELECT * FROM musicdb.membership m order by m.membershipcode asc", nativeQuery = true)
     List<Membership> findMembershipListAll();
 
     @Query(value = "SELECT * FROM musicdb.membership m WHERE m.username LIKE :username", nativeQuery = true)
     Membership findMembershipUsername(@Param("username")String username);
-
-//    @Query(value = "SELECT NEW com.example.demo.Domain.Dto.MembershipDto(m.username, m.name, m.startdate, m.enddate, m.membershipcode) FROM Membership m WHERE m.membershipcode = :membershipcode")
-//    List<MembershipDto> findMembershipCode(@Param("membershipcode")String membershipcode);
 
     @Query(value = "SELECT * FROM musicdb.membership m WHERE m.membershipcode = :membershipcode", nativeQuery = true)
     List<Membership> findMembershipCode(@Param("membershipcode")String membershipcode);
@@ -34,8 +28,6 @@ public interface MembershipRepository extends JpaRepository<Membership,String> {
     @Query(value = "SELECT NEW com.example.demo.Domain.Dto.MembershipDto(m.username, m.name, m.startdate, m.enddate, m.membershipcode) FROM Membership m WHERE m.enddate = :enddate")
     List<MembershipDto> findMembershipEnddate(@Param("enddate")LocalDate enddate);
 
-//    @Query(value = "SELECT m.username, m.name, m.startdate, m.enddate, m.membershipcode FROM musicdb.membership m WHERE m.enddate = :enddate")
-//    List<Membership> findMembershipEnddate(@Param("enddate")LocalDate enddate);
 
 
 

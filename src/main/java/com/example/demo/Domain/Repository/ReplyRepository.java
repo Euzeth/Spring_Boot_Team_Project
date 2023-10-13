@@ -13,9 +13,9 @@ import java.util.List;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     @Query("SELECT r FROM Reply r WHERE qno = :qno ORDER BY rno DESC")
-    List<Reply> GetReplyByBnoDesc(@Param("qno") Long qno);
+    List<Reply> GetReplyByQnoDesc(@Param("qno") Long qno);
 
     @Query("SELECT COUNT(r) FROM Reply r WHERE qno = :qno")
-    Long GetReplyCountByBnoDesc(@Param("qno") Long qno);
+    Long GetReplyCountByQnoDesc(@Param("qno") Long qno);
 
 }

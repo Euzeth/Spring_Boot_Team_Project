@@ -410,7 +410,7 @@ public class QnAService {
     }
 
     public List<ReplyDto> getReplyList(Long qno) {
-        List<Reply> replyList =  replyRepository.GetReplyByBnoDesc(qno);
+        List<Reply> replyList =  replyRepository.GetReplyByQnoDesc(qno);
 
         List<ReplyDto> returnReply  = new ArrayList();
         ReplyDto dto = null;
@@ -434,7 +434,7 @@ public class QnAService {
     }
 
     public Long getReplyCount(Long qno) {
-        return replyRepository.GetReplyCountByBnoDesc(qno);
+        return replyRepository.GetReplyCountByQnoDesc(qno);
 
     }
 
