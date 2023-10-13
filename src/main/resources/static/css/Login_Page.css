@@ -5,7 +5,7 @@ li{
     .login {
         width: 410px;
         display: block;
-        height: 470px;
+        height: 550px;
         padding-top: 50px;
         margin: 0 auto;
     }
@@ -80,7 +80,7 @@ li{
     }
 
     .login div {
-        padding: 0 0 45px;
+        padding: 0 0 15px;
     }
 
     .login div ul {
@@ -117,4 +117,24 @@ li{
         font-size: 14px;
         color: #666;
         border-bottom: 1px solid#666;
+    }
+
+    .google_icon{
+        width : 55px;
+        height : 55px;
+    }
+
+    .oauth_icon{
+        display:flex;
+        justify-content:space-around;
+        align-items : center;
+    }
+
+    .oauth_icon img{
+        display:block;
+        width : 45px;
+        height : 45px;
+        margin : 5px;
+        border : 50%;
+        margin-right:15px;
     }

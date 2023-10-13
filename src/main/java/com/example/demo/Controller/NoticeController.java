@@ -95,8 +95,10 @@ public class NoticeController {
         } else if ("ROLE_MEMBER".equals(role)) {
             System.out.println("member's mypage");
             return "redirect:/notice/post";
+        } else{
+            return "redirect:/notice/list";
         }
-        return "redirect:/notice/list";
+
     }
 
     @GetMapping("/page")

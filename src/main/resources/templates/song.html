@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,6 @@
                 <div class="progress" id="progress"></div>
             </div>
         </div>
-        <audio id="audio" src="" onloadstart="this.volume=0.005"></audio>
         <div class="img-container">
             <img src="" alt="cover" id="cover">
         </div>
@@ -54,17 +53,19 @@
     const progressContainer = document.getElementById('progress-container');
     const imgCover = document.getElementById("cover");
     const title = document.getElementById("title");
-
-    const songs = ["hey", "summer", "ukulele"];
+    let song;
+    const songs = document.getElementById("title");
 
     let songIndex = 2;
 
     loadSong(songs[songIndex]);
 
     function loadSong(song) {
-      title.innerText = song;
-      audio.src = `http://127.0.0.1:5500/music/${song}.mp3`;
-      imgCover.src = `http://127.0.0.1:5500/images/${song}.jpg`;
+            title.innerHTML = song;
+            console.log("song//"+song);
+            var encodedTitle = encodeURIComponent(title.innerHTML);
+            imgCover.src = '/image/'+encodedTitle+'.webp/';
+            console.log("image//"+song);
     }
 
     function playMusic() {
@@ -88,10 +89,18 @@
         if (songIndex < 0) {
           songIndex = songs.length - 1;
         }
-
-        loadSong(songs[songIndex]);
-
-        playMusic();
+        fetch('/previousplay',{
+                method : 'GET',
+            })
+                .then(response => response.text())
+                .then(data => {
+                    loadSong(data);
+                    console.log('PlayPreviousSong//'+ data);
+                    playmusic(data);
+                })
+                .catch(error => {
+                    console.error('Error playPreviousSong', error);
+                });
     }
 
     function playNextSong (){
@@ -100,9 +109,18 @@
         if(songIndex > 2){
             songIndex = 0;
         }
-
-        loadSong(songs[songIndex]);
-        playMusic();
+        fetch('/nextplay',{
+            method : 'GET',
+        })
+            .then(response => response.text())
+            .then(data => {
+                loadSong(data);
+                console.log('PlayNextSong//'+ data);
+                playmusic(data);
+            })
+            .catch(error => {
+                console.error('Error playNextSong', error);
+            });
     }
 
     function updateProgress(e){
@@ -128,13 +146,11 @@
 
     playBtn.addEventListener("click", () => {
         const isPlaying = musicContainer.classList.contains('play');
-        const musicFileName = "5 Seconds Of Summer-02-Want You Back-320k.mp3";
         const isLoop = true;
-
 
         if (isPlaying) {
 
-            fetch('/pause?name=${musicFileName}', {
+            fetch('/pause', {
                 method: 'GET',
             })
             .then(response => {
@@ -148,21 +164,27 @@
                 console.error('오류 발생: ' + error);
             });
         } else {
-            fetch('/play?name=${musicFileName}&isLoop=${isLoop}', {
+            fetch('/play', {
                 method: 'GET',
             })
             .then(response => {
-                if (response.ok) {
-                    playMusic();
-                } else {
-                    console.error('서버 오류: ' + response.status);
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            throw new Error('Failed to fetch data');
+                        }
+                    })
+                    .then(responseSong => {
+                        song = responseSong
+                        console.log('responsesong'+song);
+                        loadSong(song);
+                        playMusic(song);
+                    })
+                    .catch(error => {
+                        console.error('오류 발생: ' + error);
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('오류 발생: ' + error);
             });
-        }
-    });
 
     prevBtn.addEventListener("click", playPrevSong);
     nextBtn.addEventListener('click', playNextSong);
