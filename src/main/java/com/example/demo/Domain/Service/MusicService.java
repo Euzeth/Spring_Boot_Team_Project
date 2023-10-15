@@ -57,11 +57,6 @@ public class MusicService {
         musicRepository.save(music);
     }
 
-  //  @Transactional(rollbackFor = SQLException.class)
-  //  public void GetTop100List(MusicDto dto){
-  //      List<Music> list = musicRepository
-
-   // }
 
 
 }

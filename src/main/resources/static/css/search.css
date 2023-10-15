@@ -16,11 +16,43 @@ section {
         }
 
         .search-header{
-            text-align: right;
-            font-size:20px;
-            margin : 20px auto;
+            margin : 20px;
+            display : flex;
+            justify-content: space-between;
         }
 
+        .keyword{
+            display: inline-block;
+            font-size: 23px;
+            height: 40px;
+            line-height: 55px;
+
+        }
+        .button{
+            width:200px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .button > a{
+            color: rgb(192, 57, 43);
+            display: inline-block;
+            width: 90px;
+            border: 2px solid rgb(192, 57, 43);
+            border-radius: 7px;
+            background-color: white;
+            font-size: 22px;
+            text-align: center;
+            line-height: 34px;
+        }
+
+
+        .button > a:hover{
+            color: white;
+            background-color: rgb(192, 57, 43);
+            transition: 0.3s;
+        }
 
         .search-body table{
             border-top: 1px solid #444444;

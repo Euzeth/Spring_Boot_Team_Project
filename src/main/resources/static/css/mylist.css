@@ -16,26 +16,24 @@ section {
         }
 
         .mylist-header{
-            text-align: right;
-            font-size:20px;
-            margin : 20px auto;
+             margin : 20px;
         }
         .button{
-    margin: 20px 0 10px auto;
-    width: 220px;
-    display: flex;
-    justify-content: space-evenly;        }
+             display: block;
+             text-align: right;
+             cursor: pointer;
+        }
 
         .button > a{
-           color: rgb(192, 57, 43);
-               display: block;
-               width: 90px;
-               border: 2px solid rgb(192, 57, 43);
-               border-radius: 7px;
-               background-color: white;
-               font-size: 22px;
-               text-align: center;
-               line-height: 34px;
+            color: rgb(192, 57, 43);
+            display: inline-block;
+            width: 90px;
+            border: 2px solid rgb(192, 57, 43);
+            border-radius: 7px;
+            background-color: white;
+            font-size: 22px;
+            text-align: center;
+            line-height: 34px;
         }
 
 

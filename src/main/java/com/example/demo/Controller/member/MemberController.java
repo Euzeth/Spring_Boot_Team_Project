@@ -235,12 +235,7 @@ public class MemberController {
 	    }
 	}
 
-	////////////////////////////////////////////////////////////////////////
-	@GetMapping("/mylist")
-	public void myList(){
-		log.info("/GET mylist");
 
-	}
 
 
 
