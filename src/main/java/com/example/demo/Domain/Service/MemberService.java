@@ -84,6 +84,7 @@ public class MemberService{
 			oldMember.setAddr1(dto.getAddr1());
 			oldMember.setAddr2(dto.getAddr2());
 			oldMember.setPhone(dto.getPhone());
+			oldMember.setEmail(dto.getEmail());
 			oldMember.setRole("ROLE_USER");
 
 			// 회원 정보 저장
@@ -122,11 +123,22 @@ public class MemberService{
 		memberDto.setAddr1(member.getAddr1());
 		memberDto.setAddr2(member.getAddr2());
 		memberDto.setPhone(member.getPhone());
+		memberDto.setEmail(member.getEmail());
 		memberDto.setRole("ROLE_USER");
 
 		System.out.println("memberDto : " + memberDto);
 
 		return memberDto;
+	}
+
+	public boolean idcheck(String username) throws Exception {
+		Member dbMember = memberRepository.findById(username).orElse(null);
+		if (dbMember == null) {
+			System.out.println("[INFO] 사용가능한 아이디입니다.");
+			return true;
+		}
+		System.out.println("[ERROR] 이미 사용중인 아이디입니다.");
+		return false;
 	}
 
 }

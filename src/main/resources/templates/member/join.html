@@ -39,10 +39,9 @@
             <ul>
                 <li><span>ID</span> <span th:text="${username}" style="font-size:0.7rem;color:orange;" class="username_msg"></span>
                     <div>
-                        <input id="id_input" class="username" name="username" type="text" placeholder="example@example.com"
-                               title="아이디입력" >
-                        <button type="button" class="btn btn-secondary email_auth_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            인증
+                        <input id="id_input" class="username" name="username" type="text" placeholder="abcd" title="아이디입력" >
+                        <button type="button" class="btn btn-secondary username_btn" id="idcheck_btn">
+                            확인
                         </button>
                     </div>
                     </li>
@@ -51,6 +50,14 @@
                 <li><span>PW Check</span> <span th:text="${repassword}" style="font-size:0.7rem;color:orange;"></span>
                     <input id="pwc_input" name="repassword" type="password" placeholder="비밀번호확인" title="비밀번호확인" ></li>
                 <li><span>NAME</span> <input type="text" name="name" placeholder="이름" title="이름입력" ></li>
+                <li><span>EMAIL</span> <span th:text="${email}" style="font-size:0.7rem;color:orange;" class="email_msg"></span>
+                    <div>
+                        <input id="email_input" class="email" type="text" name="email" title="이메일입력" placeholder="example@example.com">
+                        <button type="button" class="btn btn-secondary email_auth_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            인증
+                        </button>
+                    </div>
+                </li>
                 <li><span>우편번호</span> <span th:text="${zipcode}" style="font-size:0.7rem;color:orange;"></span>
                     <div>
                         <input type="text" id="addr_input" name="zipcode" class="zipcode" placeholder="우편번호" title="우편번호입력" >
@@ -117,10 +124,10 @@
 <script>
     // EMAIL 발송
     const email_auth_btn_el = document.querySelector('.email_auth_btn');
-    const username = document.querySelector('.username');
+    const email = document.querySelector('.email');
     email_auth_btn_el.addEventListener('click', function(){
         //alert('TEST');
-        axios.get('/member/auth/email/' + username.value)
+        axios.get('/member/auth/email/' + email.value)
         .then(response => { console.log(response); })
         .catch(error => {});
     });
@@ -131,17 +138,17 @@
     email_auth_btn_2_el.addEventListener('click', function(){
         //alert('TEST');
 
-        const username_msg = document.querySelector('.username_msg');
+        const email_msg = document.querySelector('.email_msg');
 
         axios.get('/member/auth/confirm/' + code.value)
         .then(response => {
             console.log(response);
             if(response.data === 'success'){
-                username_msg.innerHTML = "이메일 인증 성공..!";
-                username_msg.style.color="green";
+                email_msg.innerHTML = "이메일 인증 성공..!";
+                email_msg.style.color="green";
             }else{
-                username_msg.innerHTML = "이메일 인증 실패..!";
-                username_msg.style.color="red";
+                email_msg.innerHTML = "이메일 인증 실패..!";
+                email_msg.style.color="red";
             }
             //모달창 종료
             const modal_exit = document.querySelector('.modal_exit');
@@ -191,6 +198,27 @@
         }
     }).open();
     });
+
+    async function checkDuplicateId() {
+			var id = document.getElementById("id_input").value;
+
+			try {
+				const response = await axios.get(`/member/checkDuplicate`, {
+							params : { username : id },
+				});
+
+				const isDuplicate = response.data;
+				if (!isDuplicate) {
+					alert("이미 사용 중인 아이디입니다.");
+				} else {
+					alert("사용 가능한 아이디입니다.");
+				}
+			} catch (error) {
+				alert("중복 확인 중에 오류가 발생했습니다.");
+			}
+
+		}
+		document.getElementById("idcheck_btn").addEventListener("click", checkDuplicateId);
 
 </script>
 

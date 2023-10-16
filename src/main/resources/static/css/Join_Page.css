@@ -5,7 +5,7 @@ li{
     .join {
         width: 450px;
         display: block;
-        height: 950px;
+        height: 1050px;
         padding-top: 50px;
         margin: 0 auto;
     }
@@ -62,7 +62,7 @@ li{
         color: gray;
     }
 
-    .join form .email_auth_btn, .zipcode_btn{
+    .join form .username_btn, .email_auth_btn, .zipcode_btn{
         width: 82px;
         height: 40px;
         margin-left: 15px;

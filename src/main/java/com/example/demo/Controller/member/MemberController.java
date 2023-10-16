@@ -236,5 +236,14 @@ public class MemberController {
 
 	}
 
+	@GetMapping("/checkDuplicate")
+	public ResponseEntity<String> checkDuplicate(@RequestParam("username") String username) {
+		try {
+			boolean duplicate_id = memberService.idcheck(username);
+			return ResponseEntity.ok(String.valueOf(duplicate_id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("중복 확인 중에 오류가 발생했습니다." + e.getMessage());
+		}
+	}
 	
 }

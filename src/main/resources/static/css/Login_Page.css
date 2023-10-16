@@ -79,24 +79,24 @@ li{
         color: #fff
     }
 
-    .login div {
-        padding: 0 0 15px;
+    .login .loginmenu {
+        padding: 0 0 5px;
     }
 
-    .login div ul {
+    .login .loginmenu ul {
         display: flex;
         justify-content: space-between;
     }
 
-    .login div ul li {
+    .login .loginmenu ul li {
         position: relative;
     }
    
-    .login div ul li:nth-child(2) {
+    .login .loginmenu ul li:nth-child(2) {
         padding-right: 150px;
     }
 
-    .login div ul li:nth-child(2)::after {
+    .login .loginmenu ul li:nth-child(2)::after {
         content: "";
         position: absolute;
         left: -10px;
@@ -107,7 +107,7 @@ li{
         transform: rotate(25deg);
     }
 
-    .login div ul li a {
+    .login .loginmenu ul li a {
         font-size: 14px;
         color: #111;
     }

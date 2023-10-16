@@ -26,6 +26,9 @@
 .wrapper>footer>div>.footer_menu>li>a{
     font-family: 'NanumSquareAceb'; 
     font-size: 17px;
+    text-decoration: none;
+    font-family: 'SDSamliphopangche_Basic';
+    color:black;
 }
 
 .wrapper>footer>.Site_info{

@@ -23,6 +23,7 @@ public class Member {
     private String addr1;
     private String addr2;
     private String name;
+    private String email;
 
     // OAuth2 Added
     private String provider;
