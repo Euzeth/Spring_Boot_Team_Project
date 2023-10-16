@@ -2,6 +2,7 @@ package com.example.demo.Domain.Dto;
 
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Entity.Membership;
+import com.example.demo.Domain.Entity.Music;
 import com.example.demo.Domain.Entity.Mylist;
 import com.example.demo.Domain.Entity.MylistId;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,5 @@ import java.time.LocalDate;
 public class MylistDto {
     private String lusername;
     private Long lmusic_code;
-
+    private Music music;
 }

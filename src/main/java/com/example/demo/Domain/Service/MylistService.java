@@ -3,9 +3,8 @@ package com.example.demo.Domain.Service;
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MusicDto;
 import com.example.demo.Domain.Dto.MylistDto;
-import com.example.demo.Domain.Entity.Membership;
-import com.example.demo.Domain.Entity.Mylist;
-import com.example.demo.Domain.Entity.MylistId;
+import com.example.demo.Domain.Entity.*;
+import com.example.demo.Domain.Repository.MusicRepository;
 import com.example.demo.Domain.Repository.MylistRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +24,34 @@ public class MylistService {
     @Autowired
     MylistRepository mylistRepository;
 
+    @Autowired
+    MusicRepository musicRepository;
+
     @Transactional(rollbackFor = SQLException.class)
-    public void addMylist(List<Long> musicCodes, String lusername){
-        for (Long lmusic_code : musicCodes) {
+    public void addMylist(List<Long> musicCodes, String username) {
+        for (Long music_code : musicCodes) {
             Mylist mylist = new Mylist();
-            mylist.setMylistId(lusername, lmusic_code);
+
+            MylistId mylistId = new MylistId();
+            mylistId.setUsername(username);
+            mylistId.setMusicCode(music_code);
+
+            mylist.setMylistId(mylistId);
+            Music music = musicRepository.findByMusicCode(music_code);
+            mylist.setMusic(music);
+            System.out.println(mylist);
+
             mylistRepository.save(mylist);
         }
     }
 
     @Transactional(rollbackFor = SQLException.class)
-    public List<Mylist> GetMylistByUsername(String lusername){
-        return mylistRepository.GetMylistByUsernameAsc(lusername);
+    public List<Mylist> GetMylistByUsername(String username){
+        return mylistRepository.GetMylistByUsernameAsc(username);
     }
 
     @Transactional(rollbackFor = SQLException.class)
-    public void removeMylist(MylistId mylistId){
+    public void removeMylistById(MylistId mylistId){
         Optional<Mylist> mylistOptional = mylistRepository.findById(mylistId);
         System.out.println(mylistOptional);
 

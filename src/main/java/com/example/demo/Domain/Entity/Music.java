@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Optional;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Builder
 @NoArgsConstructor

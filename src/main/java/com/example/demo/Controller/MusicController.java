@@ -9,6 +9,7 @@ import com.example.demo.Domain.Entity.Music;
 import com.example.demo.Domain.Entity.Mylist;
 import com.example.demo.Domain.Service.MusicService;
 import com.example.demo.Domain.Service.MylistService;
+import com.nimbusds.openid.connect.sdk.claims.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -92,6 +93,8 @@ public class MusicController {
 		return username;
 	}
 
+
+
 	//Mylist에 담기
 	public static class MylistRequest {
 		private List<Long> musicCodes;
@@ -116,12 +119,14 @@ public class MusicController {
 
 	@PostMapping("/search/addlist")
 	public String addMylist(@RequestBody MylistRequest request) {
+
 		List<Long> musicCodes = request.getMusicCodes();
 		String username = request.getUsername();
+		System.out.println(username+","+ musicCodes);
 
 		mylistService.addMylist(musicCodes, username);
 
-		return "Add Success";
+		return "search";
 	}
 
 

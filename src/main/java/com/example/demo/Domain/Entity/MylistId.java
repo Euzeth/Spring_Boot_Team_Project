@@ -1,11 +1,11 @@
 package com.example.demo.Domain.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 @Embeddable
 @NoArgsConstructor
@@ -17,5 +17,13 @@ public class MylistId implements Serializable {
     public MylistId(String lusername, Long lmusic_code) {
         this.lusername = lusername;
         this.lmusic_code = lmusic_code;
+    }
+
+    public void setUsername(String username) {
+        this.lusername = username;
+    }
+
+    public void setMusicCode(Long music_code) {
+        this.lmusic_code = music_code;
     }
 }

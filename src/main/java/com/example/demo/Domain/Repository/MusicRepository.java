@@ -21,6 +21,6 @@ public interface MusicRepository extends JpaRepository<Music,Long> {
     List<Music> findSearchMusicArtist(@Param("keyWord")String keyWord);
 
 
-
-
+    @Query(value = "SELECT * FROM musicdb.music m WHERE music_code = :music_code",nativeQuery = true)
+    Music findByMusicCode(@Param("music_code")Long music_code);
 }

@@ -110,4 +110,4 @@ section {
                 }
 
                  th:nth-of-type(3) { display: none; }
-                 td:nth-of-type(3) { display: none; }
+                 td:nth-of-type(2) { display: none; }
