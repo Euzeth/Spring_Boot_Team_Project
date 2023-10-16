@@ -51,15 +51,21 @@ public class MylistService {
     }
 
     @Transactional(rollbackFor = SQLException.class)
-    public void removeMylistById(MylistId mylistId){
-        Optional<Mylist> mylistOptional = mylistRepository.findById(mylistId);
-        System.out.println(mylistOptional);
+    public void removeMylistById(List<Long> musicCodes, String username){
+        for (Long music_code : musicCodes) {
 
-        if (mylistOptional.isPresent()) {
-            Mylist mylist = mylistOptional.get();
-            mylistRepository.delete(mylist);
+            MylistId mylistId = new MylistId();
+            mylistId.setUsername(username);
+            mylistId.setMusicCode(music_code);
+
+            Optional<Mylist> mylistOptional = mylistRepository.findById(mylistId);
+            System.out.println(mylistOptional);
+
+            if (mylistOptional.isPresent()) {
+                Mylist mylist = mylistOptional.get();
+                mylistRepository.delete(mylist);
+            }
         }
-
     }
 
 }

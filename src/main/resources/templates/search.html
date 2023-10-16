@@ -304,6 +304,30 @@
                 });
             });
 
+            // "ADD" 버튼 클릭 시 이벤트 처리
+            var addButtons = document.querySelectorAll(".add_btn");
+            addButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var row = this.parentElement.parentElement;
+                    var musicCode = row.querySelector("td:nth-child(3)").textContent;
+                    addMusicCode(musicCode);
+                    // 선택된 music_code 배열과 username을 서버로 보내기
+                    axios.post('/search/addlist', {
+                        musicCodes: selectedMusicCodes,
+                        username: username
+                    })
+                    .then(function (response) {
+                        console.log("Mylist add Success");
+                        alert("음악이 Mylist에 담겼습니다!");
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.error("Mylist add fail: ", error);
+                    });
+                });
+            });
+
+
             function addMusicCode(musicCode) {
                 if (selectedMusicCodes.indexOf(musicCode) === -1) {
                     selectedMusicCodes.push(musicCode);

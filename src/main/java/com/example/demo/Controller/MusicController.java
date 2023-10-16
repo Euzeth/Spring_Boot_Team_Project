@@ -83,53 +83,6 @@ public class MusicController {
 	}
 
 
-	//view에 username정보 보내기
-	@GetMapping("/user/info")
-	@ResponseBody
-	public String userInfo(Authentication authentication){
-		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
-		String username = principalDetails.getUsername();
-		System.out.println("user:"+ username);
-		return username;
-	}
-
-
-
-	//Mylist에 담기
-	public static class MylistRequest {
-		private List<Long> musicCodes;
-		private String username;
-
-		public List<Long> getMusicCodes() {
-			return musicCodes;
-		}
-
-		public void setMusicCodes(List<Long> musicCodes) {
-			this.musicCodes = musicCodes;
-		}
-
-		public String getUsername() {
-			return username;
-		}
-
-		public void setUsername(String username) {
-			this.username = username;
-		}
-	}
-
-	@PostMapping("/search/addlist")
-	public String addMylist(@RequestBody MylistRequest request) {
-
-		List<Long> musicCodes = request.getMusicCodes();
-		String username = request.getUsername();
-		System.out.println(username+","+ musicCodes);
-
-		mylistService.addMylist(musicCodes, username);
-
-		return "search";
-	}
-
-
 
 	@GetMapping("/top100")
 	public void top100(MusicDto dto, Model model){
