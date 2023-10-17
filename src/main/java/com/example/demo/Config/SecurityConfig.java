@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/", "/index", "/member/**", "/song").permitAll()
 				.antMatchers("/play", "/nextplay", "/previousplay", "/pause", "/stop", "/time").permitAll()
 				.antMatchers("/qna/list","/notice/list","/notice/post", "/notice/read","/notice/update","/notice/delete","/qna/read","/qna/post","/qna/delete","/qna/update").permitAll()
-//				.anyRequest().authenticated()
+				.anyRequest().authenticated()
 			.and()
 
 			.formLogin()

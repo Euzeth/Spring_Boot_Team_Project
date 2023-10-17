@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 @Builder
 public class Member {
     @Id
+    @Column(length=255)
     private String username;
     private String password;
     private String role;
