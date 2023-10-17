@@ -25,12 +25,18 @@ public class MylistController {
 
     private String MylistRequest(HttpSession session) {
         String role = (String) session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null, redirecting to /member/login");
+            return "redirect:/member/login";
+        }
+
         if (role.equals("ROLE_USER") || role.equals("ROLE_MEMBER")) {
-            System.out.println("user's mylist");
+            System.out.println("mylist enter..");
             return "redirect:/mylist";
         }
         return "redirect:/member/login";
     }
+
     @GetMapping("/inmylist")
     public String mylist(HttpSession session, Authentication authentication){
         System.out.println("authentication: " + authentication);

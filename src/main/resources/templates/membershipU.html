@@ -22,11 +22,14 @@
     <header>
         <div class="top-header">
             <a href="/indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
-            <form action="" method="get">
+            <form action="/search" method="get">
                 <div class="search_box">
-                    <div class="search_btn" id="searchButton">SEARCH</div>
+                    <select name="type"  class="selectbox" >
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
                     <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
-                    <img id="searchIcon" src="/images/search.png" alt="" onclick="searchMusic()" >
+                    <button type="submit">🔍</button>
                 </div>
             </form>
             <ul>
@@ -100,7 +103,7 @@
                         <a href="">마이페이지</a>
                         <ul class="two--depth">
                             <li><a href="/member/mypage" />정보수정</a></li>
-                            <li><a href="">마이리스트</a></li>
+                            <li><a href="/inmylist">마이리스트</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -171,7 +174,7 @@
 <script>
     const subscribe1_el = document.querySelector('.subscribe_1');
     subscribe1_el.addEventListener('click', function () {
-        axios.get('http://localhost:8080/membership/request1')
+        axios.get('/membership/request1')
         .then(response=>{
             console.log("request1 Success");
             console.log(response);
@@ -180,12 +183,13 @@
             window.open(response.data.next_redirect_pc_url, "Payment","width=400,height=700");
         })
         .catch(error=>{});
+
     });
 
 
     const subscribe2_el = document.querySelector('.subscribe_2');
     subscribe2_el.addEventListener('click', function () {
-        axios.get('http://localhost:8080/membership/request2')
+        axios.get('/membership/request2')
         .then(response=>{
             console.log("request2 Success");
             console.log(response);

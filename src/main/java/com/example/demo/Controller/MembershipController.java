@@ -17,6 +17,8 @@ import com.example.demo.Domain.Service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +49,11 @@ public class MembershipController {
 
     private String MembershipRequest(HttpSession session) {
         String role = (String) session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null, redirecting to /member/login");
+            return "redirect:/member/login";
+        }
+
         if (role.equals("ROLE_USER")) {
             System.out.println("user's Membership");
             return "redirect:/membershipU";
@@ -54,7 +61,7 @@ public class MembershipController {
             System.out.println("member's Membership");
             return "redirect:/membershipM";
         }
-        return "indexlog";
+        return "redirect:/member/login"; // 기본적으로 /member/login으로 리다이렉트
     }
 
     @GetMapping("/membership")
@@ -76,15 +83,6 @@ public class MembershipController {
     @GetMapping("/membershipM")
     public void membership_M(Model model) {
         System.out.println("GET /membershipM");
-
-/*        log.info("GET /memberhsipM");
-        List<MembershipDto> list = membershipService.getMembershipList();
-
-        List<MembershipDto> membershipDtoList = list.stream().collect(Collectors.toList());
-
-        model.addAttribute("selectedAllList", membershipDtoList);
-
-        System.out.println(membershipDtoList);*/
     }
 
     // 유저 멤버십페이지에서 WM_1 결제
@@ -262,16 +260,24 @@ public class MembershipController {
     }
 
     // membership 회원 삭제 관련 매핑
-    @GetMapping("/membership/delete")
+ /*   @GetMapping("/membership/delete")
     public void membership_delete(@RequestParam String username) {
         log.info("GET /membership_M delete");
     }
-
+*/
     @PostMapping("/membership/delete")
-    public String membership_delete_post(@RequestParam String username) {
+    public ResponseEntity<String> membership_delete(@RequestParam String username) {
         log.info("POST /membership_M delete");
-        membershipService.removeMembership(username);
-        return "redirect:/membershipM";
+//        membershipService.removeMembership(username);
+//        return "redirect:/membershipM";
+        String message = membershipService.removeMembership(username);
+
+        if ((username + " 유저가 삭제되었습니다.").equals(message)) {
+            return ResponseEntity.status(HttpStatus.OK).body(message);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("찾으시는 USERNAME이 없습니다.");
+        }
     }
 
 

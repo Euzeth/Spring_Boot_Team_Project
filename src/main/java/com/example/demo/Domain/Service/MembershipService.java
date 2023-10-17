@@ -66,15 +66,16 @@ public class MembershipService {
     }
 
     @Transactional(rollbackFor = SQLException.class)
-    public void removeMembership(String username) {
+    public String removeMembership(String username) {
         Optional<Membership> membershipOptional = membershipRepository.findById(username);
         System.out.println(membershipOptional);
 
         if (membershipOptional.isPresent()) {
             Membership membership = membershipOptional.get();
             membershipRepository.delete(membership);
+            return username + " 유저가 삭제되었습니다.";
         } else {
-            System.out.println("찾으시는 USERNAME이 없습니다.");
+            return "찾으시는 USERNAME이 없습니다.";
         }
 
 

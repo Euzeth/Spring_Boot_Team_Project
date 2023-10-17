@@ -36,9 +36,6 @@ public class MusicController {
 	@Autowired
 	MusicService musicService;
 
-	@Autowired
-	MylistService mylistService;
-
 	@GetMapping("/song")
 	public void song() {
 		System.out.println("GET /song");
@@ -77,7 +74,6 @@ public class MusicController {
 		log.info("GET /search/like " +music_code + " " +type + " " + searchText);
 
 		musicService.likeMusic(music_code);
-
 
 		return "redirect:/search?type="+type+"&searchText="+searchText;
 	}
