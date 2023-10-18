@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>search</title>
 
     <!--  Google Icon  -->
     <link rel="stylesheet"
@@ -12,26 +12,25 @@
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <link rel="stylesheet" type="text/css" href="/css/mylist.css">
+    <link rel="stylesheet" type="text/css" href="/css/top100.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
-
     <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="icon" href="/images/favicon/favicon.ico"/>
 </head>
 <body>
 <div class="wrapper">
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/main" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/main"><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
-                    <select name="type"  class="selectbox" >
+                    <select name="type" class="selectbox">
                         <option value="title" selected>TITLE</option>
                         <option value="artist">ARTIST</option>
                     </select>
-                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!">
                     <button type="submit">🔍</button>
                 </div>
             </form>
@@ -85,7 +84,7 @@
                     <li>
                         <a href="">수박매거진</a>
                         <ul class="two--depth">
-                            <li><a href="./magazine.html">오늘의매거진</a></li>
+                            <li><a href="">오늘의매거진</a></li>
                             <li><a href="">완결매거진</a></li>
                         </ul>
                     </li>
@@ -104,29 +103,30 @@
                     <li>
                         <a href="">마이페이지</a>
                         <ul class="two--depth">
-                            <li><a href="/member/mypage">정보수정</a></li>
+                            <li><a href="/member/mypage"/>정보수정</a></li>
                             <li><a href="/inmylist">마이리스트</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
+
     </nav>
     <div class="header_line"></div>
     <main>
         <section>
             <div class="sec_1">
                 <!-- title -->
-                <div id="mylist">MY LIST</div>
+                <div id="top100">TOP 100 LIST</div>
                 <div style="width:100%">
-                    <div class="mylist-header">
+                    <div class="top100-header">
                         <div class="button">
-                            <a    type="button">선택재생</a>
-                            <a    type="button" id="selectDelete">선택삭제</a>
+                            <a type="button">선택재생</a>
+                            <a type="button" id="selectAdd">선택담기</a>
                         </div>
                     </div>
 
-                    <div class="mylist-body">
+                    <div class="top100-body">
                         <!-- body -->
                         <table>
                             <thead>
@@ -137,21 +137,32 @@
                                 <th class="title_2">TITLE</th>
                                 <th class="title_1">ARTIST</th>
                                 <th class="title_1">LIKE</th>
+                                <th class="title_1">ADD</th>
+                                <th class="title_1">COUNT</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- SEARCH LIST ITEMS -->
                             <th:block>
-                                <tr th:each="myList, iterationStat  : ${MyList}">
+                                <tr th:each="dto, iterationStat  : ${Top100List}">
                                     <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
-                                    <td th:text="${myList.music.music_code}"></td>
-                                    <td th:text="${myList.music.title}"></td>
-                                    <td th:text="${myList.music.artist}"></td>
-                                    <td><a th:href="@{/mylist/like(music_code=${myList.music.music_code})}"
+                                    <td th:text="${dto.music_code}"></td>
+                                    <td><a th:text="${dto.title}"> </a></td>
+                                    <td th:text="${dto.artist}"></td>
+                                    <td>
+                                        <a th:href="@{/Top100/like(music_code=${dto.music_code})}"
                                            class="like_btn">
-                                        <span class="material-symbols-outlined">favorite</span><span
-                                            th:text="${myList.music.mlike}" class="likeno"></span></a></td>
+                                            <span class="material-symbols-outlined">favorite</span><span
+                                                th:text="${dto.mlike}" class="likeno"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="add_btn">
+                                            <span class="material-symbols-outlined">add</span></a>
+                                    </td>
+                                    <td th:text="${dto.count}"></td>
+
+
                                 </tr>
                             </th:block>
 
@@ -163,8 +174,6 @@
             </div>
         </section>
         <img class="top_btn" src="/images/topBtn.png">
-
-
     </main>
     <footer>
         <div class="footer_line"></div>
@@ -189,7 +198,6 @@
         </div>
 
     </footer>
-
 </div>
 
 <!-- axios -->
@@ -198,30 +206,30 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+    //Top버튼 스크립트
+        const mTopBtn = document.querySelector(".top_btn");
 
-    const mTopBtn = document.querySelector(".top_btn");
+        window.addEventListener("scroll", () => {
+          let scVal = window.scrollY;
 
-    window.addEventListener("scroll", () => {
-      let scVal = window.scrollY;
-
-      if (scVal === 0) {
-        mTopBtn.style.opacity = 0;
-      } else {
-        mTopBtn.style.opacity = 1;
-        mTopBtn.classList.remove("active");
-      }
-    });
-
-
-    mTopBtn.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
+          if (scVal === 0) {
+            mTopBtn.style.opacity = 0;
+          } else {
+            mTopBtn.style.opacity = 1;
+            mTopBtn.classList.remove("active");
+          }
+        });
 
 
-     //체크박스로 체크한 곡 삭제하기
+        mTopBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        });
+
+
+    //체크박스로 체크한 곡 mylist에 선택 담기
         window.onload = function() {
             var allCheck = document.getElementById("allCheck");
             var rowCheckboxes = document.getElementsByName("rowCheck");
@@ -270,25 +278,49 @@
                 });
             }
 
-            // "선택삭제" 버튼 클릭 시 이벤트 처리
-            document.querySelector("#selectDelete").addEventListener("click", function() {
+            // "선택담기" 버튼 클릭 시 이벤트 처리
+            document.querySelector("#selectAdd").addEventListener("click", function() {
 
                 // 선택된 music_code 배열과 username을 서버로 보내기
-                axios.post('/mylist/delete', {
+                axios.post('/search/addlist', {
                     musicCodes: selectedMusicCodes,
                     username: username
                 })
                 .then(function (response) {
-                    console.log("Mylist delete Success");
-                    alert("음악이 Mylist에서 삭제되었습니다!")
+                    console.log("Mylist add Success");
+                    alert("음악이 Mylist에 담겼습니다!")
                     location.reload();
                 })
                 .catch(function (error) {
                     console.log(username);
                     console.log(selectedMusicCodes);
-                    console.error("Mylist delete fail.. : ", error);
+                    console.error("Mylist add fail.. : ", error);
                 });
             });
+
+            // "ADD" 버튼 클릭 시 이벤트 처리
+            var addButtons = document.querySelectorAll(".add_btn");
+            addButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var row = this.parentElement.parentElement;
+                    var musicCode = row.querySelector("td:nth-child(3)").textContent;
+                    addMusicCode(musicCode);
+                    // 선택된 music_code 배열과 username을 서버로 보내기
+                    axios.post('/search/addlist', {
+                        musicCodes: selectedMusicCodes,
+                        username: username
+                    })
+                    .then(function (response) {
+                        console.log("Mylist add Success");
+                        alert("음악이 Mylist에 담겼습니다!");
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.error("Mylist add fail: ", error);
+                    });
+                });
+            });
+
 
             function addMusicCode(musicCode) {
                 if (selectedMusicCodes.indexOf(musicCode) === -1) {
@@ -303,6 +335,10 @@
                 }
             }
         }
+
+
+
+
 
 
 

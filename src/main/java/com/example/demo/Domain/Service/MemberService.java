@@ -1,12 +1,12 @@
 package com.example.demo.Domain.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.Domain.Dto.MemberDto;
 import com.example.demo.Domain.Entity.Member;
 import com.example.demo.Domain.Repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,15 +28,13 @@ public class MemberService{
 
 	@Autowired
 	private MemberRepository memberRepository;
-	
-	public List<MemberDto> getAllMember(){
-		return null;
+
+	public List<Member> getAllMember(){
+		return memberRepository.findAll();
 	}
-	
-	public MemberDto searchMember(String id){
-		return null;
-	}
-	
+
+	public Optional<Member> searchMember(String username){ return memberRepository.findById(username);}
+
 	@Transactional(rollbackFor = Exception.class)
 	public boolean addMember(MemberDto dto, Model model, HttpServletRequest request) {
 		if(!dto.getPassword().equals(dto.getRepassword()))
@@ -56,7 +54,7 @@ public class MemberService{
 				dto.setPassword( passwordEncoder.encode(dto.getPassword()) );
 
 				Member member = MemberDto.dtoToEntity(dto);
-				System.out.println(member);
+
 				memberRepository.save(member);
 
 				return true;
@@ -72,24 +70,74 @@ public class MemberService{
 		}
 
 	}
-	
-	@Transactional(rollbackFor = Exception.class)
-	public void modifyMember(MemberDto dto) {
 
+	@Transactional(rollbackFor = Exception.class)
+	public boolean modifyMember(MemberDto dto) {
+		// 이전 회원 정보 가져오기
+		Member oldMember = memberRepository.findById(dto.getUsername()).orElse(null);
+		System.out.println("DTO : " +dto);
+		if (oldMember != null) {
+			// 새로운 정보로 업데이트
+			oldMember.setPassword(passwordEncoder.encode(dto.getPassword()));
+			oldMember.setName(dto.getName());
+			oldMember.setZipcode(dto.getZipcode());
+			oldMember.setAddr1(dto.getAddr1());
+			oldMember.setAddr2(dto.getAddr2());
+			oldMember.setPhone(dto.getPhone());
+			oldMember.setEmail(dto.getEmail());
+			oldMember.setRole("ROLE_USER");
+
+			// 회원 정보 저장
+			Member updatedMember = memberRepository.save(oldMember);
+
+			return updatedMember != null;
+		} else {
+			// 기존 회원 정보가 없을 경우 예외 처리 또는 오류 처리
+			return false;
+		}
 	}
-	
+
 	@Transactional(rollbackFor = Exception.class)
 	public void removeMember(String id) {
-
+		memberRepository.deleteById(id);
 	}
-	
-	public String getMemberName(String id) {
 
-        return null; //
-    }
-	
-	public boolean idcheck(String id) throws Exception {
+	public Member getMemberName(String username) {
+		return memberRepository.findById(username).orElse(null);
+	}
 
+	public MemberDto getUpdatedUserInfo(String username) {
+		Member member = memberRepository.findById(username).orElse(null);
+		if (member != null) {
+			// Member를 MemberDto로 변환하여 반환
+			return convertMemberToDto(member);
+		}
+		return null;
+	}
+
+	public MemberDto convertMemberToDto(Member member) {
+		MemberDto memberDto = new MemberDto();
+		memberDto.setUsername(member.getUsername());
+		memberDto.setName(member.getName());
+		memberDto.setZipcode(member.getZipcode());
+		memberDto.setAddr1(member.getAddr1());
+		memberDto.setAddr2(member.getAddr2());
+		memberDto.setPhone(member.getPhone());
+		memberDto.setEmail(member.getEmail());
+		memberDto.setRole("ROLE_USER");
+
+		System.out.println("memberDto : " + memberDto);
+
+		return memberDto;
+	}
+
+	public boolean idcheck(String username) throws Exception {
+		Member dbMember = memberRepository.findById(username).orElse(null);
+		if (dbMember == null) {
+			System.out.println("[INFO] 사용가능한 아이디입니다.");
+			return true;
+		}
+		System.out.println("[ERROR] 이미 사용중인 아이디입니다.");
 		return false;
 	}
 

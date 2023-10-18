@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -22,7 +22,7 @@
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/index" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/main" ><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
                     <select name="type"  class="selectbox" >
@@ -60,8 +60,7 @@
                     <li>
                         <a href="">수박차트</a>
                         <ul class="two--depth">
-                            <li><a href="">국내TOP100</a></li>
-                            <li><a href="">해외TOP100</a></li>
+                            <li><a href="/Top100">TOP100</a></li>
                             <li><a href="">최신음악</a></li>
                             <li><a href="">장르음악</a></li>
                         </ul>
@@ -95,8 +94,8 @@
                     <li>
                         <a href="">공지사항</a>
                         <ul class="two--depth">
-                            <li><a href="/member/login">공지사항</a></li>
-                            <li><a href="/member/login">QnA</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="/qna/list">QnA</a></li>
                             <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
@@ -154,7 +153,7 @@
             <article>멤버십 이벤트<br><br />
                 <span>워터멜론을 구독해보세요!</span>
                 <span>첫 구독 1개월 무료</span>
-                <div><a href="">구독하기</a></div>
+                <div><a href="/membership">구독하기</a></div>
             </article>
             <aside>
                 <div class="top10">
@@ -164,63 +163,24 @@
                 </div> <br>
                 <div class="table-wrapper">
                     <table>
-                        <tr>
-                            <th>No.</th>
-                            <th>TITLE</th>
-                            <th>ARTIST</th>
-                        </tr>
-                        <tr>
-                            <td class="no">1 -</td>
-                            <td class="title">I AM</td>
-                            <td class="artist">IVE(아이브)</td>
-                        </tr>
-                        <tr>
-                            <td class="id">2 -</td>
-                            <td class="title">Kitsch</td>
-                            <td class="artist">IVE(아이브)</td>
-                        </tr>
-                        <tr>
-                            <td class="id">3 -</td>
-                            <td class="title">꽃</td>
-                            <td class="artist">지수(JISOO)</td>
-                        </tr>
-                        <tr>
-                            <td class="no">4 -</td>
-                            <td class="title">Ditto</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">5 -</td>
-                            <td class="title">Hype boy</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">6 -</td>
-                            <td class="title">OMG</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">7 ▲1</td>
-                            <td class="title">Teddy Bear</td>
-                            <td class="artist">STAYC</td>
-                        </tr>
-                        <tr>
-                            <td class="no">8 ▼1</td>
-                            <td class="title">사람 pt.2(feat. ...)</td>
-                            <td class="artist">Agust D</td>
-                        </tr>
-                        <tr>
-                            <td class="no">9 ▲1</td>
-                            <td class="title">Like Crazy</td>
-                            <td class="artist">지민</td>
-                        </tr>
-                        <tr>
-                            <td class="no">10 -</td>
-                            <td class="title">사랑은 늘 도망가</td>
-                            <td class="artist">임영웅</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th style="width:40px; text-align:left;">No.</th>
+                                <th>TITLE</th>
+                                <th>ARTIST</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block>
+                                <tr th:each="dto, iterationStat  : ${Top10List}">
+                                    <td th:text="${iterationStat.count}"></td>
+                                    <td th:text="${dto.title}"></td>
+                                    <td th:text="${dto.artist}"></td>
+                                </tr>
+                            </th:block>
+                        </tbody>
                     </table>
-                    <div><a href="">더보기</a></div>
+                    <div><a href="/Top100">더보기</a></div>
                 </div>
             </aside>
         </section>
@@ -270,72 +230,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
         integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-<script defer>
-
-    // 검색 아이콘 클릭 시 검색 결과 페이지로 이동
-   document.getElementById('searchIcon').addEventListener('click', function () {
-       const searchText = document.getElementById('searchInput').value;
-       console.log("searchButton",searchText)
-       searchMusic();
-   });
-
-   // input 요소에서 Enter 키를 누르면 검색 결과 페이지로 이동
-    document.getElementById('searchInput').addEventListener('keydown', function (event) {
-       if (event.keyCode === 13) {
-           searchMusic();
-       }
-   });
-
-
-    function searchMusic() {
-           const searchText = document.getElementById('searchInput').value;
-           const projectPath = '${pageContext.request.contextPath}';
-           const ServerPort = '${pageContext.request.serverPort}';
-
-           const xhr = new XMLHttpRequest();
-           xhr.open('GET', "http://localhost:" + ServerPort + projectPath + "/music/search.do?searchText=" + encodeURIComponent(searchText), false); // Set the third parameter to false for synchronous request
-           xhr.send();
-
-           if (xhr.status === 200) {
-               const list = JSON.parse(xhr.responseText);
-               const table_el = document.getElementById('searchTable');
-               table_el.innerHTML = '<tr><th>No</th><th>Name</th><th>Artist</th><th>URL</th></tr>';
-
-               list.forEach((dto, index) => {
-                   const row = document.createElement('tr');
-                   const noCell = document.createElement('td');
-                   noCell.innerText = index + 1;
-                   const nameCell = document.createElement('td');
-                   nameCell.innerText = dto.name;
-                   const artistCell = document.createElement('td');
-                   artistCell.innerText = dto.artist;
-                   const urlCell = document.createElement('td');
-                   const urlLink = document.createElement('a');
-                   urlLink.href = dto.url;
-                   urlLink.innerText = dto.url;
-                   urlLink.target = '_blank';
-                   urlCell.appendChild(urlLink);
-
-                   row.appendChild(noCell);
-                   row.appendChild(nameCell);
-                   row.appendChild(artistCell);
-                   row.appendChild(urlCell);
-
-                   table_el.appendChild(row);
-
-                   window.location.href = projectPath + "/music/search.do?searchText=" + encodeURIComponent(searchText);
-
-                   return false;
-               });
-           } else {
-               alert("fail..!");
-           }
-       }
-
-</script>
-
 
 
 </body>

@@ -1,12 +1,14 @@
 package com.example.demo.Config;
 
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariDataSource;
@@ -42,11 +44,17 @@ public HikariDataSource dataSource()
 	return dataSource;
 }
 
-	
-//    @Bean
-//    public DataSourceTransactionManager transactionManager() {
-//        return new DataSourceTransactionManager(dataSource());
-//    }
+
+	private HikariDataSource dataSource;
+
+
+	@Bean
+	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManagerFactory);
+		transactionManager.setDataSource(dataSource);
+		return transactionManager;
+	}
 	
 	
 }

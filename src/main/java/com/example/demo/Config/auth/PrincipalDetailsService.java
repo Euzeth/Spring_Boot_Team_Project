@@ -29,11 +29,6 @@ public class PrincipalDetailsService implements UserDetailsService{
 		dto.setUsername(user.get().getUsername());
 		dto.setPassword(user.get().getPassword());
 		dto.setRole(user.get().getRole());
-		dto.setName(user.get().getName());
-		dto.setPhone(user.get().getPhone());
-		dto.setAddr1(user.get().getAddr1());
-		dto.setAddr2(user.get().getAddr2());
-		dto.setZipcode(user.get().getZipcode());
 
 		PrincipalDetails principalDetails = new PrincipalDetails();
 		principalDetails.setMember(dto);

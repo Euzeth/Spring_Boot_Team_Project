@@ -1,6 +1,6 @@
 /* Section1 */
 
-section.section1{
+.section1{
     display: flex;
     margin: 20px auto;
 }
@@ -230,14 +230,14 @@ section.section1{
 th,
 td {
     padding: 2px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid;
 }
 
 
 th {
     background-color: #f2f2f2;
-    width: 90px;
+    width: 125px;
 }
 
 .section2>article {

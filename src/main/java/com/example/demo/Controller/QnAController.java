@@ -41,7 +41,7 @@ public class QnAController {
     //-------------------
     //-------------------
     @GetMapping("/list")
-    public String list(Integer pageNo,String type, String keyword, Model model, HttpServletResponse response)
+    public String list(Integer pageNo,String type, String keyword, Model model, HttpServletResponse response, HttpSession session)
     {
         log.info("GET /qna/list... " + pageNo + " " + type +" " + keyword);
 
@@ -87,6 +87,19 @@ public class QnAController {
         //--------------------------------
         Cookie init = new Cookie("isRead","false");
         response.addCookie(init);
+
+
+        String role = (String)session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null");
+            return "qna/list";
+        }
+        if(role.equals("ROLE_USER")){
+            model.addAttribute("role", "USER");
+        } else if(role.equals("ROLE_MEMBER")){
+            model.addAttribute("role", "MEMBER");
+        }
+        System.out.println(role);
 
 
         return "qna/list";

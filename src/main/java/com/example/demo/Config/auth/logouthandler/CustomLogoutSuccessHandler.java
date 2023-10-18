@@ -24,7 +24,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 		String provider = principalDetails.getMember().getProvider();
-		if(StringUtils.contains(provider,"kakao"))
+		if(provider!=null && StringUtils.contains(provider,"kakao"))
 		{
 			System.out.println("GET /th/kakao/logoutWithKakao");
 			//URL
@@ -32,14 +32,14 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 			response.sendRedirect(url);
 			return ;
 		}
-		else if(StringUtils.contains(provider,"google"))
+		else if(provider!=null && StringUtils.contains(provider,"google"))
 		{
 			String url = "https://accounts.google.com/Logout";
 			response.sendRedirect(url);
 			return;
 
 		}
-		else if(StringUtils.contains(provider,"naver"))
+		else if(provider!=null && StringUtils.contains(provider,"naver"))
 		{
 			String url = "http://nid.naver.com/nidlogin.logout";
 			response.sendRedirect(url);

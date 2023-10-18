@@ -5,7 +5,7 @@ li{
     .login {
         width: 410px;
         display: block;
-        height: 470px;
+        height: 550px;
         padding-top: 50px;
         margin: 0 auto;
     }
@@ -20,7 +20,7 @@ li{
     .login>form ul {
         padding: 40px 0 10px;
     }
-    
+
     .login>form>ul>.log_chk{
         display: flex;
         justify-content: space-between;
@@ -38,7 +38,7 @@ li{
         box-sizing: border-box;
         text-indent: 16px;
         color: black;
-        font-family: 'NanumSquareAceb'; 
+        font-family: 'NanumSquareAceb';
     }
 
     .login>form ul li input::-webkit-input-placeholder {
@@ -79,24 +79,24 @@ li{
         color: #fff
     }
 
-    .login div {
-        padding: 0 0 45px;
+    .login .loginmenu {
+        padding: 0 0 5px;
     }
 
-    .login div ul {
+    .login .loginmenu ul {
         display: flex;
         justify-content: space-between;
     }
 
-    .login div ul li {
+    .login .loginmenu ul li {
         position: relative;
     }
-   
-    .login div ul li:nth-child(2) {
+
+    .login .loginmenu ul li:nth-child(2) {
         padding-right: 150px;
     }
 
-    .login div ul li:nth-child(2)::after {
+    .login .loginmenu ul li:nth-child(2)::after {
         content: "";
         position: absolute;
         left: -10px;
@@ -107,7 +107,7 @@ li{
         transform: rotate(25deg);
     }
 
-    .login div ul li a {
+    .login .loginmenu ul li a {
         font-size: 14px;
         color: #111;
     }
@@ -117,4 +117,24 @@ li{
         font-size: 14px;
         color: #666;
         border-bottom: 1px solid#666;
+    }
+
+    .google_icon{
+        width : 55px;
+        height : 55px;
+    }
+
+    .oauth_icon{
+        display:flex;
+        justify-content:space-around;
+        align-items : center;
+    }
+
+    .oauth_icon img{
+        display:block;
+        width : 45px;
+        height : 45px;
+        margin : 5px;
+        border : 50%;
+        margin-right:15px;
     }

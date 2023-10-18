@@ -37,6 +37,7 @@ public class NoticeController {
 
     //-------------------
     //-------------------
+
     @GetMapping("/list")
     public String list(Integer pageNo, String type, String keyword, Model model, HttpServletResponse response, HttpSession session){
         log.info("GET /notice/list no,type,keyword : " + pageNo+"|"+type+"|"+keyword);
@@ -83,6 +84,10 @@ public class NoticeController {
         response.addCookie(init);
 
         String role = (String)session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null");
+            return "notice/list";
+        }
         if(role.equals("ROLE_USER")){
             model.addAttribute("role", "USER");
         } else if(role.equals("ROLE_MEMBER")){
@@ -99,22 +104,9 @@ public class NoticeController {
     // POST
     //-------------------
 
-    private String PostRequest(HttpSession session) {
-        String role = (String) session.getAttribute("role");
-        if (role.equals("ROLE_USER")) {
-            System.out.println("post impossible");
-            return "notice/list";
-        } else if (role.equals("ROLE_MEMBER")) {
-            System.out.println("post possible");
-            return "notice/post";
-        }
-        return "redirect:/notice/list";
-    }
-
     @GetMapping("/post")
-    public String post_get(HttpSession session){
+    public void post_get(){
         log.info("GET /notice/post");
-        return PostRequest(session);
     }
 
     @PostMapping("/post")

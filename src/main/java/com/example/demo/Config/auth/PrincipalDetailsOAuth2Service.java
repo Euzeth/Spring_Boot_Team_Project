@@ -77,22 +77,36 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         //OAuth2UserInfo 확인
         String provider  = oAuth2UserInfo.getProvider();
         String providerId = oAuth2UserInfo.getProviderId();
-        String username = provider+"_"+providerId + "@example.com";    //  /
+        String username = provider+"_"+providerId ;    //  /
         String password = passwordEncoder.encode("1234");
         String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
+        String name = oAuth2UserInfo.getName();
+        String addr1 = oAuth2UserInfo.getAddr1();
+        String addr2 = oAuth2UserInfo.getAddr2();
+        String phone = oAuth2UserInfo.getPhone();
+        String zipcode = oAuth2UserInfo.getZipcode();
 
         //DB 저장
+
         Optional<Member> optional =   memberRepository.findById(username);
         if(optional.isEmpty()) {
             Member member = Member.builder()
                     .username(username)
                     .password(password)
                     .role(role)
+                    .name(name)
+                    .addr1(addr1)
+                    .addr2(addr2)
+                    .phone(phone)
+                    .zipcode(zipcode)
+                    .email(email)
                     .provider(provider)
                     .providerId(providerId)
                     .build();
+            System.out.println("Member : " + member);
             memberRepository.save(member);
+
             System.out.println("[OAUTH] "+provider +" 최초 로그인 요청!");
         }else{
             System.out.println("[OAUTH] 기존 계정"+optional.get().getUsername() +"으로 로그인!");
@@ -106,6 +120,12 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         dto.setUsername(username);
         dto.setPassword(password);
         dto.setRole(role);
+        dto.setName(name);
+        dto.setAddr1(addr1);
+        dto.setAddr2(addr2);
+        dto.setPhone(phone);
+        dto.setZipcode(zipcode);
+        dto.setEmail(email);
         //OAUTH2 LOGOUT
         dto.setProvider(provider);
         dto.setProviderId(providerId);
@@ -132,6 +152,7 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         dto.setAddr1(member.get().getAddr1());
         dto.setAddr2(member.get().getAddr2());
         dto.setName(member.get().getName());
+        dto.setEmail(member.get().getEmail());
 
         PrincipalDetails principalDetails = new PrincipalDetails();
         principalDetails.setMember(dto);

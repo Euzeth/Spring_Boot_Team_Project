@@ -29,8 +29,15 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 		return attributes;
 	}
 
-
-
+	@Override
+	public String getName() {
+		return member.getName();
+	}
+	public String getAddr1() {return member.getAddr1();}
+	public String getAddr2() {return member.getAddr2();}
+	public String getPhone() {return member.getPhone();}
+	public String getEmail() {return member.getEmail();}
+	public String getZipcode(){return member.getZipcode();}
 	//OAUTH2 ----------------------------------------------------------------
 
 	@Override
@@ -47,16 +54,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
 		return collection;
 	}
-	public String getName() {
-		return member.getName();
-	}
-
-	public String getPhone() {return member.getPhone();}
-
-	public String getZipcode() {return member.getZipcode();}
-
-	public String getAddr1() {return member.getAddr1();}
-	public String getAddr2() {return member.getAddr1();}
 
 	@Override
 	public String getPassword() {

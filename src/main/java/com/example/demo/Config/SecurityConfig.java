@@ -17,12 +17,24 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+	@Autowired
+	private DataSource dataSource;
+
+	@Autowired
+	private PrincipalDetailsOAuth2Service principalDetailsOAuth2Service;
+
+	@Autowired
+	private PrincipalDetailsService principalDetailsService;
 
 	protected void configure(HttpSecurity http) throws Exception{
 
@@ -31,42 +43,64 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 				.antMatchers("/css/**", "/js/**", "/images/**", "/font/**").permitAll()
-				.antMatchers("/", "/index", "/member/**", "/song","/search","/membership").permitAll()
+				.antMatchers("/", "/index", "/member/**", "/song","/search","/membership","/main","/inmylist","/Top100","/indexlog").permitAll()
 				.antMatchers("/qna/list","/notice/list","/notice/post", "/notice/read","/notice/update","/notice/delete","/qna/read","/qna/post","/qna/delete","/qna/update").permitAll()
-//				.anyRequest().authenticated()
+				.anyRequest().authenticated()
 			.and()
 
-			.formLogin()
-			.loginPage("/member/login")
-			.successHandler(new CustomLoginSuccessHandler())
-			.failureHandler(new CustomAuthenticationFailureHandler())
+				.formLogin()
+				.loginPage("/member/login")
+				.successHandler(new CustomLoginSuccessHandler())
+				.failureHandler(new CustomAuthenticationFailureHandler())
 
-			.and()
-			.logout()
-			.logoutUrl("/logout")
-			.permitAll()
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.permitAll()
 				//.addLogoutHandler(new CustomLogoutHandler())
 				.addLogoutHandler(new OAuthLogoutHandler())
-			.logoutSuccessHandler(new CustomLogoutSuccessHandler())
+				.logoutSuccessHandler(new CustomLogoutSuccessHandler())
 
-			.and()
-			.exceptionHandling()
-			.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-			.accessDeniedHandler(new CustomAccessDeniedHandler());
+				.and()
+				.exceptionHandling()
+				.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+				.accessDeniedHandler(new CustomAccessDeniedHandler())
+
+				//REMEMBER ME
+				.and()
+				.rememberMe()
+				.rememberMeParameter("remember-me")
+				.tokenValiditySeconds(60*60)
+				.alwaysRemember(false)
+				.tokenRepository(tokenRepository())
+				.userDetailsService(principalDetailsOAuth2Service)
+
+				.and()
+				//OAUTH2
+				.oauth2Login()
+				.userInfoEndpoint()
+				.userService(principalDetailsOAuth2Service);
 
 	}
 
-	@Autowired
-	private PrincipalDetailsService principalDetailsService;
+
 
 	protected void configure(AuthenticationManagerBuilder auth)throws Exception{
-		auth.userDetailsService(principalDetailsService)
-			.passwordEncoder(passwordEncoder());
+		auth.userDetailsService(principalDetailsOAuth2Service)
+				.passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public PersistentTokenRepository tokenRepository() {
+		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+		repo.setDataSource(dataSource);
+		//repo.setCreateTableOnStartup(true);
+		return repo;
 	}
 
 }

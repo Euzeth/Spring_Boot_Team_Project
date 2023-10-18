@@ -1,6 +1,8 @@
 package com.example.demo.Controller.member;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,8 @@ import javax.validation.Valid;
 
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MemberDto;
+import com.example.demo.Domain.Entity.Member;
+import com.example.demo.Domain.Repository.MemberRepository;
 import com.example.demo.Domain.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -104,45 +109,43 @@ public class MemberController {
 	public void selectall(Model model) {
 		log.info("GET /member/selectall");
 	}
-	
+
 	@GetMapping("/search")
-	public void search(@RequestParam String id) {
-        log.info("GET /member/search");
-        memberService.searchMember(id);
-        
-    }
-	
+	public @ResponseBody void search(@RequestParam String username) {
+		log.info("GET /member/search");
+	}
+
 	@PostMapping("/search")
-	public String search_post(@RequestParam String id, Model model) {
-		log.info("POST /member/search");
-		return "";
+	public @ResponseBody List<Member> searchPost(@RequestParam(value = "username", required = true) String username, Model model) {
+		log.info("POST /member/search + " + username);
+		List<Member> members = new ArrayList<>();
+		members.add(memberService.searchMember(username).orElse(null));
+		return members;
 	}
 
 	@GetMapping("/update")
-	public void update(MemberDto dto) {
-		log.info("GET /member/update");
-		memberService.modifyMember(dto);
+	public void update(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, MemberDto dto) {
+		log.info("GET /member/update" + principalDetails);
+		model.addAttribute("principalDetails", principalDetails);
 	}
-	
+
 	@PostMapping("/update")
 	public String update(MemberDto dto, Authentication authentication) {
-		log.info("POST /member/update");
-		memberService.modifyMember(dto);
-		
-		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		log.info("POST /member/update + " + dto);
 
-		
+		memberService.modifyMember(dto);
+
 		return "redirect:user";
 	}
-	
+
 	@GetMapping("/remove")
-	public void remove(@RequestParam String id) {
+	public void remove(String id) {
 		log.info("GET /member/delete");
 		memberService.removeMember(id);
 	}
-	
+
 	@PostMapping("/remove")
-	public String remove1(@RequestParam String id) {
+	public String remove1(String id) {
 		log.info("POST /member/delete");
 		memberService.removeMember(id);
 		return "redirect:member";
@@ -151,6 +154,8 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 		log.info("GET /login");
+
+
 	}
 
 	@GetMapping("/join")
@@ -181,11 +186,9 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Authentication authentication, Model model) {
 		System.out.println("authentication : " + authentication);
-		
-		
 		return MypageRequest(session);
-	}	
-		
+	}
+
 
 	@PostMapping("/mypage")
 	public String mypage(HttpSession session) {
@@ -194,10 +197,10 @@ public class MemberController {
 
 	private String MypageRequest(HttpSession session) {
 		String role = (String) session.getAttribute("role");
-		if (role.equals("ROLE_USER")) {
+		if ("ROLE_USER".equals(role)) {
 			System.out.println("user's mypage");
 			return "redirect:/member/user";
-		} else if (role.equals("ROLE_MEMBER")) {
+		} else if ("ROLE_MEMBER".equals(role)) {
 			System.out.println("member's mypage");
 			return "redirect:/member/member";
 		}
@@ -205,41 +208,44 @@ public class MemberController {
 	}
 
 	@GetMapping("/user")
-	public void user() {
+	public String user(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)
+	{
 		log.info("GET /user");
+		model.addAttribute("principalDetails", principalDetails);
+
+		String username = principalDetails.getUsername();
+		MemberDto updatedUserInfo = memberService.getUpdatedUserInfo(username);
+		System.out.println("Updated User Info: " + updatedUserInfo);
+
+		if (updatedUserInfo != null) {
+			model.addAttribute("updatedUserInfo", updatedUserInfo);
+		}
+		return "/member/user";
 	}
 
 	@GetMapping("/member")
-	public void	 member(Model model) {
+	public void member(Model model) {
 		log.info("GET /member");
-		List<MemberDto> list = memberService.getAllMember();
-		
-		List<MemberDto> userDtoList = list.stream()
-	            .filter(dto -> "ROLE_USER".equals(dto.getRole()))
-	            .collect(Collectors.toList());
+		List<Member> list = memberService.getAllMember();
+		List<Member> userDtoList = list.stream()
+				.filter(dto -> "ROLE_USER".equals(dto.getRole()))
+				.collect(Collectors.toList());
 
 		userDtoList.forEach((dto) -> {
-	        System.out.println(dto);
-	    });
+			System.out.println(dto);
+		});
+		model.addAttribute("list", userDtoList);
 
-	    model.addAttribute("list", userDtoList);
 	}
 
 	@GetMapping("/checkDuplicate")
-	public ResponseEntity<String> checkDuplicate(@RequestParam("id") String id) {
-	    try {
-	        boolean duplicate_id = memberService.idcheck(id);
-	        return ResponseEntity.ok(String.valueOf(duplicate_id));
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("중복 확인 중에 오류가 발생했습니다.");
-	    }
+	public ResponseEntity<String> checkDuplicate(@RequestParam("username") String username) {
+		try {
+			boolean duplicate_id = memberService.idcheck(username);
+			return ResponseEntity.ok(String.valueOf(duplicate_id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("중복 확인 중에 오류가 발생했습니다." + e.getMessage());
+		}
 	}
 
-
-
-
-
-
-
-	
 }

@@ -231,14 +231,14 @@
 th,
 td {
     padding: 2px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid;
 }
 
 
 th {
     background-color: #f2f2f2;
-    width: 90px;
+    width: 125px;
 }
 
 .section2>article {
