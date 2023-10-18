@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="">
 <head>
     <meta charset="UTF-8">
-    <title>search</title>
+    <title>Title</title>
 
     <!--  Google Icon  -->
     <link rel="stylesheet"
@@ -12,30 +12,31 @@
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <link rel="stylesheet" type="text/css" href="/css/search.css">
+    <link rel="stylesheet" type="text/css" href="/css/mylist.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
+
     <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon.ico"/>
+    <link rel="icon" href="/images/favicon/favicon.ico" />
 </head>
 <body>
 <div class="wrapper">
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/indexlog"><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/index" ><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
-                    <select name="type" class="selectbox">
+                    <select name="type"  class="selectbox" >
                         <option value="title" selected>TITLE</option>
                         <option value="artist">ARTIST</option>
                     </select>
-                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!">
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
                     <button type="submit">🔍</button>
                 </div>
             </form>
             <ul>
-                <li><a href="/membership"
+                <li><a href="/member/login"
                        style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
                         src="/images/add.png" alt=""> 멤버십가입</a></li>
                 <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
@@ -85,7 +86,7 @@
                     <li>
                         <a href="">수박매거진</a>
                         <ul class="two--depth">
-                            <li><a href="">오늘의매거진</a></li>
+                            <li><a href="./magazine.html">오늘의매거진</a></li>
                             <li><a href="">완결매거진</a></li>
                         </ul>
                     </li>
@@ -97,42 +98,36 @@
                         <a href="">공지사항</a>
                         <ul class="two--depth">
                             <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/qna/list">QnA</a></li>
+                            <li><a href="/member/login">QnA</a></li>
                             <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="">마이페이지</a>
                         <ul class="two--depth">
-                            <li><a href="/member/mypage"/>정보수정</a></li>
+                            <li><a href="/member/mypage">정보수정</a></li>
                             <li><a href="/inmylist">마이리스트</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-
     </nav>
     <div class="header_line"></div>
     <main>
         <section>
             <div class="sec_1">
                 <!-- title -->
-                <div id="search">SEARCH RESULT</div>
+                <div id="mylist">MY LIST</div>
                 <div style="width:100%">
-                    <div class="search-header">
-                        <div class="keyword">
-                            검색한 <span th:text="${type}" style="text-transform:uppercase;"></span> 키워드 (<span
-                                style="color:red" ,
-                                th:text="${searchText}"></span>)
-                        </div>
+                    <div class="mylist-header">
                         <div class="button">
-                            <a type="button">선택재생</a>
-                            <a type="button" id="selectAdd">선택담기</a>
+                            <a    type="button">선택재생</a>
+                            <a    type="button" id="selectDelete">선택삭제</a>
                         </div>
                     </div>
 
-                    <div class="search-body">
+                    <div class="mylist-body">
                         <!-- body -->
                         <table>
                             <thead>
@@ -143,32 +138,18 @@
                                 <th class="title_2">TITLE</th>
                                 <th class="title_1">ARTIST</th>
                                 <th class="title_1">LIKE</th>
-                                <th class="title_1">ADD</th>
-                                <th class="title_1">COUNT</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- SEARCH LIST ITEMS -->
                             <th:block>
-                                <tr th:each="searchDto, iterationStat  : ${searchList}">
+                                <tr th:each="myList, iterationStat  : ${MyList}">
                                     <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
-                                    <td th:text="${searchDto.music_code}"></td>
-                                    <td><a th:text="${searchDto.title}"> </a></td>
-                                    <td th:text="${searchDto.artist}"></td>
-                                    <td>
-                                        <a th:href="@{/search/like(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}"
-                                           class="like_btn">
-                                            <span class="material-symbols-outlined">favorite</span><span
-                                                th:text="${searchDto.mlike}" class="likeno"></span></a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="add_btn">
-                                            <span class="material-symbols-outlined">add</span></a>
-                                    </td>
-                                    <td th:text="${searchDto.count}"></td>
-
-
+                                    <td th:text="${myList.music.music_code}"></td>
+                                    <td th:text="${myList.music.title}"></td>
+                                    <td th:text="${myList.music.artist}"></td>
+                                    <td><span class="material-symbols-outlined">favorite</span><span th:text="${myList.music.mlike}" class="likeno"></span></td>
                                 </tr>
                             </th:block>
 
@@ -180,6 +161,8 @@
             </div>
         </section>
         <img class="top_btn" src="/images/topBtn.png">
+
+
     </main>
     <footer>
         <div class="footer_line"></div>
@@ -204,6 +187,7 @@
         </div>
 
     </footer>
+
 </div>
 
 <!-- axios -->
@@ -212,30 +196,30 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-    //Top버튼 스크립트
-        const mTopBtn = document.querySelector(".top_btn");
 
-        window.addEventListener("scroll", () => {
-          let scVal = window.scrollY;
+    const mTopBtn = document.querySelector(".top_btn");
 
-          if (scVal === 0) {
-            mTopBtn.style.opacity = 0;
-          } else {
-            mTopBtn.style.opacity = 1;
-            mTopBtn.classList.remove("active");
-          }
-        });
+    window.addEventListener("scroll", () => {
+      let scVal = window.scrollY;
 
-
-        mTopBtn.addEventListener("click", () => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-        });
+      if (scVal === 0) {
+        mTopBtn.style.opacity = 0;
+      } else {
+        mTopBtn.style.opacity = 1;
+        mTopBtn.classList.remove("active");
+      }
+    });
 
 
-    //체크박스로 체크한 곡 mylist에 선택 담기
+    mTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+
+     //체크박스로 체크한 곡 삭제하기
         window.onload = function() {
             var allCheck = document.getElementById("allCheck");
             var rowCheckboxes = document.getElementsByName("rowCheck");
@@ -284,49 +268,25 @@
                 });
             }
 
-            // "선택담기" 버튼 클릭 시 이벤트 처리
-            document.querySelector("#selectAdd").addEventListener("click", function() {
+            // "선택삭제" 버튼 클릭 시 이벤트 처리
+            document.querySelector("#selectDelete").addEventListener("click", function() {
 
                 // 선택된 music_code 배열과 username을 서버로 보내기
-                axios.post('/search/addlist', {
+                axios.post('/mylist/delete', {
                     musicCodes: selectedMusicCodes,
                     username: username
                 })
                 .then(function (response) {
-                    console.log("Mylist add Success");
-                    alert("음악이 Mylist에 담겼습니다!")
+                    console.log("Mylist delete Success");
+                    alert("음악이 Mylist에서 삭제되었습니다!")
                     location.reload();
                 })
                 .catch(function (error) {
                     console.log(username);
                     console.log(selectedMusicCodes);
-                    console.error("Mylist add fail.. : ", error);
+                    console.error("Mylist delete fail.. : ", error);
                 });
             });
-
-            // "ADD" 버튼 클릭 시 이벤트 처리
-            var addButtons = document.querySelectorAll(".add_btn");
-            addButtons.forEach(function(button) {
-                button.addEventListener("click", function() {
-                    var row = this.parentElement.parentElement;
-                    var musicCode = row.querySelector("td:nth-child(3)").textContent;
-                    addMusicCode(musicCode);
-                    // 선택된 music_code 배열과 username을 서버로 보내기
-                    axios.post('/search/addlist', {
-                        musicCodes: selectedMusicCodes,
-                        username: username
-                    })
-                    .then(function (response) {
-                        console.log("Mylist add Success");
-                        alert("음악이 Mylist에 담겼습니다!");
-                        location.reload();
-                    })
-                    .catch(function (error) {
-                        console.error("Mylist add fail: ", error);
-                    });
-                });
-            });
-
 
             function addMusicCode(musicCode) {
                 if (selectedMusicCodes.indexOf(musicCode) === -1) {

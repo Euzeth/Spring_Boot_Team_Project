@@ -164,19 +164,7 @@ public class MusicService {
 
     }
 
-//    @Transactional(rollbackFor = SQLException.class)
-//    public Music getMusicOne(int musicId) {
-//
-//        Optional<Music> music = musicRepository.findById(musicId);
-//        if(music.isEmpty())
-//            return null;
-//        else
-//            return music.get();
-//    }
-
-
-
-
+    @Transactional(rollbackFor = SQLException.class)
     public void likeMusic(Long musicId) {
         Music music =  musicRepository.findById(musicId).get();
         music.setMlike(music.getMlike()+1L);
