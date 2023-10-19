@@ -21,7 +21,6 @@ public class QnADto {
 
     private Long no;
     @NotBlank(message = "username을 입력하세요")
-    @Email(message = "올바른 이메일 주소를 입력하세요")
     private String username;
     private String title;
     private String content;

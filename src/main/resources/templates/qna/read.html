@@ -5,11 +5,15 @@
     <title>Title</title>
 
     <!--  BS5  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
     <!-- google icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
     <!-- common.css    -->
     <link rel="stylesheet" href="/css/common.css" type="text/css">
@@ -21,7 +25,7 @@
     <link rel="stylesheet" href="/css/footer.css" type="text/css">
 
     <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="icon" href="/images/favicon/favicon.ico"/>
 
 </head>
 <body>
@@ -31,14 +35,14 @@
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/main" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/main"><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
-                    <select name="type"  class="selectbox" >
+                    <select name="type" class="selectbox">
                         <option value="title" selected>TITLE</option>
                         <option value="artist">ARTIST</option>
                     </select>
-                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!">
                     <button type="submit">🔍</button>
                 </div>
             </form>
@@ -127,31 +131,35 @@
         <!-- title -->
         <div id="qna">QnA</div>
         <div>
-            <input type="hidden" name="no" >
+            <input type="hidden" name="no">
             <div class="mb-3 w-100">
                 <label for="exampleFormControlInput1" class="form-label">No</label>
-                <input type="text" name="no" class="form-control" id="exampleFormControlInput1"  th:value="${qnaDto.no}"  readonly>
+                <input type="text" name="no" class="form-control" id="exampleFormControlInput1" th:value="${qnaDto.no}"
+                       readonly>
             </div>
             <div class="mb-3 w-100">
                 <label for="exampleFormControlInput2" class="form-label">질문한 사람</label>
-                <input type="email" class="form-control" id="exampleFormControlInput2" th:value="${qnaDto.username}" readonly>
+                <input type="email" class="form-control" id="exampleFormControlInput2" th:value="${qnaDto.username}"
+                       readonly>
             </div>
             <div class="mb-3 w-100">
                 <label for="ex2" class="form-label">QnA 제목</label>&nbsp;&nbsp;
-                <input type="text" class="form-control" id="ex2" placeholder="Title" name="title"  th:value="${qnaDto.title}" readonly>
+                <input type="text" class="form-control" id="ex2" placeholder="Title" name="title"
+                       th:value="${qnaDto.title}" readonly>
             </div>
             <div class="mb-3 w-100">
-                <label for="exampleFormControlTextarea1" class="form-label" >QnA 내용</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" th:text="${qnaDto.content}" readonly></textarea>
+                <label for="exampleFormControlTextarea1" class="form-label">QnA 내용</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" th:text="${qnaDto.content}"
+                          readonly></textarea>
             </div>
             <div class="mb-3  w-100">
-                <th:block >
+                <th:block>
                     <div th:if="${filenames!=null }">
                         <div>
                             <span>파일개수 : </span><span th:text="${filenames.length}"></span>
                         </div>
                         <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
-                        <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}" >
+                        <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}">
                             <a th:href="@{/qna/download(filename=${filenames[i]})}">
                                 <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
                                 ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )
@@ -162,9 +170,12 @@
             </div>
             <div class="button">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="Basic outlined example">
-                    <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"  th:href="@{/qna/update(no=${qnaDto.no})}">수정</a>
-                    <a type="button" class="btn btn-outline-danger btn-sm delete_btn" style="width:80px; margin-top:10px;"  th:data-no="${qnaDto.no}">삭제</a>
-                    <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"  th:href="@{/qna/list(pageNo=${pageNo})}">이전</a>
+                    <a type="button" class="btn btn-outline-danger btn-sm update_btn"
+                       style="width:80px; margin-top:10px;" th:href="@{/qna/update(no=${qnaDto.no})}">수정</a>
+                    <a type="button" class="btn btn-outline-danger btn-sm delete_btn"
+                       style="width:80px; margin-top:10px;" th:data-no="${qnaDto.no}">삭제</a>
+                    <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"
+                       th:href="@{/qna/list(pageNo=${pageNo})}">이전</a>
                 </div>
             </div>
 
@@ -175,13 +186,16 @@
         <label for="exampleFormControlInput2" class="form-label">관리자 댓글</label>
         <div class="reply-header">
             <div>
-                <img src="/images/account.png" />
+                <img src="/images/account.png"/>
             </div>
             <div>
-                <input name="contents" class="form-control reply_contents" placeholder="관리자가 댓글을 작성합니다." th:readonly="${#strings.equals(role, 'USER')}">
+                <input name="contents" class="form-control reply_contents" placeholder="관리자가 댓글을 작성합니다."
+                       th:readonly="${#strings.equals(role, 'USER')}">
             </div>
             <div>
-                <button class="btn btn-danger reply_btn" style="width:80px;" th:disabled="${#strings.equals(role, 'USER')}">댓글</button>
+                <button class="btn btn-danger reply_btn" style="width:80px;"
+                        th:disabled="${#strings.equals(role, 'USER')}">댓글
+                </button>
             </div>
         </div>
 
@@ -223,25 +237,52 @@
 </div>
 
 
-
 <!-- axios -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script th:inline="javascript">
+    //model변수 받아오기
+    var qnaUsername = [[${qnaDto.username}]];
+</script>
 <script>
-    //qna 삭제버튼 구현
-    const delete_btn_el = document.querySelector('.delete_btn');
-    delete_btn_el.addEventListener('click',function(){
-        const no = delete_btn_el.dataset.no;
-        axios.delete("/qna/delete?no="+no)
-        .then(
-            response=>{console.log(response);
-                if(response.status === 200){
-                    location.href="/qna/list";
+    //작성자가 아닐 경우 수정, 삭제버튼 비활성화
+        axios.get('/user/info')
+            .then(function(response) {
+                username = response.data;
+                console.log("User: " + username);
+                console.log("Post : " + qnaUsername);
+
+                const update_btn_el = document.querySelector('.update_btn');
+                const delete_btn_el = document.querySelector('.delete_btn');
+
+                 if (username !== qnaUsername) {
+                    //작성자가 아닐 때 버튼 비활성화
+                    console.log("작성자가 다릅니다.")
+                    update_btn_el.removeAttribute('href');
+                    update_btn_el.addEventListener('click', function() {alert('작성자만 수정할 수 있습니다.');});
+                    delete_btn_el.removeAttribute('href');
+                    delete_btn_el.addEventListener('click', function() {alert('작성자만 삭제할 수 있습니다.');});
+                } else if(username == qnaUsername){
+                //작성자일 때 삭제 가능
+                delete_btn_el.addEventListener('click',function(){
+                const no = delete_btn_el.dataset.no;
+                    axios.delete("/qna/delete?no="+no)
+                        .then(
+                            response=>{console.log(response);
+                                if(response.status === 200){
+                                    location.href="/qna/list";
+                                }
+                            })
+                        .catch(error=>console.log(error));
+                    });
                 }
-            }
-        )
-        .catch(error=>console.log(error));
-    });
+            })
+            .catch(function(error){
+                console.error(error);
+            });
+
 
 
     //

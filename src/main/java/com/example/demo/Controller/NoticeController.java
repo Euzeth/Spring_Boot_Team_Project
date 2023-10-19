@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.Criteria;
 import com.example.demo.Domain.Dto.NoticeDto;
 import com.example.demo.Domain.Dto.PageDto;
@@ -7,6 +8,7 @@ import com.example.demo.Domain.Entity.Notice;
 import com.example.demo.Domain.Service.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +37,7 @@ public class NoticeController {
     private NoticeService noticeService;
 
     public static String READ_NOTICE_DIR_PATH;
+
 
     //-------------------
     //-------------------
@@ -132,7 +136,7 @@ public class NoticeController {
     //-------------------
     //-------------------
     @GetMapping("/read")
-    public String read(Long no, Model model, HttpServletRequest request, HttpServletResponse response)
+    public String read(Long no, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session)
     {
         log.info("GET /notice/read no : " + no );
 
@@ -199,6 +203,19 @@ public class NoticeController {
             }
         }
         model.addAttribute("noticeDto",dto);
+
+        String role = (String)session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null");
+            return "notice/read";
+        }
+        if(role.equals("ROLE_USER")){
+            model.addAttribute("role", "USER");
+        } else if(role.equals("ROLE_MEMBER")){
+            model.addAttribute("role", "MEMBER");
+        }
+        System.out.println(role);
+
 
         return "notice/read";
     }

@@ -5,8 +5,11 @@
     <title>Title</title>
 
     <!--  BS5  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
     <!-- common.css    -->
     <link rel="stylesheet" href="/css/common.css" type="text/css">
@@ -18,7 +21,7 @@
     <link rel="stylesheet" href="/css/footer.css" type="text/css">
 
     <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="icon" href="/images/favicon/favicon.ico"/>
 
 </head>
 <body>
@@ -28,14 +31,14 @@
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/main" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/main"><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
-                    <select name="type"  class="selectbox" >
+                    <select name="type" class="selectbox">
                         <option value="title" selected>TITLE</option>
                         <option value="artist">ARTIST</option>
                     </select>
-                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!">
                     <button type="submit">🔍</button>
                 </div>
             </form>
@@ -120,34 +123,36 @@
     <div class="header_line"></div>
 
 
-
     <section class="sec_1">
         <!-- title -->
         <div id="notice">공지사항</div>
 
 
         <div>
-            <input type="hidden" name="no" >
+            <input type="hidden" name="no">
             <div class="mb-3 w-100">
                 <label for="exampleFormControlInput2" class="form-label">No</label>
-                <input type="text" name="no" class="form-control" id="exampleFormControlInput2"  th:value="${noticeDto.no}"  readonly>
+                <input type="text" name="no" class="form-control" id="exampleFormControlInput2"
+                       th:value="${noticeDto.no}" readonly>
             </div>
             <div class="mb-3 w-100">
                 <label for="ex2" class="form-label">공지 제목</label>&nbsp;&nbsp;
-                <input type="text" class="form-control" id="ex2" placeholder="Title" name="title"  th:value="${noticeDto.title}" readonly>
+                <input type="text" class="form-control" id="ex2" placeholder="Title" name="title"
+                       th:value="${noticeDto.title}" readonly>
             </div>
             <div class="mb-3 w-100">
-                <label for="exampleFormControlTextarea1" class="form-label" >공지 내용</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" th:text="${noticeDto.content}" readonly></textarea>
+                <label for="exampleFormControlTextarea1" class="form-label">공지 내용</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" th:text="${noticeDto.content}"
+                          readonly></textarea>
             </div>
             <div class="mb-3  w-100">
-                <th:block >
+                <th:block>
                     <div th:if="${filenames!=null }">
                         <div>
                             <span>파일개수 : </span><span th:text="${filenames.length}"></span>
                         </div>
                         <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
-                        <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}" >
+                        <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}">
                             <a th:href="@{/notice/download(filename=${filenames[i]})}">
                                 <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
                                 ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )
@@ -158,9 +163,12 @@
             </div>
             <div class="button">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="Basic outlined example">
-                    <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"  th:href="@{/notice/update(no=${noticeDto.no})}">수정</a>
-                    <a type="button" class="btn btn-outline-danger btn-sm delete_btn" style="width:80px; margin-top:10px;"  th:data-no="${noticeDto.no}">삭제</a>
-                    <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"  th:href="@{/notice/list(pageNo=${pageNo})}">이전</a>
+                    <a type="button" class="btn btn-outline-danger btn-sm update_btn"
+                       style="width:80px; margin-top:10px;" th:href="@{/notice/update(no=${noticeDto.no})}">수정</a>
+                    <a type="button" class="btn btn-outline-danger btn-sm delete_btn"
+                       style="width:80px; margin-top:10px;" th:data-no="${noticeDto.no}">삭제</a>
+                    <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"
+                       th:href="@{/notice/list(pageNo=${pageNo})}">이전</a>
                 </div>
             </div>
 
@@ -195,13 +203,31 @@
 </div>
 
 
-
 <!-- axios -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:inline="javascript">
+    //model변수 받아오기
+    var noticeRole = [[${role}]];
+</script>
 <script>
+    //noticeRole값 확인
+    console.log("ROLE : " + noticeRole);
+
+    const update_btn_el = document.querySelector('.update_btn');
     const delete_btn_el = document.querySelector('.delete_btn');
-    delete_btn_el.addEventListener('click',function(){
+
+    //관리자가 아닐 경우 수정, 삭제버튼 비활성화
+    if(noticeRole !== 'MEMBER'){
+        console.log("관리자가 아닙니다.");
+        update_btn_el.removeAttribute('href');
+        update_btn_el.addEventListener('click', function() {alert('관리자만 수정할 수 있습니다.');});
+        delete_btn_el.removeAttribute('href');
+        delete_btn_el.addEventListener('click', function() {alert('관리자만 삭제할 수 있습니다.');});
+    } else if(noticeRole == 'MEMBER') {
+        //관리자일 때 삭제 가능
+        delete_btn_el.addEventListener('click',function(){
         const no = delete_btn_el.dataset.no;
         axios.delete("/notice/delete?no="+no)
         .then(
@@ -213,6 +239,8 @@
         )
         .catch(error=>console.log(error));
     });
+    }
+
 
 </script>
 

@@ -367,13 +367,15 @@ public class QnAService {
         String removePath = QnAController.READ_DIRECTORY_PATH;
 
         //파일 있으면삭제
-        File dir = new File(removePath);
-        if(dir.exists()){
-            File files[] = dir.listFiles();
-            for(File file : files){
-                file.delete();
+        if (qna.getDirpath() != null) {
+            File dir = new File(removePath);
+            if (dir.exists()) {
+                File files[] = dir.listFiles();
+                for (File file : files) {
+                    file.delete();
+                }
+                dir.delete();
             }
-            dir.delete();
         }
 
 

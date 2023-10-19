@@ -71,7 +71,7 @@ public class QnARestController {
     public String delete(Long no) throws Exception{
         log.info("DELETE /qna/delete no " + no);
 
-        boolean isremoved =  qnaService.removeQnA(no);
+        boolean isremoved =  !qnaService.removeQnA(no);
         if(isremoved)
             return "success";
         else

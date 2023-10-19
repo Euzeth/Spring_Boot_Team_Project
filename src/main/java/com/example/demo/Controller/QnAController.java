@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MemberDto;
 import com.example.demo.Domain.Dto.QnADto;
 import com.example.demo.Domain.Dto.Criteria;
@@ -8,6 +9,7 @@ import com.example.demo.Domain.Entity.QnA;
 import com.example.demo.Domain.Service.QnAService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +36,13 @@ public class QnAController {
 
     public static String READ_DIRECTORY_PATH ;
 
-
+    @GetMapping("/user/info")
+    @ResponseBody
+    public String userInfo(Authentication authentication){
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String username = principalDetails.getUsername();
+        return username;
+    }
 
 
 
@@ -312,22 +320,6 @@ public class QnAController {
 
         return "redirect:/qna/read?no="+qno;
     }
-
-
-
-    @ExceptionHandler(Exception.class)
-    public String error1(Exception ex, Model model) {
-        System.out.println("QnAExcptionHandler FileNotFoundException... ex " + ex);
-        //System.out.println("GlobalExceptionHandler FileNotFoundException... ex ");
-        model.addAttribute("ex",ex);
-        return "qna/error";
-    }
-
-    @GetMapping("/error")
-    public void error_page(){
-
-    }
-
 
 
 }
