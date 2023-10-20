@@ -35,10 +35,12 @@ public class NoticeController {
 
     public static String READ_NOTICE_DIR_PATH;
 
+
     //-------------------
     //-------------------
+
     @GetMapping("/list")
-    public String list(Integer pageNo, String type, String keyword, Model model, HttpServletResponse response){
+    public String list(Integer pageNo, String type, String keyword, Model model, HttpServletResponse response, HttpSession session){
         log.info("GET /notice/list no,type,keyword : " + pageNo+"|"+type+"|"+keyword);
         //----------------
         //PageDto  Start
@@ -82,39 +84,31 @@ public class NoticeController {
         Cookie init = new Cookie("isRead","false");
         response.addCookie(init);
 
+        String role = (String)session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null");
+            return "notice/list";
+        }
+        if(role.equals("ROLE_USER")){
+            model.addAttribute("role", "USER");
+        } else if(role.equals("ROLE_MEMBER")){
+            model.addAttribute("role", "MEMBER");
+        }
+        System.out.println(role);
+
 
         return "notice/list";
 
     }
 
-    private String NoticeRequest(HttpSession session) {
-        String role = (String) session.getAttribute("role");
-        if ("ROLE_USER".equals(role)) {
-            System.out.println("user's mypage");
-            return "redirect:/notice/list";
-        } else if ("ROLE_MEMBER".equals(role)) {
-            System.out.println("member's mypage");
-            return "redirect:/notice/post";
-        } else{
-            return "redirect:/notice/list";
-        }
-
-    }
-
-    @GetMapping("/page")
-    public String getPage(HttpSession session){return NoticeRequest(session);}
-
-    @PostMapping("/page")
-    public String postPage(HttpSession session){return NoticeRequest(session);}
-
+    //-------------------
     // POST
     //-------------------
+
     @GetMapping("/post")
     public void post_get(){
         log.info("GET /notice/post");
     }
-
-
 
     @PostMapping("/post")
     public String post_post(@Valid NoticeDto dto, BindingResult bindingResult, Model model) throws IOException {
@@ -135,11 +129,10 @@ public class NoticeController {
 
     }
 
-
     //-------------------
     //-------------------
     @GetMapping("/read")
-    public String read(Long no, Model model, HttpServletRequest request, HttpServletResponse response)
+    public String read(Long no, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session)
     {
         log.info("GET /notice/read no : " + no );
 
@@ -207,11 +200,21 @@ public class NoticeController {
         }
         model.addAttribute("noticeDto",dto);
 
+        String role = (String)session.getAttribute("role");
+        if (role == null) {
+            System.out.println("Role is null");
+            return "notice/read";
+        }
+        if(role.equals("ROLE_USER")){
+            model.addAttribute("role", "USER");
+        } else if(role.equals("ROLE_MEMBER")){
+            model.addAttribute("role", "MEMBER");
+        }
+        System.out.println(role);
+
+
         return "notice/read";
     }
-
-
-
 
     //-------------------
     //-------------------
@@ -287,11 +290,5 @@ public class NoticeController {
         return "redirect:/notice/update?no="+dto.getNo();
 
     }
-
-
-
-
-
-
 
 }

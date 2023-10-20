@@ -171,4 +171,8 @@ public class MusicService {
         musicRepository.save(music);
     }
 
+    @Transactional(rollbackFor = SQLException.class)
+    public List<Music> Top100(){
+        return musicRepository.findTop100();
+    }
 }

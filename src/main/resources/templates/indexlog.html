@@ -57,8 +57,7 @@
                     <li>
                         <a href="">수박차트</a>
                         <ul class="two--depth">
-                            <li><a href="">국내TOP100</a></li>
-                            <li><a href="">해외TOP100</a></li>
+                            <li><a href="/Top100">TOP100</a></li>
                             <li><a href="">최신음악</a></li>
                             <li><a href="">장르음악</a></li>
                         </ul>
@@ -101,7 +100,7 @@
                         <a href="">마이페이지</a>
                         <ul class="two--depth">
                             <li><a href="/member/mypage"/>정보수정</a></li>
-                            <li><a href="">마이리스트</a></li>
+                            <li><a href="/inmylist">마이리스트</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -163,63 +162,24 @@
                 </div> <br>
                 <div class="table-wrapper">
                     <table>
+                        <thead>
                         <tr>
-                            <th>No.</th>
+                            <th style="width:40px; text-align:left;">No.</th>
                             <th>TITLE</th>
                             <th>ARTIST</th>
                         </tr>
-                        <tr>
-                            <td class="no">1 -</td>
-                            <td class="title">I AM</td>
-                            <td class="artist">IVE(아이브)</td>
-                        </tr>
-                        <tr>
-                            <td class="id">2 -</td>
-                            <td class="title">Kitsch</td>
-                            <td class="artist">IVE(아이브)</td>
-                        </tr>
-                        <tr>
-                            <td class="id">3 -</td>
-                            <td class="title">꽃</td>
-                            <td class="artist">지수(JISOO)</td>
-                        </tr>
-                        <tr>
-                            <td class="no">4 -</td>
-                            <td class="title">Ditto</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">5 -</td>
-                            <td class="title">Hype boy</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">6 -</td>
-                            <td class="title">OMG</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">7 ▲1</td>
-                            <td class="title">Teddy Bear</td>
-                            <td class="artist">STAYC</td>
-                        </tr>
-                        <tr>
-                            <td class="no">8 ▼1</td>
-                            <td class="title">사람 pt.2(feat. ...)</td>
-                            <td class="artist">Agust D</td>
-                        </tr>
-                        <tr>
-                            <td class="no">9 ▲1</td>
-                            <td class="title">Like Crazy</td>
-                            <td class="artist">지민</td>
-                        </tr>
-                        <tr>
-                            <td class="no">10 -</td>
-                            <td class="title">사랑은 늘 도망가</td>
-                            <td class="artist">임영웅</td>
-                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block>
+                            <tr th:each="dto, iterationStat  : ${Top10List}">
+                                <td th:text="${iterationStat.count}"></td>
+                                <td th:text="${dto.title}"></td>
+                                <td th:text="${dto.artist}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
                     </table>
-                    <div><a href="">더보기</a></div>
+                    <div><a href="/Top100">더보기</a></div>
                 </div>
             </aside>
         </section>

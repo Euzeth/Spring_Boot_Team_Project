@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -8,8 +8,11 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/Main_Page.css">
+    <link rel="stylesheet" type="text/css" href="/css/songs.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
     <!-- favicon.ico   -->
     <link rel="icon" href="/images/favicon/favicon_2xl.png" />
@@ -58,8 +61,7 @@
                     <li>
                         <a href="">수박차트</a>
                         <ul class="two--depth">
-                            <li><a href="">국내TOP100</a></li>
-                            <li><a href="">해외TOP100</a></li>
+                            <li><a href="/Top100">TOP100</a></li>
                             <li><a href="">최신음악</a></li>
                             <li><a href="">장르음악</a></li>
                         </ul>
@@ -162,63 +164,24 @@
                 </div> <br>
                 <div class="table-wrapper">
                     <table>
+                        <thead>
                         <tr>
-                            <th>No.</th>
+                            <th style="width:40px; text-align:left;">No.</th>
                             <th>TITLE</th>
                             <th>ARTIST</th>
                         </tr>
-                        <tr>
-                            <td class="no">1 -</td>
-                            <td class="title">I AM</td>
-                            <td class="artist">IVE(아이브)</td>
-                        </tr>
-                        <tr>
-                            <td class="id">2 -</td>
-                            <td class="title">Kitsch</td>
-                            <td class="artist">IVE(아이브)</td>
-                        </tr>
-                        <tr>
-                            <td class="id">3 -</td>
-                            <td class="title">꽃</td>
-                            <td class="artist">지수(JISOO)</td>
-                        </tr>
-                        <tr>
-                            <td class="no">4 -</td>
-                            <td class="title">Ditto</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">5 -</td>
-                            <td class="title">Hype boy</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">6 -</td>
-                            <td class="title">OMG</td>
-                            <td class="artist">NewJeans</td>
-                        </tr>
-                        <tr>
-                            <td class="no">7 ▲1</td>
-                            <td class="title">Teddy Bear</td>
-                            <td class="artist">STAYC</td>
-                        </tr>
-                        <tr>
-                            <td class="no">8 ▼1</td>
-                            <td class="title">사람 pt.2(feat. ...)</td>
-                            <td class="artist">Agust D</td>
-                        </tr>
-                        <tr>
-                            <td class="no">9 ▲1</td>
-                            <td class="title">Like Crazy</td>
-                            <td class="artist">지민</td>
-                        </tr>
-                        <tr>
-                            <td class="no">10 -</td>
-                            <td class="title">사랑은 늘 도망가</td>
-                            <td class="artist">임영웅</td>
-                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block>
+                            <tr th:each="dto, iterationStat  : ${Top10List}">
+                                <td th:text="${iterationStat.count}"></td>
+                                <td th:text="${dto.title}"></td>
+                                <td th:text="${dto.artist}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
                     </table>
-                    <div><a href="">더보기</a></div>
+                    <div><a href="/Top100">더보기</a></div>
                 </div>
             </aside>
         </section>
@@ -243,6 +206,58 @@
             <br>
             <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
             <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+        <div class="wrap__music">
+            <div class="music__inner">
+                <div class="song_progress">
+                    <div class="music__song">
+                        <p class="name"></p>
+                        <p class="artist"></p>
+                    </div>
+
+                    <div class="music__progress">
+                        <div class="bar">
+                            <audio id="main-audio" src=""></audio>
+                        </div>
+                        <div class="timer">
+                            <span class="current">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control_list">
+                    <div class="music__control">
+                        <i id="control-repeat" class="material-icons" title="전체 반복">repeat</i>
+                        <i id="control-prev" class="material-icons" title="이전곡">skip_previous</i>
+                        <div class="play-pause">
+                            <i id="control-play" class="material-icons" title="재생">play_arrow</i>
+                            <!-- <i class="material-icons">pause</i> -->
+                        </div>
+                        <i id="control-next" class="material-icons" title="다음곡">skip_next</i>
+                        <i id="control-list" class="material-icons" title="재생목록">queue_music</i>
+                        <!-- <i class="material-icons">repeat_one</i>
+                        <i class="material-icons">shuffle</i> -->
+                    </div>
+
+                    <div class="music__list">
+                        <div class="title">
+                            <div>
+                                <i class="material-icons queue">queue_music</i>
+                                <span>Music List</span>
+                            </div>
+                            <i class="material-icons close">close</i>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <!-- Javascript -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </footer>

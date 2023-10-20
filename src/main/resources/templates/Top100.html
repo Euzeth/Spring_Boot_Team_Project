@@ -12,7 +12,7 @@
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <link rel="stylesheet" type="text/css" href="/css/search.css">
+    <link rel="stylesheet" type="text/css" href="/css/top100.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
     <!-- favicon.ico   -->
@@ -117,21 +117,16 @@
         <section>
             <div class="sec_1">
                 <!-- title -->
-                <div id="search">SEARCH RESULT</div>
+                <div id="top100">TOP 100 LIST</div>
                 <div style="width:100%">
-                    <div class="search-header">
-                        <div class="keyword">
-                            검색한 <span th:text="${type}" style="text-transform:uppercase;"></span> 키워드 (<span
-                                style="color:red" ,
-                                th:text="${searchText}"></span>)
-                        </div>
+                    <div class="top100-header">
                         <div class="button">
                             <a type="button">선택재생</a>
                             <a type="button" id="selectAdd">선택담기</a>
                         </div>
                     </div>
 
-                    <div class="search-body">
+                    <div class="top100-body">
                         <!-- body -->
                         <table>
                             <thead>
@@ -149,24 +144,23 @@
                             <tbody>
                             <!-- SEARCH LIST ITEMS -->
                             <th:block>
-                                <tr th:each="searchDto, iterationStat  : ${searchList}">
+                                <tr th:each="dto, iterationStat  : ${Top100List}">
                                     <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
-                                    <td th:text="${searchDto.music_code}"></td>
-                                    <td><a th:text="${searchDto.title}"> </a></td>
-                                    <td th:text="${searchDto.artist}"></td>
+                                    <td th:text="${dto.music_code}"></td>
+                                    <td><a th:text="${dto.title}"> </a></td>
+                                    <td th:text="${dto.artist}"></td>
                                     <td>
-                                        <a th:href="@{/search/like(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}"
+                                        <a th:href="@{/Top100/like(music_code=${dto.music_code})}"
                                            class="like_btn">
                                             <span class="material-symbols-outlined">favorite</span><span
-                                                th:text="${searchDto.mlike}" class="likeno"></span></a>
+                                                th:text="${dto.mlike}" class="likeno"></span></a>
                                     </td>
                                     <td>
                                         <a href="#" class="add_btn">
                                             <span class="material-symbols-outlined">add</span></a>
                                     </td>
-                                    <td th:text="${searchDto.count}"></td>
-
+                                    <td th:text="${dto.count}"></td>
 
                                 </tr>
                             </th:block>

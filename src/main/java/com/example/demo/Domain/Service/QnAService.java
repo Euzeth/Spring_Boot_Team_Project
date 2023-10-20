@@ -39,7 +39,6 @@ public class QnAService {
     public Map<String,Object> GetQnAList(Criteria criteria) {
 
 
-
         Map<String,Object> returns = new HashMap<String,Object>();
 
 
@@ -116,7 +115,6 @@ public class QnAService {
         List<String> filesizes = new ArrayList<String>();
 
 
-
         if(dto.getFiles().length >= 1 && dto.getFiles()[0].getSize()!=0L)
         {
             //Upload Dir 미존재시 생성
@@ -152,16 +150,12 @@ public class QnAService {
         }
 
 
-
-
-
         qna =    qnaRepository.save(qna);
 
         boolean issaved =  qnaRepository.existsById(qna.getNo());
 
         return issaved;
     }
-
 
     @Transactional(rollbackFor = Exception.class)
 
@@ -173,8 +167,6 @@ public class QnAService {
         else
             return qna.get();
     }
-
-
 
     //----------------------------------------------------------------
     //수정하기코드!
@@ -292,7 +284,6 @@ public class QnAService {
 
     }
 
-
     @Transactional(rollbackFor = SQLException.class)
     public boolean removeFile(String no,String filename){
 
@@ -354,7 +345,6 @@ public class QnAService {
 
     }
 
-
     @Transactional(rollbackFor = SQLException.class)
     public boolean removeQnA(Long no) {
 
@@ -362,13 +352,15 @@ public class QnAService {
         String removePath = QnAController.READ_DIRECTORY_PATH;
 
         //파일 있으면삭제
-        File dir = new File(removePath);
-        if(dir.exists()){
-            File files[] = dir.listFiles();
-            for(File file : files){
-                file.delete();
+        if (qna.getDirpath() != null) {
+            File dir = new File(removePath);
+            if (dir.exists()) {
+                File files[] = dir.listFiles();
+                for (File file : files) {
+                    file.delete();
+                }
+                dir.delete();
             }
-            dir.delete();
         }
 
 
@@ -377,7 +369,6 @@ public class QnAService {
 
         return qnaRepository.existsById(no);
     }
-
 
     //----------------------------------------------------------------
     // COUNT
@@ -405,7 +396,7 @@ public class QnAService {
     }
 
     public List<ReplyDto> getReplyList(Long qno) {
-        List<Reply> replyList =  replyRepository.GetReplyByBnoDesc(qno);
+        List<Reply> replyList =  replyRepository.GetReplyByQnoDesc(qno);
 
         List<ReplyDto> returnReply  = new ArrayList();
         ReplyDto dto = null;
@@ -429,13 +420,12 @@ public class QnAService {
     }
 
     public Long getReplyCount(Long qno) {
-        return replyRepository.GetReplyCountByBnoDesc(qno);
+        return replyRepository.GetReplyCountByQnoDesc(qno);
 
     }
 
     public void deleteReply(Long rno) {
         replyRepository.deleteById(rno);
     }
-
 
 }

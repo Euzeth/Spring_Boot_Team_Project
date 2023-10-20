@@ -30,6 +30,11 @@ public class MusicController {
 		System.out.println("GET /song");
 	}
 
+	@GetMapping("/songs")
+	public void songs(){
+		System.out.println("GET /songs");
+	}
+
 	@GetMapping("/search")
 	public void search(String searchText, String type, MusicDto dto, Model model) {
 		log.info("GET /search");
@@ -67,5 +72,26 @@ public class MusicController {
 
 		return "redirect:/search?type="+type+"&searchText="+searchText;
 	}
+
+	@GetMapping("/Top100")
+	public void top100(MusicDto dto, Model model){
+		log.info("GET /Top100");
+
+		List<Music> list = musicService.Top100();
+		List<MusicDto> Top100List = list.stream().map(music -> MusicDto.Of(music)).collect(Collectors.toList());
+		System.out.println(Top100List);
+
+		model.addAttribute("Top100List", Top100List);
+	}
+
+	@GetMapping("/Top100/like")
+	public String like(Long music_code) {
+		log.info("GET /Top100/like " +music_code);
+
+		musicService.likeMusic(music_code);
+
+		return "redirect:/Top100";
+	}
+
 
 }

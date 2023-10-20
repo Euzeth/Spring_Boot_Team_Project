@@ -47,7 +47,6 @@ public class PageDto {
 
         this.startPage=nowBlock * pagePerBlock -pagePerBlock + 1;
 
-
     }
 
     @Override
@@ -56,10 +55,5 @@ public class PageDto {
                 + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", startPage=" + startPage + ", endPage="
                 + endPage + ", prev=" + prev + ", next=" + next + "]";
     }
-
-
-
-
-
 
 }

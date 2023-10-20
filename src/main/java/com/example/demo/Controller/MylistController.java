@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Entity.Mylist;
+import com.example.demo.Domain.Service.MusicService;
 import com.example.demo.Domain.Service.MylistService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 public class MylistController {
     @Autowired
     private MylistService mylistService;
+
+    @Autowired
+    private MusicService musicService;
 
     private String MylistRequest(HttpSession session) {
         String role = (String) session.getAttribute("role");
@@ -120,6 +124,15 @@ public class MylistController {
 
         mylistService.removeMylistById(musicCodes, username);
         return "mylist";
+    }
+
+    @GetMapping("/mylist/like")
+    public String like(Long music_code) {
+        log.info("GET /mylist/like " +music_code);
+
+        musicService.likeMusic(music_code);
+
+        return "redirect:/mylist";
     }
 
 }
