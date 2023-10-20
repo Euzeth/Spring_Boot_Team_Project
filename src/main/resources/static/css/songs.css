@@ -8,26 +8,33 @@
             --darkwhite : #cecaca;
         }
         .wrap__music {
+            position: relative;
+            width: 100%;
+            min-height: 5vh; /* 화면 뷰포트의 높이만큼 최소 높이를 설정합니다. */
             display: flex;
-            width: 1200px;
-            height: 200px;
             align-items: center;
             justify-content: center;
-            min-height: 100%;
-            margin-top: 30px;
             user-select: none;
         }
         .music__inner {
             width: 500px;
-            bottom:0;
             height: 160px;
             padding: 25px 30px;
             overflow: hidden;
             position: fixed;
+            bottom: -160px;
+            left: 50%;
+            transform: translateX(-50%);
             border-radius: 15px;
             background: var(--white);
             box-shadow: 0 6px 15px var(--lightshadow);
+            transition: bottom 0.3s;
         }
+        /* 마우스를 가져갈 때 music_inner를 화면 하단으로 이동하여 표시합니다. */
+        .footer:hover .music__inner {
+            bottom: 0;
+        }
+
         .music__song {
             text-align: center;
             margin: 30px;
