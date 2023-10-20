@@ -30,20 +30,18 @@ public class DataSourceConfig {
 //		return dataSource;
 //	}
 
-	
-//	HikariCP DataSource
-@Bean
-public HikariDataSource dataSource()
-{
-	HikariDataSource dataSource = new HikariDataSource();
-	dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-	dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/musicdb");
-	dataSource.setUsername("root");
-	dataSource.setPassword("1234");
 
-	return dataSource;
-}
-
+	//	HikariCP DataSource
+	@Bean
+	public HikariDataSource dataSource()
+	{
+		HikariDataSource dataSource = new HikariDataSource();
+		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/musicdb");
+		dataSource.setUsername("root");
+		dataSource.setPassword("1234");
+		return dataSource;
+	}
 
 	private HikariDataSource dataSource;
 
@@ -55,6 +53,5 @@ public HikariDataSource dataSource()
 		transactionManager.setDataSource(dataSource);
 		return transactionManager;
 	}
-	
-	
+
 }

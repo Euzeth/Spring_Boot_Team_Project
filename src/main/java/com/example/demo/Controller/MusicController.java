@@ -24,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,12 +72,12 @@ public class MusicController {
 
 
 	@GetMapping("/search/like")
-	public String like(Long music_code,String searchText, String type) {
+	public String like(Long music_code,String searchText, String type) throws UnsupportedEncodingException {
 		log.info("GET /search/like " +music_code + " " +type + " " + searchText);
 
 		musicService.likeMusic(music_code);
 
-		return "redirect:/search?type="+type+"&searchText="+searchText;
+		return "redirect:/search?type="+type+"&searchText="+ URLEncoder.encode(searchText, "UTF-8");
 	}
 
 

@@ -5,7 +5,7 @@ li{
     .update {
         width: 410px;
         display: block;
-        height: 740px;	
+        height: 1100px;
         padding-top: 50px;
         margin: 0 auto;
     }
@@ -20,7 +20,7 @@ li{
     .update>form {
         padding: 40px 0 10px;
     }
-    
+
     .update>form>span {
         text-align: left;
 		font-size: 25px;
@@ -28,7 +28,21 @@ li{
 		margin-left: 10px;
 		color: gray;
     }
-    
+
+    .update>form>div{
+        width: 410px;
+        display: flex;
+        justify-content : space-between;
+    }
+
+    .update>form>div>span {
+        text-align: left;
+        font-size: 25px;
+        display: inline-block;
+        margin-left: 10px;
+        color: gray;
+    }
+
 	.update>form>input{
 		font-size: 30px;
 		display: block;
@@ -40,7 +54,7 @@ li{
         color: black;
         font-family: 'SDSamliphopangche_Basic';
 	}
-    
+
     .update #update_btn{
 		width: 100px;
         height: 35px;
@@ -52,4 +66,16 @@ li{
   		margin-left: 305px;
         cursor: pointer;
         text-align: center;
+	}
+
+	.update #addr_btn{
+	    width: 100px;
+        height: 35px;
+        background: #ed1c24;
+        border-radius: 5px;
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+
 	}

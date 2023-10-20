@@ -13,7 +13,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+					   AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		System.out.println("권한 부족 Exception: " + accessDeniedException);
 		System.out.println("권한 부족 Message: " + accessDeniedException.getMessage());
 		request.setAttribute("msg", accessDeniedException.getMessage());

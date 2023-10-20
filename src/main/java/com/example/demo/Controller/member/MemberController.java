@@ -154,8 +154,6 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 		log.info("GET /login");
-
-
 	}
 
 	@GetMapping("/join")
