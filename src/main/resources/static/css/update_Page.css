@@ -5,7 +5,7 @@ li{
     .update {
         width: 410px;
         display: block;
-        height: 1100px;
+        height: 1150px;
         padding-top: 50px;
         margin: 0 auto;
     }
@@ -67,6 +67,17 @@ li{
         cursor: pointer;
         text-align: center;
 	}
+
+    .update #pw_btn{
+        width: 100px;
+        height: 35px;
+        background: #ed1c24;
+        border-radius: 5px;
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+    }
 
 	.update #addr_btn{
 	    width: 100px;

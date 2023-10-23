@@ -16,6 +16,7 @@ import com.example.demo.Domain.Dto.MemberDto;
 import com.example.demo.Domain.Entity.Member;
 import com.example.demo.Domain.Repository.MemberRepository;
 import com.example.demo.Domain.Service.MemberService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +41,9 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/add")
 	public void add() {
@@ -137,7 +142,25 @@ public class MemberController {
 
 		return "redirect:user";
 	}
-	
+
+	@PostMapping("/passwordConfirm")
+	public ResponseEntity<String> passwordConfirmFunction(@RequestBody JSONObject oldPassword, Authentication authentication){
+		System.out.println("POST  /user/passwordConfirm .." + oldPassword.get("oldPassword"));
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+		MemberDto memberDto = principalDetails.getMember();
+
+		boolean isCorrect =  passwordEncoder.matches(oldPassword.get("oldPassword").toString(),memberDto.getPassword());
+
+		if(isCorrect) {
+			System.out.println("패스워드 일치!");
+			//여기서 패스워드가 일치한다면 패스워드 확인이 완료되었다는 정보를 서버측에 저장 Session이 적당한듯..(코드는 나중에 넣어야지..피고나니까)
+			return new ResponseEntity("패스워드 확인 완료",HttpStatus.OK);
+
+		}
+		return new ResponseEntity("패스워드 불일치", HttpStatus.UNAUTHORIZED);
+
+	}
+
 	@GetMapping("/remove")
 	public void remove(String id) {
 		log.info("GET /member/delete");

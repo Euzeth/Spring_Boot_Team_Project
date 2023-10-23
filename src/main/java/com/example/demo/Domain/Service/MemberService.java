@@ -78,7 +78,6 @@ public class MemberService{
         System.out.println("DTO : " +dto);
 		if (oldMember != null) {
 			// 새로운 정보로 업데이트
-			oldMember.setPassword(passwordEncoder.encode(dto.getPassword()));
 			oldMember.setName(dto.getName());
 			oldMember.setZipcode(dto.getZipcode());
 			oldMember.setAddr1(dto.getAddr1());
@@ -86,6 +85,7 @@ public class MemberService{
 			oldMember.setPhone(dto.getPhone());
 			oldMember.setEmail(dto.getEmail());
 			oldMember.setRole("ROLE_USER");
+			oldMember.setPassword(passwordEncoder.encode(dto.getRepassword()));
 
 			// 회원 정보 저장
 			Member updatedMember = memberRepository.save(oldMember);
