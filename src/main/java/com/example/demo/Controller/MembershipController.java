@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MembershipDto;
 import com.example.demo.Domain.Entity.Membership;
 import com.example.demo.Domain.Service.MembershipService;
@@ -27,12 +28,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.Data;
@@ -76,8 +72,27 @@ public class MembershipController {
     }
 
     @GetMapping("/membershipU")
-    public void membership_U() {
-        System.out.println("GET /membershipU");
+    public void membership_U(Authentication authentication, Model model) {
+        log.info("GET /membershipU");
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String username = principalDetails.getUsername();
+
+        Membership myMemberhsip = membershipService.getMembershipOne(username);
+
+        model.addAttribute("myMembership", myMemberhsip);
+    }
+
+    @DeleteMapping("/membership/terminate")
+    public String membership_terminate(Authentication authentication) {
+        log.info("DELETE /membership/terminate");
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String username = principalDetails.getUsername();
+
+        boolean isterminated = !membershipService.terminateMembership(username);
+        if(isterminated)
+            return "/membershipU";
+        else
+            return "failed";
     }
 
     @GetMapping("/membershipM")
@@ -162,7 +177,7 @@ public class MembershipController {
 
         // 멤버십DB에 정보 ADD
         membershipService.addMembership(dto, authentication, request);
-        return "Subscribe Success!";
+        return "WMM_1 Subscribe START!";
     }
 
     // 유저 멤버십페이지에서 WM_2 결제 성공시 매핑
@@ -171,7 +186,7 @@ public class MembershipController {
         log.info("GET /membership/success2");
         // 멤버십DB에 정보 ADD
         membershipService.addMembership(dto, authentication, request);
-        return "Subscribe Success!";
+        return "WMM_2 Subscribe START!";
     }
 
     // 유저 멤버십페이지에서 결제 취소 매핑
@@ -185,7 +200,7 @@ public class MembershipController {
     @GetMapping("/membership/fail")
     public @ResponseBody String fail() {
         log.info("GET /membership/fail");
-        return "Subscribe Fail..";
+        return "Subscribe fail..";
     }
 
     @GetMapping("/membership/selectAll")

@@ -53,7 +53,12 @@ public class MusicService {
     @Transactional(rollbackFor = SQLException.class)
     public void likeMusic(Long musicId) {
         Music music =  musicRepository.findById(musicId).get();
-        music.setMlike(music.getMlike()+1L);
+        if (music.getMlike() != null) {
+            music.setMlike(music.getMlike()+1L);
+        } else{
+            music.setMlike(1L);
+        }
+
         musicRepository.save(music);
     }
 

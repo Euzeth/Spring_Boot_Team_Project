@@ -11,7 +11,7 @@
         .Notice_search {
             height: 38px;
             width: 550px;
-            border: 3px solid rgb(92, 115, 6);
+            border: 3px solid rgb(192, 57, 43);
             position: relative;
             border-radius: 7px;
             line-height: 20px;
@@ -26,8 +26,8 @@
             line-height: 35px;
             margin-top: -1px;
             margin-left: -10px;
-            border-right: 3px solid rgb(92, 115, 6);
-            background-color: rgba(92, 115, 6, 0.43);
+            border-right: 3px solid rgb(192, 57, 43);
+            background-color: rgba(192, 57, 43, 0.43);
         }
 
         .Notice_search>input {
@@ -90,11 +90,11 @@
         }
 
         .title_1{
-            width: 200px;
+            width: 150px;
         }
 
         .title_2{
-            width: 400px;
+            width: 600px;
         }
 
        .button{

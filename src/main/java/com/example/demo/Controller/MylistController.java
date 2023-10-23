@@ -107,9 +107,6 @@ public class MylistController {
         List<Mylist> MyList = list.stream().collect(Collectors.toList());
 
         model.addAttribute("MyList", MyList);
-
-        System.out.println(MyList);
-
     }
 
 

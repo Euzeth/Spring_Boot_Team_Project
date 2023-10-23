@@ -11,14 +11,14 @@
 
 
     <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="icon" href="/images/favicon/favicon_2xl.png" />
 </head>
 <body>
 
 <div class="wrapper">
     <header>
         <div class="log-header">
-            <a href="/main" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
             <ul>
                 <li><a href=""><img  src="/images/english.png" alt="">ENGLISH</a></li>
             </ul>
@@ -31,8 +31,11 @@
         <form action="/member/update" method="post" class="update" name="update" onsubmit="return false" >
             <span class="title" >ID</span><hr/><input type="text" name="username" th:value="${principalDetails.username}" readonly /><br />
             <span class="title">NAME</span><hr/><input type="text" name="name" th:value="${principalDetails.name}" readonly /><br />
-            <span class="title">PW</span><hr/><input type="password" name="password" th:value="${principalDetails.password}" /><br />
-            <span class="title">PW</span><hr/><input type="password" name="repassword" th:value="${principalDetails.password}" /><br />
+            <div>
+                <span class="title pwmsg">기존 PW</span>
+                <button class="btn btn-secondary password_btn" id="pw_btn">확인</button>
+            </div><hr/><input type="password" name="password" /><br />
+            <span class="title">새 PW</span><hr/><input type="password" name="repassword" readonly/><br />
             <span class="title">EMAIL</span><hr/><input type="text" name="email" th:value="${principalDetails.email}" readonly /><br />
             <div>
                 <span class="title">ZIPCODE</span>
@@ -102,6 +105,43 @@
         const form = document.update;
         form.submit();
     }
+</script>
+
+<!-- axios -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
+
+<script>
+    //패스워드 일치 검증 코드
+    const form = document.update;
+    const passwordConfirmBtn = document.querySelector('.password_btn');
+    passwordConfirmBtn.addEventListener('click',function(){
+        const requestData = {
+          oldPassword: form.password.value
+        };
+
+        axios.post('/member/passwordConfirm', requestData)
+          .then(response => {
+            console.log('Success:', response);
+            const msgtg = document.querySelector('.pwmsg');
+            msgtg.innerHTML=response.data;
+            msgtg.style.color='green';
+
+            form.repassword.readOnly = false;
+          })
+          .catch(error => {
+
+                console.log('Unauthorized: Incorrect password');
+                const msgtg = document.querySelector('.pwmsg');
+                msgtg.innerHTML='Unauthorized: Incorrect password';
+                msgtg.style.color='orange';
+
+          });
+
+    })
+
 </script>
 
 </body>

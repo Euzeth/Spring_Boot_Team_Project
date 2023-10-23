@@ -80,4 +80,14 @@ public class MembershipService {
 
 
     }
+
+    @Transactional(rollbackFor = SQLException.class)
+    public boolean terminateMembership(String username) {
+        Membership terminateUser = membershipRepository.findMembershipUsername(username);
+        System.out.println("user : "+terminateUser);
+
+        membershipRepository.delete(terminateUser);
+
+        return membershipRepository.existsById(username);
+    }
 }

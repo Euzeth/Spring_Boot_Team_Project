@@ -61,9 +61,6 @@ public class MusicController {
 
 		List<MusicDto> searchList = list.stream().map(music -> MusicDto.Of(music)).collect(Collectors.toList());
 
-		System.out.println(searchList);
-
-
 		model.addAttribute("searchList", searchList);
 		model.addAttribute("searchText", dto.getSearchText());
 		model.addAttribute("type",dto.getType());
@@ -88,7 +85,6 @@ public class MusicController {
 
 		List<Music> list = musicService.Top100();
 		List<MusicDto> Top100List = list.stream().map(music -> MusicDto.Of(music)).collect(Collectors.toList());
-		System.out.println(Top100List);
 
 		model.addAttribute("Top100List", Top100List);
 	}

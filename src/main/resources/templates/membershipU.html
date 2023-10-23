@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -95,7 +95,6 @@
                         <ul class="two--depth">
                             <li><a href="/notice/list">공지사항</a></li>
                             <li><a href="/qna/list">QnA</a></li>
-                            <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
                     <li>
@@ -113,14 +112,21 @@
     <div class="header_line"></div>
     <section class="ms_pay">
         <span class="title">멤버십 가입</span>
+        <div class="myMembership" th:if="${myMembership!=null }">
+            <span th:text="|~ ${myMembership.enddate}|" style="font-size:20px; color:gray;"></span><br/>
+            <span th:text="${myMembership.membershipcode}" style="font-size:27px; color: rgb(192, 57, 43);"></span>을 구독중입니다!
+            <a class="term_btn" th:data-username="${myMembership.username}" type="button">해지</a>
+        </div>
         <div>
-            <div class="subscribe_1">
+            <div class="subscribe_1" >
                 <span style="font-size:27px; color:rgb(92, 115, 6);">첫 구독 1개월 무료!</span>
+                <span style="color: rgb(192, 57, 43);"> WMM_1</span>
                 <span>무제한 스트리밍</span>
                 <span class="price">월 6,900원</span>
                 <img class="sub_img" src="/images/subscribe.png" alt="">
             </div>
             <div class="subscribe_2">
+                <span style="color: rgb(192, 57, 43);"> WMM_2</span>
                 <span>무제한 스트리밍</span>
                 <span>오프라인 듣기</span>
                 <span class="price">월 9,900원</span>
@@ -182,7 +188,6 @@
             window.open(response.data.next_redirect_pc_url, "Payment","width=400,height=700");
         })
         .catch(error=>{});
-
     });
 
 
@@ -198,6 +203,26 @@
         })
         .catch(error=>{});
     });
+
+    const term_btn_el = document.querySelector('.term_btn');
+    term_btn_el.addEventListener('click', function () {
+        const username = term_btn_el.dataset.username;
+        if (confirm("정말 구독을 취소하시겠습니까?") == true){
+            axios.delete("/membership/terminate?username=" + username)
+            .then(response=>{
+                if(response.status === 200){
+                    console.log(username+"님 구독취소 완료!");
+                    alert(username+"님 구독이 취소되었습니다!")
+                    location.reload();
+                }
+            })
+            .catch(error=>{console.log(error)});
+        }else{
+            console.log("구독 해지를 취소하였습니다.");
+            alert("구독 해지가 취소되었습니다!");
+        }
+    });
+
 </script>
 
 
