@@ -1,10 +1,8 @@
 package com.example.demo.Domain.Entity;
 
-import com.example.demo.Domain.Dto.MusicDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity
@@ -24,7 +22,7 @@ public class Mylist {
     @MapsId("lusername")
     @JoinColumn(name = "lusername", foreignKey = @ForeignKey(name = "FK_mylist_member",
             foreignKeyDefinition = "FOREIGN KEY (lusername) REFERENCES member(username) ON DELETE CASCADE ON UPDATE CASCADE"))
-
+    private Member member = new Member();
 
     public void setMylistId(String lusername, Long lmusic_code) {
 

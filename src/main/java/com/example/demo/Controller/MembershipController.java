@@ -77,9 +77,11 @@ public class MembershipController {
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         String username = principalDetails.getUsername();
 
-        Membership myMemberhsip = membershipService.getMembershipOne(username);
+        Membership myMembership = membershipService.getMembershipOne(username);
+        String enddate = myMembership.getEnddate().toString();
 
-        model.addAttribute("myMembership", myMemberhsip);
+        model.addAttribute("myMembership", myMembership);
+        model.addAttribute("enddate",enddate);
     }
 
     @DeleteMapping("/membership/terminate")
@@ -92,8 +94,10 @@ public class MembershipController {
         if(isterminated)
             return "/membershipU";
         else
-            return "failed";
+            return "/membershipU";
     }
+
+
 
     @GetMapping("/membershipM")
     public void membership_M(Model model) {

@@ -24,7 +24,7 @@ public class Membership {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enddate;
     private String membershipcode;
-
+    private LocalDate terminationdate;
 
 
 }

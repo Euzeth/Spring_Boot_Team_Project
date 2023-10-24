@@ -115,7 +115,8 @@
         <div class="myMembership" th:if="${myMembership!=null }">
             <span th:text="|~ ${myMembership.enddate}|" style="font-size:20px; color:gray;"></span><br/>
             <span th:text="${myMembership.membershipcode}" style="font-size:27px; color: rgb(192, 57, 43);"></span>을 구독중입니다!
-            <a class="term_btn" th:data-username="${myMembership.username}" type="button">해지</a>
+            <!--<a class="term_btn" th:data-username="${myMembership.username}" type="button">해지</a>-->
+            <a class="term_btn" th:data-username="${myMembership.username}" onclick="terminateMembership()" type="button">해지</a>
         </div>
         <div>
             <div class="subscribe_1" >
@@ -176,6 +177,10 @@
 
 <!-- axios cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:inline="javascript">
+    //model변수 받아오기
+    var enddate = [[${enddate}]];
+</script>
 <script>
     const subscribe1_el = document.querySelector('.subscribe_1');
     subscribe1_el.addEventListener('click', function () {
@@ -204,15 +209,17 @@
         .catch(error=>{});
     });
 
-    const term_btn_el = document.querySelector('.term_btn');
-    term_btn_el.addEventListener('click', function () {
+
+        function terminateMembership() {
+        const term_btn_el = document.querySelector('.term_btn');
         const username = term_btn_el.dataset.username;
+        // 사용자에게 확인 메시지를 표시
         if (confirm("정말 구독을 취소하시겠습니까?") == true){
             axios.delete("/membership/terminate?username=" + username)
             .then(response=>{
                 if(response.status === 200){
                     console.log(username+"님 구독취소 완료!");
-                    alert(username+"님 구독이 취소되었습니다!")
+                    alert(username+"님 구독이 취소되었습니다! "+enddate+"까지 구독이 유지됩니다.")
                     location.reload();
                 }
             })
@@ -221,8 +228,7 @@
             console.log("구독 해지를 취소하였습니다.");
             alert("구독 해지가 취소되었습니다!");
         }
-    });
-
+    }
 </script>
 
 

@@ -3,6 +3,7 @@ package com.example.demo.Domain.Service;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.persistence.Tuple;
@@ -13,6 +14,7 @@ import com.example.demo.Domain.Entity.Membership;
 import com.example.demo.Domain.Repository.MembershipRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,8 +79,6 @@ public class MembershipService {
         } else {
             return "찾으시는 USERNAME이 없습니다.";
         }
-
-
     }
 
     @Transactional(rollbackFor = SQLException.class)
@@ -86,8 +86,21 @@ public class MembershipService {
         Membership terminateUser = membershipRepository.findMembershipUsername(username);
         System.out.println("user : "+terminateUser);
 
-        membershipRepository.delete(terminateUser);
+        terminateUser.setTerminationdate(terminateUser.getEnddate().plusDays(1));
 
-        return membershipRepository.existsById(username);
+        membershipRepository.save(terminateUser);
+
+        return true;
     }
+
+    @Scheduled(cron = "0 0 0 * * *") //매일 자정 실행
+    public void deleteTerminatedMemberships() {
+        LocalDate now = LocalDate.now();
+        List<Membership> membershipsToDelete = membershipRepository.findByTerminationdateBefore(now);
+        for (Membership membership : membershipsToDelete) {
+            //멤버십 삭제
+            membershipRepository.delete(membership);
+        }
+    }
+
 }

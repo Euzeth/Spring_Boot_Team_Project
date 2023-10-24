@@ -4,6 +4,7 @@ import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MusicDto;
 import com.example.demo.Domain.Dto.MylistDto;
 import com.example.demo.Domain.Entity.*;
+import com.example.demo.Domain.Repository.MemberRepository;
 import com.example.demo.Domain.Repository.MusicRepository;
 import com.example.demo.Domain.Repository.MylistRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,9 @@ public class MylistService {
     @Autowired
     MusicRepository musicRepository;
 
+    @Autowired
+    MemberRepository memberRepository;
+
     @Transactional(rollbackFor = SQLException.class)
     public void addMylist(List<Long> musicCodes, String username) {
         for (Long music_code : musicCodes) {
@@ -38,7 +42,9 @@ public class MylistService {
 
             mylist.setMylistId(mylistId);
             Music music = musicRepository.findByMusicCode(music_code);
+            Member member = memberRepository.findByUsername(username);
             mylist.setMusic(music);
+            mylist.setMember(member);
             System.out.println(mylist);
 
             mylistRepository.save(mylist);
