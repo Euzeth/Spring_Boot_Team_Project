@@ -37,11 +37,16 @@
     <header>
         <div class="top-header">
             <a href="/index"><img class="logo" src="/images/로고.png" alt=""></a>
-            <div class="search_box">
-                <div>SEARCH</div>
-                <input type="text" placeholder="듣고 싶은 노래를 검색하세요!">
-                <a href=""><img src="/images/search.svg" alt=""></a>
-            </div>
+            <form action="/search" method="get">
+                <div class="search_box">
+                    <select name="type"  class="selectbox" >
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <button type="submit">🔍</button>
+                </div>
+            </form>
             <ul>
                 <li><a href="" style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
                         src="/images/add.svg" alt=""> 멤버십가입</a></li>

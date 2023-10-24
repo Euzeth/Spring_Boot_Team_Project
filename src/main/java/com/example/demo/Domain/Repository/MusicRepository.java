@@ -16,7 +16,7 @@ public interface MusicRepository extends JpaRepository<Music,Long> {
     @Query(value = "SELECT * FROM musicdb.music m WHERE m.artist LIKE %:keyWord%  ORDER BY m.music_code ASC" ,nativeQuery = true)
     List<Music> findSearchMusicArtist(@Param("keyWord")String keyWord);
 
-    @Query(value = "SELECT * FROM musicdb.music m ORDER BY m.count DESC LIMIT 100",nativeQuery = true)
+    @Query(value = "SELECT *, RANK() OVER (ORDER BY m.count DESC) AS ranking FROM musicdb.music m ORDER BY m.count DESC LIMIT 100",nativeQuery = true)
     List<Music> findTop100();
 
     @Query(value = "SELECT * FROM musicdb.music m WHERE music_code = :music_code",nativeQuery = true)
