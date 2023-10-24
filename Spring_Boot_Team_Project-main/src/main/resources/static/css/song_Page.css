@@ -1,0 +1,151 @@
+        * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, rgb(222, 185, 185), #fff);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.music-container {
+  position: relative;
+  margin: 100px 0;
+  width: 400px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 1px 20px 20px rgb(222, 185, 185);
+
+}
+
+.music-info {
+
+  position: absolute;
+  padding: 10px 10px 10px 150px;
+  height: 50px;
+  width: 350px;
+  top: 0;
+  left: 25;
+  background-color: rgb(219, 193, 193);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(0%);
+  transition: transform 0.3s ease-in;
+  z-index: 0;
+  animation-play-state: paused;
+
+}
+
+
+.music-container.play .music-info {
+  animation: showMusicInfo 0.5s forwards;
+  transform: translateY(-100%);
+  animation-play-state: running;
+
+}
+
+@keyframes showMusicInfo {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.music-info h4 {
+  margin: 0;
+}
+
+.progress-container {
+  margin: 5px 0;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.progress {
+  background-color: #fe8daa;
+  height: 4px;
+  width: 0%;
+  border-radius: 5px;
+  transition: width 0.1s linear;
+}
+
+
+.img-container {
+  position: absolute;
+  top: -30;
+  left: 40;
+  width: 110px;
+  height: 110px;
+}
+
+.img-container::after {
+  content: '';
+  position: absolute;
+  top: 40;
+  left: 40;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 10;
+
+}
+
+.img-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.navigation {
+  position: absolute;
+  right: 120;
+  bottom: 10;
+  width: 100px;
+  display: flex;
+}
+
+.navigation button {
+  color: rgb(223, 214, 214);
+  background-color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.actiong-btn.big {
+  font-size: 40px;
+}
+
+.music-container.play .img-container img {
+  animation: rotate 3s infinite linear;
+  animation-play-state: running;
+}
+
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
