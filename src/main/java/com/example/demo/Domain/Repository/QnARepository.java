@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface QnARepository extends JpaRepository<QnA,Long> {
 
-
-
-
     @Query(value = "SELECT * FROM musicdb.qna ORDER BY no DESC LIMIT :amount OFFSET :offset", nativeQuery = true)
     List<QnA> findQnAAmountStart(@Param("amount") int amount, @Param("offset") int offset);
 

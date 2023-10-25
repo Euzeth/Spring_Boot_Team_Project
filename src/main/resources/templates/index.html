@@ -266,16 +266,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
-    const swiper_multi_slider = new Swiper('.section1 .d1', {
-        // Optional parameters
-        direction: 'horizontal',
-        autoplay: { delay: 2000 },
-        loop: true,
-        slidesPerView: 3,
-        loop: true,
-        loopFillGroupWithBlank: true,
-
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+  const swiper_multi_slider = new Swiper('.section1 .d1', {
+    direction: 'horizontal',
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: true, // 마우스 호버 시에 멈추도록 설정
+    },
+    loop: true,
+    slidesPerView: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+  });
+});
 </script>
 
 <!-- axios cdn -->

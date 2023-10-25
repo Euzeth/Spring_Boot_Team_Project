@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -22,54 +26,48 @@ public class PlayMP3 {
     private String currentMusicName;
     private FileInputStream finalFis;
     private BufferedInputStream finalBis;
-
+    private MusicDto musicDto = new MusicDto();
     @Autowired
     private MusicService musicService;
 
-    @GetMapping("/play")
-    public String playMusic(Model model) {
-        String fileTitle = null;
+    @PostMapping("/musicinfo")
+    public @ResponseBody MusicDto MusicInfo(@RequestBody Map<String, String> request) {
         try {
-            if (player != null) {
-                player.close();
-            }
+            System.out.println("----------------------------------------------------");
+            String title = request.get("title");
+            System.out.println("title : " + title);
+            musicDto = musicService.connect(title);
+            System.out.println("MusicDto : " + musicDto);
 
-            MusicDto dto = new MusicDto();
-            MusicDto musicDto = musicService.connect(dto);
-            fileTitle = musicDto.getTitle();
-            String filePath = musicDto.getMusic_path();
+            return musicDto;
 
-            File file = new File(filePath);
-            String absolutePath = file.getAbsolutePath();
-            System.out.println("FILE : " + filePath);
-
-            // 절대 경로 출력
-            System.out.println("절대 경로: " + absolutePath);
-            FileInputStream fis = new FileInputStream(absolutePath);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            player = new Player(bis);
-            player.play();
-            System.out.println("재생완료");
-
-            model.addAttribute("title", fileTitle);
-
-        } catch (Exception e) {
+        } catch(Exception e) {
             System.out.println(e.getMessage());
-
+            return null;
         }
-        return fileTitle;
     }
 
-    @GetMapping("/nextplay")
-    public String NextPlayMusic(Model model) {
+
+    @GetMapping("/musicinfo")
+    public @ResponseBody void playMusic(){
+        System.out.println("play실행했따");
+    }
+
+
+
+    @PostMapping("/play")
+    public @ResponseBody void playMusic(@RequestBody Map<String, String> request) {
         String fileTitle = null;
         try {
+            if(player != null){
+                player.close();
+                System.out.println("멈춤");
+            }
+            System.out.println("play------------------------");
 
-            MusicDto dto = new MusicDto();
-            MusicDto musicDto = musicService.connectNext(dto);
-            fileTitle = musicDto.getTitle();
+            String title = request.get("title");
+            musicDto = musicService.connect(title);
             String filePath = musicDto.getMusic_path();
-
 
             File file = new File(filePath);
             String absolutePath = file.getAbsolutePath();
@@ -80,61 +78,75 @@ public class PlayMP3 {
             FileInputStream fis = new FileInputStream(absolutePath);
             BufferedInputStream bis = new BufferedInputStream(fis);
             player = new Player(bis);
-            player.play();
+            Thread playThread = new Thread(() -> {
+                try {
+                    player.play();
+                    System.out.println("Play Music");
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            });
+            playThread.start();
             System.out.println("다음곡재생완료");
 
-            model.addAttribute("title", fileTitle);
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
         }
-        return fileTitle;
+
     }
-
-    @GetMapping("/previousplay")
-    public String PreviousPlayMusic(Model model) {
-        String fileTitle = null;
-        try {
-            if (player != null) {
-                player.close();
-            }
-
-            MusicDto dto = new MusicDto();
-            MusicDto musicDto = musicService.connectNext(dto);
-            fileTitle = musicDto.getTitle();
-            String filePath = musicDto.getMusic_path();
-
-
-            File file = new File(filePath);
-            String absolutePath = file.getAbsolutePath();
-            System.out.println("FILE : " + filePath);
-
-            // 절대 경로 출력
-            System.out.println("절대 경로: " + absolutePath);
-            FileInputStream fis = new FileInputStream(absolutePath);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            player = new Player(bis);
-            player.play();
-            System.out.println("이전곡재생완료");
-
-            model.addAttribute("title", fileTitle);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-        }
-        return fileTitle;
-    }
+//
+//	@GetMapping("/previousplay")
+//	public @ResponseBody String PreviousPlayMusic(Model model) {
+//		String fileTitle = null;
+//		try {
+//			if (player != null) {
+//				player.close();
+//			}
+//
+//			MusicDto dto = new MusicDto();
+//			MusicDto musicDto = musicService.connectNext(dto);
+//			fileTitle = musicDto.getTitle();
+//			String filePath = musicDto.getMusic_path();
+//
+//
+//			File file = new File(filePath);
+//			String absolutePath = file.getAbsolutePath();
+//			System.out.println("FILE : " + filePath);
+//
+//			// 절대 경로 출력
+//			System.out.println("절대 경로: " + absolutePath);
+//			FileInputStream fis = new FileInputStream(absolutePath);
+//			BufferedInputStream bis = new BufferedInputStream(fis);
+//			player = new Player(bis);
+//			Thread playThread = new Thread(() -> {
+//				try {
+//					player.play();
+//					System.out.println("Play Music");
+//				} catch (Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			});
+//			System.out.println("이전곡재생완료");
+//
+//			return fileTitle;
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//			return null;
+//		}
+//	}
 
     @GetMapping("/pause")
-    public void pauseMusic() {
-
+    public @ResponseBody void pauseMusic() {
+        if(player != null){
+            player.close();
+            System.out.println("멈춤");
+        }
 
     }
 
     @GetMapping("/stop")
-    public void stopMusic() {
+    public @ResponseBody void stopMusic() {
         if(player!= null)
             player.close();
         System.out.println("멈춤");
@@ -143,7 +155,7 @@ public class PlayMP3 {
     }
 
     @GetMapping("/time")
-    public int getTime() {
+    public @ResponseBody int getTime() {
         if (player == null)
             return 0;
         return player.getPosition();
