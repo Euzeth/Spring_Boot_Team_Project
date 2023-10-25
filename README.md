@@ -84,7 +84,6 @@
 ##### DEV TOOLS
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![SPRING BOOT](https://img.shields.io/badge/SPRING BOOT-%6DB33F.svg?style=for-the-badge&logo=SPRING BOOT&logoColor=green)
 
 
 [참고 배지 싸이트] <br/>
