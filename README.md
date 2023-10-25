@@ -85,7 +85,7 @@
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![SPRING BOOT](https://img.shields.io/badge/SPRING%20BOOT-%236DB33F.svg?style=for-the-badge&logo=spring-boot&logoColor=green)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-%23000000.svg?style=for-the-badge&logoSvg=file:///C:/Users/ChiYeon/Downloads/intellijidea.svg)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-%23000000.svg?style=for-the-badge&logoSvg=[file:///C:/Users/ChiYeon/Downloads/intellijidea.svg](https://simpleicons.org/icons/intellijidea.svg))
 
 
 [참고 배지 싸이트] <br/>
