@@ -14,9 +14,9 @@
 
 ## ▶️ 개발 일정
 #### 2023-09-26 ~ 2023-09-27(02Day) : 요구사항분석 / 유스케이스 
-#### 2023-09-28 ~ 2023-10-02(05Day) : 스타일가이드 / 스토리보드 / ERD / ClassDiagram / Sequence Diagram
+#### 2023-09-28 ~ 2023-10-02(05Day) : 스타일가이드 / 스토리보드 / ERD / ClassDiagram 
 #### 2023-10-03 ~ 2023-10-04(02Day) : 개발환경 구축(Github / Git / STS / Mysql / AWS ...)
-#### 2023-10-04 ~ 2023-10-19(2Weeks) : 기능 구현
+#### 2023-10-04 ~ 2023-10-27(3Weeks) : 기능 구현
 
 
 <br/>
@@ -47,11 +47,12 @@
 
 ##### IDE : IntelliJ IDEA 2023.2.2
 ##### SpringBoot 2.7.15
-##### maven version 3.1.2
+##### Gradle
 ##### Git 2.40.1.windows.1
 ##### Mysql Server 8.0.33
 ##### Mysql Workbench 8.0.33
-##### ...
+##### JPA
+##### 
 <br/>
 
 ## ▶️ DevOps 
@@ -60,7 +61,6 @@
 ##### Amazon Web Service RDS(Remote Datebase Server)
 ##### Git & Github
 ##### Docker(Server Image)
-##### Swagger(API Document)
 ##### Adobe XD
 <br/>
 
@@ -75,14 +75,18 @@
 <br/>
 
 ## ▶️ 기술스택
-
+##### FRONT END
 ![JAVA](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+##### BACK END
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+##### DEV TOOLS
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-
+![SPRING BOOT](https://img.shields.io/badge/SPRING%20BOOT-%236DB33F.svg?style=for-the-badge&logo=spring-boot&logoColor=green)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-%23000000.svg?style=for-the-badge&logoSvg=(https://simpleicons.org/icons/intellijidea.svg))
+![GitHub](https://img.shields.io/badge/GitHub-%23181717.svg?style=for-the-badge&logo=github)
 
 [참고 배지 싸이트] <br/>
 https://badgen.net/ <br/>
