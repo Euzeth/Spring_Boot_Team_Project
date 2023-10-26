@@ -205,7 +205,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/mypage")
-	public String mypage(HttpSession session, Authentication authentication, Model model) {
+	public String mypage(HttpSession session, Authentication authentication) {
 		System.out.println("authentication : " + authentication);
 		return MypageRequest(session);
 	}	
@@ -222,8 +222,7 @@ public class MemberController {
 			System.out.println("Role is null, redirecting to /member/login");
 			return "redirect:/member/login";
 		}
-
-		if (role.equals("ROLE_USER")) {
+		else if (role.equals("ROLE_USER")) {
 			System.out.println("user's mypage");
 			return "redirect:/member/user";
 		} else if (role.equals("ROLE_MEMBER")) {
