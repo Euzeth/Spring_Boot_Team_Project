@@ -229,7 +229,7 @@ public class MemberController {
 			System.out.println("member's mypage");
 			return "redirect:/member/member";
 		}
-		return "redirect:/indexlog";
+		return "redirect:/member/login";
 	}
 
 	@GetMapping("/user")
