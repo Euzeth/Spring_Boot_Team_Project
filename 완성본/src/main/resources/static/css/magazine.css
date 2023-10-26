@@ -1,0 +1,62 @@
+main {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+}
+
+.magazineTop {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.magazineTop h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.magazineContent {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.magazineContent img {
+    max-width: 200px;
+    margin-right: 30px;
+}
+
+.magazineContent h2 {
+    margin: 0;
+    font-size: 20px;
+    
+    width: 200px;
+}
+
+.magazineContent p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.magazineContent .date {
+    margin-right: 50px;
+    color: #999;
+}
+
+
+.magazineContent .image-date {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.magazineDown {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
