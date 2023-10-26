@@ -95,46 +95,7 @@ public class PlayMP3 {
         }
 
     }
-//
-//	@GetMapping("/previousplay")
-//	public @ResponseBody String PreviousPlayMusic(Model model) {
-//		String fileTitle = null;
-//		try {
-//			if (player != null) {
-//				player.close();
-//			}
-//
-//			MusicDto dto = new MusicDto();
-//			MusicDto musicDto = musicService.connectNext(dto);
-//			fileTitle = musicDto.getTitle();
-//			String filePath = musicDto.getMusic_path();
-//
-//
-//			File file = new File(filePath);
-//			String absolutePath = file.getAbsolutePath();
-//			System.out.println("FILE : " + filePath);
-//
-//			// 절대 경로 출력
-//			System.out.println("절대 경로: " + absolutePath);
-//			FileInputStream fis = new FileInputStream(absolutePath);
-//			BufferedInputStream bis = new BufferedInputStream(fis);
-//			player = new Player(bis);
-//			Thread playThread = new Thread(() -> {
-//				try {
-//					player.play();
-//					System.out.println("Play Music");
-//				} catch (Exception e) {
-//					System.out.println(e.getMessage());
-//				}
-//			});
-//			System.out.println("이전곡재생완료");
-//
-//			return fileTitle;
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			return null;
-//		}
-//	}
+
 
     @GetMapping("/pause")
     public @ResponseBody void pauseMusic() {
