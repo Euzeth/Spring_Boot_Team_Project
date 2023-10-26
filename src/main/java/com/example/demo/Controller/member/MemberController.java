@@ -218,10 +218,15 @@ public class MemberController {
 
 	private String MypageRequest(HttpSession session) {
 		String role = (String) session.getAttribute("role");
-		if ("ROLE_USER".equals(role)) {
+		if(role == null) {
+			System.out.println("Role is null, redirecting to /member/login");
+			return "redirect:/member/login";
+		}
+
+		if (role.equals("ROLE_USER")) {
 			System.out.println("user's mypage");
 			return "redirect:/member/user";
-		} else if ("ROLE_MEMBER".equals(role)) {
+		} else if (role.equals("ROLE_MEMBER")) {
 			System.out.println("member's mypage");
 			return "redirect:/member/member";
 		}
