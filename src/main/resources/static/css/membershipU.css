@@ -7,23 +7,47 @@
 
 .ms_pay .title {
 
-    display: block;
+    display: inline-block;
     color: rgb(192, 57, 43);
     font-weight: 700;
-    width: 900px;
+    width: 500px;
     font-size: 2.5rem;
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.ms_pay .myMembership{
+    display: inline-block;
+    text-align: right;
+    width: 690px;
+    font-size: 25px;
+
+}
+
+
+.ms_pay .myMembership>a{
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    border: 2px solid rgb(192, 57, 43);
+    border-radius: 7px;
+    background-color: white;
+    color: rgb(192, 57, 43);
+    font-size: 23px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.ms_pay .myMembership>a:hover{
+    background-color: rgb(192, 57, 43);
+    color: white;
+}
+
 .ms_pay>div{
-    width: 1000px;
     display: flex;
-    margin: 50px auto;
-    /* border: 1px solid blue; */
+    margin: 20px auto;
     justify-content:space-around;
-    align-items: center;
     margin-top: 15px;
-    margin-bottom: 50px;
 }
 
 
@@ -32,7 +56,7 @@
     border: 5px solid gray;
     border-radius: 40px;
     width: 350px;
-    height: 300px;
+    height: 350px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
@@ -43,7 +67,7 @@
     border: 5px solid gray;
     border-radius: 40px;
     width: 350px;
-    height: 300px;
+    height: 350px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
@@ -56,7 +80,7 @@
     font-size: 37px;
     color: gray;
     margin-top: 5px;
-
+    
 }
 
 .ms_pay .subscribe_2>span {
@@ -66,7 +90,7 @@
     font-size: 37px;
     color: gray;
     margin-top: 5px;
-
+    
 }
 
 
@@ -92,8 +116,7 @@
     font-weight: 700;
     width: 900px;
     font-size: 2rem;
-    margin-top: 15px;
-    margin-top: 15px;
+    margin-top: 60px;
     margin-bottom: 30px;
 }
 
@@ -120,12 +143,12 @@
     /* position: absolute; */
     width: 130px;
     height: 130px;
-
+    
 }
 
 
 .ms_benefit #title1 {
-
+    
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
@@ -134,7 +157,7 @@
 }
 
 .ms_benefit #title2 {
-
+    
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
@@ -142,7 +165,7 @@
 }
 
 .ms_benefit #title3 {
-
+    
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
@@ -150,9 +173,10 @@
 }
 
 .ms_benefit #title4 {
-
+    
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
     margin-left: 150px;
 }
+
