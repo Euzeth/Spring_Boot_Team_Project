@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'SDSamliphopangche_Basic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 2px;
+    box-sizing: border-box;
+    font-family: 'SDSamliphopangche_Basic';
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.wrapper {
+    width: 1200px;
+    margin: 30px auto;
+}
+
+.wrapper>nav>.mobilemenu>.material-symbols-outlined{ 
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <!--  BS5  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- common.css    -->
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/Join_Page.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+
+
+    <!-- favicon.ico   -->
+    <link rel="icon" href="/images/favicon/favicon_2xl.png" />
+
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- header -->
+    <!-- top-header -->
+    <header>
+        <div class="log-header">
+            <a href="/index" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <ul>
+                <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
+        <div class="logheader_line"></div>
+    </header>
+
+    <section class="join">
+        <h1>워터멜론과 함께 하세요!</h1>
+        <form class="joinform" name="joinform" action="/member/join" method="post" onsubmit="return false">
+            <ul>
+                <li><span>ID</span> <span th:text="${username}" style="font-size:0.7rem;color:orange;" class="username_msg"></span>
+                    <div>
+                        <input id="id_input" class="username" name="username" type="text" placeholder="abcd" title="아이디입력" >
+                        <button type="button" class="btn btn-secondary username_btn" id="idcheck_btn">
+                            확인
+                        </button>
+                    </div>
+                    </li>
+                <li><span>PW</span>  <span th:text="${password}" style="font-size:0.7rem;color:orange;"></span>
+                    <input id="pw_input" name="password" type="password" placeholder="비밀번호" title="비밀번호입력" ></li>
+                <li><span>PW Check</span> <span th:text="${repassword}" style="font-size:0.7rem;color:orange;"></span>
+                    <input id="pwc_input" name="repassword" type="password" placeholder="비밀번호확인" title="비밀번호확인" ></li>
+                <li><span>NAME</span> <input type="text" name="name" placeholder="이름" title="이름입력" ></li>
+                <li><span>EMAIL</span> <span th:text="${email}" style="font-size:0.7rem;color:orange;" class="email_msg"></span>
+                    <div>
+                        <input id="email_input" class="email" type="text" name="email" title="이메일입력" placeholder="example@example.com">
+                        <button type="button" class="btn btn-secondary email_auth_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            인증
+                        </button>
+                    </div>
+                </li>
+                <li><span>우편번호</span> <span th:text="${zipcode}" style="font-size:0.7rem;color:orange;"></span>
+                    <div>
+                        <input type="text" id="addr_input" name="zipcode" class="zipcode" placeholder="우편번호" title="우편번호입력" >
+                        <button class="btn btn-secondary zipcode_btn" id="addr_btn">검색</button>
+                    </div>
+                </li>
+                <li><span>ADDRESS</span> <input name="addr1" class="addr1" type="text" placeholder="주소" title="주소입력" ></li>
+                <li><input type="text" name="addr2" placeholder="동/호수 입력" title="주소입력"></li>
+                <li><span>PHONE</span> <input type="text" name="phone" placeholder="핸드폰번호" title="핸드폰번호입력" ></li>
+                <li><button id="join_btn" onclick="isValid()">JOIN!</button></li>
+            </ul>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li><a href=""> 개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/images/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span> <span>대구광역시
+					중구 중앙대로 366 반월센트럴타워 10층</span> <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span> <span>사업자등록번호
+					: 024-04-02023</span> <br> <span>문의전화 : 1544-1111 (평일
+					09:00-18:00)</span> <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+    </footer>
+</div>
+
+<!-- Email Auth Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">인증 코드 입력</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form style="display:flex; justify-content:space-between;" onsubmit="return false">
+                    <div style="width:100%;">
+                        <input class="form-control code" >
+                    </div>
+                    <div style="width:80px; margin-left:5px; text-align:right;">
+                        <button class="btn btn-primary email_auth_btn_2">전송</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">다시요청</button>
+                <button type="button" class="btn btn-secondary modal_exit" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // EMAIL 발송
+    const email_auth_btn_el = document.querySelector('.email_auth_btn');
+    const email = document.querySelector('.email');
+    email_auth_btn_el.addEventListener('click', function(){
+        //alert('TEST');
+        axios.get('/member/auth/email/' + email.value)
+        .then(response => { console.log(response); })
+        .catch(error => {});
+    });
+
+    // CODE 전송
+    const email_auth_btn_2_el = document.querySelector('.email_auth_btn_2');
+    const code = document.querySelector('.code');
+    email_auth_btn_2_el.addEventListener('click', function(){
+        //alert('TEST');
+
+        const email_msg = document.querySelector('.email_msg');
+
+        axios.get('/member/auth/confirm/' + code.value)
+        .then(response => {
+            console.log(response);
+            if(response.data === 'success'){
+                email_msg.innerHTML = "이메일 인증 성공..!";
+                email_msg.style.color="green";
+            }else{
+                email_msg.innerHTML = "이메일 인증 실패..!";
+                email_msg.style.color="red";
+            }
+            //모달창 종료
+            const modal_exit = document.querySelector('.modal_exit');
+            modal_exit.click();
+         })
+        .catch(error => {});
+    });
+</script>
+
+<script>
+    const isValid = ()=>{
+        const form = document.joinform;
+        /*
+        if(form.username.value.trim()==""){
+            alert("USERNAME을 입력하세요.");
+            return;
+        }
+        if(form.password.value.trim()==""){
+            alert("PASSWORD을 입력하세요.");
+            return;
+        }
+        */
+        form.submit();
+    }
+</script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+    const addr_btn = document.querySelector('#addr_btn');
+    addr_btn.addEventListener('click', function(){
+        new daum.Postcode({
+        oncomplete: function(data) {
+            console.log(data);
+            const zipcode = document.querySelector('.zipcode');
+            const addr1 = document.querySelector('.addr1');
+
+            if(data.userSelectedType === 'R')
+            {
+                addr1.value = data.roadAddress;
+            }
+            else
+            {
+                addr1.value = data.jibunAddress;
+            }
+            zipcode.value = data.zonecode;
+        }
+    }).open();
+    });
+
+    async function checkDuplicateId() {
+			var id = document.getElementById("id_input").value;
+
+			try {
+				const response = await axios.get(`/member/checkDuplicate`, {
+							params : { username : id },
+				});
+
+				const isDuplicate = response.data;
+				if (!isDuplicate) {
+					alert("이미 사용 중인 아이디입니다.");
+				} else {
+					alert("사용 가능한 아이디입니다.");
+				}
+			} catch (error) {
+				alert("중복 확인 중에 오류가 발생했습니다.");
+			}
+
+		}
+		document.getElementById("idcheck_btn").addEventListener("click", checkDuplicateId);
+
+</script>
+
+</body>
+</html>
