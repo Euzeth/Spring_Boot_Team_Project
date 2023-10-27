@@ -91,9 +91,9 @@ public class MembershipController {
 
         boolean isterminated = !membershipService.terminateMembership(username);
         if(isterminated)
-            return "/membershipU";
+            return "membershipU";
         else
-            return "/membershipU";
+            return "membershipU";
     }
 
 
@@ -123,9 +123,9 @@ public class MembershipController {
         params.add("quantity", "1");
         params.add("total_amount", "6900");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/membership/success1");
-        params.add("fail_url", "http://localhost:8080/membership/fail");
-        params.add("cancel_url", "http://localhost:8080/membership/cancel");
+        params.add("approval_url", "http://3.38.87.177/:8080/membership/success1");
+        params.add("fail_url", "http://3.38.87.177:8080/membership/fail");
+        params.add("cancel_url", "http://3.38.87.177:8080/membership/cancel");
 
         // HEADER + PARAMETER
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
@@ -158,9 +158,9 @@ public class MembershipController {
         params.add("quantity", "1");
         params.add("total_amount", "9900");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/membership/success2");
-        params.add("fail_url", "http://localhost:8080/membership/fail");
-        params.add("cancel_url", "http://localhost:8080/membership/cancel");
+        params.add("approval_url", "http://3.38.87.177:8080/membership/success2");
+        params.add("fail_url", "http://3.38.87.177:8080/membership/fail");
+        params.add("cancel_url", "http://3.38.87.177:8080/membership/cancel");
 
         // HEADER + PARAMETER
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
