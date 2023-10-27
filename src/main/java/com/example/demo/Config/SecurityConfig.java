@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 				.antMatchers("/css/**", "/js/**", "/images/**", "/font/**").permitAll()
-				.antMatchers("/", "/index", "/member/login", "/member/mypage", "/memeber/join", "/song", "/search").permitAll()
+				.antMatchers("/", "/index", "/member/login", "/member/mypage", "/member/join", "/song", "/search").permitAll()
 				.antMatchers("/inmylist", "/Top100", "/membershipU", "/membershipM" , "/main").permitAll()
 				.antMatchers("/play", "/nextplay", "/previousplay", "/pause", "/stop", "/time").permitAll()
 				.antMatchers("/qna/list","/notice/list","/notice/post", "/notice/read","/notice/update","/notice/delete","/qna/read","/qna/post","/qna/delete","/qna/update").permitAll()
