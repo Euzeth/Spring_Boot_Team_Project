@@ -92,9 +92,9 @@ public class MembershipController {
 
         boolean isterminated = !membershipService.terminateMembership(username);
         if(isterminated)
-            return "/membershipU";
+            return "membershipU";
         else
-            return "/membershipU";
+            return "membershipU";
     }
 
 
