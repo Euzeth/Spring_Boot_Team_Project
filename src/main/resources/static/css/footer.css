@@ -24,11 +24,10 @@
 }
 
 .wrapper>footer>div>.footer_menu>li>a{
-    font-family: 'NanumSquareAceb'; 
-    font-size: 17px;
-    text-decoration: none;
     font-family: 'SDSamliphopangche_Basic';
-    color:black;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
 }
 
 .wrapper>footer>.Site_info{
@@ -52,6 +51,6 @@
 }
 
 .wrapper>footer>.Site_info>.Sitename{
-    font-family: 'NanumSquareAceb'; 
-    font-size: 17px;
+    font-family: 'SDSamliphopangche_Basic';
+    font-size: 23px;
 }
