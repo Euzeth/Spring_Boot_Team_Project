@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="/css/Main_Page.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
     <link rel="stylesheet" type="text/css" href="/css/songs.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
     <!-- favicon.ico   -->
     <link rel="icon" href="/images/favicon/favicon_2xl.png" />
@@ -34,8 +35,8 @@
             </form>
             <ul>
                 <li><a href="/member/login"
-                    style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
-                            src="/images/add.png" alt=""> 멤버십가입</a></li>
+                       style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
+                        src="/images/add.png" alt=""> 멤버십가입</a></li>
                 <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
             </ul>
         </div>
@@ -251,9 +252,7 @@
 <div class="wrap__music">
     <div class="music__inner">
 
-        <div class="volume">
-            <input type="range" id="volume-slider" min="0" max="100">
-        </div>
+
 
         <!-- // music__img -->
         <div class="music__song">
@@ -304,7 +303,18 @@
             </div>
         </div>
         <!-- // music__list -->
+
+        <div class="volume">
+            <i class="material-icons icon-left">volume_off</i>
+            <input type="range" id="volume-slider" min="0" max="100">
+            <i class="material-icons icon-right">volume_up</i>
+
+        </div>
+
     </div>
+
+
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -341,51 +351,17 @@
     const musicListUl = musicList.querySelector(".list ul");
     const MusicClick = document.querySelectorAll(".Music-Click");
 
-    let allMusic = [];
+
+
+    let allMusic = JSON.parse(localStorage.getItem("allMusic")) || [];
+    // allMusic 배열을 콘솔에 출력
+    console.log("allMusic : "+allMusic);
+    var numIndex = localStorage.getItem("addMusicIndex");
+    console.log("numIndex : "+numIndex);
     let musicIndex =1;
 
-    // 세션저장
-    sessionStorage.setItem("allMusic", JSON.stringify(allMusic));
-
-    const storedMusicPlayerState = sessionStorage.getItem("musicPlayerState");
-
-    if (storedMusicPlayerState) {
-      const allMusic = JSON.parse(storedMusicPlayerState);
-
-      updateMusicPlayerUI(allMusic);
-    } else {
-      const initialMusicPlayerState = {
-        title: "Default Title",
-        artist: "Default Artist",
-        filePath : "Default FilePath",
-        dataIndex : "Default DataIndex"
-      };
-
-      updateMusicPlayerUI(initialMusicPlayerState);
-    }
-
-    // 업데이트 뮤직 플레이어 UI
-function updateMusicPlayerUI(allMusic) {
-    const currentMusic = allMusic[musicIndex - 1];
-
-    if (currentMusic) {
-      musicName.innerText = currentMusic.title;
-      musicArtist.innerText = currentMusic.artist;
-      index = cuurentMusic.dataIndex;
 
 
-      const encodedTitle = encodeURIComponent(currentMusic.title);
-      musicAudio.src = `http://localhost:8080/audio/${encodedTitle}.mp3`;
-      loadMusic(index);
-      playMusic();
-      playListMusic();
-    } else {
-
-      musicName.innerText = "No Music";
-      musicArtist.innerText = "No Artist";
-
-    }
-}
 
     // 볼륨
 
@@ -484,6 +460,9 @@ function updateMusicPlayerUI(allMusic) {
         musicAudio.play();
 
     }
+
+
+
 
     // 일시정지 버튼
     function pauseMusic(){
@@ -658,6 +637,16 @@ function updateMusicPlayerUI(allMusic) {
         playMusic();
         playListMusic();
     }
+    // 창이 열리면 노래 시작
+     window.addEventListener("load", ()=>{
+            addList(numIndex);
+            loadMusic(numIndex);
+            playMusic();
+            playListMusic(numIndex);
+        });
+
+
+
 </script>
 <!-- axios cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"

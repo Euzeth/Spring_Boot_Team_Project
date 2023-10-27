@@ -62,16 +62,45 @@
             object-fit: contain;
         }
         .volume {
-          height: 20px;
-          overflow: hidden;
-          transition: height 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            margin-top : 15px;
+
         }
+
         .volume input[type="range"] {
           height: 100%;
         }
+        #volume-slider {
+         height:20px;
+         width: 320px;
+         background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%)
+
+
+
+         }
         .volume:hover {
-          height: 40px;
+          height: 20px;
         }
+
+       .icon-left,
+       .icon-right {
+           font-size: 24px; /* 아이콘 크기 조절 */
+           background: linear-gradient(var(--pink) 0%, var(--violet) 100%);
+       }
+
+       .icon-left {
+           flex: 1; /* 왼쪽 아이콘이 왼쪽으로 정렬 */
+       }
+
+       .icon-right {
+           flex: 1; /* 오른쪽 아이콘이 오른쪽으로 정렬 */
+       }
+
+
         .music__song {
             text-align: center;
             margin: 30px;

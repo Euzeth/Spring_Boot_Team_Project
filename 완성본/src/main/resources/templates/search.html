@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>search</title>
+    <title>WaterMelon</title>
 
     <!--  Google Icon  -->
     <link rel="stylesheet"
@@ -15,7 +15,8 @@
     <link rel="stylesheet" type="text/css" href="/css/search.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
     <link rel="stylesheet" type="text/css" href="/css/songs.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
     <!-- favicon.ico   -->
     <link rel="icon" href="/images/favicon/favicon.ico"/>
@@ -155,8 +156,8 @@
                                     <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
                                     <td th:text="${searchDto.music_code}"></td>
-                                    <td><a th:text="${searchDto.title}"> </a></td>
-                                    <td th:text="${searchDto.artist}"></td>
+                                    <td><a th:text="${searchDto.title}" class="Music-Click"></a></td>
+                                    <td th:text="${searchDto.artist}" class="artist"></td>
                                     <td>
                                         <a th:href="@{/search/like(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}"
                                            class="like_btn">
@@ -209,9 +210,7 @@
 <div class="wrap__music">
     <div class="music__inner">
 
-        <div class="volume">
-            <input type="range" id="volume-slider" min="0" max="100">
-        </div>
+
 
         <!-- // music__img -->
         <div class="music__song">
@@ -262,153 +261,24 @@
             </div>
         </div>
         <!-- // music__list -->
+
+        <div class="volume">
+            <i class="material-icons icon-left">volume_off</i>
+            <input type="range" id="volume-slider" min="0" max="100">
+            <i class="material-icons icon-right">volume_up</i>
+
+        </div>
+
     </div>
+
+
+
 </div>
+
 <!-- axios -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
         integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-    //Top버튼 스크립트
-        const mTopBtn = document.querySelector(".top_btn");
-
-        window.addEventListener("scroll", () => {
-          let scVal = window.scrollY;
-
-          if (scVal === 0) {
-            mTopBtn.style.opacity = 0;
-          } else {
-            mTopBtn.style.opacity = 1;
-            mTopBtn.classList.remove("active");
-          }
-        });
-
-
-        mTopBtn.addEventListener("click", () => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-        });
-
-
-    //체크박스로 체크한 곡 mylist에 선택 담기
-        window.onload = function() {
-            var allCheck = document.getElementById("allCheck");
-            var rowCheckboxes = document.getElementsByName("rowCheck");
-            var selectedMusicCodes = [];
-            var username = "";  // 사용자 이름
-
-            // username 가져오기
-            axios.get('/user/info')
-                .then(function(response) {
-                    username = response.data;
-                    console.log("User: " + username);
-                })
-                .catch(function(error){
-                    console.error(error);
-                });
-
-            // allcheck 선택되었을 때 모두 선택
-            allCheck.addEventListener("change", function() {
-                for (var i = 0; i < rowCheckboxes.length; i++) {
-                    rowCheckboxes[i].checked = allCheck.checked;
-                    if (allCheck.checked) {
-                        var musicCode = rowCheckboxes[i].parentElement.nextElementSibling.textContent;
-                        addMusicCode(musicCode);
-                    } else {
-                        // allCheck가 선택이 해제되었을 때 배열에서 제거
-                        var musicCode = rowCheckboxes[i].parentElement.nextElementSibling.textContent;
-                        removeMusicCode(musicCode);
-                    }
-                }
-                console.log("Selected Music Codes: " + selectedMusicCodes.join(", "));
-            });
-
-            for (var i = 0; i < rowCheckboxes.length; i++) {
-                rowCheckboxes[i].addEventListener("change", function() {
-                    if (this.checked) {
-                        // 선택된 체크박스의 music_code 값을 얻기
-                        var musicCode = this.parentElement.nextElementSibling.nextElementSibling.textContent;
-                        // musicCode를 배열에 추가
-                        addMusicCode(musicCode);
-                    } else {
-                        var musicCode = this.parentElement.nextElementSibling.nextElementSibling.textContent;
-                        // 체크가 해제된 경우 배열에서 제거
-                        removeMusicCode(musicCode);
-                    }
-                    console.log("Selected Music Codes: " + selectedMusicCodes.join(", "));
-                });
-            }
-
-            // "선택담기" 버튼 클릭 시 이벤트 처리
-            document.querySelector("#selectAdd").addEventListener("click", function() {
-
-                // 선택된 music_code 배열과 username을 서버로 보내기
-                axios.post('/search/addlist', {
-                    musicCodes: selectedMusicCodes,
-                    username: username
-                })
-                .then(function (response) {
-                    console.log("Mylist add Success");
-                    alert("음악이 Mylist에 담겼습니다!")
-                    location.reload();
-                })
-                .catch(function (error) {
-                    console.log(username);
-                    console.log(selectedMusicCodes);
-                    console.error("Mylist add fail.. : ", error);
-                });
-            });
-
-            // "ADD" 버튼 클릭 시 이벤트 처리
-            var addButtons = document.querySelectorAll(".add_btn");
-            addButtons.forEach(function(button) {
-                button.addEventListener("click", function() {
-                    var row = this.parentElement.parentElement;
-                    var musicCode = row.querySelector("td:nth-child(3)").textContent;
-                    addMusicCode(musicCode);
-                    // 선택된 music_code 배열과 username을 서버로 보내기
-                    axios.post('/search/addlist', {
-                        musicCodes: selectedMusicCodes,
-                        username: username
-                    })
-                    .then(function (response) {
-                        console.log("Mylist add Success");
-                        alert("음악이 Mylist에 담겼습니다!");
-                        location.reload();
-                    })
-                    .catch(function (error) {
-                        console.error("Mylist add fail: ", error);
-                    });
-                });
-            });
-
-
-            function addMusicCode(musicCode) {
-                if (selectedMusicCodes.indexOf(musicCode) === -1) {
-                    selectedMusicCodes.push(musicCode);
-                }
-            }
-
-            function removeMusicCode(musicCode) {
-                var index = selectedMusicCodes.indexOf(musicCode);
-                if (index > -1) {
-                    selectedMusicCodes.splice(index, 1);
-                }
-            }
-        }
-
-
-
-
-
-
-
-
-
-</script>
 <script >
     const volumeSlider = document.getElementById("volume-slider");
     const musicWrap = document.querySelector(".wrap__music");
@@ -429,52 +299,27 @@
     const MusicListClose = musicList.querySelector(".close");
     const musicListUl = musicList.querySelector(".list ul");
     const MusicClick = document.querySelectorAll(".Music-Click");
+    const musicOff = document.querySelector(".material-icons icon-left");
 
-    let allMusic = [];
-    let musicIndex =1;
 
-    // 세션저장
-    sessionStorage.setItem("allMusic", JSON.stringify(allMusic));
 
-    const storedMusicPlayerState = sessionStorage.getItem("musicPlayerState");
 
-    if (storedMusicPlayerState) {
-      const allMusic = JSON.parse(storedMusicPlayerState);
+  let allMusic = JSON.parse(localStorage.getItem("allMusic")) || [];
+      // allMusic 배열을 콘솔에 출력
+      console.log("allMusic : "+allMusic);
+      var numIndex = localStorage.getItem("addMusicIndex");
+      console.log("numIndex : "+numIndex);
+      let musicIndex =1;
 
-      updateMusicPlayerUI(allMusic);
-    } else {
-      const initialMusicPlayerState = {
-        title: "Default Title",
-        artist: "Default Artist",
-        filePath : "Default FilePath",
-        dataIndex : "Default DataIndex"
-      };
 
-      updateMusicPlayerUI(initialMusicPlayerState);
+    function addMusic(num) {
+        addMusicIndex = allMusic[num-1].dataIndex;
+        localStorage.setItem("addMusicIndex",num);
+        console.log("allMusic : " + allMusic);
+        localStorage.setItem("allMusic", JSON.stringify(allMusic));
+        console.log("LocalStorage.setItem : " + localStorage);
     }
 
-    // 업데이트 뮤직 플레이어 UI
-function updateMusicPlayerUI(allMusic) {
-    const currentMusic = allMusic[musicIndex - 1];
-
-    if (currentMusic) {
-      musicName.innerText = currentMusic.title;
-      musicArtist.innerText = currentMusic.artist;
-      index = cuurentMusic.dataIndex;
-
-
-      const encodedTitle = encodeURIComponent(currentMusic.title);
-      musicAudio.src = `http://localhost:8080/audio/${encodedTitle}.mp3`;
-      loadMusic(index);
-      playMusic();
-      playListMusic();
-    } else {
-
-      musicName.innerText = "No Music";
-      musicArtist.innerText = "No Artist";
-
-    }
-}
 
     // 볼륨
 
@@ -482,6 +327,8 @@ function updateMusicPlayerUI(allMusic) {
         const volume = volumeSlider.value / 100;
         musicAudio.volume = volume;
     });
+
+
 
     // 음악 재생
     function loadMusic(num){
@@ -493,6 +340,9 @@ function updateMusicPlayerUI(allMusic) {
         var encodedTitle  = encodeURIComponent(title);
         musicAudio.src = "http://localhost:8080/audio/"+encodedTitle +".mp3";
         console.log("musicAudio.src : " + musicAudio.src);
+
+        addMusic(musicIndex);
+        console.log("musicIndex : " +musicIndex);
 
     }
 
@@ -524,6 +374,8 @@ function updateMusicPlayerUI(allMusic) {
                         loadMusic(index);
                         playMusic();
                         playListMusic();
+
+
 
                     })
                     .catch(function (error) {
@@ -735,7 +587,7 @@ function updateMusicPlayerUI(allMusic) {
         }
         musicListAll[j].setAttribute("onclick", "clicked(this)");
     }
-}
+  }
 
     function clicked(el){
 
@@ -747,6 +599,151 @@ function updateMusicPlayerUI(allMusic) {
         playMusic();
         playListMusic();
     }
+      // 창이 열리면 노래 시작
+       window.addEventListener("load", ()=>{
+              addList(numIndex);
+              loadMusic(numIndex);
+              playMusic();
+              playListMusic(numIndex);
+          });
+
+
+
+
 </script>
+<script>
+    //Top버튼 스크립트
+        const mTopBtn = document.querySelector(".top_btn");
+
+        window.addEventListener("scroll", () => {
+          let scVal = window.scrollY;
+
+          if (scVal === 0) {
+            mTopBtn.style.opacity = 0;
+          } else {
+            mTopBtn.style.opacity = 1;
+            mTopBtn.classList.remove("active");
+          }
+        });
+
+
+        mTopBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        });
+
+
+    //체크박스로 체크한 곡 mylist에 선택 담기
+        window.onload = function() {
+            var allCheck = document.getElementById("allCheck");
+            var rowCheckboxes = document.getElementsByName("rowCheck");
+            var selectedMusicCodes = [];
+            var username = "";  // 사용자 이름
+
+            // username 가져오기
+            axios.get('/user/info')
+                .then(function(response) {
+                    username = response.data;
+                    console.log("User: " + username);
+                })
+                .catch(function(error){
+                    console.error(error);
+                });
+
+            // allcheck 선택되었을 때 모두 선택
+            allCheck.addEventListener("change", function() {
+                for (var i = 0; i < rowCheckboxes.length; i++) {
+                    rowCheckboxes[i].checked = allCheck.checked;
+                    if (allCheck.checked) {
+                        var musicCode = rowCheckboxes[i].parentElement.nextElementSibling.textContent;
+                        addMusicCode(musicCode);
+                    } else {
+                        // allCheck가 선택이 해제되었을 때 배열에서 제거
+                        var musicCode = rowCheckboxes[i].parentElement.nextElementSibling.textContent;
+                        removeMusicCode(musicCode);
+                    }
+                }
+                console.log("Selected Music Codes: " + selectedMusicCodes.join(", "));
+            });
+
+            for (var i = 0; i < rowCheckboxes.length; i++) {
+                rowCheckboxes[i].addEventListener("change", function() {
+                    if (this.checked) {
+                        // 선택된 체크박스의 music_code 값을 얻기
+                        var musicCode = this.parentElement.nextElementSibling.nextElementSibling.textContent;
+                        // musicCode를 배열에 추가
+                        addMusicCode(musicCode);
+                    } else {
+                        var musicCode = this.parentElement.nextElementSibling.nextElementSibling.textContent;
+                        // 체크가 해제된 경우 배열에서 제거
+                        removeMusicCode(musicCode);
+                    }
+                    console.log("Selected Music Codes: " + selectedMusicCodes.join(", "));
+                });
+            }
+
+            // "선택담기" 버튼 클릭 시 이벤트 처리
+            document.querySelector("#selectAdd").addEventListener("click", function() {
+
+                // 선택된 music_code 배열과 username을 서버로 보내기
+                axios.post('/search/addlist', {
+                    musicCodes: selectedMusicCodes,
+                    username: username
+                })
+                .then(function (response) {
+                    console.log("Mylist add Success");
+                    alert("음악이 Mylist에 담겼습니다!")
+                    location.reload();
+                })
+                .catch(function (error) {
+                    console.log(username);
+                    console.log(selectedMusicCodes);
+                    console.error("Mylist add fail.. : ", error);
+                });
+            });
+
+            // "ADD" 버튼 클릭 시 이벤트 처리
+            var addButtons = document.querySelectorAll(".add_btn");
+            addButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var row = this.parentElement.parentElement;
+                    var musicCode = row.querySelector("td:nth-child(3)").textContent;
+                    addMusicCode(musicCode);
+                    // 선택된 music_code 배열과 username을 서버로 보내기
+                    axios.post('/search/addlist', {
+                        musicCodes: selectedMusicCodes,
+                        username: username
+                    })
+                    .then(function (response) {
+                        console.log("Mylist add Success");
+                        alert("음악이 Mylist에 담겼습니다!");
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.error("Mylist add fail: ", error);
+                    });
+                });
+            });
+
+
+            function addMusicCode(musicCode) {
+                if (selectedMusicCodes.indexOf(musicCode) === -1) {
+                    selectedMusicCodes.push(musicCode);
+                }
+            }
+
+            function removeMusicCode(musicCode) {
+                var index = selectedMusicCodes.indexOf(musicCode);
+                if (index > -1) {
+                    selectedMusicCodes.splice(index, 1);
+                }
+            }
+        }
+
+</script>
+
+
 </body>
 </html>
