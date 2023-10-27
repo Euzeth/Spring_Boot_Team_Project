@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/update_Page.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 
+    <script type="text/javascript" src="/js/member/update.js"></script>
 
     <!-- favicon.ico   -->
     <link rel="icon" href="/images/favicon/favicon.ico" />
@@ -75,37 +76,6 @@
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-
-    const addr_btn = document.querySelector('#addr_btn');
-    addr_btn.addEventListener('click', function(){
-        new daum.Postcode({
-        oncomplete: function(data) {
-            console.log(data);
-            const zipcode = document.querySelector('.zipcode');
-            const addr1 = document.querySelector('.addr1');
-
-            if(data.userSelectedType === 'R')
-            {
-                addr1.value = data.roadAddress;
-            }
-            else
-            {
-                addr1.value = data.jibunAddress;
-            }
-            zipcode.value = data.zonecode;
-        }
-    }).open();
-    });
-
-</script>
-
-<script>
-    const isValid = ()=>{
-        const form = document.update;
-        form.submit();
-    }
-</script>
 
 <!-- axios -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
@@ -113,36 +83,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 
-<script>
-    //패스워드 일치 검증 코드
-    const form = document.update;
-    const passwordConfirmBtn = document.querySelector('.password_btn');
-    passwordConfirmBtn.addEventListener('click',function(){
-        const requestData = {
-          oldPassword: form.password.value
-        };
-
-        axios.post('/member/passwordConfirm', requestData)
-          .then(response => {
-            console.log('Success:', response);
-            const msgtg = document.querySelector('.pwmsg');
-            msgtg.innerHTML=response.data;
-            msgtg.style.color='green';
-
-            form.repassword.readOnly = false;
-          })
-          .catch(error => {
-
-                console.log('Unauthorized: Incorrect password');
-                const msgtg = document.querySelector('.pwmsg');
-                msgtg.innerHTML='Unauthorized: Incorrect password';
-                msgtg.style.color='orange';
-
-          });
-
-    })
-
-</script>
 
 </body>
 </html>
