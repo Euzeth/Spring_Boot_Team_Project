@@ -193,13 +193,13 @@ public class MemberController {
 				log.info(error.getField()+ " : " + error.getDefaultMessage());
 				model.addAttribute(error.getField(), error.getDefaultMessage());
 			}
-			return "/member/join";
+			return "member/join";
 		}
 
 		boolean isjoin = memberService.addMember(dto,model,request);
 		if(!isjoin)
 		{
-			return "/member/join";
+			return "member/join";
 		}
 		return "redirect:login?msg=Join_Success!";
 	}
@@ -245,7 +245,7 @@ public class MemberController {
 		if (updatedUserInfo != null) {
 			model.addAttribute("updatedUserInfo", updatedUserInfo);
 		}
-		return "/member/user";
+		return "member/user";
 	}
 
 	@GetMapping("/member")
