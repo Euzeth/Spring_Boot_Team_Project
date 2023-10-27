@@ -14,7 +14,7 @@ import org.thymeleaf.util.StringUtils;
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
 private final String kakaoClientId = "34a860be2821a13fa1656cd331d2488d";
-	private final String LOGOUT_REDIRECT_URI = "http://localhost:8080/member/login";
+	private final String LOGOUT_REDIRECT_URI = "http://3.38.87.177:8080/member/login";
 
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
