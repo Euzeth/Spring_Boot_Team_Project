@@ -42,16 +42,18 @@ public class MembershipController {
 
     private final String ADMIN_KEY = "ae39e2b27d5011a69f526b76f277ed62";
 
-    private String MembershipRequest(HttpSession session) {
-        String role = (String) session.getAttribute("role");
-        if (role == null) {
-            System.out.println("Role is null, redirecting to /member/login");
+    private String MembershipRequest(Authentication authentication) {
+        if (authentication == null) {
             return "redirect:/member/login";
         }
-        else if (role.equals("ROLE_USER")) {
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String role = principalDetails.getRole();
+        if (role.equals("ROLE_USER")) {
             System.out.println("user's Membership");
+            System.out.println("role:" + role);
             return "redirect:/membershipU";
         } else if (role.equals("ROLE_MEMBER")) {
+            System.out.println("role:" + role);
             System.out.println("member's Membership");
             return "redirect:/membershipM";
         }
@@ -59,14 +61,14 @@ public class MembershipController {
     }
 
     @GetMapping("/membership")
-    public String membership(HttpSession session, Authentication authentication) {
+    public String membership(Authentication authentication) {
         System.out.println("Authentication : " + authentication);
-        return MembershipRequest(session);
+        return MembershipRequest(authentication);
     }
 
     @PostMapping("/membership")
-    public String membership_post(HttpSession session) {
-        return MembershipRequest(session);
+    public String membership_post(Authentication authentication) {
+        return MembershipRequest(authentication);
     }
 
     @GetMapping("/membershipU")
