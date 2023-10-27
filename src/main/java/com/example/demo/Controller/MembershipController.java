@@ -43,32 +43,70 @@ public class MembershipController {
 
     private final String ADMIN_KEY = "ae39e2b27d5011a69f526b76f277ed62";
 
-    private String MembershipRequest(HttpSession session) {
-        String role = (String) session.getAttribute("role");
-        if (role == null) {
-            System.out.println("Role is null, redirecting to /member/login");
+//    private String MembershipRequest(HttpSession session) {
+//        String role = (String) session.getAttribute("role");
+//        if (role == null) {
+//            System.out.println("Session:"+session.getAttribute("role"));
+//            System.out.println("Role is null, redirecting to /member/login");
+//            return "redirect:/member/login";
+//        }
+//
+//        if (role.equals("ROLE_USER")) {
+//            System.out.println("user's Membership");
+//            System.out.println("Session:"+session.getAttribute("role"));
+//            return "redirect:/membershipU";
+//        } else if (role.equals("ROLE_MEMBER")) {
+//            System.out.println("Session:"+session.getAttribute("role"));
+//            System.out.println("member's Membership");
+//            return "redirect:/membershipM";
+//        }
+//        return "redirect:/member/login"; // 기본적으로 /member/login으로 리다이렉트
+//    }
+
+//    @ExceptionHandler(NullPointerException.class)
+//    public String handleNullPointerException(NullPointerException ex, HttpServletRequest request) {
+//        // NullPointerException이 발생하면 로그인 페이지로 리디렉션합니다.
+//        return "redirect:/member/login";
+//    }
+
+    private String MembershipRequest(Authentication authentication) {
+        if (authentication == null) {
             return "redirect:/member/login";
         }
-
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String role = principalDetails.getRole();
         if (role.equals("ROLE_USER")) {
             System.out.println("user's Membership");
+            System.out.println("role:" + role);
             return "redirect:/membershipU";
         } else if (role.equals("ROLE_MEMBER")) {
+            System.out.println("role:" + role);
             System.out.println("member's Membership");
             return "redirect:/membershipM";
         }
         return "redirect:/member/login"; // 기본적으로 /member/login으로 리다이렉트
     }
 
-    @GetMapping("/membership")
-    public String membership(HttpSession session, Authentication authentication) {
+//    @GetMapping("/membership")
+//    public String membership(HttpSession session, Authentication authentication) {
+//        System.out.println("Authentication : " + authentication);
+//        return MembershipRequest(session);
+//    }
+//
+//    @PostMapping("/membership")
+//    public String membership_post(HttpSession session) {
+//        return MembershipRequest(session);
+//    }
+
+        @GetMapping("/membership")
+    public String membership(Authentication authentication) {
         System.out.println("Authentication : " + authentication);
-        return MembershipRequest(session);
+        return MembershipRequest(authentication);
     }
 
     @PostMapping("/membership")
-    public String membership_post(HttpSession session) {
-        return MembershipRequest(session);
+    public String membership_post(Authentication authentication) {
+        return MembershipRequest(authentication);
     }
 
     @GetMapping("/membershipU")

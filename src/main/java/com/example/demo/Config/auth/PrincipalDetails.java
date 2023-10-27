@@ -38,6 +38,8 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	public String getPhone() {return member.getPhone();}
 	public String getEmail() {return member.getEmail();}
 	public String getZipcode(){return member.getZipcode();}
+
+	public String getRole() {return member.getRole();}
 	//OAUTH2 ----------------------------------------------------------------
 
 	@Override
