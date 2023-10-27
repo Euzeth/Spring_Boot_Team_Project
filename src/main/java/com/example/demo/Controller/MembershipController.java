@@ -48,8 +48,7 @@ public class MembershipController {
             System.out.println("Role is null, redirecting to /member/login");
             return "redirect:/member/login";
         }
-
-        if (role.equals("ROLE_USER")) {
+        else if (role.equals("ROLE_USER")) {
             System.out.println("user's Membership");
             return "redirect:/membershipU";
         } else if (role.equals("ROLE_MEMBER")) {
