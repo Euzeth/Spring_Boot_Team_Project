@@ -5,6 +5,7 @@ import com.example.demo.Domain.Entity.Membership;
 import com.example.demo.Domain.Repository.MembershipRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class MembershipService {
     @Autowired
     MembershipRepository membershipRepository;
 
+
     @Transactional(rollbackFor = SQLException.class)
     public List<Membership> getMembershipList() {
         return membershipRepository.findMembershipListAll();
@@ -33,15 +35,18 @@ public class MembershipService {
         return membershipRepository.findMembershipUsername(username);
     }
 
+
     @Transactional(rollbackFor = Exception.class)
     public List<Membership> getMembershipCode(String membershipcode) {
         return membershipRepository.findMembershipCode(membershipcode);
     }
 
+
     @Transactional(rollbackFor = Exception.class)
     public List<MembershipDto> getMembershipDate(LocalDate enddate) {
         return membershipRepository.findMembershipEnddate(enddate);
     }
+
 
     @Transactional(rollbackFor = SQLException.class)
     public void addMembership(MembershipDto dto, Authentication authentication, HttpServletRequest request) throws IOException {
@@ -70,6 +75,28 @@ public class MembershipService {
         } else {
             return "찾으시는 USERNAME이 없습니다.";
         }
-
     }
+
+    @Transactional(rollbackFor = SQLException.class)
+    public boolean terminateMembership(String username) {
+        Membership terminateUser = membershipRepository.findMembershipUsername(username);
+        System.out.println("user : "+terminateUser);
+
+        terminateUser.setTerminationdate(terminateUser.getEnddate().plusDays(1));
+
+        membershipRepository.save(terminateUser);
+
+        return true;
+    }
+
+    @Scheduled(cron = "0 0 0 * * *") //매일 자정 실행
+    public void deleteTerminatedMemberships() {
+        LocalDate now = LocalDate.now();
+        List<Membership> membershipsToDelete = membershipRepository.findByTerminationdateBefore(now);
+        for (Membership membership : membershipsToDelete) {
+            //멤버십 삭제
+            membershipRepository.delete(membership);
+        }
+    }
+
 }

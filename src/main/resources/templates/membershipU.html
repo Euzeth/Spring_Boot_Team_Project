@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -8,8 +8,8 @@
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/Membership_Page.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
-    <link rel="stylesheet" type="text/css" href="/css/membershipU.css">
 
     <!-- favicon.ico   -->
     <link rel="icon" href="/images/favicon/favicon.ico" />
@@ -21,7 +21,7 @@
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="/indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="/main" ><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
                     <select name="type"  class="selectbox" >
@@ -93,9 +93,8 @@
                     <li>
                         <a href="">공지사항</a>
                         <ul class="two--depth">
-                            <li><a href="">공지사항</a></li>
-                            <li><a href="">QnA</a></li>
-                            <li><a href="">자주하는질문</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="/qna/list">QnA</a></li>
                         </ul>
                     </li>
                     <li>
@@ -113,14 +112,22 @@
     <div class="header_line"></div>
     <section class="ms_pay">
         <span class="title">멤버십 가입</span>
+        <div class="myMembership" th:if="${myMembership!=null }">
+            <span th:text="|~ ${myMembership.enddate}|" style="font-size:20px; color:gray;"></span><br/>
+            <span th:text="${myMembership.membershipcode}" style="font-size:27px; color: rgb(192, 57, 43);"></span>을 구독중입니다!
+            <!--<a class="term_btn" th:data-username="${myMembership.username}" type="button">해지</a>-->
+            <a class="term_btn" th:data-username="${myMembership.username}" onclick="terminateMembership()" type="button">해지</a>
+        </div>
         <div>
-            <div class="subscribe_1">
+            <div class="subscribe_1" >
                 <span style="font-size:27px; color:rgb(92, 115, 6);">첫 구독 1개월 무료!</span>
+                <span style="color: rgb(192, 57, 43);"> WMM_1</span>
                 <span>무제한 스트리밍</span>
                 <span class="price">월 6,900원</span>
                 <img class="sub_img" src="/images/subscribe.png" alt="">
             </div>
             <div class="subscribe_2">
+                <span style="color: rgb(192, 57, 43);"> WMM_2</span>
                 <span>무제한 스트리밍</span>
                 <span>오프라인 듣기</span>
                 <span class="price">월 9,900원</span>
@@ -170,6 +177,10 @@
 
 <!-- axios cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:inline="javascript">
+    //model변수 받아오기
+    var enddate = [[${enddate}]];
+</script>
 <script>
     const subscribe1_el = document.querySelector('.subscribe_1');
     subscribe1_el.addEventListener('click', function () {
@@ -182,7 +193,6 @@
             window.open(response.data.next_redirect_pc_url, "Payment","width=400,height=700");
         })
         .catch(error=>{});
-
     });
 
 
@@ -198,6 +208,27 @@
         })
         .catch(error=>{});
     });
+
+
+        function terminateMembership() {
+        const term_btn_el = document.querySelector('.term_btn');
+        const username = term_btn_el.dataset.username;
+        // 사용자에게 확인 메시지를 표시
+        if (confirm("정말 구독을 취소하시겠습니까?") == true){
+            axios.delete("/membership/terminate?username=" + username)
+            .then(response=>{
+                if(response.status === 200){
+                    console.log(username+"님 구독취소 완료!");
+                    alert(username+"님 구독이 취소되었습니다! "+enddate+"까지 구독이 유지됩니다.")
+                    location.reload();
+                }
+            })
+            .catch(error=>{console.log(error)});
+        }else{
+            console.log("구독 해지를 취소하였습니다.");
+            alert("구독 해지가 취소되었습니다!");
+        }
+    }
 </script>
 
 

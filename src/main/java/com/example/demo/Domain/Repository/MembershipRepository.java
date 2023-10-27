@@ -25,7 +25,8 @@ public interface MembershipRepository extends JpaRepository<Membership,String> {
     @Query(value = "SELECT NEW com.example.demo.Domain.Dto.MembershipDto(m.username, m.name, m.startdate, m.enddate, m.membershipcode) FROM Membership m WHERE m.enddate = :enddate")
     List<MembershipDto> findMembershipEnddate(@Param("enddate")LocalDate enddate);
 
-
+    @Query(value = "SELECT * FROM musicdb.membership m WHERE m.terminationdate = :now", nativeQuery = true)
+    List<Membership> findByTerminationdateBefore(@Param("now")LocalDate now);
 
 
 }

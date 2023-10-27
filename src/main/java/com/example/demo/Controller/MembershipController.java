@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MembershipDto;
 import com.example.demo.Domain.Entity.Membership;
 import com.example.demo.Domain.Service.MembershipService;
@@ -70,9 +71,32 @@ public class MembershipController {
     }
 
     @GetMapping("/membershipU")
-    public void membership_U() {
-        System.out.println("GET /membershipU");
+    public void membership_U(Authentication authentication, Model model) {
+        log.info("GET /membershipU");
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String username = principalDetails.getUsername();
+
+        Membership myMembership = membershipService.getMembershipOne(username);
+        String enddate = myMembership.getEnddate().toString();
+
+        model.addAttribute("myMembership", myMembership);
+        model.addAttribute("enddate",enddate);
     }
+
+    @DeleteMapping("/membership/terminate")
+    public String membership_terminate(Authentication authentication) {
+        log.info("DELETE /membership/terminate");
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        String username = principalDetails.getUsername();
+
+        boolean isterminated = !membershipService.terminateMembership(username);
+        if(isterminated)
+            return "/membershipU";
+        else
+            return "/membershipU";
+    }
+
+
 
     @GetMapping("/membershipM")
     public void membership_M(Model model) {
@@ -156,7 +180,7 @@ public class MembershipController {
 
         // 멤버십DB에 정보 ADD
         membershipService.addMembership(dto, authentication, request);
-        return "Subscribe Success!";
+        return "WMM_1 Subscribe START!";
     }
 
     // 유저 멤버십페이지에서 WM_2 결제 성공시 매핑
@@ -165,7 +189,7 @@ public class MembershipController {
         log.info("GET /membership/success2");
         // 멤버십DB에 정보 ADD
         membershipService.addMembership(dto, authentication, request);
-        return "Subscribe Success!";
+        return "WMM_2 Subscribe START!";
     }
 
     // 유저 멤버십페이지에서 결제 취소 매핑
@@ -179,7 +203,7 @@ public class MembershipController {
     @GetMapping("/membership/fail")
     public @ResponseBody String fail() {
         log.info("GET /membership/fail");
-        return "Subscribe Fail..";
+        return "Subscribe fail..";
     }
 
     @GetMapping("/membership/selectAll")
@@ -273,7 +297,6 @@ public class MembershipController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("찾으시는 USERNAME이 없습니다.");
         }
     }
-
 
 }
 
