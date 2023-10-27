@@ -1,0 +1,158 @@
+/* Section : ms_pay */
+
+.ms_pay {
+    margin: 15px auto;
+}
+
+
+.ms_pay .title {
+
+    display: block;
+    color: rgb(192, 57, 43);
+    font-weight: 700;
+    width: 900px;
+    font-size: 2.5rem;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.ms_pay>div{
+    width: 1000px;
+    display: flex;
+    margin: 50px auto;
+    /* border: 1px solid blue; */
+    justify-content:space-around;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+
+.ms_pay .subscribe_1 {
+    display: inline-block;
+    border: 5px solid gray;
+    border-radius: 40px;
+    width: 350px;
+    height: 300px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ms_pay .subscribe_2 {
+    display: inline-block;
+    border: 5px solid gray;
+    border-radius: 40px;
+    width: 350px;
+    height: 300px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ms_pay .subscribe_1>span {
+    display: block;
+    width: 300px;
+    height: 50px;
+    font-size: 37px;
+    color: gray;
+    margin-top: 5px;
+
+}
+
+.ms_pay .subscribe_2>span {
+    display: block;
+    width: 300px;
+    height: 50px;
+    font-size: 37px;
+    color: gray;
+    margin-top: 5px;
+
+}
+
+
+.ms_pay .price {
+    display: block;
+    font-size: 45px;
+    color: brown;
+}
+
+.sub_img {
+    width: 90px;
+    height: 90px;
+}
+
+/* section : ms_benefit */
+.ms_benefit {
+    margin: 20px auto;
+}
+
+.ms_benefit .title {
+    display: block;
+    color: rgb(192, 57, 43);
+    font-weight: 700;
+    width: 900px;
+    font-size: 2rem;
+    margin-top: 15px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.ms_benefit #ben_img{
+    display: flex;
+    /* border: 1px solid blue; */
+    justify-content:space-around;
+    align-items: center;
+    margin: 15px auto;
+}
+
+.ms_benefit .benefit_icon {
+    display: flex;
+    border: 4px solid gray;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ms_benefit .benefit_icon>img{
+    /* position: absolute; */
+    width: 130px;
+    height: 130px;
+
+}
+
+
+.ms_benefit #title1 {
+
+    display: inline-block;
+    font-size: 25px;
+    color: rgb(68, 67, 67);
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+.ms_benefit #title2 {
+
+    display: inline-block;
+    font-size: 25px;
+    color: rgb(68, 67, 67);
+    margin-left: 90px;
+}
+
+.ms_benefit #title3 {
+
+    display: inline-block;
+    font-size: 25px;
+    color: rgb(68, 67, 67);
+    margin-left: 130px;
+}
+
+.ms_benefit #title4 {
+
+    display: inline-block;
+    font-size: 25px;
+    color: rgb(68, 67, 67);
+    margin-left: 150px;
+}

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+
+    <!--  Google Icon  -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+
+    <!-- common.css    -->
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/search.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/songs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+    <!-- favicon.ico   -->
+    <link rel="icon" href="/images/favicon/favicon.ico"/>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 메인 -->
+    <header>
+        <div class="top-header">
+            <a href="/main"><img class="logo" src="/images/로고.png" alt=""></a>
+            <form action="/search" method="get">
+                <div class="search_box">
+                    <select name="type" class="selectbox">
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!">
+                    <button type="submit">🔍</button>
+                </div>
+            </form>
+            <ul>
+                <li><a href="/membership"
+                       style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
+                        src="/images/add.png" alt=""> 멤버십가입</a></li>
+                <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
+    </header>
+    <nav>
+        <div class="mobilemenu">
+                <span href="" class="material-symbols-outlined">menu
+                    <ul class="wa">
+                        <li><a href="">수박차트</a></li>
+                        <li><a href="">수박DJ</a></li>
+                        <li><a href="">수박TV</a></li>
+                        <li><a href="">수박매거진</a></li>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">마이페이지</a></li>
+                    </ul>
+                </span>
+        </div>
+        <div class="navi">
+            <div class="Menu_left">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">수박차트</a>
+                        <ul class="two--depth">
+                            <li><a href="/Top100">TOP100</a></li>
+                            <li><a href="">최신음악</a></li>
+                            <li><a href="">장르음악</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박DJ</a>
+                        <ul class="two--depth">
+                            <li><a href="">#투데이</a></li>
+                            <li><a href="">테마장르</a></li>
+                            <li><a href="">인기선곡</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박TV</a>
+                        <ul class="two--depth">
+                            <li><a href="">뮤직비디오</a></li>
+                            <li><a href="">수박방송</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박매거진</a>
+                        <ul class="two--depth">
+                            <li><a href="">오늘의매거진</a></li>
+                            <li><a href="">완결매거진</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="Menu_right">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">공지사항</a>
+                        <ul class="two--depth">
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="/qna/list">QnA</a></li>
+                            <li><a href="">자주하는질문</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">마이페이지</a>
+                        <ul class="two--depth">
+                            <li><a href="/member/mypage"/>정보수정</a></li>
+                            <li><a href="/inmylist">마이리스트</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="header_line"></div>
+    <main>
+        <section>
+            <div class="sec_1">
+                <!-- title -->
+                <div id="search">SEARCH RESULT</div>
+                <div style="width:100%">
+                    <div class="search-header">
+                        <div class="keyword">
+                            검색한 <span th:text="${type}" style="text-transform:uppercase;"></span> 키워드 (<span
+                                style="color:red" ,
+                                th:text="${searchText}"></span>)
+                        </div>
+                        <div class="button">
+                            <a type="button">선택재생</a>
+                            <a type="button" id="selectAdd">선택담기</a>
+                        </div>
+                    </div>
+
+                    <div class="search-body">
+                        <!-- body -->
+                        <table>
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" id="allCheck" name="allCheck"></th>
+                                <th class="title_1">NO</th>
+                                <th class="title_1">CODE</th>
+                                <th class="title_2">TITLE</th>
+                                <th class="title_1">ARTIST</th>
+                                <th class="title_1">LIKE</th>
+                                <th class="title_1">ADD</th>
+                                <th class="title_1">COUNT</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- SEARCH LIST ITEMS -->
+                            <th:block>
+                                <tr th:each="searchDto, iterationStat  : ${searchList}">
+                                    <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
+                                    <td th:text="${iterationStat.count}"></td>
+                                    <td th:text="${searchDto.music_code}"></td>
+                                    <td><a th:text="${searchDto.title}"> </a></td>
+                                    <td th:text="${searchDto.artist}"></td>
+                                    <td>
+                                        <a th:href="@{/search/like(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}"
+                                           class="like_btn">
+                                            <span class="material-symbols-outlined">favorite</span><span
+                                                th:text="${searchDto.mlike}" class="likeno"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="add_btn">
+                                            <span class="material-symbols-outlined">add</span></a>
+                                    </td>
+                                    <td th:text="${searchDto.count}"></td>
+
+
+                                </tr>
+                            </th:block>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <img class="top_btn" src="/images/topBtn.png">
+    </main>
+    <footer>
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li><a href=""> 개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/images/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span>
+            <span>대구광역시 중구 중앙대로 366 반월센트럴타워 10층</span>
+            <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span>
+            <span>사업자등록번호 : 024-04-02023</span>
+            <br>
+            <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
+            <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+    </footer>
+</div>
+<div class="wrap__music">
+    <div class="music__inner">
+
+        <div class="volume">
+            <input type="range" id="volume-slider" min="0" max="100">
+        </div>
+
+        <!-- // music__img -->
+        <div class="music__song">
+            <p class="name"></p>
+            <p class="artist"></p>
+        </div>
+
+        <!-- // music__song -->
+        <div class="music__progress">
+            <div class="bar">
+                <audio id="main-audio" src="" ></audio>
+
+            </div>
+            <div class="timer">
+                <span class="current">0:00</span>
+                <span class="duration">0:00</span>
+            </div>
+        </div>
+
+        <!-- // music__progress -->
+        <div class="music__control">
+            <i id="control-repeat" class="material-icons" title="전체 반복">repeat</i>
+            <i id="control-prev" class="material-icons" title="이전곡">skip_previous</i>
+            <div class="play-pause">
+                <i id="control-play" class="material-icons" title="재생">play_arrow</i>
+                <!-- <i class="material-icons">pause</i> -->
+            </div>
+            <i id="control-next" class="material-icons" title="다음곡">skip_next</i>
+            <i id="control-list" class="material-icons" title="재생목록">queue_music</i>
+            <!-- <i class="material-icons">repeat_one</i>
+            <i class="material-icons">shuffle</i> -->
+        </div>
+
+        <!-- // music__control -->
+        <div class="music__list">
+            <div class="title">
+                <div>
+                    <i class="material-icons queue">queue_music</i>
+                    <span>Music List</span>
+                </div>
+                <i class="material-icons close">close</i>
+            </div>
+            <div class="list">
+                <ul>
+                    <!-- Javascript -->
+
+                </ul>
+            </div>
+        </div>
+        <!-- // music__list -->
+    </div>
+</div>
+<!-- axios -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    //Top버튼 스크립트
+        const mTopBtn = document.querySelector(".top_btn");
+
+        window.addEventListener("scroll", () => {
+          let scVal = window.scrollY;
+
+          if (scVal === 0) {
+            mTopBtn.style.opacity = 0;
+          } else {
+            mTopBtn.style.opacity = 1;
+            mTopBtn.classList.remove("active");
+          }
+        });
+
+
+        mTopBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        });
+
+
+    //체크박스로 체크한 곡 mylist에 선택 담기
+        window.onload = function() {
+            var allCheck = document.getElementById("allCheck");
+            var rowCheckboxes = document.getElementsByName("rowCheck");
+            var selectedMusicCodes = [];
+            var username = "";  // 사용자 이름
+
+            // username 가져오기
+            axios.get('/user/info')
+                .then(function(response) {
+                    username = response.data;
+                    console.log("User: " + username);
+                })
+                .catch(function(error){
+                    console.error(error);
+                });
+
+            // allcheck 선택되었을 때 모두 선택
+            allCheck.addEventListener("change", function() {
+                for (var i = 0; i < rowCheckboxes.length; i++) {
+                    rowCheckboxes[i].checked = allCheck.checked;
+                    if (allCheck.checked) {
+                        var musicCode = rowCheckboxes[i].parentElement.nextElementSibling.textContent;
+                        addMusicCode(musicCode);
+                    } else {
+                        // allCheck가 선택이 해제되었을 때 배열에서 제거
+                        var musicCode = rowCheckboxes[i].parentElement.nextElementSibling.textContent;
+                        removeMusicCode(musicCode);
+                    }
+                }
+                console.log("Selected Music Codes: " + selectedMusicCodes.join(", "));
+            });
+
+            for (var i = 0; i < rowCheckboxes.length; i++) {
+                rowCheckboxes[i].addEventListener("change", function() {
+                    if (this.checked) {
+                        // 선택된 체크박스의 music_code 값을 얻기
+                        var musicCode = this.parentElement.nextElementSibling.nextElementSibling.textContent;
+                        // musicCode를 배열에 추가
+                        addMusicCode(musicCode);
+                    } else {
+                        var musicCode = this.parentElement.nextElementSibling.nextElementSibling.textContent;
+                        // 체크가 해제된 경우 배열에서 제거
+                        removeMusicCode(musicCode);
+                    }
+                    console.log("Selected Music Codes: " + selectedMusicCodes.join(", "));
+                });
+            }
+
+            // "선택담기" 버튼 클릭 시 이벤트 처리
+            document.querySelector("#selectAdd").addEventListener("click", function() {
+
+                // 선택된 music_code 배열과 username을 서버로 보내기
+                axios.post('/search/addlist', {
+                    musicCodes: selectedMusicCodes,
+                    username: username
+                })
+                .then(function (response) {
+                    console.log("Mylist add Success");
+                    alert("음악이 Mylist에 담겼습니다!")
+                    location.reload();
+                })
+                .catch(function (error) {
+                    console.log(username);
+                    console.log(selectedMusicCodes);
+                    console.error("Mylist add fail.. : ", error);
+                });
+            });
+
+            // "ADD" 버튼 클릭 시 이벤트 처리
+            var addButtons = document.querySelectorAll(".add_btn");
+            addButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var row = this.parentElement.parentElement;
+                    var musicCode = row.querySelector("td:nth-child(3)").textContent;
+                    addMusicCode(musicCode);
+                    // 선택된 music_code 배열과 username을 서버로 보내기
+                    axios.post('/search/addlist', {
+                        musicCodes: selectedMusicCodes,
+                        username: username
+                    })
+                    .then(function (response) {
+                        console.log("Mylist add Success");
+                        alert("음악이 Mylist에 담겼습니다!");
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.error("Mylist add fail: ", error);
+                    });
+                });
+            });
+
+
+            function addMusicCode(musicCode) {
+                if (selectedMusicCodes.indexOf(musicCode) === -1) {
+                    selectedMusicCodes.push(musicCode);
+                }
+            }
+
+            function removeMusicCode(musicCode) {
+                var index = selectedMusicCodes.indexOf(musicCode);
+                if (index > -1) {
+                    selectedMusicCodes.splice(index, 1);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+</script>
+<script >
+    const volumeSlider = document.getElementById("volume-slider");
+    const musicWrap = document.querySelector(".wrap__music");
+    const musicImg = musicWrap.querySelector(".music__img img");
+    const musicName = musicWrap.querySelector(".music__song .name");
+    const musicArtist = musicWrap.querySelector(".music__song .artist");
+    const musicAudio = musicWrap.querySelector("#main-audio");
+    const musicPlay = musicWrap.querySelector("#control-play");
+    const musicPrevBtn = musicWrap.querySelector("#control-prev");
+    const musicNextBtn = musicWrap.querySelector("#control-next");
+    const musicProgress = musicWrap.querySelector(".music__progress");
+    const musicProgressBar = musicProgress.querySelector(".bar");
+    const musicProgressCurrent = musicProgress.querySelector(".current");
+    const musicProgressDuration = musicProgress.querySelector(".duration");
+    const musicRepeat = musicWrap.querySelector("#control-repeat");
+    const musicList = musicWrap.querySelector(".music__list");
+    const MusicListBtn = musicWrap.querySelector("#control-list");
+    const MusicListClose = musicList.querySelector(".close");
+    const musicListUl = musicList.querySelector(".list ul");
+    const MusicClick = document.querySelectorAll(".Music-Click");
+
+    localStorage.setItem("allMusic", JSON.stringify(allMusic));
+
+
+    let allMusic = [];
+    let musicIndex =1;
+
+    // 세션저장
+    sessionStorage.setItem("allMusic", JSON.stringify(allMusic));
+
+    const storedMusicPlayerState = sessionStorage.getItem("musicPlayerState");
+
+    if (storedMusicPlayerState) {
+      const allMusic = JSON.parse(storedMusicPlayerState);
+
+      updateMusicPlayerUI(allMusic);
+    } else {
+      const initialMusicPlayerState = {
+        title: "Default Title",
+        artist: "Default Artist",
+        filePath : "Default FilePath",
+        dataIndex : "Default DataIndex"
+      };
+
+      updateMusicPlayerUI(initialMusicPlayerState);
+    }
+
+    // 업데이트 뮤직 플레이어 UI
+function updateMusicPlayerUI(allMusic) {
+    const currentMusic = allMusic[musicIndex - 1];
+
+    if (currentMusic) {
+      musicName.innerText = currentMusic.title;
+      musicArtist.innerText = currentMusic.artist;
+      index = cuurentMusic.dataIndex;
+
+
+      const encodedTitle = encodeURIComponent(currentMusic.title);
+      musicAudio.src = `http://localhost:8080/audio/${encodedTitle}.mp3`;
+      loadMusic(index);
+      playMusic();
+      playListMusic();
+    } else {
+
+      musicName.innerText = "No Music";
+      musicArtist.innerText = "No Artist";
+
+    }
+}
+
+    // 볼륨
+
+    volumeSlider.addEventListener("input", () => {
+        const volume = volumeSlider.value / 100;
+        musicAudio.volume = volume;
+    });
+
+    // 음악 재생
+    function loadMusic(num){
+        musicName.innerText = allMusic[num-1].title;
+        musicArtist.innerText = allMusic[num-1].artist;
+
+        title = allMusic[num-1].title;
+        console.log("AudioPlayTitle : " + title);
+        var encodedTitle  = encodeURIComponent(title);
+        musicAudio.src = "http://localhost:8080/audio/"+encodedTitle +".mp3";
+        console.log("musicAudio.src : " + musicAudio.src);
+
+    }
+
+    // 음악정보가져오기
+    MusicClick.forEach(element => {
+        element.addEventListener("click", ()=>{
+                var buttonText = element.textContent;
+                console.log("ButtonText : " + buttonText);
+                axios.post('/musicinfo', {
+                        title : buttonText
+                    })
+                    .then(function (response) {
+
+                        var title = response.data.title;
+                        var artist = response.data.artist;
+                        var musicPath = response.data.music_path;
+                        var index = allMusic.length+1;
+
+                        allMusic.push({
+                            artist : artist,
+                            title : title,
+                            musicPath : musicPath,
+                            dataIndex : index
+                        });
+                        console.log(allMusic);
+
+                        addList();
+                        console.log("index : " + index);
+                        loadMusic(index);
+                        playMusic();
+                        playListMusic();
+
+                    })
+                    .catch(function (error) {
+                        console.error("Mylist add fail.. : ", error);
+                    });
+
+
+        })
+    })
+
+    // 리스트 추가
+    function addList(){
+        let i = allMusic.length -1;
+        let li = `
+               <li data-index="${allMusic[i].dataIndex}">
+                    <div>
+                       <em>${allMusic[i].title}</em>
+                       <p>${allMusic[i].artist}</p>
+                    </div>
+                        <audio class="${allMusic[i].audio}" "></audio>
+                        <span id="${allMusic[i].audio}" class="audio-duration">3:36</span>
+               </li>
+               `;
+              musicListUl.insertAdjacentHTML("beforeend", li);
+              console.log("li" + li);
+
+              let liAudioDuration = musicListUl.querySelector(`#${allMusic[i].audio}`);
+              let liAudio = musicListUl.querySelector(`.${allMusic[i].audio}`);
+
+              liAudio.addEventListener("loadeddata", () => {
+                  let audioDuration = liAudio.duration;
+                  let totalMin = Math.floor(audioDuration / 60);
+                  let totalSec = Math.floor(audioDuration % 60);
+                  if (totalSec < 10) totalSec = `0${totalSec}`;
+
+                  liAudioDuration.innerText = `${totalMin}:${totalSec}`;
+                  liAudioDuration.setAttribute("data-duration", `${totalMin}:${totalSec}`);
+        });
+    }
+
+
+    // 플레이 버튼
+    function playMusic(){
+        musicWrap.classList.add("paused");
+        musicPlay.innerText = "pause";
+        musicPlay.setAttribute("title", "일시정지")
+        musicAudio.play();
+
+    }
+
+    // 일시정지 버튼
+    function pauseMusic(){
+        musicWrap.classList.remove("paused");
+        musicPlay.innerText = "play_arrow";
+        musicPlay.setAttribute("title", "재생")
+        musicAudio.pause();
+
+
+    }
+
+    // 이전 곡 듣기 버튼
+    function prevMusic(){
+        musicIndex--;
+        musicIndex < 1 ? musicIndex = allMusic.length : musicIndex = musicIndex;
+        loadMusic(musicIndex);
+        playMusic(musicIndex);
+        playListMusic(musicIndex);
+    }
+
+    // 다음 곡 듣기 버튼
+    function nextMusic(){
+        musicIndex++;
+        musicIndex > allMusic.length ? musicIndex = 1 : musicIndex = musicIndex;
+        loadMusic(musicIndex);
+        playMusic(musicIndex);
+        playListMusic(musicIndex);
+    }
+
+    // 뮤직 진행바
+    musicAudio.addEventListener("timeupdate", (e)=>{
+        const currentTime = e.target.currentTime;
+        const duration = e.target.duration;
+        let progressWidth = (currentTime/duration) * 100;
+        musicProgressBar.style.width = `${progressWidth}%`
+
+        musicAudio.addEventListener("loadeddata", ()=>{
+            let audioDuration = musicAudio.duration;
+            let totalMin = Math.floor(audioDuration / 60);
+            let totalSec = Math.floor(audioDuration % 60);
+            if (totalSec < 10) totalSec = `0${totalSec}`;
+
+            musicProgressDuration.innerText = `${totalMin}:${totalSec}`;
+        })
+
+        let currentMin = Math.floor(currentTime / 60);
+        let currentSec = Math.floor(currentTime % 60);
+        if (currentSec < 10) currentSec = `0${currentSec}`;
+        musicProgressCurrent.innerText = `${currentMin}:${currentSec}`
+    })
+
+    // 진행 버튼
+    musicProgress.addEventListener("click", e=>{
+        let progressWidth = musicProgress.clientWidth;
+        let clickedOffsetX = e.offsetX;
+        let songDuration = musicAudio.duration;
+
+        musicAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
+        playMusic();
+    })
+
+
+
+
+    // 재생/일시정지
+    musicPlay.addEventListener("click", ()=>{
+        const isMusicPaused = musicWrap.classList.contains("paused");
+        isMusicPaused ? pauseMusic() : playMusic();
+    })
+
+    musicPrevBtn.addEventListener("click", ()=>{
+        prevMusic();
+    });
+    musicNextBtn.addEventListener("click", ()=>{
+        nextMusic();
+    });
+
+    // 반복 버튼
+    musicRepeat.addEventListener("click", ()=>{
+        let getText = musicRepeat.innerText;
+
+        switch(getText){
+            case "repeat" :
+                musicRepeat.innerText = "repeat_one";
+                musicRepeat.setAttribute("title", "한곡 반복")
+            break;
+
+            case "repeat_one" :
+                musicRepeat.innerText = "shuffle";
+                musicRepeat.setAttribute("title", "랜덤 반복")
+            break;
+
+            case "shuffle" :
+                musicRepeat.innerText = "repeat";
+                musicRepeat.setAttribute("title", "전체 반복")
+                playListMusic();
+            break;
+        }
+    })
+
+    // 오디오가 끝나고
+    musicAudio.addEventListener("ended", ()=>{
+        let getText = musicRepeat.innerText;
+
+        switch(getText){
+            case "repeat" :
+                nextMusic();
+            break;
+
+            case "repeat_one" :
+                loadMusic(musicIndex);
+                playMusic();
+            break;
+
+            case "shuffle" :
+                let randIndex = Math.floor((Math.random() * allMusic.length) + 1);
+                do {
+                    randIndex = Math.floor((Math.random() * allMusic.length) + 1);
+                } while (musicIndex == randIndex);
+                musicIndex = randIndex;
+                loadMusic(musicIndex);
+                playMusic();
+                playListMusic();
+            break;
+        }
+    })
+
+    // 뮤직 리스트 버튼
+    MusicListBtn.addEventListener("click", ()=>{
+        musicList.classList.add("show");
+    })
+
+    // 뮤직 리스트 닫기 버튼
+    MusicListClose.addEventListener("click", ()=>{
+        musicList.classList.remove("show");
+    })
+
+    // 뮤직 리스트 구현하기
+
+
+    // 뮤직 리스트 클릭하기
+
+    function playListMusic(){
+        const musicListAll = musicListUl.querySelectorAll("li");
+        console.log("musicListAll : " +musicListAll.length);
+
+        for(let j=0; j<musicListAll.length; j++){
+        let audioTag = musicListAll[j].querySelector(".audio-duration");
+        let adDuration = audioTag.getAttribute("data-duration");
+
+        if (musicListAll[j].classList.contains("playing")) {
+            musicListAll[j].classList.remove("playing");
+            audioTag.innerText = adDuration;
+        }
+
+        if (musicListAll[j].getAttribute("data-index") == musicIndex) {
+            musicListAll[j].classList.add("playing");
+            audioTag.innerText = "재생중";
+            console.log("musicIndex : "+musicIndex);
+        }
+        musicListAll[j].setAttribute("onclick", "clicked(this)");
+    }
+}
+
+    function clicked(el){
+
+        let getLiIndex = el.getAttribute("data-index");
+        musicIndex = getLiIndex;
+        console.log("musicIndex 변화 : " + musicIndex);
+
+        loadMusic(musicIndex);
+        playMusic();
+        playListMusic();
+    }
+</script>
+</body>
+</html>

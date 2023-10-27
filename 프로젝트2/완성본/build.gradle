@@ -1,0 +1,71 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//WEB
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//LOMBOK
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	//THYMELEAF
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//TEST
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//DATABASE
+	implementation 'com.mysql:mysql-connector-j:8.1.0'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	//ORM_JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	//FILE UPLOAD
+	implementation 'commons-fileupload:commons-fileupload:1.5'
+
+	//02CONTROLLER_VALIDATION
+	implementation 'org.hibernate.validator:hibernate-validator'
+	implementation 'javax.validation:validation-api'
+
+	//SECURITY
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+	//OAUTH2
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	//MAIL
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//JAVAJOOM JLAYER
+	implementation group: 'javazoom', name: 'jlayer', version: '1.0.1' // JLayer 추가
+
+	//AOP
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	//DEV_TOOLS
+	implementation 'org.springframework.boot:spring-boot-devtools'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

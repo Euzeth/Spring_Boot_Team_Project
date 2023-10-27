@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/412379eca8.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+<title>음악 플레이어</title>
+<!-- common.css    -->
+<link rel="stylesheet" type="text/css" href="/css/song_Page.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<!-- favicon.ico   -->
+<link rel="icon" href="/images/favicon/favicon_2xl.png" />
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+
+<div class="container">
+    <h1>음악 플레이어</h1>
+    <div class="music-container" id="musicContainer">
+        <div class="music-info">
+            <h4 id="title">노래 제목</h4>
+            <div class="progress-container" id="progress-container">
+                <span class="progress" id="progress">0:00</span>
+                <span class="duration" id="duration">0:00</span>
+            </div>
+        </div>
+
+        <audio id="audio" src="" onloadstart="this.volume=0.005"></audio>
+        <div class="img-container">
+            <img src="" alt="cover" id="cover">
+        </div>
+
+        <div class="navigation">
+            <i id="repeat" class="material-icons" title="전체반복">repeat</i>
+            <button id="prev" class="action-btn" title="이전곡"><i class="fa-sharp fa-solid fa-backward"></i></button>
+            <button id="play" class="actiong-btn big" ><i class="fa-solid fa-play"></i></button>
+            <button id="next" class="actiong-btn" title="이후곡"><i class="fa-sharp fa-solid fa-forward"></i></button>
+            <i id="music-list" class="material-icons" title="재생목록">queue_music</i>
+
+<!--            <i class="material-icons">repeat_one</i>-->
+                <i class="material-icons">shffle</i>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+const playBtn = document.getElementById("play");
+const musicContainer = document.getElementById("musicContainer");
+const audio = document.getElementById("audio");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const progress = document.getElementById("progress");
+const progressContainer = document.getElementById('progress-container');
+const imgCover = document.getElementById("cover");
+const title = document.getElementById("title");
+let song;
+const currentPlay = {
+    trEl : null,
+}
+function loadSong() {
+        title.innerHTML = currentPlay.trEl;
+        console.log("title : "+currentPlay.trEl);
+        imgCover.src = 'image/${encodeURIComponent(currentPlay.trEl)}.webp';
+        console.log("image : "+currentPlay.trEl);
+}
+
+function playMusic() {
+  musicContainer.classList.add("play");
+  playBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+  playBtn.setAttribute("title","정지")
+
+  audio.play();
+}
+
+function pauseMusic(){
+    musicContainer.classList.remove('play');
+    playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+    playBtn.setAttribute("title","재생")
+    audio.pause();
+}
+
+function playPrevSong() {
+
+    fetch('/previousplay',{
+            method : 'GET',
+        })
+            .then(response => {
+                if(response.ok){
+                    return response.text();
+                }else{
+                    console.error('서버 오류: ' + response.status);
+                }
+             })
+            .then(song => {
+                console.log('song : ' + song);
+                   currentPlay.trEl = song;
+                   console.log('currentPlay : '+currentPlay.trEl);
+                   loadSong(currentPlay.trEl);
+                   playMusic();
+            })
+            .catch(error => {
+                console.error('Error playPreviousSong', error);
+            });
+}
+
+function playNextSong (){
+
+    fetch('/nextplay',{
+        method : 'GET',
+    })
+        .then(response => {
+                if(response.ok){
+                    return response.text();
+                }else{
+                    console.error('서버 오류: ' + response.status);
+                }
+             })
+        .then(song => {
+             console.log('song : ' + song);
+                   currentPlay.trEl = song;
+                   console.log('currentPlay : '+currentPlay.trEl);
+                   loadSong(currentPlay.trEl);
+                   playMusic();
+        })
+        .catch(error => {
+            console.error('Error playNextSong', error);
+        });
+}
+
+function updateProgress(e){
+    const {duration, currentTime} = e.srcElement;
+
+    const progressPer = (currentTime / duration) * 100;
+
+    progress.style.width = `${progressPer}%`;
+}
+
+function changeProgress(e){
+
+    const width = e.target.clientWidth; // 전체 넓이
+
+    const offsetX = e.offsetX; // 현재 x 좌표;
+
+    const duration = audio.duration; // 재생길이
+
+    audio.currentTime = (offsetX / width) * duration;
+
+}
+
+
+playBtn.addEventListener("click", () => {
+    const isPlaying = musicContainer.classList.contains('play');
+    const isLoop = true;
+
+    if(isPlaying) {
+        fetch('/pause', {
+            method: 'GET',
+        })
+        .then(response => {
+            if (response.ok) {
+                pauseMusic();
+                console.log('pause : ' + response);
+            } else {
+                console.error('서버 오류: ' + response.status);
+            }
+        })
+        .catch(error => {
+            console.error('오류 발생: ' + error);
+        });
+    } else {
+        fetch('/play', {
+            method: 'GET',
+        })
+        .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Failed to fetch data');
+                    }
+                })
+                .then(song => {
+                   console.log('song : ' + song);
+                   currentPlay.trEl = song;
+                   console.log('currentPlay : '+currentPlay.trEl);
+                   loadSong(currentPlay.trEl);
+                   playMusic();
+                })
+                .catch(error => {
+                    console.error('오류 발생: ' + error);
+                });
+            }
+        });
+
+prevBtn.addEventListener("click", playPrevSong);
+nextBtn.addEventListener('click', playNextSong);
+audio.addEventListener('ended', playNextSong);
+audio.addEventListener('timeupdate', updateProgress);
+
+progressContainer.addEventListener('click', changeProgress);
+</script>
+
+
+</body>
+</html>

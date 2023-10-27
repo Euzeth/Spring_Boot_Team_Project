@@ -1,0 +1,48 @@
+.searchresult{
+    margin: 50px;
+    color: rgb(192, 57, 43);
+    font-weight: 700;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+table{
+    width: 1100px;
+    height: 700px;
+    border-collapse: collapse;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: black;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+th,
+td {
+    padding: 2px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+th {
+    background-color: #f2f2f2;
+}
+td:nth-child(1),
+th:nth-child(1) {
+  width: 10%; /* 泥� 踰덉㎏ �뿴�쓽 �꼫鍮� */
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+  width: 25%; /* �몢 踰덉㎏ �뿴�쓽 �꼫鍮� */
+}
+
+td:nth-child(3),
+th:nth-child(3) {
+  width: 25%; /* �꽭 踰덉㎏ �뿴�쓽 �꼫鍮� */
+}
+
+td:nth-child(4),
+th:nth-child(4) {
+  width: 40%; /* �꽕 踰덉㎏ �뿴�쓽 �꼫鍮� */
+}
+

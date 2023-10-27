@@ -1,0 +1,120 @@
+li{
+    list-style: none;
+    }
+
+    .login {
+        width: 410px;
+        display: block;
+        height: 470px;
+        padding-top: 50px;
+        margin: 0 auto;
+    }
+
+    .login h1 {
+        padding-top: 20px;
+        font-size: 25px;
+        color: #111;
+        text-align: center;
+    }
+
+    .login>form ul {
+        padding: 40px 0 10px;
+    }
+    
+    .login>form>ul>.log_chk{
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+    }
+
+    .login>form ul li {
+        padding: 0 0 12px;
+        text-align: left;
+    }
+
+    .login>form ul li input {
+        width: 100%;
+        height: 46px;
+        box-sizing: border-box;
+        text-indent: 16px;
+        color: black;
+        font-family: 'NanumSquareAceb'; 
+    }
+
+    .login>form ul li input::-webkit-input-placeholder {
+        font-size: 16px;
+        color: gray;
+    }
+
+    .login>form ul li input[type="checkbox"] {
+        display: none;
+    }
+
+    .login>form ul li input[type="checkbox"]+label {
+        height: 36px;
+        line-height: 36px;
+    }
+
+    .login>form ul li input[type="checkbox"]+label:before {
+        content: "";
+        display: inline-block;
+        margin: 0 10px 0 0;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #666;
+        background: #fff;
+        vertical-align: -5px;
+    }
+
+    .login li input[type="checkbox"]:checked+label:before {
+        background:no-repeat center#333;
+        border-color: #333;
+    }
+
+    .login button {
+        width: 100%;
+        height: 56px;
+        background: #ed1c24;
+        font-size: 18px;
+        color: #fff
+    }
+
+    .login div {
+        padding: 0 0 45px;
+    }
+
+    .login div ul {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .login div ul li {
+        position: relative;
+    }
+   
+    .login div ul li:nth-child(2) {
+        padding-right: 150px;
+    }
+
+    .login div ul li:nth-child(2)::after {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 1px;
+        height: 16px;
+        width: 1.2px;
+        background: #111;
+        transform: rotate(25deg);
+    }
+
+    .login div ul li a {
+        font-size: 14px;
+        color: #111;
+    }
+
+    .login>a {
+        padding: 0 0 10px;
+        font-size: 14px;
+        color: #666;
+        border-bottom: 1px solid#666;
+    }
