@@ -152,7 +152,7 @@
                                     <th><input type="checkbox" name="rowCheck" value="${iterationStat.count}"></th>
                                     <td th:text="${iterationStat.count}"></td>
                                     <td th:text="${searchDto.music_code}"></td>
-                                    <td><a th:text="${searchDto.title}" class="name"></a></td>
+                                    <td><a th:href="@{/search/count(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}" th:text="${searchDto.title}" class="name"></a></td>
                                     <td th:text="${searchDto.artist}" class="artist"></td>
                                     <td>
                                         <a th:href="@{/search/like(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}"

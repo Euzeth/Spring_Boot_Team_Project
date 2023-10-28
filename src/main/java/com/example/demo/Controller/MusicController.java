@@ -77,6 +77,14 @@ public class MusicController {
 		return "redirect:/search?type="+type+"&searchText="+ URLEncoder.encode(searchText, "UTF-8");
 	}
 
+	@GetMapping("/search/count")
+	public String count(Long music_code,String searchText, String type) throws UnsupportedEncodingException {
+		log.info("GET /search/count " + music_code + " " +type+" "+ searchText);
+
+		musicService.CountUpMusic(music_code);
+
+		return "redirect:/search?type="+type+"&searchText="+ URLEncoder.encode(searchText, "UTF-8");
+	}
 
 
 	@GetMapping("/Top100")

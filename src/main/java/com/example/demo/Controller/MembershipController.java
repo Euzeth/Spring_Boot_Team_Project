@@ -1,16 +1,5 @@
 package com.example.demo.Controller;
 
-import java.beans.PropertyEditorSupport;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import com.example.demo.Config.auth.PrincipalDetails;
 import com.example.demo.Domain.Dto.MembershipDto;
 import com.example.demo.Domain.Entity.Membership;
@@ -34,6 +23,16 @@ import org.springframework.web.client.RestTemplate;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @Slf4j
 public class MembershipController {
@@ -42,32 +41,6 @@ public class MembershipController {
     MembershipService membershipService;
 
     private final String ADMIN_KEY = "ae39e2b27d5011a69f526b76f277ed62";
-
-//    private String MembershipRequest(HttpSession session) {
-//        String role = (String) session.getAttribute("role");
-//        if (role == null) {
-//            System.out.println("Session:"+session.getAttribute("role"));
-//            System.out.println("Role is null, redirecting to /member/login");
-//            return "redirect:/member/login";
-//        }
-//
-//        if (role.equals("ROLE_USER")) {
-//            System.out.println("user's Membership");
-//            System.out.println("Session:"+session.getAttribute("role"));
-//            return "redirect:/membershipU";
-//        } else if (role.equals("ROLE_MEMBER")) {
-//            System.out.println("Session:"+session.getAttribute("role"));
-//            System.out.println("member's Membership");
-//            return "redirect:/membershipM";
-//        }
-//        return "redirect:/member/login"; // 기본적으로 /member/login으로 리다이렉트
-//    }
-
-//    @ExceptionHandler(NullPointerException.class)
-//    public String handleNullPointerException(NullPointerException ex, HttpServletRequest request) {
-//        // NullPointerException이 발생하면 로그인 페이지로 리디렉션합니다.
-//        return "redirect:/member/login";
-//    }
 
     private String MembershipRequest(Authentication authentication) {
         if (authentication == null) {
@@ -87,18 +60,7 @@ public class MembershipController {
         return "redirect:/member/login"; // 기본적으로 /member/login으로 리다이렉트
     }
 
-//    @GetMapping("/membership")
-//    public String membership(HttpSession session, Authentication authentication) {
-//        System.out.println("Authentication : " + authentication);
-//        return MembershipRequest(session);
-//    }
-//
-//    @PostMapping("/membership")
-//    public String membership_post(HttpSession session) {
-//        return MembershipRequest(session);
-//    }
-
-        @GetMapping("/membership")
+    @GetMapping("/membership")
     public String membership(Authentication authentication) {
         System.out.println("Authentication : " + authentication);
         return MembershipRequest(authentication);
@@ -110,16 +72,27 @@ public class MembershipController {
     }
 
     @GetMapping("/membershipU")
-    public void membership_U(Authentication authentication, Model model) {
+    public String membership_U(Authentication authentication, Model model) {
+        if (authentication == null) {
+            return "redirect:/member/login";
+        }
         log.info("GET /membershipU");
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         String username = principalDetails.getUsername();
 
-        Membership myMembership = membershipService.getMembershipOne(username);
-        String enddate = myMembership.getEnddate().toString();
+        // Membership 엔티티에서 username을 사용하여 검색
+        Membership myMembership = null;
+        if (username != null && !username.isEmpty()) {
+            myMembership = membershipService.getMembershipOne(username);
+        }
+
+        // Membership 정보가 있는 경우에만 종료 날짜를 문자열로 변환
+        String enddate = (myMembership != null) ? myMembership.getEnddate().toString() : null;
 
         model.addAttribute("myMembership", myMembership);
-        model.addAttribute("enddate",enddate);
+        model.addAttribute("enddate", enddate);
+
+        return "membershipU";
     }
 
     @DeleteMapping("/membership/terminate")
@@ -162,9 +135,9 @@ public class MembershipController {
         params.add("quantity", "1");
         params.add("total_amount", "6900");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/membership/success1");
-        params.add("fail_url", "http://localhost:8080/membership/fail");
-        params.add("cancel_url", "http://localhost:8080/membership/cancel");
+        params.add("approval_url", "http://3.38.87.177/:8080/membership/success1");
+        params.add("fail_url", "http://3.38.87.177:8080/membership/fail");
+        params.add("cancel_url", "http://3.38.87.177:8080/membership/cancel");
 
         // HEADER + PARAMETER
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
@@ -197,9 +170,9 @@ public class MembershipController {
         params.add("quantity", "1");
         params.add("total_amount", "9900");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/membership/success2");
-        params.add("fail_url", "http://localhost:8080/membership/fail");
-        params.add("cancel_url", "http://localhost:8080/membership/cancel");
+        params.add("approval_url", "http://3.38.87.177:8080/membership/success2");
+        params.add("fail_url", "http://3.38.87.177:8080/membership/fail");
+        params.add("cancel_url", "http://3.38.87.177:8080/membership/cancel");
 
         // HEADER + PARAMETER
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
@@ -336,7 +309,6 @@ public class MembershipController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("찾으시는 USERNAME이 없습니다.");
         }
     }
-
 
 }
 

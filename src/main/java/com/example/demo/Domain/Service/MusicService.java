@@ -63,6 +63,17 @@ public class MusicService {
     }
 
     @Transactional(rollbackFor = SQLException.class)
+    public void CountUpMusic(Long musicId){
+        Music music = musicRepository.findById(musicId).get();
+        if(music.getCount()!=null){
+            music.setCount(music.getCount()+1L);
+        } else{
+            music.setCount(1L);
+        }
+        musicRepository.save(music);
+    }
+
+    @Transactional(rollbackFor = SQLException.class)
     public List<Music> Top100(){
         return musicRepository.findTop100();
     }
