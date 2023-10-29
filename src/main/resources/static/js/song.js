@@ -1,4 +1,4 @@
-const volumeSlider = document.getElementById("volume-slider");
+    const volumeSlider = document.getElementById("volume-slider");
     const musicWrap = document.querySelector(".wrap__music");
     const musicImg = musicWrap.querySelector(".music__img img");
     const musicName = musicWrap.querySelector(".music__song .name");
