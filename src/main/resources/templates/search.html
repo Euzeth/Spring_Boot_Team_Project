@@ -223,7 +223,7 @@
                                     <td th:text="${iterationStat.count}"></td>
                                     <td th:text="${searchDto.music_code}"></td>
                                     <td>
-                                        <a th:href="@{/search/(music_code=${searchDto.title},type=${type},searchText=${searchText})}" class="Music-Click"></a>
+                                        <a th:href="@{/search(title=${searchDto.title},type=${type},searchText=${searchText})}" class="Music-Click"></a>
                                     </td>
                                     <td th:text="${searchDto.artist}" class="artist"></td>
                                     <td>

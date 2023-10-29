@@ -9,7 +9,6 @@
 }
 body {
     height: 100vh;
-    background: linear-gradient(var(--white) 0%, var(--violet) 100%);
 }
 .wrap__music {
     display: flex;
