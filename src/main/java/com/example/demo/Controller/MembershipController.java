@@ -72,16 +72,27 @@ public class MembershipController {
     }
 
     @GetMapping("/membershipU")
-    public void membership_U(Authentication authentication, Model model) {
+    public String membership_U(Authentication authentication, Model model) {
+        if (authentication == null) {
+            return "redirect:/member/login";
+        }
         log.info("GET /membershipU");
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         String username = principalDetails.getUsername();
 
-        Membership myMembership = membershipService.getMembershipOne(username);
-        String enddate = myMembership.getEnddate().toString();
+        // Membership 엔티티에서 username을 사용하여 검색
+        Membership myMembership = null;
+        if (username != null && !username.isEmpty()) {
+            myMembership = membershipService.getMembershipOne(username);
+        }
+
+        // Membership 정보가 있는 경우에만 종료 날짜를 문자열로 변환
+        String enddate = (myMembership != null) ? myMembership.getEnddate().toString() : null;
 
         model.addAttribute("myMembership", myMembership);
-        model.addAttribute("enddate",enddate);
+        model.addAttribute("enddate", enddate);
+
+        return "membershipU";
     }
 
     @DeleteMapping("/membership/terminate")

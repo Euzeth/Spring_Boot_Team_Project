@@ -32,11 +32,6 @@ public class MusicController {
 		System.out.println("GET /song");
 	}
 
-	@GetMapping("/songs")
-	public void songs(){
-		System.out.println("GET /songs");
-	}
-
 	@GetMapping("/search")
 	public void search(String searchText, String type, MusicDto dto, Model model) {
 		log.info("GET /search");

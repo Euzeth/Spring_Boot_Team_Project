@@ -27,6 +27,8 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/").setCachePeriod(60 * 60 * 24 * 365);
 		/* '/font/**'로 호출하는 자원은 '/static/font/' 폴더 아래에서 찾는다. */
 		registry.addResourceHandler("/font/**").addResourceLocations("classpath:/static/font/").setCachePeriod(60 * 60 * 24 * 365);
+
+		registry.addResourceHandler("/audio/**").addResourceLocations("file:/music/").setCachePeriod(60 * 60 * 24 * 365);
 	}
 	
 
