@@ -109,17 +109,13 @@
     const MusicListClose = musicList.querySelector(".close");
     const musicListUl = musicList.querySelector(".list ul");
     const MusicClick = document.querySelectorAll(".Music-Click");
-    const musicOff = document.querySelector(".material-icons icon-left");
 
 
 
 
-  let allMusic = JSON.parse(localStorage.getItem("allMusic")) || [];
-      // allMusic 배열을 콘솔에 출력
-      console.log("allMusic : "+allMusic);
-      var numIndex = localStorage.getItem("addMusicIndex");
-      console.log("numIndex : "+numIndex);
-      let musicIndex =1;
+
+    let allMusic = [];
+    let musicIndex =1;
 
 
     function addMusic(num) {
@@ -137,8 +133,6 @@
         const volume = volumeSlider.value / 100;
         musicAudio.volume = volume;
     });
-
-
 
     // 음악 재생
     function loadMusic(num){
@@ -296,6 +290,9 @@
         playMusic();
     })
 
+
+
+
     // 재생/일시정지
     musicPlay.addEventListener("click", ()=>{
         const isMusicPaused = musicWrap.classList.contains("paused");
@@ -394,7 +391,7 @@
         }
         musicListAll[j].setAttribute("onclick", "clicked(this)");
     }
-  }
+}
 
     function clicked(el){
 
@@ -406,13 +403,7 @@
         playMusic();
         playListMusic();
     }
-      // 창이 열리면 노래 시작
-       window.addEventListener("load", ()=>{
-              addList(numIndex);
-              loadMusic(numIndex);
-              playMusic();
-              playListMusic(numIndex);
-          });
+    // 창이 열리면 노래 시작
 
 </script>
 </body>
