@@ -1,0 +1,120 @@
+
+/* Section 1 전체 */
+section {
+    margin: 20px auto;
+}
+
+.sec_1{
+    margin-bottom: 20px;
+}
+
+        #top100{
+             font-size: 40px;
+             padding-top: 20px;
+             padding-left: 50px;
+             color: rgb(192, 57, 43);
+        }
+
+        .top100-header{
+            margin : 20px;
+        }
+
+        .button{
+            width:100%;
+            cursor: pointer;
+            text-align: right;
+        }
+
+        .button > a{
+            color: rgb(192, 57, 43);
+            display: inline-block;
+            width: 90px;
+            border: 2px solid rgb(192, 57, 43);
+            border-radius: 7px;
+            background-color: white;
+            font-size: 22px;
+            text-align: center;
+            line-height: 34px;
+        }
+
+
+        .button > a:hover{
+            color: white;
+            background-color: rgb(192, 57, 43);
+            transition: 0.3s;
+        }
+
+        .top100-body table{
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+        }
+
+        .top100-body tr{
+            height: 50px;
+        }
+
+
+        .top100-body th{
+            font-size:23px;
+            text-align: center;
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+
+        }
+
+        .top100-body td{
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+
+        }
+
+        .title_1{
+            width: 250px;
+        }
+
+        .title_2{
+            width: 400px;
+        }
+
+        .like_btn{
+            display: inline-block;
+            width: 30px;
+            height :30px;
+            position:relative;
+        }
+
+        .likeno{
+            position: absolute;
+            display: inline-block;
+            width: 25px;
+            height: 30px;
+            line-height: 26px;
+            text-align: center;
+            font-size:15px;
+            color: rgb(192, 57, 43);
+        }
+
+        .top_btn{
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            padding: 5px;
+            bottom: 30px;
+            right: 50px;
+            cursor: pointer;
+            border: 3px solid rgb(192, 57, 43);
+            border-radius: 50%;
+        }
+
+        .material-symbols-outlined {
+                  font-variation-settings:
+                  'FILL' 0,
+                  'wght' 400,
+                  'GRAD' 0,
+                  'opsz' 24
+                }
+
+                 th:nth-of-type(2) { display: none; }
+                 td:nth-of-type(2) { display: none; }

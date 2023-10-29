@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:c="" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WaterMelon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <!-- common.css    -->
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/membershipM.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+
+    <script type="text/javascript" src="/js/membershipM.js"></script>
+
+    <!-- favicon.ico   -->
+    <link rel="icon" href="/images/favicon/favicon.ico"/>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <header>
+        <div class="log-header">
+            <a href="/main"><img class="logo" src="/images/로고.png" alt=""></a>
+            <ul>
+                <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
+        <div class="logheader_line"></div>
+    </header>
+
+    <section class="membership_M">
+        <h1>멤버십 관리 페이지입니다. </h1>
+        <ul>
+            <div>
+                <form action="/membership/selectAll" method="get">
+                    <li><span class="title">멤버십회원 전체조회<button class="alluser" id="showButton"
+                                                              type="submit">조회하기</button></span>
+                        <hr/>
+                    </li>
+                </form>
+            </div>
+            <div class="selectall">
+                <th:block>
+                    <table>
+                        <tr th:if="${selectedAllList} !=null">
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
+                        </tr>
+                        <tr th:each="dto : ${selectedAllList}">
+                            <td class="search_title1" th:text="${dto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${dto.username}"></td>
+                            <td class="search_title1" th:text="${dto.name}"></td>
+                            <td class="search_title2" th:text="${dto.startdate}"></td>
+                            <td class="search_title2" th:text="${dto.enddate}"></td>
+                        </tr>
+                    </table>
+                </th:block>
+            </div>
+            <br/>
+            <li><span class="title">멤버십 키워드검색</span>
+                <hr/>
+            </li>
+            <div class="search_block">
+
+                <select id="select">
+                    <option value="username">USERNAME</option>
+                    <option value="membershipcode">멤버십 코드</option>
+                    <option value="enddate">종료 날짜</option>
+                </select>
+                <form action="/membership/selectId" method="get" class="search_form">
+                    <input type="text" class="search_input"
+                           placeholder="검색할 USERNAME를 입력하세요" name="username">
+                    <button class="ms_search" type="submit" id="key_search">검색</button>
+                </form>
+            </div>
+            <div class="keywordShow">
+                <th:block>
+                    <table>
+                        <tr th:if="${selectedId} != null or ${selectedCodeList} != null or ${selectedDateList} != null">
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'CODE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'USERNAME'"></th>
+                            <th class="search_title1" th:style="'color: rgb(92, 115, 6);'" th:text="'NAME'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'START_DATE'"></th>
+                            <th class="search_title2" th:style="'color: rgb(92, 115, 6);'" th:text="'END_DATE'"></th>
+                        </tr>
+
+                        <tr th:each="searchDto : ${selectedId}">
+                            <td class="search_title1" th:text="${searchDto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${searchDto.username}"></td>
+                            <td class="search_title1" th:text="${searchDto.name}"></td>
+                            <td class="search_title2" th:text="${searchDto.startdate}"></td>
+                            <td class="search_title2" th:text="${searchDto.enddate}"></td>
+                        </tr>
+
+                        <tr th:each="searchDto : ${selectedCodeList}">
+                            <td class="search_title1" th:text="${searchDto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${searchDto.username}"></td>
+                            <td class="search_title1" th:text="${searchDto.name}"></td>
+                            <td class="search_title2" th:text="${searchDto.startdate}"></td>
+                            <td class="search_title2" th:text="${searchDto.enddate}"></td>
+                        </tr>
+
+                        <tr th:each="searchDto : ${selectedDateList}">
+                            <td class="search_title1" th:text="${searchDto.membershipcode}"></td>
+                            <td class="search_title2" th:text="${searchDto.username}"></td>
+                            <td class="search_title1" th:text="${searchDto.name}"></td>
+                            <td class="search_title2" th:text="${searchDto.startdate}"></td>
+                            <td class="search_title2" th:text="${searchDto.enddate}"></td>
+                        </tr>
+                    </table>
+                </th:block>
+
+            </div>
+            <br/>
+            <li><span class="title" style="display:inline-block">회원 삭제&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="message" th:text="${message}" style="color:red; font-size:15px;"></span>
+                <hr/>
+            </li>
+            <form action="/membership/delete" method="post" >
+                <input type="text" id="remove_input" name="username"
+                       placeholder="멤버십에서 삭제할 USERNAME을 입력하세요">
+                <button class="ms_delete">삭제</button>
+            </form>
+            <br/>
+        </ul>
+
+    </section>
+    <footer>
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li style="width:170px"><a href=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/images/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span>
+            <span>대구광역시 중구 중앙대로 366 반월센트럴타워 10층</span>
+            <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span>
+            <span>사업자등록번호 : 024-04-02023</span>
+            <br>
+            <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
+            <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+    </footer>
+</div>
+</body>
+
+<!-- axios cdn -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+</html>

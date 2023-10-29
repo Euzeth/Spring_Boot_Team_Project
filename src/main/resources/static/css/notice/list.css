@@ -1,0 +1,161 @@
+
+/* Section 1 전체 */
+        .sec_1 {
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+
+        /* Section 1 내 검색창 */
+        .Notice_search {
+            height: 38px;
+            width: 550px;
+            border: 3px solid rgb(192, 57, 43);
+            position: relative;
+            border-radius: 7px;
+            line-height: 20px;
+            padding-left: 10px;
+        }
+
+        .Notice_search>div {
+            height: 35px;
+            width: 110px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 35px;
+            margin-top: -1px;
+            margin-left: -10px;
+            border-right: 3px solid rgb(192, 57, 43);
+            background-color: rgba(192, 57, 43, 0.43);
+        }
+
+        .Notice_search>input {
+            height: 30px;
+            width: 400px;
+            border: 1px;
+            outline: 1px;
+            position: absolute;
+            top: 0px;
+            left: 120px;
+            font-size: 18px;
+            color: black;
+            font-family: 'SDSamliphopangche_Basic';
+        }
+
+        .Notice_search>button {
+             position: absolute;
+             height: 30px;
+             top: -5px;
+             left: 90%;
+             font-size: 25px;
+             background-color: transparent;
+             border: none;
+        }
+
+        #notice{
+             font-size: 40px;
+             padding-top: 20px;
+             padding-left: 50px;
+             color: rgb(192, 57, 43);
+        }
+
+        .notice-header{
+            text-align: right;
+            font-size:20px;
+            margin : 20px auto;
+        }
+
+        .notice-body table{
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+        }
+
+        .notice-body tr{
+            height: 50px;
+        }
+
+        .notice-body th{
+            font-size:23px;
+            text-align: center;
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+        }
+
+        .notice-body td{
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+        }
+
+        .title_1{
+            width: 150px;
+        }
+
+        .title_2{
+            width: 600px;
+        }
+
+       .button{
+           margin: 30px 0 20px auto;
+                       width: 100px;
+       }
+
+        .button > a{
+            color: rgb(192, 57, 43);
+            display: block;
+            border: 2px solid rgb(192, 57, 43);
+            border-radius: 7px;
+            background-color: white;
+            font-size: 23px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .pagenation{
+            margin: 30px auto 50px;
+        }
+
+        .pagenation ul {
+            display : flex;
+            justify-content: space-between;
+            width : 800px;
+            margin : 10px auto;
+
+        }
+
+        .page-link {
+            color: #000;
+            border: 2px solid;
+            background-color: transparent;
+            font-size: 20px;
+            display: block;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 5px;
+        }
+
+        .page-item.active .page-item {
+         z-index: 1;
+         color: white;
+         background-color: rgb(192, 57, 43);
+        }
+
+        .page-item:focus, .page-link:hover {
+         color: white;
+          background-color: rgb(192, 57, 43);
+          border-color: #ccc;
+        }
+
+        td>a:hover{
+            color : rgb(192, 57, 43);
+        }
+
+         .button > a:hover{
+                    color: white;
+                    background-color: rgb(192, 57, 43);
+                    transition: 0.3s;
+                }

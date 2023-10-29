@@ -1,0 +1,269 @@
+/* header */
+.wrapper>header {
+    height:130px;
+    /* border: 1px solid red; */
+    margin-top: 20px;
+}
+
+/* 탑헤더 내 로고, 검색창, 퀵메뉴 전체 */
+.wrapper>header>.top-header{
+    height: 110px;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 탑헤더 내 로고 */
+.wrapper>header>.top-header>.logo{
+    margin-top: 0;
+    width: 240px;
+    height: 120px;
+}
+
+/* 탑헤더 내 검색창 */
+.wrapper>header>.top-header>form>.search_box{
+    height: 38px;
+    width: 500px;
+    border: 3px solid rgb(92, 115, 6);
+    position: relative;
+    border-radius: 7px;
+    line-height: 35px;
+    padding-left: 10px;
+}
+
+.wrapper>header>.top-header>form>.search_box>select{
+    /* border: 1px solid rosybrown; */
+    height: 35px;
+    width: 110px;
+    font-size: 22px;
+    text-align: center;
+    line-height: 38px;
+    margin-top: -1px;
+    margin-left: -10px;
+    border-right: 3px solid rgb(92, 115, 6);
+    background-color: rgba(92, 115, 6, 0.43);
+}
+
+.wrapper>header>.top-header>form>.search_box>input {
+    height: 30px;
+    width: 340px;
+    border: 1px;
+    outline: 1px;
+    position: absolute;
+    top: -1px;
+    left: 115px;
+    font-size: 18px;
+    color: black;
+    font-family: 'SDSamliphopangche_Basic';
+}
+
+.wrapper>header>.top-header>form>.search_box>button {
+    position: absolute;
+    height: 30px;
+    top: -5px;
+    left: 90%;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+
+}
+
+/* 헤더 내 퀵메뉴 */
+.wrapper>header>.top-header>ul {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.wrapper>header>.top-header>ul>li {
+    /* border: 1px solid gray; */
+    width: 110px;
+    position: relative;
+    text-align: center;
+}
+
+.wrapper>header>.top-header>ul>li>a {
+    display: block;
+    font-size: 18px;
+    position: relative;
+    left: 15px;
+}
+
+.wrapper>header>.top-header>ul>li>a>img{
+    width: 20px;
+    height: 18px;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    top: -2.5px;
+    left: -6px;
+}
+
+/* nav부분 STYLE */
+.wrapper>nav>.navi{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 왼쪽 nav one-depth */
+.wrapper>nav>.navi>.Menu_left>.one--depth {
+    width: 100%;
+    height: 60px;
+    display: flex;
+}
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li {
+    position: relative;
+    height: 35px;
+}
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li>a {
+    display: block;
+    font-size: 25px;
+    width: 110px;
+    /* transition: 1s; */
+}
+
+
+/* 왼쪽 nav two-depth */
+.wrapper>nav>.navi>.Menu_left>.one--depth>li>.two--depth {
+    position: absolute;
+    display: none;
+
+}
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li>.two--depth>li {
+    height: 30px;
+    line-height: 30px;
+
+}
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li>.two--depth>li>a {
+    display: block;
+    width: 120px;
+    font-size: 21px;
+}
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li:hover .two--depth {
+    display: flex;
+}
+
+.wrapper>nav>.navi>.Menu_left>.one--depth>li>.two--depth>li>a:hover {
+    font-size: 21px;
+    transition: 0.7s;
+    color: rgb(192, 57, 43);
+}
+
+/* 오른쪽 nav one-depth */
+.wrapper>nav>.navi>.Menu_right>.one--depth {
+    width: 100%;
+    height: 60px;
+    display: flex;
+}
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li {
+    position: relative;
+    height: 35px;
+}
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li>a {
+    display: block;
+    font-size: 25px;
+    width: 110px;
+    text-align: right;
+}
+
+/* 오른쪽 nav two-depth */
+.wrapper>nav>.navi>.Menu_right>.one--depth>li>.two--depth {
+    position: absolute;
+    display: none;
+}
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li>.two--depth>li {
+    height: 30px;
+    line-height: 30px;
+}
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li>.two--depth>li>a {
+    display: block;
+    width: 110px;
+    font-size: 21px;
+    text-align: center;
+}
+
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li:hover .two--depth {
+    display: flex;
+    text-align: right;
+    right: -12px;
+}
+
+.wrapper>nav>.navi>.Menu_right>.one--depth>li>.two--depth>li>a:hover {
+    font-size: 21px;
+    transition: 0.7s;
+    color: rgb(192, 57, 43);
+}
+
+/* header_line */
+.wrapper>.header_line {
+    display: block;
+    background-color: gray;
+    height: 3px;
+    width: 100%;
+    margin: 10px auto;
+}
+
+
+.wrapper>header>.log-header{
+    height: 150px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logheader_line{
+    display: block;
+    background-color: gray;
+    height: 3px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/* login header */
+
+.wrapper>header>.log-header>a>.logo{
+    margin-top: 0;
+}
+
+.wrapper>header>.log-header>ul{
+    position: absolute;
+    right: 30px;
+}
+
+.wrapper>header>.log-header>ul>li{
+    display: inline-block;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+}
+
+.wrapper>header>.log-header>ul>li>a{
+    font-size: 21px;
+    position: relative;
+
+}
+
+.wrapper>header>.log-header>ul>li>a>img{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 80px;
+}
+
+.wrapper>nav>.mobilemenu{
+    display: none;
+}

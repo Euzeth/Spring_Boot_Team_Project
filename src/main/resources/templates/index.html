@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>WaterMelon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <!-- common.css    -->
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/Main_Page.css">
+    <link rel="stylesheet" type="text/css" href="/css/songs.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+    <!-- favicon.ico   -->
+    <link rel="icon" href="/images/favicon/favicon.ico" />
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- 메인 -->
+    <header>
+        <div class="top-header">
+            <a href="/index" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <form action="/search" method="get">
+                <div class="search_box">
+                    <select name="type"  class="selectbox" >
+                        <option value="title" selected>TITLE</option>
+                        <option value="artist">ARTIST</option>
+                    </select>
+                    <input id="searchInput" type="text" name="searchText" placeholder="듣고 싶은 노래를 검색하세요!" >
+                    <button type="submit">🔍</button>
+                </div>
+            </form>
+            <ul>
+                <li><a href="/member/login"
+                    style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
+                            src="/images/add.png" alt=""> 멤버십가입</a></li>
+                <li><a href=""><img src="/images/english.png" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
+    </header>
+    <nav>
+        <div class="mobilemenu">
+                <span href="" class="material-symbols-outlined">menu
+                    <ul class="wa">
+                        <li><a href="">수박차트</a></li>
+                        <li><a href="">수박DJ</a></li>
+                        <li><a href="">수박TV</a></li>
+                        <li><a href="">수박매거진</a></li>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">마이페이지</a></li>
+                    </ul>
+                </span>
+        </div>
+        <div class="navi">
+            <div class="Menu_left">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">수박차트</a>
+                        <ul class="two--depth">
+                            <li><a href="/Top100">TOP100</a></li>
+                            <li><a href="">최신음악</a></li>
+                            <li><a href="">장르음악</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박DJ</a>
+                        <ul class="two--depth">
+                            <li><a href="">#투데이</a></li>
+                            <li><a href="">테마장르</a></li>
+                            <li><a href="">인기선곡</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박TV</a>
+                        <ul class="two--depth">
+                            <li><a href="">뮤직비디오</a></li>
+                            <li><a href="">수박방송</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박매거진</a>
+                        <ul class="two--depth">
+                            <li><a href="">오늘의매거진</a></li>
+                            <li><a href="">완결매거진</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="Menu_right">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">공지사항</a>
+                        <ul class="two--depth">
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="/member/login">QnA</a></li>
+                            <li><a href="">자주하는질문</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">마이페이지</a>
+                        <ul class="two--depth">
+                            <li><a href="/member/mypage">정보수정</a></li>
+                            <li><a href="">마이리스트</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="header_line"></div>
+    <main>
+        <section class="section1">
+            <aside>오늘의 추천 앨범
+                <!-- Slider main container -->
+                <div class="d1" style="overflow: hidden;">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"><a><img src="/images/Feeling.png">Feeling</a></div>
+                        <div class="swiper-slide"><a><img src="/images/NewJeans.png">NewJeans 1st EP 'NewJeans'</a>
+                        </div>
+                        <div class="swiper-slide"><a><img src="/images/That's Not how This Works.png">That's Not how
+                            This Works</a></div>
+                        <div class="swiper-slide"><a><img src="/images/song1.webp">NewJeans 'Super Shy'</a></div>
+                        <div class="swiper-slide"><a><img src="/images/song3.jpg">I feel</a></div>
+                        <div class="swiper-slide"><a><img src="/images/song6.jpg">UNFORGIVEN</a></div>
+                        <div class="swiper-slide"><a><img src="/images/song10.webp">I've IVE</a></div>
+                        <div class="swiper-slide"><a><img src="/images/song8.webp">MY WORLD - The 3rd Mini Album</a></div>
+                        <div class="swiper-slide"><a><img src="/images/song4.jpg">1집 Alone</a></div>
+                    </div>
+                </div>
+            </aside>
+            <article>워터멜론에서 즐거운 음악감상하세요!
+                <a href="/member/login" />로그인</a>
+                <h4></h4>
+                <a href="">아이디</a>
+                <span>/</span>
+                <a href="">비밀번호 찾기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="/member/join" />회원가입</a>
+            </article>
+        </section>
+        <section class="section2">
+            <aside>HOT 수박매거진<br>
+                <a href="">
+                    <img src="/images/블랙핑크.png" width="300px" height="220px" alt=""> BLACKPINK IN COACHELLA <br></a>
+                <span> 역대 전체 K-POP 아티스트들은 물론, 범위를 넓힌 '아시아계 아티스트'중에서도 코첼라 페스티벌에서 헤드라이너로 선 것은 BLACKPINK 외에는 전례가
+                        없습니다.</span>
+            </aside>
+            <article>멤버십 이벤트<br><br />
+                <span>워터멜론을 구독해보세요!</span>
+                <span>첫 구독 1개월 무료</span>
+                <div><a href="/member/login">구독하기</a></div>
+            </article>
+            <aside>
+                <div class="top10">
+                    <span> WATERMELON </span>
+                    <span> TOP10 </span>
+                    <img src="/images/로고-removebg-preview.png" alt="">
+                </div> <br>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th style="width:40px; text-align:left;">No.</th>
+                            <th>TITLE</th>
+                            <th>ARTIST</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block>
+                            <tr th:each="dto, iterationStat  : ${Top10List}">
+                                <td th:text="${iterationStat.count}"></td>
+                                <td th:text="${dto.title}"></td>
+                                <td th:text="${dto.artist}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                    <div><a href="/Top100">더보기</a></div>
+                </div>
+            </aside>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li><a href=""> 개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/images/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span>
+            <span>대구광역시 중구 중앙대로 366 반월센트럴타워 10층</span>
+            <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span>
+            <span>사업자등록번호 : 024-04-02023</span>
+            <br>
+            <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
+            <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
+
+    </footer>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+    const swiper_multi_slider = new Swiper('.section1 .d1', {
+        direction: 'horizontal',
+        autoplay: {
+            delay: 2000
+        },
+        loop: true,
+        slidesPerView: 3,
+        loop: true,
+        loopFillGroupWithBlank: true
+    });
+
+    // 마우스 호버 시에 autoplay 정지, 떠날 때 다시 시작
+    const sliderContainer = document.querySelector('.section1 .d1');
+
+    sliderContainer.addEventListener('mouseenter', function () {
+        swiper_multi_slider.autoplay.stop();
+    });
+
+    sliderContainer.addEventListener('mouseleave', function () {
+        swiper_multi_slider.autoplay.start();
+    });
+</script>
+
+<!-- axios cdn -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</body>
+</html>

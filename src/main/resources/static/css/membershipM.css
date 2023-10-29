@@ -1,0 +1,133 @@
+li{
+    list-style: none;
+    }
+
+    .membership_M {
+        width: 620px;
+        display: block;
+        height: 100%;
+        padding-top: 50px;
+        margin: 0 auto;
+    }
+
+    .membership_M h1 {
+        padding-top: 20px;
+        font-size: 35px;
+        color: #111;
+        text-align: center;
+    }
+
+  	.membership_M>ul {
+        padding: 40px 0 10px;
+    }
+    
+    .membership_M>ul li {
+        padding: 0 0 12px;
+        text-align: left;
+    }
+    
+    .membership_M>ul li .title {
+		font-size: 25px;
+		display: block;
+		margin-left: 10px;
+		color: gray;
+	}
+	
+	.search_block{
+		display: flex;
+	}
+	
+	.membership_M select{
+		width: 120px;
+		height: 40px;
+		text-align: center;
+		margin-top:5px;
+		margin-right: 15px;
+		font-size: 18px;
+	}
+	
+	.search_input{
+	 	width: 360px;
+        height: 40px;
+        box-sizing: border-box;
+        text-indent: 15px;
+        font-size: 18px;
+        color: black;
+        font-family: 'SDSamliphopangche_Basic';
+	}
+	
+	
+	#remove_input{
+        width: 81%;
+        height: 40px;
+        box-sizing: border-box;
+        text-indent: 15px;
+        font-size: 18px;
+        color: black;
+        font-family: 'SDSamliphopangche_Basic';
+    }
+
+    .membership_M>form input::-webkit-input-placeholder {
+        font-size: 18px;
+        color: gray;
+    }
+
+	.membership_M .title>.alluser{
+		width: 82px;
+        height: 25px;
+        font-size: 18px;
+        cursor: pointer;
+        display: inline-block; 
+        margin: 0 5px;  
+        float: right;
+    	    
+	}
+	
+	table{
+		table-layout: fixed;
+		border-collapse: collapse;
+	 	width: 540px;
+	}
+	
+	td{
+		border-bottom: 1px solid black;
+	 	overflow: hidden;
+	 	text-overflow: ellipsis;
+	  	white-space: nowrap;
+	  	padding:5px;
+	}
+	  
+	th:first-child, td:first-child {
+    	border-left: none;
+  	}
+	
+	.search_title1{
+		width:80px;
+		font-size:18px;
+	}
+	
+	.search_title2{
+		width:150px;
+		font-size:18px;
+	}
+	
+	
+    .membership_M form .ms_search, .ms_delete{
+        width: 82px;
+        height: 40px;
+        margin-left: 15px;
+        margin-right: 0px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+	
+	.selectall {
+        font-size: 20px;
+		text-align: center;
+    }
+    
+    .keywordShow{
+    	font-size: 20px;
+		text-align: center;
+    }
+    
