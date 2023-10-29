@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/inmylist", "/Top100", "/membership", "/main").permitAll()
 				.antMatchers("/play", "/nextplay", "/previousplay", "/pause", "/stop", "/time").permitAll()
 				.antMatchers("/qna/**","/notice/**").permitAll()
+				.antMatchers("/musicinfo").permitAll()
 				.anyRequest().authenticated()
 			.and()
 
