@@ -224,6 +224,7 @@
                                     <td th:text="${searchDto.music_code}"></td>
                                     <td>
                                         <a th:href="@{/search/play(title=${searchDto.title},type=${type},searchText=${searchText})}" class="Music-Click"></a>
+                                        <span th:text="${searchDto.title}"></span>
                                     </td>
                                     <td th:text="${searchDto.artist}" class="artist"></td>
                                     <td>
