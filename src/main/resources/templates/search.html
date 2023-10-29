@@ -414,6 +414,40 @@
         musicWrap.classList.add("paused");
         musicPlay.innerText = "pause";
         musicPlay.setAttribute("title", "일시정지")
+
+                axios.post('/play', {
+                        title : allMusic[allMusic.length-1].title
+                    })
+                    .then(function (response) {
+
+                        var title = response.data.title;
+                        var artist = response.data.artist;
+                        var musicPath = response.data.music_path;
+                        var index = allMusic.length+1;
+
+                        allMusic.push({
+                            artist : artist,
+                            title : title,
+                            musicPath : musicPath,
+                            dataIndex : index
+                        });
+                        console.log(allMusic);
+
+                        addList();
+                        console.log("index : " + index);
+                        loadMusic(index);
+                        playMusic();
+                        playListMusic();
+
+
+
+                    })
+                    .catch(function (error) {
+                        console.error("Mylist add fail.. : ", error);
+                    });
+
+
+
         musicAudio.play();
 
     }
