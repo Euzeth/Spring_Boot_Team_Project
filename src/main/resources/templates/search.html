@@ -414,22 +414,6 @@
         musicWrap.classList.add("paused");
         musicPlay.innerText = "pause";
         musicPlay.setAttribute("title", "일시정지")
-
-                axios.get('/play', {
-                        title : allMusic[allMusic.length-1].title
-                    })
-                    .then(function (response) {
-
-                       console.log("play-Music");
-
-
-                    })
-                    .catch(function (error) {
-                        console.error("Mylist add fail.. : ", error);
-                    });
-
-
-
         musicAudio.play();
 
     }
