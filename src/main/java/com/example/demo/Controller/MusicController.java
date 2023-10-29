@@ -59,6 +59,13 @@ public class MusicController {
 
 	}
 
+	@GetMapping("/search/play")
+	public String play(String title,String searchText, String type)throws UnsupportedEncodingException{
+
+		musicService.connect(title);
+
+		return "redirect:/search?type="+type+"&searchText="+ URLEncoder.encode(searchText, "UTF-8");
+	}
 
 	@GetMapping("/search/like")
 	public String like(Long music_code,String searchText, String type) throws UnsupportedEncodingException {
