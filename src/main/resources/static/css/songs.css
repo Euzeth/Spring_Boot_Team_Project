@@ -17,7 +17,7 @@ body {
     min-height: 100%;
     user-select: none;
     position: fixed;
-    bottom: 120px;
+    bottom: 150px;
     left: 50%;
     transform: translate(-50%, 50%);
 

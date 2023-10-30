@@ -341,6 +341,7 @@
     // 음악정보가져오기
     MusicClick.forEach(element => {
         element.addEventListener("click", ()=>{
+
                 var buttonText = element.textContent;
                 console.log("ButtonText : " + buttonText);
                 axios.post('/musicinfo', {
