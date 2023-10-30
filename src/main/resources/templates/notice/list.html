@@ -167,31 +167,37 @@
                         <a th:href="@{/notice/post}"   type="button">글쓰기</a>
                     </div>
 
-
                     <!-- pagenation -->
-
                     <div class="pagenation">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
+                        <nav style="display:block;">
+                            <ul style="display:flex;">
 
                                 <!-- PREV      -->
                                 <li class="page-item" th:if="${pageDto.prev}">
-                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
+                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}">
+                                        <span>&laquo;</span>
                                     </a>
                                 </li>
 
 
                                 <!-- PAGENATION -->
-                                <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                    <a class="page-link" th:href="@{/notice/list(pageNo=${i},type=${pageDto.criteria.type},keyword=${pageDto.criteria.keyword} )}" > <span th:text="${i}"></span> </a>
-                                </li>
+                                <th:block th:if="${pageDto.criteria.type == null}">
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i})}" ><span th:text="${i}"></span></a>
+                                    </li>
+                                </th:block>
+
+                                <th:block th:if="${pageDto.criteria.type != null}">
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i}, type=${pageDto.criteria.type}, keyword=${pageDto.criteria.keyword})}" ><span th:text="${i}"></span></a>
+                                    </li>
+                                </th:block>
 
 
                                 <!-- NEXT -->
                                 <li class="page-item"  th:if="${pageDto.next}">
-                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
+                                    <a class="page-link" th:href="@{/notice/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}">
+                                        <span>&raquo;</span>
                                     </a>
                                 </li>
 
