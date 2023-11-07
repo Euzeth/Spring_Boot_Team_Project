@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +23,50 @@ import java.util.Optional;
 public class MusicService {
     @Autowired
     MusicRepository musicRepository;
+
+    private String jdbcUrl = "jdbc:mysql://localhost:3306/musicdb";
+    private String username = "root";
+    private String password = "1234";
+
+    @Transactional(rollbackFor = SQLException.class)
+    public MusicDto connect(String title) {
+
+        String filePath = null;
+        String fileTitle = null;
+        String fileArtist = null;
+        MusicDto dto = new MusicDto();
+
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            String sql = "SELECT * FROM music where title = ?";
+            System.out.println(sql);
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1,title);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    fileTitle = resultSet.getString("title");
+                    filePath = resultSet.getString("music_path");
+                    fileArtist = resultSet.getString("artist");
+                    System.out.println("Next File Title: " + fileTitle);
+                    System.out.println("Next File Path: " + filePath);
+
+                    dto.setTitle(fileTitle);
+                    dto.setMusic_path(filePath);
+                    dto.setArtist(fileArtist);
+
+
+                } else {
+                    System.out.println("파일을 찾을 수 없습니다.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return dto;
+    }
+
 
     @Transactional(rollbackFor = SQLException.class)
     public Map<String,Object> GetSearchList(MusicDto dto) {

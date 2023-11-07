@@ -15,6 +15,7 @@ li{
         font-size: 35px;
         color: #111;
         text-align: center;
+        font-weight: 800;
     }
 
   	.membership_M>ul {
@@ -38,12 +39,12 @@ li{
 	}
 	
 	.membership_M select{
-		width: 120px;
+		width: 128px;
 		height: 40px;
 		text-align: center;
 		margin-top:5px;
 		margin-right: 15px;
-		font-size: 18px;
+		font-size: 16px;
 	}
 	
 	.search_input{
@@ -53,18 +54,18 @@ li{
         text-indent: 15px;
         font-size: 18px;
         color: black;
-        font-family: 'SDSamliphopangche_Basic';
+        font-family: 'Nanum Gothic', sans-serif;
 	}
 	
 	
 	#remove_input{
-        width: 81%;
+        width: 82%;
         height: 40px;
         box-sizing: border-box;
         text-indent: 15px;
         font-size: 18px;
         color: black;
-        font-family: 'SDSamliphopangche_Basic';
+        font-family: 'Nanum Gothic', sans-serif;
     }
 
     .membership_M>form input::-webkit-input-placeholder {
@@ -73,13 +74,14 @@ li{
     }
 
 	.membership_M .title>.alluser{
-		width: 82px;
-        height: 25px;
+		width: 90px;
+        height: 30px;
         font-size: 18px;
         cursor: pointer;
         display: inline-block; 
         margin: 0 5px;  
         float: right;
+        font-weight:800;
     	    
 	}
 	
@@ -103,12 +105,12 @@ li{
 	
 	.search_title1{
 		width:80px;
-		font-size:18px;
+		font-size:17px;
 	}
 	
 	.search_title2{
 		width:150px;
-		font-size:18px;
+		font-size:17px;
 	}
 	
 	
@@ -119,6 +121,7 @@ li{
         margin-right: 0px;
         font-size: 18px;
         cursor: pointer;
+        font-weight:800;
     }
 	
 	.selectall {

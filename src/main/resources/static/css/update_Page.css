@@ -52,7 +52,8 @@ li{
         height: 40px;
         box-sizing: border-box;
         color: black;
-        font-family: 'SDSamliphopangche_Basic';
+        font-family: 'Nanum Gothic', sans-serif;
+        font-weight: 800;
 	}
 
     .update #update_btn{

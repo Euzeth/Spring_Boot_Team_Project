@@ -7,7 +7,7 @@
 
 .section1>aside {
     color: rgb(192, 57, 43);
-    font-weight: 700;
+    font-weight: 800;
     width: 900px;
     font-size: 2.5rem;
     margin-top: 15px;
@@ -66,8 +66,9 @@
     height: 250px;
     text-align: center;
     margin: 50px auto;
-    font-size: 1.3rem;
-    padding-top: 50px;
+    font-size: 18px;
+    font-weight: 800;
+    padding-top: 40px;
     margin-top: 80px;
 }
 
@@ -99,19 +100,20 @@
 .section1>article>a:nth-child(3) {
     color: black;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .section1>article>a:nth-child(5) {
     text-decoration: none;
     color: black;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .section1>article>a:nth-child(6) {
     text-decoration: none;
     color: black;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight:800;
 }
 
 /* Section2 */
@@ -124,11 +126,12 @@
 .section2>aside {
     padding: 20px;
     margin: 20px 10px;
+    font-weight: 800;
 }
 
 .section2>aside:nth-child(1) {
     color: rgb(192, 57, 43);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 2.3rem;
     text-align: center;
     width: 450px;
@@ -197,10 +200,13 @@
 
 .section2>aside>.top10>span:nth-child(1) {
     font-size: 1.4rem;
+    font-weight: 800;
 }
 
 .section2>aside>.top10>span:nth-child(2) {
     font-size: 1.7rem;
+    font-weight:800;
+    text-shadow: 2px 2px 2px black;
 }
 
 .section2>aside>table {
@@ -244,7 +250,7 @@ th {
     padding: 20px;
     margin: 20px 10px;
     color: rgb(192, 57, 43);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 2.3rem;
     text-align: center;
     border: 1px solid lightgray;

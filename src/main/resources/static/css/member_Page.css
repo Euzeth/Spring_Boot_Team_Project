@@ -40,7 +40,8 @@ li{
         text-indent: 15px;
         font-size: 18px;
         color: black;
-        font-family: 'SDSamliphopangche_Basic';
+        font-family: 'Nanum Gothic', sans-serif;
+        font-weight: 800;
     }
 	
 	.member form #remove_input{
@@ -50,7 +51,8 @@ li{
         text-indent: 15px;
         font-size: 18px;
         color: black;
-        font-family: 'SDSamliphopangche_Basic';
+        font-family: 'Nanum Gothic', sans-serif;
+        font-weight: 800;
     }
 
     .member>form input::-webkit-input-placeholder {

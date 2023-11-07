@@ -7,7 +7,7 @@
 
 .section1>aside {
     color: rgb(192, 57, 43);
-    font-weight: 700;
+    font-weight: 800;
     width: 900px;
     font-size: 2.5rem;
     margin-top: 15px;
@@ -65,7 +65,8 @@
     height: 250px;
     text-align: center;
     margin: 50px auto;
-    font-size: 1.3rem;
+    font-size: 18px;
+    font-weight: 800;
     padding-top: 40px;
     margin-top: 80px;
 }
@@ -77,12 +78,12 @@
 .section1>article>div>a {
     display: block;
     position: absolute;
-    margin-left: 40px;
+    margin-left: 35px;
 }
 
 .section1>article>div>a>img {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
 }
 
 .section1>article>div>span {
@@ -90,7 +91,7 @@
     width: 180px;
     height: 70px;
     line-height: 70px;
-    margin-left: 80px;
+    margin-left: 60px;
 
 }
 
@@ -108,7 +109,7 @@
     height: 25px;
     background-color: rgb(192, 57, 43);
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 13px;
     margin-left: 200px;
     color: white;
     cursor: pointer;
@@ -125,11 +126,12 @@
 .section2>aside {
     padding: 30px;
     margin: 20px 10px;
+    font-weight: 800;
 }
 
 .section2>aside:nth-child(1) {
     color: rgb(192, 57, 43);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 2.3rem;
     text-align: center;
     width: 450px;
@@ -198,10 +200,13 @@
 
 .section2>aside>.top10>span:nth-child(1) {
     font-size: 1.4rem;
+    font-weight:800;
 }
 
 .section2>aside>.top10>span:nth-child(2) {
     font-size: 1.7rem;
+    font-weight:800;
+    text-shadow: 2px 2px 2px black;
 }
 
 .section2>aside>table {
@@ -245,7 +250,7 @@ th {
     padding: 30px;
     margin: 20px 10px;
     color: rgb(192, 57, 43);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 2.3rem;
     text-align: center;
     border: 1px solid lightgray;

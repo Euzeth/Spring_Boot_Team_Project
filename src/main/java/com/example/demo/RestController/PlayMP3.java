@@ -1,132 +1,122 @@
 package com.example.demo.RestController;
 
-
+import com.example.demo.Domain.Dto.MusicDto;
+import com.example.demo.Domain.Service.MusicService;
 import javazoom.jl.player.Player;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
-//@RestController
-//public class PlayMP3 extends Thread{
-//
-//
-//    private Player player;
-//    private boolean isLoop;
-//    private File file;
-//    private FileInputStream fis;
-//    private BufferedInputStream bis;
-//
-//    @GetMapping
-//    public void PlayMP3(String name, boolean isLoop){
-//        try{
-//            this.isLoop = isLoop;
-//            file = new File(Main.class.getResource("../music/"+name).toURI());
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    public int getTime(){
-//        if(player == null)
-//            return 0;
-//        return player.getPosition();
-//    }
-//    public void close(){
-//        isLoop = false;
-//        player.close();
-//        this.interrupt();
-//    }
-//
-//    @Override
-//    public void run(){
-//        try{
-//            do{
-//                player.play();
-//                fis = new FileInputStream(file);
-//                bis = new BufferedInputStream(fis);
-//                player = new Player(bis);
-//            }while(isLoop);
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//}
-@RestController
+@Controller
+@Slf4j
+
 public class PlayMP3 {
 	private Player player;
 	private boolean isLoop;
 	private String currentMusicName;
 	private FileInputStream finalFis;
 	private BufferedInputStream finalBis;
+	private MusicDto musicDto = new MusicDto();
+	@Autowired
+	private MusicService musicService;
 
-	@GetMapping("/play")
-	public void playMusic(@RequestParam String name, @RequestParam String isLoop){
+	@PostMapping("/musicinfo")
+	public @ResponseBody MusicDto MusicInfo(@RequestBody Map<String, String> request) {
 		try {
-			if (player != null) {
+			System.out.println("----------------------------------------------------");
+			String title = request.get("title");
+			System.out.println("title : " + title);
+			musicDto = musicService.connect(title);
+			System.out.println("MusicDto : " + musicDto);
+
+			return musicDto;
+
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+
+	@GetMapping("/musicinfo")
+	public @ResponseBody void playMusic(){
+		System.out.println("play실행했따");
+	}
+
+
+
+	@PostMapping("/play")
+	public @ResponseBody void playMusic(@RequestBody Map<String, String> request) {
+		String fileTitle = null;
+		try {
+			if(player != null){
 				player.close();
+				System.out.println("멈춤");
 			}
-			this.isLoop = Boolean.parseBoolean(isLoop);;
-//            currentMusicName = name;
+			System.out.println("play------------------------");
 
-//            String basePath = "C:\\Users\\Administrator\\Desktop\\노래\\";
-//            String filePath = basePath + currentMusicName;
-//            FileInputStream fis = new FileInputStream(filePath);
-//            BufferedInputStream bis = new BufferedInputStream(fis);
-//            player = new Player(bis);
+			String title = request.get("title");
+			musicDto = musicService.connect(title);
+			String filePath = musicDto.getMusic_path();
 
-			String filePath = "C:\\08SPING_BOOT-main\\프로젝트\\프로젝트\\노래\\2BIC(투빅)-01-그대와 나만-320k.mp3";
-
-			// File 객체를 생성하여 절대 경로를 얻습니다.
 			File file = new File(filePath);
 			String absolutePath = file.getAbsolutePath();
+			System.out.println("FILE : " + filePath);
 
 			// 절대 경로 출력
 			System.out.println("절대 경로: " + absolutePath);
 			FileInputStream fis = new FileInputStream(absolutePath);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			player = new Player(bis);
-			System.out.println("재생완료");
-
-
 			Thread playThread = new Thread(() -> {
 				try {
-					do {
-						player.play();
-
-						String basePath2 = "C:\\Users\\Administrator\\Desktop\\노래\\";
-						String filePath2= basePath2 + currentMusicName;
-						finalFis = new FileInputStream(filePath2);
-						finalBis = new BufferedInputStream(finalFis);
-						player = new Player(finalBis);
-					} while (Boolean.parseBoolean(isLoop));
+					player.play();
+					System.out.println("Play Music");
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 			});
 			playThread.start();
+			System.out.println("다음곡재생완료");
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
 		}
+
 	}
 
+
 	@GetMapping("/pause")
-	public void pauseMusic() {
+	public @ResponseBody void pauseMusic() {
+		if(player != null){
+			player.close();
+			System.out.println("멈춤");
+		}
 
 	}
 
 	@GetMapping("/stop")
-	public void stopMusic() {
-		// 음악을 정지하고 player 객체를 닫는 코드 작성
+	public @ResponseBody void stopMusic() {
+		if(player!= null)
+			player.close();
+		System.out.println("멈춤");
+
+
 	}
 
 	@GetMapping("/time")
-	public int getTime() {
+	public @ResponseBody int getTime() {
 		if (player == null)
 			return 0;
 		return player.getPosition();

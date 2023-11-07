@@ -40,7 +40,8 @@
             left: 120px;
             font-size: 18px;
             color: black;
-            font-family: 'SDSamliphopangche_Basic';
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight:800;
         }
 
         .Notice_search>button {
@@ -54,10 +55,11 @@
         }
 
         #notice{
-             font-size: 40px;
+             font-size: 50px;
              padding-top: 20px;
              padding-left: 50px;
              color: rgb(192, 57, 43);
+             font-weight:800;
         }
 
         .notice-header{
@@ -134,7 +136,7 @@
             width: 35px;
             height: 35px;
             text-align: center;
-            line-height: 35px;
+            line-height: 32px;
             border-radius: 5px;
         }
 

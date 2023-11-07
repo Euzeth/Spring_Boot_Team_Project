@@ -84,6 +84,8 @@ public class MusicController {
 		musicService.CountUpMusic(music_code);
 
 		return "redirect:/search?type="+type+"&searchText="+ URLEncoder.encode(searchText, "UTF-8");
+
+		//search html파일 내 td title부분에 th:href="@{/search/count(music_code=${searchDto.music_code},type=${type},searchText=${searchText})}"  넣기!
 	}
 
 

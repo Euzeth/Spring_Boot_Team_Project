@@ -9,10 +9,11 @@ section {
 }
 
         #mylist{
-             font-size: 40px;
-             padding-top: 20px;
+             font-size: 50px;
+             padding-top: 10px;
              padding-left: 50px;
              color: rgb(192, 57, 43);
+             font-weight: 800;
         }
 
         .mylist-header{
@@ -22,16 +23,18 @@ section {
              display: block;
              text-align: right;
              cursor: pointer;
+             margin-top: -20px;
         }
 
         .button > a{
             color: rgb(192, 57, 43);
             display: inline-block;
-            width: 90px;
+            width: 110px;
             border: 2px solid rgb(192, 57, 43);
             border-radius: 7px;
             background-color: white;
             font-size: 22px;
+            font-weight:800;
             text-align: center;
             line-height: 34px;
         }

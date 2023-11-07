@@ -213,15 +213,27 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
     const swiper_multi_slider = new Swiper('.section1 .d1', {
-        // Optional parameters
-        direction: 'horizontal',
-        autoplay: { delay: 2000 },
-        loop: true,
-        slidesPerView: 3,
-        loop: true,
-        loopFillGroupWithBlank: true,
+         direction: 'horizontal',
+         autoplay: {
+             delay: 2000
+         },
+         loop: true,
+         slidesPerView: 3,
+         loop: true,
+         loopFillGroupWithBlank: true
+     });
 
-    });
+     // 마우스 호버 시에 autoplay 정지, 떠날 때 다시 시작
+     const sliderContainer = document.querySelector('.section1 .d1');
+
+     sliderContainer.addEventListener('mouseenter', function () {
+         swiper_multi_slider.autoplay.stop();
+     });
+
+     sliderContainer.addEventListener('mouseleave', function () {
+         swiper_multi_slider.autoplay.start();
+     });
+
 </script>
 
 <!-- axios cdn -->
@@ -229,7 +241,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
         integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 
 </body>
 </html>
