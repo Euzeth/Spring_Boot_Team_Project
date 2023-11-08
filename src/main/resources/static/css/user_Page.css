@@ -20,19 +20,19 @@ li{
     .user>form {
         padding: 40px 0 10px;
     }
-    
+
     .user>form li {
         padding: 0 0 12px;
         text-align: left;
     }
-    
+
     .user>form li .title {
 		font-size: 25px;
 		display: block;
 		margin-left: 10px;
 		color: gray;
 	}
-	
+
 	.user>form>li>input{
 		font-size: 30px;
         display: block;
@@ -42,7 +42,8 @@ li{
         height: 40px;
         box-sizing: border-box;
         color: black;
-        font-family: 'SDSamliphopangche_Basic';
+        font-family: 'Nanum Gothic', sans-serif;
+        font-weight: 800;
 	}
 
     .user #back_btn {

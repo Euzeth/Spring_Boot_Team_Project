@@ -1,14 +1,15 @@
-@font-face {
+/*@font-face {
     font-family: 'SDSamliphopangche_Basic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
-
+}*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 * {
     margin: 2px;
     box-sizing: border-box;
-    font-family: 'SDSamliphopangche_Basic';
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight:700;
 }
 
 ul {

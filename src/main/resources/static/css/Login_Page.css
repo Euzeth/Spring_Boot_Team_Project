@@ -20,7 +20,7 @@ li{
     .login>form ul {
         padding: 40px 0 10px;
     }
-    
+
     .login>form>ul>.log_chk{
         display: flex;
         justify-content: space-between;
@@ -38,7 +38,8 @@ li{
         box-sizing: border-box;
         text-indent: 16px;
         color: black;
-        font-family: 'NanumSquareAceb'; 
+        font-family: 'Nanum Gothic', sans-serif;
+        font-weight: 800;
     }
 
     .login>form ul li input::-webkit-input-placeholder {
@@ -91,7 +92,7 @@ li{
     .login .loginmenu ul li {
         position: relative;
     }
-   
+
     .login .loginmenu ul li:nth-child(2) {
         padding-right: 150px;
     }

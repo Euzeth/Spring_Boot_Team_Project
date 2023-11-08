@@ -8,6 +8,7 @@
              padding-top: 20px;
              padding-left: 50px;
              color: rgb(192, 57, 43);
+             font-weight:800;
         }
 
         .form-label{
@@ -16,7 +17,9 @@
                      padding-left: 10px;
                 }
 
-
+        .form-control{
+            font-weight:700;
+        }
 
                 .wrapper>nav>.navi>.Menu_left>.one--depth>li>a:hover{
                     color: black;

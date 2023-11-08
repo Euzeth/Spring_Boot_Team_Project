@@ -14,28 +14,29 @@
     font-size: 2.5rem;
     margin-top: 30px;
     margin-bottom: 30px;
+    font-weight:800;
 }
 
 .ms_pay .myMembership{
     display: inline-block;
     text-align: right;
     width: 690px;
-    font-size: 25px;
+    font-size: 20px;
 
 }
 
 
 .ms_pay .myMembership>a{
     display: inline-block;
-    width: 70px;
+    width: 65px;
     height: 30px;
     border: 2px solid rgb(192, 57, 43);
     border-radius: 7px;
     background-color: white;
     color: rgb(192, 57, 43);
-    font-size: 23px;
+    font-size: 20px;
     text-align: center;
-    line-height: 30px;
+    line-height: 25px;
 }
 
 .ms_pay .myMembership>a:hover{
@@ -77,20 +78,20 @@
     display: block;
     width: 300px;
     height: 50px;
-    font-size: 37px;
+    font-size: 35px;
     color: gray;
     margin-top: 5px;
-    
+
 }
 
 .ms_pay .subscribe_2>span {
     display: block;
     width: 300px;
     height: 50px;
-    font-size: 37px;
+    font-size: 35px;
     color: gray;
     margin-top: 5px;
-    
+
 }
 
 
@@ -118,6 +119,7 @@
     font-size: 2rem;
     margin-top: 60px;
     margin-bottom: 30px;
+    font-weight:800;
 }
 
 .ms_benefit #ben_img{
@@ -143,40 +145,39 @@
     /* position: absolute; */
     width: 130px;
     height: 130px;
-    
+
 }
 
 
 .ms_benefit #title1 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
     margin-bottom: 20px;
-    margin-left: 40px;
+    margin-left: 25px;
 }
 
 .ms_benefit #title2 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
-    margin-left: 90px;
+    margin-left: 50px;
 }
 
 .ms_benefit #title3 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
-    margin-left: 130px;
+    margin-left: 94px;
 }
 
 .ms_benefit #title4 {
-    
+
     display: inline-block;
     font-size: 25px;
     color: rgb(68, 67, 67);
-    margin-left: 150px;
+    margin-left: 125px;
 }
-

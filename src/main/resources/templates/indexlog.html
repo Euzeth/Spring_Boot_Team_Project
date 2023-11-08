@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>WaterMelon</title>
+    <title>Insert title here</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <!-- common.css    -->
     <link rel="stylesheet" type="text/css" href="/css/common.css">
@@ -20,7 +20,7 @@
     <!-- 메인 -->
     <header>
         <div class="top-header">
-            <a href="indexlog" ><img class="logo" src="/images/로고.png" alt=""></a>
+            <a href="main" ><img class="logo" src="/images/로고.png" alt=""></a>
             <form action="/search" method="get">
                 <div class="search_box">
                     <select name="type"  class="selectbox" >
@@ -57,7 +57,7 @@
                     <li>
                         <a href="">수박차트</a>
                         <ul class="two--depth">
-                            <li><a href="/Top100">TOP100</a></li>
+                            <li><a href="Top100">TOP100</a></li>
                             <li><a href="">최신음악</a></li>
                             <li><a href="">장르음악</a></li>
                         </ul>
@@ -93,7 +93,6 @@
                         <ul class="two--depth">
                             <li><a href="/notice/list">공지사항</a></li>
                             <li><a href="/qna/list">QnA</a></li>
-                            <li><a href="">자주하는질문</a></li>
                         </ul>
                     </li>
                     <li>
@@ -211,27 +210,30 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
-    const swiper_multi_slider = new Swiper('.section1 .d1', {
-         direction: 'horizontal',
-         autoplay: {
-             delay: 2000
-         },
-         loop: true,
-         slidesPerView: 3,
-         loop: true,
-         loopFillGroupWithBlank: true
-     });
+    <script>
+        const swiper_multi_slider = new Swiper('.section1 .d1', {
+             direction: 'horizontal',
+             autoplay: {
+                 delay: 2000
+             },
+             loop: true,
+             slidesPerView: 3,
+             loop: true,
+             loopFillGroupWithBlank: true
+         });
 
-     // 마우스 호버 시에 autoplay 정지, 떠날 때 다시 시작
-     const sliderContainer = document.querySelector('.section1 .d1');
+         // 마우스 호버 시에 autoplay 정지, 떠날 때 다시 시작
+         const sliderContainer = document.querySelector('.section1 .d1');
 
-     sliderContainer.addEventListener('mouseenter', function () {
-         swiper_multi_slider.autoplay.stop();
-     });
+         sliderContainer.addEventListener('mouseenter', function () {
+             swiper_multi_slider.autoplay.stop();
+         });
 
-     sliderContainer.addEventListener('mouseleave', function () {
-         swiper_multi_slider.autoplay.start();
-     });
+         sliderContainer.addEventListener('mouseleave', function () {
+             swiper_multi_slider.autoplay.start();
+         });
+
+</script>
 
 </script>
 

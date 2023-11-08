@@ -18,13 +18,14 @@
 
 .wrapper>footer>div>.footer_menu>li{
     /* border: 1px solid red; */
-    width: 140px;
+    width: 160px;
     height: 30px;
     line-height: 30px;
 }
 
 .wrapper>footer>div>.footer_menu>li>a{
-    font-family: 'SDSamliphopangche_Basic';
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight : 800;
     font-size: 20px;
     text-decoration: none;
     color: black;
@@ -47,10 +48,11 @@
 .wrapper>footer>.Site_info>span{
     display: inline-block;
     font-size: 14px;
-    padding: 2px 40px 2px 0;
+    padding: 2px 30px 2px 0;
 }
 
 .wrapper>footer>.Site_info>.Sitename{
-    font-family: 'SDSamliphopangche_Basic';
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 800;
     font-size: 23px;
 }
