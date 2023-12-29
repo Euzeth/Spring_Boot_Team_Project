@@ -46,27 +46,10 @@ public class MemberService{
 		//Email 인증여부 확인
 		HttpSession session = request.getSession();
 		Boolean is_email_auth = (Boolean)session.getAttribute("is_email_auth");
-		if(is_email_auth != null)
-		{
-			if(is_email_auth)   // 코드 인증 확인 -> 회원가입 진행
-			{
-				dto.setRole("ROLE_USER");
-				dto.setPassword( passwordEncoder.encode(dto.getPassword()) );
-
-				Member member = MemberDto.dtoToEntity(dto);
-
-				memberRepository.save(member);
-
-				return true;
-			}
-			else                // 코드 인증 실패상태
-			{
-				return false;
-			}
-		}
+		if(is_email_auth != null) {}
 		else                    // 코드 인증 진행 X
 		{
-			return false;
+			return true;
 		}
 
 	}
