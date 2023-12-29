@@ -128,7 +128,7 @@
  const email_auth_btn_el = document.querySelector('.email_auth_btn');
  const email = document.querySelector('.email');
  email_auth_btn_el.addEventListener('click', function(){
-     //alert('TEST');
+     alert('이메일발송');
      axios.get('/member/auth/email/' + email.value)
      .then(response => { console.log(response); })
      .catch(error => {});
